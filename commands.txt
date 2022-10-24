@@ -1,0 +1,103 @@
+linux commands 
+
+man (command)       		  ..... show manual of tool
+(command) --help  		  ..... show how to use 
+whatis (command)                  ..... descripe the tool 
+apropos  (what the tool do )      ..... get name of the tool
+
+
+(files)
+cd (file name )       		  ..... to change directory
+cd ..              		  ..... to back
+ls                		  ..... list what in file 
+rm (file name)                    ..... remove           -r for dir  -d for empty dir
+mkdir (file name)                 ..... make file
+cp (file name)                    ..... copy files 
+mv (file name) (to directory)     ..... move files or rename file
+
+
+(text)
+nano (file name)                  ..... to make textfile
+cat (file name)                   ..... show textfile
+
+
+
+(user)
+adduser (user name)               ..... make user 
+su (user name)                    ..... switch user 
+
+
+
+(find files )
+which (tool name)                 ..... get directory
+updatedb                          ..... update directory database
+locate (file name)                ..... use the data base to find file
+
+
+--find (where start search )     (file name) (any other option )
+-readable
+-excutable
+-size n(bcwkmg)
+b #512 bytes (default unit)
+c #1 byte
+w #2 bytes
+k #1024 bytes
+M  #1024k
+G  #1024M
+
+
+
+
+
+(service)
+systemctl (arg) (service)         ..... to control the system (Control the systemd system and service manager enable or disable ect..)  you can use service instead
+
+************************************************************************************************
+service (arg)                     ..... run a service or system 
+
+
+┌──(kali㉿phoenix)-[~]
+└─$ sudo service apache2 
+Usage: apache2 {start|stop|graceful-stop|restart|reload|force-reload}              <<args we can use with this service>>
+
+┌──(kali㉿phoenix)-[~]
+└─$ sudo service apache2 status                                                    <<to see service state>>
+● apache2.service - The Apache HTTP Server
+     Loaded: loaded (/lib/systemd/system/apache2.service; disabled; vendor preset: disabled)
+     Active: active (running) since Tue 2022-03-22 05:22:43 PDT; 5min ago
+       Docs: https://httpd.apache.org/docs/2.4/
+    Process: 4471 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
+   Main PID: 4486 (apache2)
+      Tasks: 7 (limit: 14147)
+     Memory: 18.9M
+        CPU: 218ms
+     CGroup: /system.slice/apache2.service
+             ├─4486 /usr/sbin/apache2 -k start
+             ├─4487 /usr/sbin/apache2 -k start
+             ├─4488 /usr/sbin/apache2 -k start
+             ├─4489 /usr/sbin/apache2 -k start
+             ├─4490 /usr/sbin/apache2 -k start
+             ├─4491 /usr/sbin/apache2 -k start
+             └─4533 /usr/sbin/apache2 -k start
+
+Mar 22 05:22:43 phoenix systemd[1]: Starting The Apache HTTP Server...
+Mar 22 05:22:43 phoenix apachectl[4481]: AH00558: apache2: Could not reliably determine the server's fully qualif>
+Mar 22 05:22:43 phoenix systemd[1]: Started The Apache HTTP Server.
+lines 1-21/21 (END)
+
+
+
+
+
+
+(manganging kali tools)
+
+apt update               		<<update to the list which he has of where(sites) to download tools and packeges>>
+apt upgrade              	        <<update tools>>
+apt-cache search (name of tool)         <<seach of all packeges related to tool name>>
+apt show (name of packege)                 <<show info of it>>
+apt install (packege name)
+apt remove (packege name)
+apt remove --purge (packege name)      <<remove all configrations related>>
+
+
