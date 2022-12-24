@@ -1,0 +1,80 @@
+cross origin resource sharing
+
+
+
+requests :
+-simple
+-preflight => send two requests (option=>used to negotiate and detrmine if it safe or not , actual request) if the server forbidden the option the actual request is not send
+-with credentials (like :cookies,http credentials)
+
+
+cors flaws :
+
+-check if Access-Control-Allow-Origin *
+
+-check if Access-Control-Allow-credentials true
+
+-orgin header spoofing => can not do through browser :
+
+    -Mistakes often arise when implementing CORS origin whitelists
+
+    #For example, suppose an application grants access to all domains ending in:
+    #normal-website.com
+    =>An attacker might be able to gain access by registering the domain:
+    =>hackersnormal-website.com
+
+    #Alternatively, suppose an application grants access to all domains beginning with
+    #normal-website.com
+    =>An attacker might be able to gain access using the domain:
+    =>normal-website.com.evil-user.net
+
+
+-Whitelisted null origin value :
+    #Browsers might send the value null in the Origin header in various unusual situations:
+    =>Cross-origin redirects.
+    =>Requests from serialized data.
+    =>Request using the file: protocol.
+    =>(iframe)Sandboxed cross-origin requests.
+
+
+
+-Exploiting XSS via CORS trust relationships
+
+-Breaking TLS with poorly configured CORS
+    *Suppose an application that rigorously employs HTTPS also whitelists a trusted subdomain that is using plain HTTP.
+    *In this situation, an attacker who is in a position to intercept a victim user's traffic can exploit the CORS configuration to compromise the victim's interaction with the application.
+
+    *The victim user makes any plain HTTP request.
+
+    *The attacker injects a redirection to:
+    http://trusted-subdomain.vulnerable-website.com
+    *The victim's browser follows the redirect.
+
+    *The attacker intercepts the plain HTTP request, and returns a spoofed response containing a CORS request to:
+    https://vulnerable-website.com
+
+    *The victim's browser makes the CORS request, including the origin:
+    http://trusted-subdomain.vulnerable-website.com
+    *The application allows the request because this is a whitelisted origin. The requested sensitive data is returned in the response.
+    *The attacker's spoofed page can read the sensitive data and transmit it to any domain under the attacker's control.
+
+
+
+
+how to abuse :
+-xss
+-tools like curl wget etc ...
+
+what can we do with cors :
+-get senstive data cookie , csrf token , session token
+-port scanning
+-remote web shell
+-use the victim as proxy
+
+
+
+while using iframe the browser ignore the same origin policy
+
+so you can perform any request prevent by checking the origin of request in client side
+
+if the input used to build a output xss can used to perform cross origin xss
