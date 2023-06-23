@@ -1,0 +1,34 @@
+Passive Information Gathering
+------------------------------
+
+1)nslookup & dig & whois            ==> dns info
+
+# dig give more info than nslookup
+# check (NetRange/CIDR) with whois
+# viewdns.info  (website)
+
+2)theHarvester & amass              ==> subdomains
+
+#amass can do alot more
+
+3)crt.sh  & censys.io               ==> subdomains
+
+4)sitereport.netcraft               ==> infastructure
+
+5)waybackurls                       ==> infastructure , paramters , info leaks
+
+6)spiderfoot                        ==> OSINT
+
+
+
+active Information Gathering
+-----------------------------
+
+1)whatweb                           ==> web scanner
+
+2)Wappalyzer extension              ==> web scanner
+
+3)WafW00f                           ==> web application firewall fingerprinting
+
+
+
