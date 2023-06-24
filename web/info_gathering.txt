@@ -16,7 +16,6 @@ Passive Information Gathering
 
 5)waybackurls                               ==> infastructure , paramters , info leaks
 
-6)spiderfoot                                ==> OSINT
 
 
 
@@ -40,3 +39,5 @@ nslookup -type=any -query=AXFR domain nameServer
 7)zap , burp                                ==> crawling , scan
 
 8)amass                                     ==> mapping
+
+9)spiderfoot                                ==> OSINT
