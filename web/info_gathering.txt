@@ -1,34 +1,42 @@
 Passive Information Gathering
 ------------------------------
 
-1)nslookup & dig & whois            ==> dns info
+1)nslookup & dig & whois                    ==> dns info
 
 # dig give more info than nslookup
 # check (NetRange/CIDR) with whois
 # viewdns.info  (website)
 
-2)theHarvester & amass              ==> subdomains
+2)theHarvester & amass                      ==> subdomains
 
 #amass can do alot more
 
-3)crt.sh  & censys.io               ==> subdomains
+3)crt.sh  & censys.io                       ==> subdomains
 
-4)sitereport.netcraft               ==> infastructure
+4)sitereport.netcraft                       ==> infastructure
 
-5)waybackurls                       ==> infastructure , paramters , info leaks
+5)waybackurls                               ==> infastructure , paramters , info leaks
 
-6)spiderfoot                        ==> OSINT
+6)spiderfoot                                ==> OSINT
 
 
 
 active Information Gathering
 -----------------------------
 
-1)whatweb                           ==> web scanner
+1)whatweb                                   ==> web scanner
 
-2)Wappalyzer extension              ==> web scanner
+2)Wappalyzer extension                      ==> web scanner
 
-3)WafW00f                           ==> web application firewall fingerprinting
+3)WafW00f                                   ==> web application firewall fingerprinting
 
+4)https://hackertarget.com/zone-transfer/   ==> ZoneTransfers
+OR
+nslookup -type=any -query=AXFR domain nameServer
 
+5)fuff                                      ==> fuzzing (subdomain , Vhosts dicovery , ......)
+
+6)cewl                                      ==> custom wordlists
+
+7)zap , burp                                ==> crawling , scan
 
