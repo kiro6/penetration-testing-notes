@@ -54,6 +54,25 @@ dns concepts
 
 Resource Records
 ----------------
+*TTL            : -The TTL value specifies the amount of time (in seconds) that a DNS resolver or client should cache the DNS records obtained from the DNS server before checking for updated records.
+                 -It indicates how long the DNS information can be considered valid and cached by other systems.
+
+
+*Name Servers (NS)        : The distributed database is bound together by NS Records. They are in charge of a zone's authoritative name server and the authority for a child zone to a name server.
+
+*IPv4 Addresses (A)       : The A record is only a mapping between a hostname and an IP address. 'Forward' zones are those with A records.
+
+*Pointer (PTR)            : The PTR record is a mapping between an IP address and a hostname. 'Reverse' zones are those that have PTR records.
+
+*Canonical Name (CNAME)   : An alias hostname is mapped to an A record hostname using the CNAME record.
+
+*Mail Exchange (MX) 	  : -The MX record identifies a host that will accept emails for a specific host.
+                            -A priority value has been assigned to the specified host.
+                            -Multiple MX records can exist on the same host, and a prioritized list is made consisting of the records for a specific host.
+
+*TEXT(TXT)                : record provides arbitrary text information for the domain.
+
+
 *Start Of Authority (SOA) : -It should be first in a zone file because it indicates the start of a zone.
                             -Each zone can only have one SOA record, and additionally, it contains the zone's values, such as a serial number and multiple expiration timeouts.
 
@@ -97,29 +116,6 @@ Expire         : -The expire value sets the maximum time (in seconds) that secon
 Minimum TTL   : -The Minimum TTL (also known as the Negative TTL or Default TTL) is a value that specifies how long a negative DNS response (indicating the non-existence of a a DNS record) should be cached
                 by dns resolver or a client.
                 -It is used when a query is made for a resource record that does not exist.
-
-
-
-
-*TTL            : -The TTL value specifies the amount of time (in seconds) that a DNS resolver or client should cache the DNS records obtained from the DNS server before checking for updated records.
-                 -It indicates how long the DNS information can be considered valid and cached by other systems.
-
-
-*Name Servers (NS)        : The distributed database is bound together by NS Records. They are in charge of a zone's authoritative name server and the authority for a child zone to a name server.
-
-*IPv4 Addresses (A)       : The A record is only a mapping between a hostname and an IP address. 'Forward' zones are those with A records.
-
-*Pointer (PTR)            : The PTR record is a mapping between an IP address and a hostname. 'Reverse' zones are those that have PTR records.
-
-*Canonical Name (CNAME)   : An alias hostname is mapped to an A record hostname using the CNAME record.
-
-*Mail Exchange (MX) 	  : -The MX record identifies a host that will accept emails for a specific host.
-                            -A priority value has been assigned to the specified host.
-                            -Multiple MX records can exist on the same host, and a prioritized list is made consisting of the records for a specific host.
-
-*TEXT(TXT)                : record provides arbitrary text information for the domain.
-
-
 
 
 
