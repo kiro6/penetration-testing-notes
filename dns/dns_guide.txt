@@ -49,7 +49,7 @@ dns concepts
 
 
 
-*DNS server === Nmae Server
+*DNS server === Name Server
 
 
 Resource Records
