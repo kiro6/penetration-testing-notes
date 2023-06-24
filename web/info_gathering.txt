@@ -7,9 +7,8 @@ Passive Information Gathering
 # check (NetRange/CIDR) with whois
 # viewdns.info  (website)
 
-2)theHarvester & amass                      ==> subdomains
+2)theHarvester                              ==> subdomains
 
-#amass can do alot more
 
 3)crt.sh  & censys.io                       ==> subdomains
 
@@ -40,3 +39,4 @@ nslookup -type=any -query=AXFR domain nameServer
 
 7)zap , burp                                ==> crawling , scan
 
+8)amass                                     ==> mapping
