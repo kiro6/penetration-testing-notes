@@ -1,0 +1,40 @@
+Obfuscation
+------------
+
+
+1) https://www.toptal.com/developers/javascript-minifier         ==> Minifying
+
+2) https://beautifytools.com/javascript-obfuscator.php           ==> packing
+
+3) https://obfuscator.io/                                        ==> packing
+
+4) https://www.53lu.com/tool/aaencode/                           ==> AA Encode / decode
+
+5) https://www.53lu.com/tool/jjencode/                           ==> JJ Encode / decode
+
+6) https://www.53lu.com/tool/jsfuck/                             ==> js fuck Encode
+
+
+
+
+
+
+Deobfuscate
+--------------
+
+
+1) http://www.jsnice.org/                                        ==> unpacking
+
+Tip: We should click on the options button next to the "Nicify JavaScript" button, and de-select "Infer types" to reduce cluttering the code with comments.
+
+Tip: Ensure you do not leave any empty lines before the script, as it may affect the deobfuscation process and give inaccurate results.
+
+3) https://deobfuscate.io/                                       ==> unpacking
+
+4) https://deobfuscate.relative.im/                              ==> unpacking (the best i think)
+
+4) https://www.53lu.com/tool/aaencode/                           ==> AA Encode / decode
+
+5) https://www.53lu.com/tool/jjencode/                           ==> JJ Encode / decode
+
+6) https://www.53lu.com/tool/jsfuckdecode/                       ==> js fuck decode
