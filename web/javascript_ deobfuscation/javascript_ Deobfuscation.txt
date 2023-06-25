@@ -31,7 +31,7 @@ Tip: Ensure you do not leave any empty lines before the script, as it may affect
 
 3) https://deobfuscate.io/                                       ==> unpacking
 
-4) https://deobfuscate.relative.im/                              ==> unpacking (the best i think)
+4) https://deobfuscate.relative.im/                              ==> unpacking (good whe string encoded)
 
 4) https://www.53lu.com/tool/aaencode/                           ==> AA Encode / decode
 
