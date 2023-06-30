@@ -1,0 +1,306 @@
+# dns
+dns concepts
+
+
+*Resource Record:           -A domain name, usually a fully qualified domain name, is the first part of a Resource Record.
+                     			    	   -If you don't use a fully qualified domain name, the zone's name where the record is located will be appended to the end of the name.
+												EX : zone   = example.com
+													  domain = www.example.com
+                                   				      if you use www the example.com will be appended automaticly
+
+
+
+
+*TTL                                   -In seconds, the Time-To-Live (TTL) defaults to the minimum value specified in the SOA record.
+
+
+*Record Class             	   -Internet, Hesiod, or Chaos
+
+										   -IN (Internet):
+												The IN class is the most widely used and the default class for DNS resource records.
+												It is used for standard DNS operations on the Internet.
+												Most DNS resource records, such as A, AAAA, MX, CNAME, and TXT, are created within the IN class.
+												Example: example.com. IN A 192.0.2.123
+
+										   -HS (Hesiod):
+												The HS class is less commonly used and is primarily associated with the Hesiod naming system.
+												Hesiod is an older naming service that provides a distributed database for storing information like user names, passwords, and other system-related data.
+												It is often used in Unix-like systems for additional naming and directory service lookups.
+												Example: user1.hs. HS TXT "User1's information"
+
+										   -CH (Chaos):
+												The CH class is also less commonly used and is associated with the Chaosnet networking protocol.
+												Chaosnet was an early networking protocol developed at MIT in the 1970s.
+												The CH class is used for querying special information related to the network and system status, debugging, and testing purposes.
+												Example: version.bind. CH TXT "BIND version 9.11.3"
+
+
+*namespace               	   -refers to the hierarchical structure that organizes and identifies domain names
+
+
+
+*Domain Name         	    -A domain name is a human-readable label or identifier used to access resources on the internet.
+                           					-It represents a specific entity or organization and typically consists of two or more labels separated by dots. For example, "example.com" is a domain name.
+                           					-Domain names are registered with domain registrars and provide a unique identity for websites, email servers, and other internet services.
+
+*DNS Zone                 	    -A DNS zone is a portion of the DNS namespace that is managed by a specific set of DNS servers.
+                           					-It encompasses all the DNS resource records associated with a particular domain or subdomain.
+                           					-A DNS zone is defined by a zone file, which contains the DNS records for the domain or subdomain.
+                           					-The zone file specifies the authoritative name servers for the zone and includes records like A, CNAME, MX, TXT, etc. Each domain or subdomain has its own DNS zone with its own set of DNS records.
+
+
+*zone transfers					-Full zone transfer (AXFR): This type of transfer sends the complete zone file from the primary server to the secondary server. 
+											-It updates the entire zone, regardless of the changes made. AXFR is the standard method of zone transfer and is supported by most DNS servers.
+
+											-Incremental zone transfer (IXFR): This type of transfer sends only the changes or differences in the zone since the last transfer.
+											-It is more efficient than AXFR since it transfers only the modified portions of the zone, reducing bandwidth usage.
+											-IXFR requires support from both the primary and secondary servers.
+
+
+
+
+*DNS server === Name Server
+
+
+*DNS Resolver:				   -A DNS resolver, also known as a DNS client or DNS resolver library, is a component or software library that runs on a client device and is responsible for initiating DNS queries to resolve domain names into IP addresses. 
+										   -When a user or application requests a website or any resource using a domain name, the DNS resolver is the first point of contact in the DNS resolution process.
+
+										  -The DNS resolver interacts with DNS name servers to obtain the necessary information. 
+										  -It sends DNS queries to DNS servers and receives the corresponding DNS responses containing the requested information, such as IP addresses or other DNS records. 
+										  -The resolver then returns the resolved data to the requesting client or application.
+										  -DNS resolvers can be implemented as part of the operating system, network hardware, or as standalone software libraries. 
+										  -They maintain a cache of recently resolved DNS records to speed up subsequent queries and reduce the load on DNS servers.
+										
+
+
+DNS Name Server:			 -A DNS name server, also known as a DNS server or DNS authoritative server, is a crucial component of the DNS infrastructure. 
+										 -It stores and manages DNS records for a specific zone or domain. When a DNS resolver sends a query for a particular domain name, the DNS name server provides the resolver with the corresponding DNS records.
+
+There are different types of DNS name servers:
+
+Authoritative Name Server:		-An authoritative name server is responsible for storing and serving the DNS records for a specific domain or zone. 
+													-It holds the definitive information for that domain and provides responses to DNS queries with accurate and up-to-date information.
+
+Recursive Resolver: 					-A recursive resolver, also known as a caching resolver, is a DNS resolver that interacts with multiple DNS name servers to resolve domain names on behalf of client devices or applications. 
+													-It performs the entire DNS resolution process by sending queries to authoritative name servers, following the DNS hierarchy, and returning the resolved information to the client.
+
+Forwarding Name Server: 	    -A forwarding name server is configured to forward DNS queries to another DNS resolver or name server. Instead of resolving the queries itself, it passes the queries to a designated upstream resolver. 
+													-This can be useful for offloading the DNS resolution workload to more capable or specialized servers.										
+										
+
+
+
+
+Resource Records
+
+*TTL         					     -The TTL value specifies the amount of time (in seconds) that a DNS resolver or client should cache the DNS records obtained from the DNS server before checking for updated records.
+           		   					     -It indicates how long the DNS information can be considered valid and cached by other systems.
+
+
+*Name Servers (NS)        -The distributed database is bound together by NS Records. They are in charge of a zone's authoritative name server and the authority for a child zone to a name server.
+
+*IPv4 Addresses (A)        -The A record is only a mapping between a hostname and an IP address. 'Forward' zones are those with A records.
+
+*Pointer (PTR)                 -The PTR record is a mapping between an IP address and a hostname. 'Reverse' zones are those that have PTR records.
+
+*Canonical Name   	     -An alias hostname is mapped to an A record hostname using the CNAME record.
+
+*Mail Exchange (MX)      -The MX record identifies a host that will accept emails for a specific host.
+                            			 -A priority value has been assigned to the specified host.
+                            			 -Multiple MX records can exist on the same host, and a prioritized list is made consisting of the records for a specific host.
+
+*TEXT(TXT)                		 -record provides arbitrary text information for the domain.
+
+
+*Start Of Authority         -It should be first in a zone file because it indicates the start of a zone. (SOA)
+                            		     -Each zone can only have one SOA record, and additionally, it contains the zone's values, such as a serial number and multiple expiration timeouts.
+
+     EX :
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ subdomain.example.com
+     $TTL 3600
+     @   IN  SOA   ns1.example.com. admin.example.com. (
+                 2023062201  ; Serial number
+                 3600        ; Refresh
+                 1800        ; Retry
+                 604800      ; Expire
+                 86400       ; Minimum TTL
+                 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                 
+                 
+SOA recoreds
+
+Primary Name Server (NS) 									-This field specifies the primary authoritative name server for the zone.
+                          														-It indicates the DNS server responsible for serving the zone's DNS records and managing updates to the zone. For example: ns1.example.com.
+
+Responsible Person's Email Address (Email) 		-This field specifies the email address of the responsible person or administrator overseeing the zone.
+                                            								    -It is typically written with a dot replaced by an "@" symbol. For example: admin.example.com.
+
+Serial Number   														-The serial number is a unique identifier for the zone's DNS records.
+                 																-It is typically a numeric value and is incremented each time the zone's records are updated.
+                 																-In the given example, the serial number is "2023062201", which suggests that it was last updated or modified on June 22, 2023. 
+                 																-The serial number helps in determining the freshness of DNS     data during zone transfers between DNS servers.
+
+retry        										    				    -The retry value specifies the amount of time (in seconds) that secondary DNS servers should wait before attempting to retry a failed zone transfer or refresh attempt.
+               																    -If a secondary DNS server fails to contact the authoritative DNS server during the refresh interval, it will wait for the retry interval to elapse before making another attempt.
+                 																-The retry value is typically shorter than the refresh value to ensure timely retries.
+                 																-For example, a retry value of 1800 seconds (30 minutes) means the secondary DNS server will wait for 30 minutes before retrying a failed zone transfer or refresh.
+
+Refresh           														-The refresh value indicates how often (in seconds) secondary DNS servers should check the authoritative DNS server for updates.
+               																    -It specifies the interval at which secondary servers should attempt to refresh their copies of the zone's records from the primary authoritative server. 
+                 															    -In your example with a refresh value of 3600 seconds (1 hour), the secondary DNS servers will contact the authoritative server to update their copies of the zone's records at least once every hour.
+
+Expire          															-The expire value sets the maximum time (in seconds) that secondary DNS servers can use a zone's data without successfully refreshing it from the authoritative server.
+                 																-If a secondary server fails to refresh the zone within the specified expire interval, it will consider the zone expired and stop responding to DNS queries for that zone.
+                 																-In the provided configuration, the expire value is set to 604800 seconds (7 days).
+
+
+
+Minimum TTL   													    -The Minimum TTL (Negative TTL) is a value that specifies how long a negative DNS response, indicating the non-existence of a DNS record, should be cached by DNS resolvers or clients.
+                 																-It is used when a query is made for a resource record that does not exist. The Minimum TTL determines the caching duration for negative responses, such as "NXDOMAIN" or "NODATA" responses.
+                 																-This value is separate from the TTL values of actual existing DNS records and is typically a lower value.
+                 																-It ensures that DNS resolvers or clients cache the negative response for a specified duration before attempting to query the authoritative DNS server again for the same non-existent record.
+
+
+
+
+
+
+dns zone syntax
+
+
+-The $ORIGIN directive sets the origin for the zone to "example.com." This means that any domain names specified without a trailing dot (.) will be considered relative to "example.com."
+
+-"@" symbol represents the origin or the current zone name.
+
+Directives: Lines starting with a dollar sign ($) or at symbol (@) are directives that provide instructions or settings for the zone. Examples include $ORIGIN, which sets the origin for the zone, and $TTL, which sets the default time-to-live value for the zone.
+
+Records: Records specify the DNS resource records for the domain. In the example, you have various record types, such as SOA, NS, MX, TXT, and A. Each record has a specific purpose and provides different types of information.
+
+
+
+
+
+
+examples :
+
+
+Authoritative Name Server contain more than one zone
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Name Server: ns1.example.com
+; Zone: example.com
+$TTL 3600
+@   IN  SOA   ns1.example.com. admin.example.com. (
+                 2023062201  ; Serial number
+                 3600        ; Refresh
+                 1800        ; Retry
+                 604800      ; Expire
+                 86400       ; Minimum TTL
+                 )
+     IN  NS    ns1.example.com.
+     IN  NS    ns2.example.com.
+     IN  A     192.168.0.1
+
+; Zone: subdomain.example.com
+$TTL 3600
+@   IN  SOA   ns1.example.com. admin.example.com. (
+                 2023062201  ; Serial number
+                 3600        ; Refresh
+                 1800        ; Retry
+                 604800      ; Expire
+                 86400       ; Minimum TTL
+                 )
+     IN  NS    ns1.example.com.
+     IN  NS    ns2.example.com.
+     IN  A     192.168.0.2
+
+; Zone: anotherdomain.com
+$TTL 3600
+@   IN  SOA   ns1.example.com. admin.example.com. (
+                 2023062201  ; Serial number
+                 3600        ; Refresh
+                 1800        ; Retry
+                 604800      ; Expire
+                 86400       ; Minimum TTL
+                 )
+     IN  NS    ns1.example.com.
+     IN  NS    ns2.example.com.
+     IN  A     192.168.0.3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+one zone contain more than one domain
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$ORIGIN example.com.
+@    IN    SOA    ns1.example.com. hostmaster.example.com. (
+                  2023062201 ; Serial
+                  3600       ; Refresh
+                  1800       ; Retry
+                  604800     ; Expire
+                  86400 )    ; Minimum TTL
+     IN    NS     ns1.example.com.
+     IN    NS     ns2.example.com.
+     IN    MX     10 mail.example.com.
+
+example.com.        IN    A      192.168.1.1
+www.example.com.    IN    CNAME  example.com.
+mail.example.com.   IN    A      192.168.1.2
+
+$ORIGIN example.net.
+@    IN    SOA    ns1.example.net. hostmaster.example.net. (
+                  2023062201 ; Serial
+                  3600       ; Refresh
+                  1800       ; Retry
+                  604800     ; Expire
+                  86400 )    ; Minimum TTL
+     IN    NS     ns1.example.net.
+     IN    NS     ns2.example.net.
+     IN    MX     10 mail.example.net.
+
+example.net.        IN    A      192.168.2.1
+www.example.net.    IN    CNAME  example.net.
+mail.example.net.   IN    A      192.168.2.2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+one zone contain more than one domain (another way)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$ORIGIN example.com.
+$TTL 3600
+@   IN  SOA   ns1.example.com. admin.example.com. (
+                 2023062201  ; Serial number
+                 3600        ; Refresh
+                 1800        ; Retry
+                 604800      ; Expire
+                 86400       ; Minimum TTL
+                 )
+     IN  NS    ns1.example.com.
+     IN  NS    ns2.example.com.
+     IN  MX    10 mail.example.com.
+     IN  TXT   "This is a TXT record for example.com"
+
+ns1  IN  A     192.168.0.1
+ns2  IN  A     192.168.0.2
+mail IN  A     192.168.0.10
+
+www   IN  A     192.168.0.100
+blog  IN  A     192.168.0.101
+shop  IN  A     192.168.0.102
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
