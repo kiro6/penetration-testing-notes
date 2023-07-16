@@ -5,11 +5,11 @@
 
 Headers to Consider
 --------------------
-Cache-control directives
-Vary header 
-3rd parties headers 
-analytical headers
-CDN cache headers ex :
+- Cache-control directives
+- Vary header 
+- 3rd parties headers 
+- analytical headers
+- CDN cache headers ex :
 `akamai-x-get-cache-key` => `Returns the cache key used for the request`
 
 
