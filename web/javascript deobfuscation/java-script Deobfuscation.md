@@ -1,0 +1,37 @@
+
+
+
+# websites for js Deobfuscation/Obfuscation
+
+
+
+## Obfuscation
+
+
+| Website                                                 | Purpose               |
+| ------------------------------------------------------- | --------------------- |
+| [toptal.com](https://www.toptal.com/developers/javascript-minifier)           | Minifying             |
+| [beautifytools.com](https://beautifytools.com/javascript-obfuscator.php)      | Packing               |
+| [obfuscator.io](https://obfuscator.io/)                                      | Packing               |
+| [53lu.com AA Encode/decode](https://www.53lu.com/tool/aaencode/)               | AA Encode/Decode      |
+| [53lu.com JJ Encode/decode](https://www.53lu.com/tool/jjencode/)               | JJ Encode/Decode      |
+| [53lu.com jsfuck Encode](https://www.53lu.com/tool/jsfuck/)                     | jsfuck Encode         |
+
+
+
+## Deobfuscation
+
+
+
+| Website                                                        | Purpose                |
+| -------------------------------------------------------------- | ---------------------- |
+| [jsnice.org](http://www.jsnice.org/)                            | Unpacking              |
+| [deobfuscate.io](https://deobfuscate.io/)                       | Unpacking              |
+| [deobfuscate.relative.im](https://deobfuscate.relative.im/)     | Unpacking (good when string encoded) |
+| [53lu.com AA Encode/decode](https://www.53lu.com/tool/aaencode/) | AA Encode/Decode       |
+| [53lu.com JJ Encode/decode](https://www.53lu.com/tool/jjencode/) | JJ Encode/Decode       |
+| [53lu.com jsfuck decode](https://www.53lu.com/tool/jsfuckdecode/) | jsfuck Decode        |
+
+
+Tip: We should click on the options button next to the "Nicify JavaScript" button, and de-select "Infer types" to reduce cluttering the code with comments for  http://www.jsnice.org/   
+Tip: Ensure you do not leave any empty lines before the script, as it may affect the deobfuscation process and give inaccurate results.

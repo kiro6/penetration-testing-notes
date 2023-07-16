@@ -1,0 +1,54 @@
+
+# methodology 
+
+
+# Login Brute Forcing
+
+## 1)Check for default credentials
+
+## 2) Check weak brute-force protection
+### - bypass CAPTCHA 
+- **Do not send the parameter** related to the CAPTCHA.
+    - Change from POST to GET or other HTTP Verbs
+    - Change to JSON or from JSON
+- Send the **CAPTCHA parameter empty**.
+- Check if the value of the captcha is **in the source code** of the page.
+- Check if the value is **inside a cookie.**
+- Try to use an **old captcha value**
+- Check if you can use the **same** captcha **value** several times with **the same or different sessionID.**
+- If the captcha consists on a **mathematical operation** try to **automate** the **calculation.**
+- If the captcha consists of **read characters from an image**, check manually or with code **how many images** are being used and if only a **few images are being used, detect them by MD5.** 
+
+### -rate limit automation
+
+
+## 3)Brute Forcing Usernames 
+- **check any functionality that can reveal user names exist of not 
+	- ex : **message functionality** or **login , register and Password Reset forms**  
+- **types of check 
+	- User Unknown Attack
+	- Timing attack 
+	- Prefill the username input value if the username is valid
+
+## 4)Brute Forcing Passwords
+- Password Policy Inference
+
+## 5)Predictable Reset Token
+- **Check Weak Token Generation
+- **Check  Short Tokens
+- **Check Weak Cryptography
+- **Check Reset Token as Temp Password Reuse
+
+
+# Password Attacks
+- **Guessable Answers for questions as proof of identity and then setting a new one password
+- **Username/UserID Parameter Injection
+
+
+# Session Attacks
+- **Session Cookie token tampering
+- **Check Remember me token
+- **Decrypt or Decode token
+- **Check Weak(short/predictable) session token
+- **Check Token Lifetime => try Session Fixation
+- **Check Token in URL=> Referer header , Server logs

