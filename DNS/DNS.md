@@ -113,7 +113,7 @@ DNS server === Name Server
 
 - Each zone can only have one SOA record, and additionally, it contains the zone's values, such as a serial number and multiple expiration timeouts.
 - EX :
-```
+```d
  subdomain.example.com  
      $TTL 3600  
      @   IN  SOA   ns1.example.com. admin.example.com. (  
