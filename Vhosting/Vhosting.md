@@ -39,6 +39,10 @@ Here's how IP-based virtual hosting works:
 - Based on the IP address in the incoming request, the web server selects the appropriate virtual host configuration associated with that IP address.
 - The web server then serves the content of the requested website from the corresponding document root directory.
 
+
+
+
+
 - **IP-based virtual hosting allows for better separation and isolation of websites since each website has its own unique IP address.**
 - **It can be useful in scenarios where websites require individual SSL certificates or need to be accessed through specific IP addresses for various reasons.**
 
@@ -71,6 +75,7 @@ Here's how name-based virtual hosting works:
 
 **Content serving :** 
 - The web server serves the content of the requested website from the corresponding document root directory specified in the selected virtual host configuration.
+
 
 
 
