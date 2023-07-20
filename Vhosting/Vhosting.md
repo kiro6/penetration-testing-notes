@@ -42,10 +42,10 @@ Here's how IP-based virtual hosting works:
 
 
 
-
+-------------------------------------------------------------
 - **IP-based virtual hosting allows for better separation and isolation of websites since each website has its own unique IP address.**
 - **It can be useful in scenarios where websites require individual SSL certificates or need to be accessed through specific IP addresses for various reasons.**
-
+-------------------------------------------------------------
 
 ## Name-based Virtual Hosting
 
@@ -78,10 +78,10 @@ Here's how name-based virtual hosting works:
 
 
 
-
+-------------------------------------------------------------
 - **Name-based virtual hosting allows hosting multiple websites on a single IP address, which is more efficient in terms of IP address allocation compared to IP-based virtual hosting.**
 - **It is widely used and supported by most web servers and is the default method for hosting websites on shared hosting platforms.**
-
+-------------------------------------------------------------
 
 EX :
 - several domain names, such as admin.inlanefreight.htb and backup.inlanefreight.htb, can refer to the same IP.
