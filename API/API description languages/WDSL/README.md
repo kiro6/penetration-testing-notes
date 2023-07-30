@@ -251,7 +251,7 @@ The `<wsdl:portType>` element defines a set of abstract operations (or methods) 
 
 
 
-### types element
+### types element (actual paramters in request or response)
 ```xml
 <wsdl:types>
 		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
