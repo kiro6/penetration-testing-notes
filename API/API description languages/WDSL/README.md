@@ -419,3 +419,22 @@ For HTTP bindings, the `<wsdl:binding>` element includes `<http:binding>` elemen
 6. `<mime:content type="application/json"/>`:
     
     - The `<mime:content>` element specifies the content type of the input and output messages. In this case, the content type is set to "application/json," indicating that the messages will be in JSON format.
+  
+
+
+## Example of soap request for this service 
+```soap
+<?xml version="1.0" encoding="utf-8"?>
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tns="http://tempuri.org/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/">
+    <soap:Body>
+        <ExecuteCommandRequest xmlns="http://tempuri.org/">
+            <cmd>whoami</cmd>
+        </ExecuteCommandRequest>
+    </soap:Body>
+</soap:Envelope> 
+```
