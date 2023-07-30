@@ -1,1 +1,1 @@
-## Fast explanation of API description languages with examples
+# Fast explanation of API concepts with examples
