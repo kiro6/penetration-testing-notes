@@ -34,7 +34,7 @@ $ curl "https://dumyy.free.beeceptor.com/exp.html"
 ## using [ngrok](https://ngrok.com/download)
 
 ### how to use 
-- make http server on any folder , consider hosting a file named text.txt on the local server
+- make http server on any folder , consider hosting a file named test.txt on the local server
 ```bash
 $ python3 -m http.server 9999
 ```
