@@ -1,5 +1,5 @@
 
-## using (beeceptor)[https://beeceptor.com/]
+## using [beeceptor](https://beeceptor.com/)
 - beeceptor is powerful tool which can be used to host content and customize your headers 
 - with free plan you have 50 req per day per endpoint
 
@@ -31,7 +31,7 @@ $ curl "https://dumyy.free.beeceptor.com/exp.html"
 ## using 
 
 
-## using (ngrok)[https://ngrok.com/download]
+## using [ngrok](https://ngrok.com/download)
 
 ### how to use 
 - make http server on any folder , consider hosting a file named text.txt on the local server
