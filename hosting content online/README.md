@@ -28,9 +28,6 @@ $ curl "https://dumyy.free.beeceptor.com/exp.html"
 ```
 
 
-## using 
-
-
 ## using [ngrok](https://ngrok.com/download)
 
 ### how to use 
@@ -50,3 +47,8 @@ $ curl "https://7be1-41-45-139-146.ngrok-free.app/test.txt"
 
 testttttttttttttttttttttttttttttttt
 ```
+
+## using [pastebin](https://pastebin.com/)
+- just make a new paste with your content and get the url
+- you can not know if the url was vistied or not  
+
