@@ -166,7 +166,7 @@
 
 
 ### portType element 
-- notice the type attribute in binding element in ` type="tns:HacktheBoxSoapPort"` in previous example and the name element in `	<wsdl:portType name="HacktheBoxSoapPort">`  here 
+- notice the type attribute in binding element in ` type="tns:HacktheBoxSoapPort"` and the name element in `<wsdl:portType name="HacktheBoxSoapPort">`  here 
 ```xml
 	<wsdl:portType name="HacktheBoxSoapPort">
 		<!-- Login Operaion | PORT -->
