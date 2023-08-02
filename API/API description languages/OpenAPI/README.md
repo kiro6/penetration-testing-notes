@@ -1,6 +1,7 @@
 
 ## OpenAPI Specification (OAS) :
-	is a standard for describing and documenting RESTful APIs. It defines a set of     rules and guidelines that developers and API providers can follow to create        consistent and well-documented APIs. The primary goal of OpenAPI is to promote     interoperability between different API tools and services.
+- OpenAPI is a standard for describing and documenting RESTful APIs. It defines a set of rules and guidelines that developers and API providers can follow to create consistent and well-documented APIs.
+- The primary goal of OpenAPI is to promote interoperability between different API tools and services.
 
 ## The OpenAPI Specification provides a machine-readable format (typically written in JSON or YAML) that describes various aspects of an API, including:
 
