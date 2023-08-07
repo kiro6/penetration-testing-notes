@@ -43,6 +43,38 @@
 
 
 
+### simble example 
+
+- this is a serialized object 
+```
+(dp1
+S'text'
+p2
+S'string'
+p3
+sS'none'
+p4
+N
+sS'boolean'
+p5
+I01
+sS'number'
+p6
+F3.4399999999999999
+sS'int_list'
+p7
+(lp8
+I1
+aI2
+aI3
+as.
+```
+
+- will be translated to something like this in json
+```json
+{"int_list": [1, 2, 3], "text": "string", "number": 3.44, "boolean": true, "none": null}
+```
+
 ### example from `baby website rick challenge in HTB` 
 
 ```
@@ -63,7 +95,7 @@ Rp6
 s.
 ```
 
-### this object produced from code like this 
+### this object produced from code like this (this is how to serialize an object)
 ```python
 import pickle
 import pickletools
@@ -110,7 +142,8 @@ When you want to pickle an object that is not natively supported by the `pickle`
 - `Rp6`: Represents a reference to a previously serialized object (in this case, `None` with ID 0). It is used when the same object appears multiple times in the pickled data.
 - `s.`: Indicates the end of the dictionary (key-value pairs) and the end of the serialized object.
 
-### how to use pickle-tools 
+
+### this is how to deserialize an object
 ```python
 import pickle
 import pickletools
@@ -152,33 +185,4 @@ highest protocol among opcodes = 0
 {'serum': <__main__.anti_pickle_serum object at 0x7f67ab33b9d0>}
 ```
 
-### another example 
 
-```
-(dp1
-S'text'
-p2
-S'string'
-p3
-sS'none'
-p4
-N
-sS'boolean'
-p5
-I01
-sS'number'
-p6
-F3.4399999999999999
-sS'int_list'
-p7
-(lp8
-I1
-aI2
-aI3
-as.
-```
-
-- this is translated to something like this in json
-```json
-{"int_list": [1, 2, 3], "text": "string", "number": 3.44, "boolean": true, "none": null}
-```
