@@ -63,6 +63,29 @@ Rp6
 s.
 ```
 
+### this object produced from code like this 
+```python
+import pickle
+import pickletools
+import base64
+
+class anti_pickle_serum(object):
+    def __init__(self) -> None:
+        pass
+
+obj = anti_pickle_serum()
+raw_pickle = pickle.dumps({"serum" : obj}, protocol=0)
+
+optimed_pickle = pickletools.optimize(raw_pickle)
+pickletools.dis(optimed_pickle)
+
+ser_obj = base64.b64encode(raw_pickle)
+
+print(ser_obj)
+```
+
+### lets explain 
+
 -  `(dp0`: Indicates the start of a dictionary (the opening parenthesis `(` of a dictionary).
 -  `S'serum'`: Represents the key `'serum'`. In this context, it is just a string.
 -  `p1`: Indicates that the next object (in this case, `ccopy_reg`) will be used as the value associated with the key `'serum'`. However, in this serialized data, the next object is not a value for the key `'serum'`; it is rather part of the object reconstruction process.
