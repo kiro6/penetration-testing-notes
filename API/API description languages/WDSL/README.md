@@ -163,93 +163,6 @@ here we define our service endpoint and protocol
 </wsdl:service>
 ```
 
-
-
-### portType element 
-here we define the operations for our service in abstract way 
-```xml
-	<wsdl:portType name="HacktheBoxSoapPort">
-		<!-- Login Operaion | PORT -->
-		<wsdl:operation name="Login">
-			<wsdl:input message="tns:LoginSoapIn"/>
-			<wsdl:output message="tns:LoginSoapOut"/>
-		</wsdl:operation>
-		<!-- ExecuteCommand Operation | PORT -->
-		<wsdl:operation name="ExecuteCommand">
-			<wsdl:input message="tns:ExecuteCommandSoapIn"/>
-			<wsdl:output message="tns:ExecuteCommandSoapOut"/>
-		</wsdl:operation>
-	</wsdl:portType>
-```
-
-
-
-
-### message element
-`<wsdl:message>` element is used to define the abstract message format for each operation in a web service. These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
-```xml
-<!-- Login Messages -->
-	<wsdl:message name="LoginSoapIn">
-		<wsdl:part name="parameters" element="tns:LoginRequest"/>
-	</wsdl:message>
-	<wsdl:message name="LoginSoapOut">
-		<wsdl:part name="parameters" element="tns:LoginResponse"/>
-	</wsdl:message>
-	<!-- ExecuteCommand Messages -->
-	<wsdl:message name="ExecuteCommandSoapIn">
-		<wsdl:part name="parameters" element="tns:ExecuteCommandRequest"/>
-	</wsdl:message>
-	<wsdl:message name="ExecuteCommandSoapOut">
-		<wsdl:part name="parameters" element="tns:ExecuteCommandResponse"/>
-	</wsdl:message>
-```
-
-
-
-
-
-### types element 
-define actual parameters in request or response and thier types
-```xml
-<wsdl:types>
-		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-			<s:element name="LoginRequest">
-				<s:complexType>
-					<s:sequence>
-						<s:element minOccurs="1" maxOccurs="1" name="username" type="s:string"/>
-						<s:element minOccurs="1" maxOccurs="1" name="password" type="s:string"/>
-					</s:sequence>
-				</s:complexType>
-			</s:element>
-			<s:element name="LoginResponse">
-				<s:complexType>
-					<s:sequence>
-						<s:element minOccurs="1" maxOccurs="unbounded" name="result" type="s:string"/>
-					</s:sequence>
-				</s:complexType>
-			</s:element>
-			<s:element name="ExecuteCommandRequest">
-				<s:complexType>
-					<s:sequence>
-						<s:element minOccurs="1" maxOccurs="1" name="cmd" type="s:string"/>
-					</s:sequence>
-				</s:complexType>
-			</s:element>
-			<s:element name="ExecuteCommandResponse">
-				<s:complexType>
-					<s:sequence>
-						<s:element minOccurs="1" maxOccurs="unbounded" name="result" type="s:string"/>
-					</s:sequence>
-				</s:complexType>
-			</s:element>
-		</s:schema>
-
-
-</wsdl:types>
-```
-
-
-
 ### binding element :
 - SOAP binding
 - notice the `binding="tns:HacktheboxServiceSoapBinding"` in the service element and  `name="HacktheboxServiceSoapBinding"` here
@@ -352,6 +265,93 @@ For HTTP bindings, the `<wsdl:binding>` element includes `<http:binding>` elemen
     
     - The `<mime:content>` element specifies the content type of the input and output messages. In this case, the content type is set to "application/json," indicating that the messages will be in JSON format.
   
+
+### portType element 
+here we define the operations for our service in abstract way 
+```xml
+	<wsdl:portType name="HacktheBoxSoapPort">
+		<!-- Login Operaion | PORT -->
+		<wsdl:operation name="Login">
+			<wsdl:input message="tns:LoginSoapIn"/>
+			<wsdl:output message="tns:LoginSoapOut"/>
+		</wsdl:operation>
+		<!-- ExecuteCommand Operation | PORT -->
+		<wsdl:operation name="ExecuteCommand">
+			<wsdl:input message="tns:ExecuteCommandSoapIn"/>
+			<wsdl:output message="tns:ExecuteCommandSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+```
+
+
+
+
+### message element
+`<wsdl:message>` element is used to define the abstract message format for each operation in a web service. These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
+```xml
+<!-- Login Messages -->
+	<wsdl:message name="LoginSoapIn">
+		<wsdl:part name="parameters" element="tns:LoginRequest"/>
+	</wsdl:message>
+	<wsdl:message name="LoginSoapOut">
+		<wsdl:part name="parameters" element="tns:LoginResponse"/>
+	</wsdl:message>
+	<!-- ExecuteCommand Messages -->
+	<wsdl:message name="ExecuteCommandSoapIn">
+		<wsdl:part name="parameters" element="tns:ExecuteCommandRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ExecuteCommandSoapOut">
+		<wsdl:part name="parameters" element="tns:ExecuteCommandResponse"/>
+	</wsdl:message>
+```
+
+
+
+
+
+### types element 
+define actual parameters in request or response and thier types
+```xml
+<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+			<s:element name="LoginRequest">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="username" type="s:string"/>
+						<s:element minOccurs="1" maxOccurs="1" name="password" type="s:string"/>
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="LoginResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="unbounded" name="result" type="s:string"/>
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteCommandRequest">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="cmd" type="s:string"/>
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteCommandResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="unbounded" name="result" type="s:string"/>
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+
+
+</wsdl:types>
+```
+
+
+
+
 
 
 ## Example of soap request for this service 
