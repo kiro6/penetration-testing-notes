@@ -1,5 +1,6 @@
 # Here i mention the most important python libraries for hackers
 ## - [requests](#requests)
+## - [BeautifulSoup](#BeautifulSoup)
 
 
 ## requests
@@ -91,3 +92,41 @@ used to easy make http requests
         for chunk in response.iter_content(chunk_size=8192):
             f.write(chunk)
     ```
+
+## BeautifulSoup 
+BeautifulSoup is a Python library used for parsing HTML and XML documents ,searching and modfying on it  
+
+1. **Basic HTML Parsing:**
+```python
+from bs4 import BeautifulSoup
+
+html = '<html><body><p>Hello, BeautifulSoup!</p></body></html>'
+soup = BeautifulSoup(html, 'html.parser')
+```
+2. **Navigating the Parse Tree:**
+```python
+title = soup.title
+paragraph = soup.body.p
+parent_div = div.next_sibling
+next_sibling = paragraph.next_sibling
+```
+3. **Finding Elements:**
+```python
+divs = soup.find_all('div')
+first_paragraph = soup.find('p')
+anchors = soup.find_all('a' , href=True)  // with href attribute 
+```
+4. **Parsing from URL:**
+```python
+url = 'https://www.example.com'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+```
+5. **Extracting Text:**
+```pyhton
+paragraph_text = paragraph.get_text()
+```
+6. **Parsing XML:**
+```python
+soup = BeautifulSoup(xml_content, 'lxml')
+```
