@@ -130,3 +130,81 @@ paragraph_text = paragraph.get_text()
 ```python
 soup = BeautifulSoup(xml_content, 'lxml')
 ```
+
+## urllib.parse
+The `urllib.parse` module in Python is used for parsing URLs and performing URL encoding and decoding.
+
+1. **URL Parsing:**
+
+```python
+from urllib.parse import urlparse
+
+url = 'https://www.example.com/page?param=value#section'
+parsed_url = urlparse(url)
+print(parsed_url)
+```
+
+2. **URL Joining:**
+```pyhton
+from urllib.parse import urljoin
+
+base_url = 'https://www.example.com'
+relative_url = '/page'
+complete_url = urljoin(base_url, relative_url)
+print(complete_url)
+```
+
+3. **URL Encoding:**
+```pyhton
+from urllib.parse import quote
+
+unencoded_string = 'Hello, World!'
+encoded_string = quote(unencoded_string)
+print(encoded_string)
+```
+
+4. **URL Decoding:**
+```pyhton
+from urllib.parse import unquote
+
+encoded_string = 'Hello%2C%20World%21'
+decoded_string = unquote(encoded_string)
+print(decoded_string)
+```
+
+5. **Query String Parsing:**
+```pyhton
+from urllib.parse import parse_qs
+
+query_string = 'param1=value1&param2=value2'
+query_params = parse_qs(query_string)
+print(query_params)
+```
+
+6. **Query String Encoding:**
+```pyhton
+from urllib.parse import urlencode
+
+params = {'param1': 'value1', 'param2': 'value2'}
+encoded_query_string = urlencode(params)
+print(encoded_query_string)
+```
+
+7. **URL Component Unquoting:**
+```pyhton
+from urllib.parse import unquote_plus
+
+encoded_string = 'Hello%2C+World%21'
+decoded_string = unquote_plus(encoded_string)
+print(decoded_string)
+```
+
+8. **URL Component Quoting:**
+```pyhton
+from urllib.parse import quote_plus
+
+unencoded_string = 'Hello, World!'
+encoded_string = quote_plus(unencoded_string)
+print(encoded_string)
+```
+
