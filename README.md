@@ -6,3 +6,4 @@
 - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 - [portswigger academy](https://portswigger.net/web-security/)
 - [hackthebox academy](https://academy.hackthebox.com/)
+- [MDN](https://developer.mozilla.org/en-US/docs/Web)
