@@ -147,6 +147,9 @@
 
 
 ## The best way in my opinion to read WDSL is from bottom to top
+- always check relation between attribute names and other elements
+- if you feel overwhelmed continue everything will get clear at the end
+
 
 ### service element : 
 here we define our service endpoint and protocol 
