@@ -6,7 +6,7 @@
 used to easy make http requests 
 
 
-**Basic GET Request:**
+1. **Basic GET Request:**
     ```python
     import requests
     response = requests.get('https://www.example.com')
