@@ -149,6 +149,7 @@
 ## The best way in my opinion to read WDSL is from bottom to top
 
 ### service element : 
+here we define our service endpoint and protocol 
 ```xml
 <wsdl:service name="HacktheboxService">
 
@@ -158,10 +159,6 @@
 
 </wsdl:service>
 ```
-
-- `<wsdl:service>`: Defines a web service with a specific name. It groups related ports (endpoints) together.
-- `<wsdl:port>`: Specifies an endpoint (binding) within the service, defining the network address and communication protocol for that endpoint.
-
 
 
 
@@ -186,6 +183,7 @@ here we define the operations for our service in abstract way
 
 
 ### message element
+`<wsdl:message>` element is used to define the abstract message format for each operation in a web service. These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
 ```xml
 <!-- Login Messages -->
 	<wsdl:message name="LoginSoapIn">
@@ -202,13 +200,13 @@ here we define the operations for our service in abstract way
 		<wsdl:part name="parameters" element="tns:ExecuteCommandResponse"/>
 	</wsdl:message>
 ```
-`<wsdl:message>` element is used to define the abstract message format for each operation in a web service. These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
 
 
 
 
-### types element (actual parameters in request or response)
-- notice the `<wsdl:part name="parameters" element="tns:LoginRequest"/>` in the previous example and the `<s:element name="LoginRequest">`
+
+### types element 
+define actual parameters in request or response and thier types
 ```xml
 <wsdl:types>
 		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
