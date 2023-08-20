@@ -166,7 +166,6 @@
 
 
 ### portType element 
-- notice the type attribute in binding element in ` type="tns:HacktheBoxSoapPort"` and the name element in `<wsdl:portType name="HacktheBoxSoapPort">`  here 
 ```xml
 	<wsdl:portType name="HacktheBoxSoapPort">
 		<!-- Login Operaion | PORT -->
@@ -181,36 +180,11 @@
 		</wsdl:operation>
 	</wsdl:portType>
 ```
-The `<wsdl:portType>` element defines a set of abstract operations (or methods) that a web service provides.
-
-1. `<wsdl:portType name="HacktheBoxSoapPort">`:
-    
-    - This defines a `<wsdl:portType>` element with the name "HacktheBoxSoapPort." The port type represents a collection of operations provided by the web service.
-2. `<wsdl:operation name="Login">`:
-    
-    - This defines an operation named "Login" within the port type.
-    - An operation represents a specific action that clients can perform on the web service.
-3. `<wsdl:input message="tns:LoginSoapIn"/>`:
-    
-    - This element specifies the input message for the "Login" operation. It refers to a message named "LoginSoapIn" defined in message element using the `tns` namespace.
-4. `<wsdl:output message="tns:LoginSoapOut"/>`:
-    
-    - This element specifies the output message for the "Login" operation. It refers to a message named "LoginSoapOut" in message element using the `tns` namespace.
-5. `<wsdl:operation name="ExecuteCommand">`:
-    
-    - This defines another operation named "ExecuteCommand" within the port type.
-6. `<wsdl:input message="tns:ExecuteCommandSoapIn"/>`:
-    
-    - This element specifies the input message for the "ExecuteCommand" operation. It refers to a message named "ExecuteCommandSoapIn"  in message element using the `tns` namespace.
-7. `<wsdl:output message="tns:ExecuteCommandSoapOut"/>`:
-
-    - This element specifies the output message for the "ExecuteCommand" operation. It refers to a message named "ExecuteCommandSoapOut" in message element  using the `tns` namespace.
 
 
 
 
 ### message element
-- notice the `<wsdl:input message="tns:LoginSoapIn"/>` in portType element in previous example and the `<wsdl:message name="LoginSoapIn">` here 
 ```xml
 <!-- Login Messages -->
 	<wsdl:message name="LoginSoapIn">
@@ -229,27 +203,6 @@ The `<wsdl:portType>` element defines a set of abstract operations (or methods) 
 ```
 `<wsdl:message>` element is used to define the abstract message format for each operation in a web service. These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
 
-1. `<wsdl:message name="LoginSoapIn">`:
-    
-    - This defines the input message for the "Login" operation.
-    - The `name` attribute specifies a unique name for the message.
-    - The `<wsdl:part>` element inside the `<wsdl:message>` element describes the content of the message.
-    - In this case, the message has a single part named "parameters," and it references the element "tns:LoginRequest," which is defined in types in the WSDL.
-2. `<wsdl:message name="LoginSoapOut">`:
-    
-    - This defines the output message for the "Login" operation.
-    - Like the input message, it has a unique name specified by the `name` attribute.
-    - The message contains a single part named "parameters," and it references the element "tns:LoginResponse." which is defined in types
-3. `<wsdl:message name="ExecuteCommandSoapIn">`:
-    
-    - This defines the input message for the "ExecuteCommand" operation.
-    - Similar to the previous messages, it has a unique name.
-    - The message has a single part named "parameters," and it references the element "tns:ExecuteCommandRequest." which is defined in types
-4. `<wsdl:message name="ExecuteCommandSoapOut">`:
-    
-    - This defines the output message for the "ExecuteCommand" operation.
-    - It also has a unique name.
-    - The message includes a single part named "parameters," and it references the element "tns:ExecuteCommandResponse." which is defined in types
 
 
 
@@ -292,29 +245,6 @@ The `<wsdl:portType>` element defines a set of abstract operations (or methods) 
 
 </wsdl:types>
 ```
-`<wsdl:types>` element, which is used to define the data types used in the web service. In this case, the data types are specified using XML Schema (XSD) within the `<s:schema>` element. The types are then used to define the structure of the input and output messages for the operations "Login" and "ExecuteCommand."
-
-- `s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">`:
-    
-    - This defines an XML Schema (XSD) with the target namespace "[http://tempuri.org/](http://tempuri.org/)". The `elementFormDefault="qualified"` attribute means that elements in this schema are namespace-qualified by default.
-- `<s:element name="LoginRequest">`:
-    
-    - This defines the "LoginRequest" data type. It represents the structure of the input message for the "Login" operation.
-    - The `<s:complexType>` element indicates that the data type is a complex type, meaning it can have child elements.
-- `<s:element minOccurs="1" maxOccurs="1" name="username" type="s:string"/>`:
-    
-    - This defines the "username" element within the "LoginRequest" type. It is of type "s:string" (string data type) and is required (`minOccurs="1"`) with a maximum occurrence of 1 (`maxOccurs="1"`).
-- `<s:element minOccurs="1" maxOccurs="1" name="password" type="s:string"/>`:
-    
-    - This defines the "password" element within the "LoginRequest" type. It is also of type "s:string" and required with a maximum occurrence of 1.
-- `<s:element name="LoginResponse">`:
-    
-    - This defines the "LoginResponse" data type. It represents the structure of the output message for the "Login" operation.
-    - The type contains a sequence with a single element named "result," which can occur multiple times (`maxOccurs="unbounded"`).
-- `<s:element minOccurs="1" maxOccurs="unbounded" name="result" type="s:string"/>`:
-    
-    - This defines the "result" element within the "LoginResponse" type. It is of type "s:string" and can occur multiple times (`maxOccurs="unbounded"`).
-- Similar definitions for "ExecuteCommandRequest" and "ExecuteCommandResponse" data types follow the same pattern, representing the structure of input and output messages for the "ExecuteCommand" operation.
 
 
 
