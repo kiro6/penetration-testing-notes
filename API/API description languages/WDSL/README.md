@@ -203,24 +203,6 @@ Inside the `<wsdl:binding>` element, you use various child elements to specify t
 
 ##### For SOAP bindings, the `<wsdl:binding>` element contains: child elements like `<soap:binding>` and `<wsdl:operation>` elements that define how SOAP messages should be transmitted over a specific transport protocol (e.g., HTTP) and the style (e.g., document or RPC) for each operation.
 
-1. `<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>`:
-
-    - This line specifies the binding details for the web service using SOAP (Simple Object Access Protocol) as the communication protocol.
-    - The `transport` attribute sets the transport protocol to HTTP. It means that the SOAP messages will be transmitted over the HTTP protocol, which is a common way of exchanging SOAP messages.
-3. `<wsdl:operation name="Login">`:
-    
-    - This defines an operation named "Login" within the web service. Operations represent the actions that clients can perform on the service.
-3. `<soap:operation soapAction="Login" style="document"/>`:
-    
-    - The `<soap:operation>` element is nested within the `<wsdl:operation>` element to specify SOAP-specific properties for the "Login" operation.
-    - `soapAction` attribute: It indicates the SOAP action associated with this operation. SOAP actions are typically URIs that uniquely identify the purpose of the SOAP message. In this case, the SOAP action is set to "Login."
-4. `<wsdl:input>`:
-    - This element defines the input message for the "Login" operation, which is the data that the client sends to the server when invoking the operation.
-    - `<soap:body use="literal"/>`: The `<soap:body>` element specifies how the input message should be formatted inside the SOAP envelope. The `use="literal"` attribute means that the input message will be expressed directly as a literal XML element within the SOAP body.
-5. `<wsdl:output>`:
-    - This element defines the output message for the "Login" operation, which is the data that the server sends back to the client after the operation is executed.
-    - `<soap:body use="literal"/>`: Similar to the input message, the `<soap:body>` element with `use="literal"` attribute indicates that the output message will be expressed directly as a literal XML element within the SOAP body.
-
 
 
 - HTTP binding
@@ -241,28 +223,9 @@ Inside the `<wsdl:binding>` element, you use various child elements to specify t
 
 ```
 
-For HTTP bindings, the `<wsdl:binding>` element includes `<http:binding>` elements to define the details for the HTTP request and response messages. HTTP bindings are commonly used for RESTful web services.
+##### For HTTP bindings, the `<wsdl:binding>` element includes `<http:binding>` elements to define the details for the HTTP request and response messages. HTTP bindings are commonly used for RESTful web services.
 
-1. `<wsdl:binding name="HacktheboxServiceHTTPBinding" type="tns:HacktheboxServicePortType">`:
-    
-    - This defines an HTTP binding named "HacktheboxServiceHTTPBinding" associated with the port type "HacktheboxServicePortType."
-2. `<http:binding verb="POST"/>`:
-    
-    - The `<http:binding>` element specifies the details of the HTTP binding. In this case, it sets the HTTP verb to "POST," indicating that requests should be made using the HTTP POST method.
-3. `<wsdl:operation name="SomeOperation">`:
-    
-    - This defines an operation named "SomeOperation" within the web service.
-4. `<http:operation location="SomeOperation"/>`:
-    
-    - The `<http:operation>` element is nested within the `<wsdl:operation>` element to specify the details of the HTTP operation for the "SomeOperation" operation.
-    - The `location` attribute specifies the relative URL path for the "SomeOperation" HTTP request. For example, if the service endpoint is "[http://localhost/service](http://localhost/service)", then invoking "SomeOperation" would use the URL "[http://localhost/service/SomeOperation](http://localhost/service/SomeOperation)".
-5. `<wsdl:input>` and `<wsdl:output>`:
-    
-    - These elements define the input and output messages for the "SomeOperation" operation, respectively.
-6. `<mime:content type="application/json"/>`:
-    
-    - The `<mime:content>` element specifies the content type of the input and output messages. In this case, the content type is set to "application/json," indicating that the messages will be in JSON format.
-  
+
 
 ### portType element 
 here we define the operations for our service in abstract way 
