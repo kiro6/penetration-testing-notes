@@ -165,8 +165,6 @@ here we define our service endpoint and protocol
 
 ### binding element :
 - SOAP binding
-- notice the `binding="tns:HacktheboxServiceSoapBinding"` in the service element and  `name="HacktheboxServiceSoapBinding"` here
-- notice the `name="HacktheBoxSoapPort"` in the portType element and the   `type="tns:HacktheBoxSoapPort"` here
 ```xml
 <wsdl:binding name="HacktheboxServiceSoapBinding" type="tns:HacktheBoxSoapPort">
 		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
