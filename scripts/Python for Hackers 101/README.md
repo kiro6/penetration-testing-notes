@@ -9,6 +9,7 @@ used to easy make http requests
 1. **Basic GET Request:**
     ```python
     import requests
+    
     response = requests.get('https://www.example.com')
     print(response.text)
     ```
