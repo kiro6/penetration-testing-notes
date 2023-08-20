@@ -124,7 +124,7 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 ```
 5. **Extracting Text:**
-```pyhton
+```python
 paragraph_text = paragraph.get_text()
 ```
 6. **Parsing XML:**
@@ -146,7 +146,7 @@ print(parsed_url)
 ```
 
 2. **URL Joining:**
-```pyhton
+```python
 from urllib.parse import urljoin
 
 base_url = 'https://www.example.com'
@@ -156,7 +156,7 @@ print(complete_url)
 ```
 
 3. **URL Encoding:**
-```pyhton
+```python
 from urllib.parse import quote
 
 unencoded_string = 'Hello, World!'
@@ -165,7 +165,7 @@ print(encoded_string)
 ```
 
 4. **URL Decoding:**
-```pyhton
+```python
 from urllib.parse import unquote
 
 encoded_string = 'Hello%2C%20World%21'
@@ -174,7 +174,7 @@ print(decoded_string)
 ```
 
 5. **Query String Parsing:**
-```pyhton
+```python
 from urllib.parse import parse_qs
 
 query_string = 'param1=value1&param2=value2'
@@ -183,7 +183,7 @@ print(query_params)
 ```
 
 6. **Query String Encoding:**
-```pyhton
+```python
 from urllib.parse import urlencode
 
 params = {'param1': 'value1', 'param2': 'value2'}
@@ -192,7 +192,7 @@ print(encoded_query_string)
 ```
 
 7. **URL Component Unquoting:**
-```pyhton
+```python
 from urllib.parse import unquote_plus
 
 encoded_string = 'Hello%2C+World%21'
@@ -201,7 +201,7 @@ print(decoded_string)
 ```
 
 8. **URL Component Quoting:**
-```pyhton
+```python
 from urllib.parse import quote_plus
 
 unencoded_string = 'Hello, World!'
