@@ -166,6 +166,7 @@
 
 
 ### portType element 
+here we define the operations for our service in abstract way 
 ```xml
 	<wsdl:portType name="HacktheBoxSoapPort">
 		<!-- Login Operaion | PORT -->
