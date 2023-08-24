@@ -164,7 +164,15 @@ here we define our service endpoint and protocol
 ```
 
 ### binding element :
-- SOAP binding
+#### SOAP binding
+- the `<wsdl:binding>` element is used to define the protocol and data format details for a specific port type, which represents an endpoint of the web service.
+- For SOAP bindings, the `<wsdl:binding>` element contains: child elements like `<soap:binding>` and `<wsdl:operation>` elements that define how SOAP messages should be transmitted over a specific transport protocol (e.g., HTTP) and the style (e.g., document or RPC) for each operation. 
+- It associates an abstract interface (defined in the `<wsdl:portType>` element) with a concrete network protocol, specifying how the messages should be formatted and transmitted over the network.
+
+#### `<wsdl:binding>` contains the following attributes:
+
+- **name**: A unique name that identifies the binding within the WSDL document.
+- **type**: A QName (Qualified Name) that references the abstract interface (port type) defined in the `<wsdl:portType>` element, to which this binding corresponds.
 ```xml
 <wsdl:binding name="HacktheboxServiceSoapBinding" type="tns:HacktheBoxSoapPort">
 		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -191,21 +199,10 @@ here we define our service endpoint and protocol
 	</wsdl:binding>
 ```
 
--  the `<wsdl:binding>` element is used to define the protocol and data format details for a specific port type, which represents an endpoint of the web service. 
-- It associates an abstract interface (defined in the `<wsdl:portType>` element) with a concrete network protocol, specifying how the messages should be formatted and transmitted over the network.
-
-#### `<wsdl:binding>` contains the following attributes:
-
-- **name**: A unique name that identifies the binding within the WSDL document.
-- **type**: A QName (Qualified Name) that references the abstract interface (port type) defined in the `<wsdl:portType>` element, to which this binding corresponds.
-
-Inside the `<wsdl:binding>` element, you use various child elements to specify the actual communication protocol and message formatting details. The elements you include depend on the chosen binding style, which can be either SOAP or HTTP or other custom protocols.
-
-##### For SOAP bindings, the `<wsdl:binding>` element contains: child elements like `<soap:binding>` and `<wsdl:operation>` elements that define how SOAP messages should be transmitted over a specific transport protocol (e.g., HTTP) and the style (e.g., document or RPC) for each operation.
 
 
-
-- HTTP binding
+#### HTTP binding
+- For HTTP bindings, the `<wsdl:binding>` element includes `<http:binding>` elements to define the details for the HTTP request and response messages. HTTP bindings are commonly used for RESTful web services.
 ```xml
 <wsdl:binding name="HacktheboxServiceHTTPBinding" type="tns:HacktheboxServicePortType">
   <http:binding verb="POST"/>
@@ -223,12 +220,13 @@ Inside the `<wsdl:binding>` element, you use various child elements to specify t
 
 ```
 
-##### For HTTP bindings, the `<wsdl:binding>` element includes `<http:binding>` elements to define the details for the HTTP request and response messages. HTTP bindings are commonly used for RESTful web services.
+
 
 
 
 ### portType element 
-here we define the operations for our service in abstract way 
+- here we define the operations for our service in abstract way 
+- `operation name="Login"` this what is used in `SOAPAction` header
 ```xml
 	<wsdl:portType name="HacktheBoxSoapPort">
 		<!-- Login Operaion | PORT -->
@@ -248,7 +246,8 @@ here we define the operations for our service in abstract way
 
 
 ### message element
-`<wsdl:message>` element is used to define the abstract message format for each operation in a web service. These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
+- `<wsdl:message>` element is used to define the abstract message format for each operation in a web service. 
+- These messages specify the structure of the data that will be exchanged between the client and the server during the execution of an operation.
 ```xml
 <!-- Login Messages -->
 	<wsdl:message name="LoginSoapIn">
