@@ -8,6 +8,9 @@
 - [Manipulation](#manipulation)
   - [Substitution](#substitution)  
   - [Slicing](#slicing)
+- [Debugging](#debugging)
+  - [Return Values](#return-values)
+  - [xtrace](#xtrace--x)
 
 # Special Variables
 
