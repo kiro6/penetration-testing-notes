@@ -80,12 +80,12 @@
 # Manipulation 
 
 ## Substitution
-```
+```bash
 name="John"
 echo "${name/J/j}"    #=> "john"
 ```
 ## Slicing
-```
+```bash
 name="John"
 echo "${name:0:2}"    #=> "Jo" (slicing)
 echo "${name::2}"     #=> "Jo" (slicing)
@@ -93,3 +93,26 @@ echo "${name::-1}"    #=> "Joh" (slicing)
 echo "${name:(-1)}"   #=> "n" (slicing from right)
 echo "${name:(-2):1}" #=> "h" (slicing from right)
 ```
+
+# Debugging
+
+## Return Values
+| Return Code | Description                                        |
+|-------------|----------------------------------------------------|
+| 1           | General errors                                     |
+| 2           | Misuse of shell builtins                          |
+| 126         | Command invoked cannot execute                    |
+| 127         | Command not found                                 |
+| 128         | Invalid argument to exit                          |
+| 128+n       | Fatal error signal "n"                            |
+| 130         | Script terminated by Control-C                     |
+| 255*        | Exit status out of range (greater than 255)       |
+
+## xtrace (-x)
+```bash
+bash -x  bash.sh                                                                                                                                                                           127 ↵
++ name
++ echo asas
+asas
++ not_a_function
+bash.sh: line 8: not_a_function: command not found```
