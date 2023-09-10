@@ -5,9 +5,9 @@
   - [Integer Operators](#integer-operators)
   - [File Operators](#file-operators)
   - [Logical Operators](#logical-operators)
-
-
-
+- [Manipulation](#manipulation)
+  -[Substitution](#substitution)  
+  -[Slicing](#slicing)
 
 # Special Variables
 
