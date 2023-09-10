@@ -2,7 +2,9 @@
 - [Special Variables](#special-variables)
 - [Operators](#operators)
   - [String Operators](#string-operators)
-  - 
+  - [Integer Operators](#integer-operators)
+  - [File Operators](#file-operators)
+  - [Logical Operators](#logical-operators)
 
 
 
