@@ -23,7 +23,8 @@
 | $*       | Similar to $@, this variable represents all positional parameters as a single string, with arguments separated by the first character in the $IFS (Internal Field Separator) variable. |
 
 ## Notes 
-- this char `#` before any variable will output the length  
+- this char `#` before any variable will output the length.
+- this expression  `${var} == *${value}*` checks if the variable named "var" contains the contents of the variable named "value".
 
 
 
