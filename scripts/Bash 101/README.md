@@ -1,5 +1,8 @@
 # content 
-- 
+- [Special Variables](#special-variables)
+- [Operators](#operators)
+  - [String Operators](#string-operators)
+  - 
 
 
 
