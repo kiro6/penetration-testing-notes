@@ -22,6 +22,8 @@
 | $!       | After running a background command or job, this variable holds the PID of the last background process. |
 | $*       | Similar to $@, this variable represents all positional parameters as a single string, with arguments separated by the first character in the $IFS (Internal Field Separator) variable. |
 
+## Notes 
+- this char `#` before any variable will output the length  
 
 
 
