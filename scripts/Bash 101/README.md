@@ -6,8 +6,8 @@
   - [File Operators](#file-operators)
   - [Logical Operators](#logical-operators)
 - [Manipulation](#manipulation)
-  -[Substitution](#substitution)  
-  -[Slicing](#slicing)
+  - [Substitution](#substitution)  
+  - [Slicing](#slicing)
 
 # Special Variables
 
