@@ -24,7 +24,7 @@
 
 ## Notes 
 - this char `#` before any variable will output the length.
-- this expression  `${var} == *${value}*` checks if the variable named "var" contains the contents of the variable named "value".
+- this expression  `${var} == *${value}*` checks if the variable named **var** contains the contents of the variable named **value**.
 
 
 
