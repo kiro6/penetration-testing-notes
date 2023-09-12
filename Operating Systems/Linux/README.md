@@ -115,6 +115,24 @@ cat file.txt | grep "search_word"
 #Searching with Wildcards:
 grep "pattern.*" filename
 ```
+### cut syntax 
+```bash
+#Extract specific fields from a CSV file:
+cut -d',' -f2,4 input.csv
+
+#Extract characters from a text file:
+cut -c1-5,10-20 textfile.txt
+
+#Extract all fields except the specified ones:
+cut -f2-4 --complement data.txt
+
+#Extract fields from standard input:
+echo "1,John,Smith" | cut -d',' -f2
+
+#Extract characters from a variable (bash variable expansion):
+variable="Hello,World"
+echo "$variable" | cut -c1-5
+```
 
 ## Find Files and Directories
 | Command   | Description                                                           |
