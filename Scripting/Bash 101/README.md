@@ -118,4 +118,5 @@ bash -x  bash.sh                                                                
 + echo asas
 asas
 + not_a_function
-bash.sh: line 8: not_a_function: command not found```
+bash.sh: line 8: not_a_function: command not found
+```
