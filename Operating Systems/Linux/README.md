@@ -134,6 +134,22 @@ variable="Hello,World"
 echo "$variable" | cut -c1-5
 ```
 
+### tr syntax 
+```bash
+#Translate characters from one set to another:
+echo "Hello" | tr 'aeiou' 'AEIOU'
+# Output: HEllo
+
+#Delete specific characters:
+echo "Remove spaces" | tr -d ' '
+# Output: Remove spaces
+
+#Squeeze repeated characters:
+echo "Helloooo" | tr -s 'o'
+# Output: Helo
+
+```
+
 ## Find Files and Directories
 | Command   | Description                                                           |
 |-----------|-----------------------------------------------------------------------|
