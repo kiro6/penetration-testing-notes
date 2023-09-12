@@ -142,7 +142,7 @@ echo "Hello" | tr 'aeiou' 'AEIOU'
 
 #Delete specific characters:
 echo "Remove spaces" | tr -d ' '
-# Output: Remove spaces
+# Output: Removespaces
 
 #Squeeze repeated characters:
 echo "Helloooo" | tr -s 'o'
