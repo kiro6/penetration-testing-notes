@@ -153,22 +153,14 @@ echo "Helloooo" | tr -s 'o'
 ### column syntax 
 ```bash
 #Format data into a table with default separator (whitespace):
-column file.txt
+column -t file.txt
 
 #Format data into a table with a custom separator (e.g., comma):
-column -s',' file.csv
-
-#Specify the number of columns to display:
-column -c3 file.txt
-
-#Expand tabs to spaces while formatting:
-column -x file.txt
+column -s',' -t file.csv
 
 #Specify a custom output separator (e.g., a pipe "|"):
-column -s',' -o'|' file.csv
+column -s',' -o'|' -t file.csv
 
-#Format data from a command's output:
-ls -l | column -t
 ```
 
 ## Find Files and Directories
