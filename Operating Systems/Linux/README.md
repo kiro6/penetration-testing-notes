@@ -48,6 +48,74 @@
 | lsof      | Lists opened files.                                                   |
 | lspci     | Lists PCI devices.                                                    |
 
+
+## Working with Files and Directories
+
+| Command  | Description                              |
+|----------|------------------------------------------|
+| `ls`     | Lists directory contents.                 |
+| `cd`     | Changes the directory.                    |
+| `clear`  | Clears the terminal.                      |
+| `touch`  | Creates an empty file.                   |
+| `mkdir`  | Creates a directory.                      |
+| `tree`   | Lists the contents of a directory recursively. |
+| `mv`     | Move or rename files or directories.      |
+| `cp`     | Copy files or directories.                |
+| `more`    | Pager that is used to read STDOUT or files.                       |
+| `less`    | An alternative to `more` with more features.                      |
+| `head`    | Prints the first ten lines of STDOUT or a file.                   |
+| `tail`    | Prints the last ten lines of STDOUT or a file.                    |
+| `sort`    | Sorts the contents of STDOUT or a file.                           |
+| `grep`    | Searches for specific results that contain given patterns.        |
+| `cut`     | Removes sections from each line of files.                         |
+| `tr`      | Replaces certain characters.                                      |
+| `column`  | Command-line based utility that formats its input into multiple columns. |
+| `awk`     | Pattern scanning and processing language.                         |
+| `sed`     | A stream editor for filtering and transforming text.              |
+| `wc`      | Prints newline, word, and byte counts for a given input.          |
+
+### grep syntax 
+```bash
+#Search for a Word in a File:
+grep "search_word" filename
+
+
+#Case-Insensitive Search:
+grep -i "search_word" filename
+
+
+#Recursive Search in Directory:
+grep -r "search_word" directory/
+
+
+#Count Matching Lines:
+grep -c "search_word" filename
+
+
+#Search for Inverted Matches:
+grep -v "exclude_word" filename
+
+
+#Display Line Numbers:
+grep -n "search_word" filename
+
+
+Search for a Regular Expression:
+#grep -E "pattern" filename
+
+
+#Search Multiple Files:
+grep "search_word" file1 file2 file3
+
+
+#Piping Input:
+cat file.txt | grep "search_word"
+
+
+#Searching with Wildcards:
+grep "pattern.*" filename
+```
+
 ## Find Files and Directories
 | Command   | Description                                                           |
 |-----------|-----------------------------------------------------------------------|
