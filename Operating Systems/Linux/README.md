@@ -25,3 +25,38 @@
 | /usr | Contains executables, libraries, man files, etc. |
 | /var | This directory contains variable data files such as log files, email in-boxes, web application related files, cron files, and more. |
 
+# Basic commands 
+
+## System Information
+
+| Command   | Description                                                           |
+|-----------|-----------------------------------------------------------------------|
+| whoami    | Displays current username.                                            |
+| id        | Returns user's identity.                                              |
+| hostname  | Sets or prints the name of the current host system.                  |
+| uname     | Prints basic information about the operating system name and system hardware. |
+| pwd       | Returns working directory name.                                       |
+| ifconfig  | The ifconfig utility is used to assign or view an address to a network interface and/or configure network interface parameters. |
+| ip        | Ip is a utility to show or manipulate routing, network devices, interfaces, and tunnels. |
+| netstat   | Shows network status.                                                 |
+| ss        | Another utility to investigate sockets.                                |
+| ps        | Shows process status.                                                 |
+| who       | Displays who is logged in.                                            |
+| env       | Prints environment or sets and executes a command.                     |
+| lsblk     | Lists block devices.                                                  |
+| lsusb     | Lists USB devices.                                                    |
+| lsof      | Lists opened files.                                                   |
+| lspci     | Lists PCI devices.                                                    |
+
+## Find Files and Directories
+| Command   | Description                                                           |
+|-----------|-----------------------------------------------------------------------|
+| which     | locate a command binary                                            |
+| locate    | list files in databases that match a pattern.                      |
+| find  | search for files in a directory hierarchy                 |
+
+### find syntax
+```bash
+#find <location> <options>
+find / -type f -name *.conf -user root -size +20k -newermt 2020-03-03 -exec ls -al {} \; 2>/dev/null
+```
