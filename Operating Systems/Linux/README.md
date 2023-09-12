@@ -100,8 +100,8 @@ grep -v "exclude_word" filename
 grep -n "search_word" filename
 
 
-Search for a Regular Expression:
-#grep -E "pattern" filename
+#Search for a Regular Expression:
+grep -E "pattern" filename
 
 
 #Search Multiple Files:
