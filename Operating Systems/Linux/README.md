@@ -150,7 +150,7 @@ echo "Helloooo" | tr -s 'o'
 
 ```
 
-### columns syntax 
+### column syntax 
 ```bash
 #Format data into a table with default separator (whitespace):
 column file.txt
