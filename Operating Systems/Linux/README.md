@@ -1,7 +1,11 @@
-# content
+# Content
 - [File System Hierarchy](#file-system-hierarchy)
 
 # File System Hierarchy
+
+
+![NEW_filesystem](https://github.com/kiro6/penetration-testing-notes/assets/57776872/fc0ea4cf-f620-4818-bfbe-0ca39823c49a)
+
 
 | Path | Description  |
 |----------|----------|
