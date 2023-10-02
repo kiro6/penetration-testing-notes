@@ -1,5 +1,5 @@
 # penetration-testing-notes
-this my is repo with notes i take in penetration testing & related technologies
+this my is repo with notes i take in penetration testing & related technologies/topics 
 
 ## sources 
 - [hackthebox academy](https://academy.hackthebox.com/)
