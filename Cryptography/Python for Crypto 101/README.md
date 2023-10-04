@@ -1,5 +1,6 @@
 # Cotnent 
 - [Handling ASCII](#handling-ascii)
+- [Handling Hex](#handling-hex)
 
 
 ## Handling ASCII
