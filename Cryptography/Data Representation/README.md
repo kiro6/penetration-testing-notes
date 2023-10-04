@@ -1,4 +1,6 @@
 # Content 
+- [ASCII](#ascii)
+- [HEX](#hex)
 
 ## ASCII 
 ASCII is a 7-bit encoding standard which allows the representation of text using the integers 0-127.
@@ -72,3 +74,5 @@ $ man ascii
   076   62    3E    >                           176   126   7E    ~
   077   63    3F    ?                           177   127   7F    DE   
 ```
+## HEX 
+Hexadecimal representation is a base-16 numbering system using digits 0-9 and A-F, useful for compactly expressing binary data in a human-readable format in computing and programming contexts.
