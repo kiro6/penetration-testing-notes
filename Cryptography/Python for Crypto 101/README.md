@@ -1,6 +1,7 @@
 # Cotnent 
 - [Handling ASCII](#handling-ascii)
 - [Handling Hex](#handling-hex)
+- [Handling Base64](#handling-base64)
 
 
 ## Handling ASCII
@@ -44,4 +45,16 @@ $ python3 py.py                                                                 
 b'crypto{You_will_be_working_with_hex_strings_a_lot}'
 
 63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737472696e67735f615f6c6f747d
+```
+
+## Handling Base64
+```
+from base64 import *
+
+b64 = 'Y3J5cHRve0Jhc2VfNjRfRW5jb2RpbmdfaXNfV2ViX1NhZmV9'
+
+s = b64decode(b64)
+print(s)
+print()
+print(b64encode(s))
 ```
