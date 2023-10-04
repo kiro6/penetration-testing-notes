@@ -1,5 +1,5 @@
 # Cotnent 
-- handling ascii
+- [Handling ASCII](#handling-ascii)
 
 
 ## Handling ASCII
@@ -19,9 +19,28 @@ for s in string :
 print(list)
 ```
 output 
-```
+```bash
 $ python3 py.py
 crypto{ASCII_pr1nt4bl3}
 
 [99, 114, 121, 112, 116, 111, 123, 65, 83, 67, 73, 73, 95, 112, 114, 49, 110, 116, 52, 98, 108, 51, 125]
+```
+
+## Handling Hex 
+ In Python, the bytes.fromhex() function can be used to convert hex to bytes. The .hex() instance method can be called on byte strings to get the hex representation.
+```python
+hex = '63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737472696e67735f615f6c6f747d'
+
+flag = bytes.fromhex(hex)
+
+print(flag)
+print()
+print(bytes.hex(flag))
+```
+output
+```bash
+$ python3 py.py                                                                                                                                                1 ↵
+b'crypto{You_will_be_working_with_hex_strings_a_lot}'
+
+63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737472696e67735f615f6c6f747d
 ```
