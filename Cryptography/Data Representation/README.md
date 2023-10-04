@@ -76,7 +76,11 @@ $ man ascii
   077   63    3F    ?                           177   127   7F    DE   
 ```
 ## HEX 
-Hexadecimal representation is a base-16 numbering system using digits 0-9 and A-F, useful for compactly expressing binary data in a human-readable format in computing and programming contexts.
+- Hexadecimal representation is a base-16 numbering system using digits 0-9 and A-F, useful for compactly expressing binary data in a human-readable format in computing and programming contexts.
+- Hexadecimal character represents 4 bits (or half a byte). 
 
 ## Base64 
-Base64 is a binary-to-text encoding scheme that represents binary data in a 64-character ASCII string. It's commonly used for encoding binary data for safe text-based transmission or storage.
+- Base64 is a binary-to-text encoding scheme that represents binary data in a 64-character ASCII string.
+- It's commonly used for encoding binary data for safe text-based transmission or storage.
+- One character of a Base64 string encodes 6 binary digits (bits), and so 4 characters of Base64 encode three 8-bit bytes
+
