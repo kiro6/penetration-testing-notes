@@ -3,6 +3,8 @@
 ## ASCII 
 ASCII is a 7-bit encoding standard which allows the representation of text using the integers 0-127.
 ```
+$ man ascii  
+
   Oct   Dec   Hex   Char                        Oct   Dec   Hex   Char
 ────────────────────────────────────────────────────────────────────────
   000   0     00    NUL '\0' (null character)   100   64    40    @
