@@ -48,7 +48,7 @@ b'crypto{You_will_be_working_with_hex_strings_a_lot}'
 ```
 
 ## Handling Base64
-```
+```python
 from base64 import *
 
 b64 = 'Y3J5cHRve0Jhc2VfNjRfRW5jb2RpbmdfaXNfV2ViX1NhZmV9'
@@ -57,4 +57,10 @@ s = b64decode(b64)
 print(s)
 print()
 print(b64encode(s))
+```
+output
+```bash
+b'crypto{Base_64_Encoding_is_Web_Safe}'
+
+b'Y3J5cHRve0Jhc2VfNjRfRW5jb2RpbmdfaXNfV2ViX1NhZmV9'
 ```
