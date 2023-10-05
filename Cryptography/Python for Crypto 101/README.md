@@ -4,6 +4,8 @@
 - [Handling Base64](#handling-base64)
 - [PyCryptodome](#pycryptodome)
     - [Messages Into Numbers](#messages-into-numbers)
+- [pwntools](#pwntools)
+    - [XOR](#xor)
 
 
 ## Handling ASCII
@@ -87,4 +89,16 @@ $ python3 py.py
 5184020583563043647088157358196
 
 b'AnyRandomText'
+```
+## pwntools
+### XOR 
+```python
+import pwn 
+
+# xor every byte of 'label' with 13
+print(pwn.xor(b'label' , 13))
+```
+output
+```
+b'aloha'
 ```
