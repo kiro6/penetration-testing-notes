@@ -95,10 +95,10 @@ b'AnyRandomText'
 ```python
 import pwn 
 
-# xor every byte of 'label' with 13
-print(pwn.xor(b'label' , 13))
+# xor every byte of 'Random' with 13
+print(pwn.xor(b'Random' , 13))
 ```
 output
 ```
-b'aloha'
+b'_lcib`'
 ```
