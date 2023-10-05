@@ -70,7 +70,7 @@ b'Y3J5cHRve0Jhc2VfNjRfRW5jb2RpbmdfaXNfV2ViX1NhZmV9'
 ## PyCryptodome
 ### Messages Into Numbers
 messages into numbers so that mathematical operations can be applied
-```
+```python
 from Crypto.Util.number import * 
 
 string = 'AnyRandomText'
@@ -81,7 +81,7 @@ bytes  = long_to_bytes(long)
 print(bytes)
 ```
 output
-```
+```python
 $ python3 py.py
                                                                                                                                 1 ↵
 5184020583563043647088157358196
