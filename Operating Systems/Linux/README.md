@@ -4,6 +4,11 @@
   - [System Information](#system-information)
   - [Working with Files and Directories](#working-with-files-and-directories)
     - [grep syntax ](#grep-syntax )
+    - [cut syntax](#cut-syntax)
+    - [tr syntax](#tr-syntax)
+    - [column syntax](#column-syntax)
+    - [awk syntax](#awk-syntax)
+    - [sed syntax](#sed-syntax)
 
 # File System Hierarchy
 
