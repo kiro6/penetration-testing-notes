@@ -9,6 +9,8 @@
     - [column syntax](#column-syntax)
     - [awk syntax](#awk-syntax)
     - [sed syntax](#sed-syntax)
+- [Find Files and Directories](#find-files-and-directories)
+  - [find syntax](#find-syntax) 
 
 # File System Hierarchy
 
