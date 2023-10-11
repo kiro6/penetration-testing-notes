@@ -206,7 +206,36 @@ awk '/pattern/ { print "Line number:", NR, "Content:", $0 }' input.txt
 | `RS`          | The value of the input record separator, usually a newline.                           | `awk 'BEGIN { RS=";" } { print $0 }' input.txt` | Use a semicolon as the input record separator. |
 
 
+### sed syntax 
 
+```
+##Substitution (s): Replace one pattern with another.
+sed 's/pattern/replacement/' inputfile
+
+##Print (p): Print lines that match a specific pattern.
+sed -n '/pattern/p' inputfile
+
+##Delete (d): Delete lines that match a specific pattern.
+sed '/pattern/d' inputfile
+
+##Append (a): Add text after a specific line.
+sed '/pattern/a\New text' inputfile
+
+##Insert (i): Add text before a specific line.
+sed '/pattern/i\New text' inputfile
+
+##Replace (c): Replace specific lines with new text.
+sed '/pattern/c\New text' inputfile
+
+##Address Range: You can specify a range of lines to apply a command. For example, to perform a substitution from line 3 to 5:
+sed '3,5s/pattern/replacement/' inputfile
+
+##Global (g): Apply a command globally, not just on the first occurrence on each line.
+sed 's/pattern/replacement/g' inputfile
+
+##In-place Editing (-i): Modify the original file in place.
+sed -i 's/pattern/replacement/' inputfile
+```
 
 
 
