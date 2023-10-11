@@ -1,5 +1,9 @@
 # Content
 - [File System Hierarchy](#file-system-hierarchy)
+- [Basic commands](#basic-commands)
+  - [System Information](#system-information)
+  - [Working with Files and Directories](#working-with-files-and-directories)
+    - [grep syntax ](#grep-syntax )
 
 # File System Hierarchy
 
@@ -208,7 +212,7 @@ awk '/pattern/ { print "Line number:", NR, "Content:", $0 }' input.txt
 
 ### sed syntax 
 
-```
+```bash
 ##Substitution (s): Replace one pattern with another.
 sed 's/pattern/replacement/' inputfile
 
