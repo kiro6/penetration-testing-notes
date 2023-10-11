@@ -163,6 +163,48 @@ column -s',' -o'|' -t file.csv
 
 ```
 
+### awk syntax 
+```bash
+awk 'pattern { action }' input-file
+
+
+## Print specific columns from a file:
+awk '{ print $1, $3 }' input.txt
+
+## Filter lines based on a condition:
+awk '$3 > 50' input.txt
+
+## Perform calculations:
+awk '{ total += $2 } END { print "Total:", total }' input.txt
+
+## Using field separators:
+awk -F':' '{ print $1, $3 }' /etc/passwd
+```
+
+**awk predefined variables:**
+
+| Variable      | Description                                                                         |
+|-------------- |-------------------------------------------------------------------------------------|
+| `$0`          | Represents the entire input record (the current line).                             |
+| `$1, $2, $3...` | Represent the fields in the input record. Fields are separated by a field separator (usually whitespace by default). |
+| `NF`          | Stands for "Number of Fields." It contains the number of fields in the current input record. |
+| `NR`          | Stands for "Number of Records." It contains the current record number (line number). |
+| `FS`          | Stands for "Field Separator." It specifies the character or regular expression used to separate fields. By default, it's set to a space or tab. |
+| `OFS`         | Stands for "Output Field Separator." It specifies the character used to separate fields in the output. By default, it's a space. |
+| `RS`          | Stands for "Record Separator." It specifies the character or regular expression used to separate records (lines). By default, it's a newline. |
+| `ORS`         | Stands for "Output Record Separator." It specifies the character used to separate records in the output. By default, it's a newline. |
+| `FILENAME`    | Contains the name of the current input file being processed. |
+| `FNR`         | Stands for "File Number of Records." It contains the current record number within the current input file. |
+| `ARGV`        | An array that contains the command-line arguments passed to AWK. |
+| `ARGC`        | Contains the number of command-line arguments. |
+| `ENVIRON`     | An associative array that provides access to environment variables. |
+| `IGNORECASE`  | If set to a non-zero value, it makes string matching case-insensitive. |
+| `RS`          | The value of the input record separator, usually a newline. |
+
+
+
+
+
 ## Find Files and Directories
 | Command   | Description                                                           |
 |-----------|-----------------------------------------------------------------------|
