@@ -187,24 +187,24 @@ awk '/pattern/ { print "Line number:", NR, "Content:", $0 }' input.txt
 
 **awk predefined variables:**
 
-| Variable      | Description                                                                         |
-|-------------- |-------------------------------------------------------------------------------------|
-| `$0`          | Represents the entire input record (the current line).                             |
-| `$1, $2, $3...` | Represent the fields in the input record. Fields are separated by a field separator (usually whitespace by default). |
-| `NF`          | Stands for "Number of Fields." It contains the number of fields in the current input record. |
-| `$NF`         | is a variable that represents the value of the last field |
-| `NR`          | Stands for "Number of Records." It contains the current record number (line number). |
-| `FS`          | Stands for "Field Separator." It specifies the character or regular expression used to separate fields. By default, it's set to a space or tab. |
-| `OFS`         | Stands for "Output Field Separator." It specifies the character used to separate fields in the output. By default, it's a space. |
-| `RS`          | Stands for "Record Separator." It specifies the character or regular expression used to separate records (lines). By default, it's a newline. |
-| `ORS`         | Stands for "Output Record Separator." It specifies the character used to separate records in the output. By default, it's a newline. |
-| `FILENAME`    | Contains the name of the current input file being processed. |
-| `FNR`         | Stands for "File Number of Records." It contains the current record number within the current input file. |
-| `ARGV`        | An array that contains the command-line arguments passed to AWK. |
-| `ARGC`        | Contains the number of command-line arguments. |
-| `ENVIRON`     | An associative array that provides access to environment variables. |
-| `IGNORECASE`  | If set to a non-zero value, it makes string matching case-insensitive. |
-| `RS`          | The value of the input record separator, usually a newline. |
+| Variable      | Description                                                                         | Example Usage                                |
+|-------------- |-------------------------------------------------------------------------------------|----------------------------------------------|
+| `$0`          | Represents the entire input record (the current line).                              | `awk '/apple/ { print $0 }' input.txt`        <!-- Print lines containing the word "apple." -->
+| `$1`, `$2`,...| Represent the fields in the input record. Fields are separated by a field separator (usually whitespace by default). | `awk '{ print $1, $3 }' input.txt`        <!-- Print the first and third fields. -->
+| `NF`          | Stands for "Number of Fields." It contains the number of fields in the current input record. | `awk 'NF == 5 { print $0 }' input.txt` <!-- Print lines with exactly 5 fields. -->
+| `$NF`         | Represents the value of the last field in the current input record.                | `awk '{ print $NF }' input.txt`        <!-- Print the last field of each line. -->
+| `NR`          | Stands for "Number of Records." It contains the current record number (line number). | `awk '/banana/ { print NR, $0 }' input.txt` <!-- Print line numbers for lines containing the word "banana." -->
+| `FS`          | Stands for "Field Separator." It specifies the character or regular expression used to separate fields. | `awk -F ';' '{ print $1, $2 }' data.csv` <!-- Use a semicolon as the field separator to process a CSV file. -->
+| `OFS`         | Stands for "Output Field Separator." It specifies the character used to separate fields in the output. | `awk 'BEGIN { OFS="\t" } { print $1, $2 }' input.txt` <!-- Change the output field separator to a tab. -->
+| `RS`          | Stands for "Record Separator." It specifies the character or regular expression used to separate records (lines). | `awk 'BEGIN { RS="\n\n" } { print $0 }' input.txt` <!-- Use a double newline to separate records. -->
+| `ORS`         | Stands for "Output Record Separator." It specifies the character used to separate records in the output. | `awk 'BEGIN { ORS="\n---\n" } { print $0 }' input.txt` <!-- Change the output record separator to a newline followed by a line of dashes. -->
+| `FILENAME`    | Contains the name of the current input file being processed.                        | `awk '{ print FILENAME, $0 }' file1.txt file2.txt` <!-- Print the filename for each line in multiple files. -->
+| `FNR`         | Stands for "File Number of Records." It contains the current record number within the current input file. | `awk '{ print FNR, $0 }' file1.txt file2.txt` <!-- Print line numbers within each file. -->
+| `ARGV`, `ARGC`| Used to access command-line arguments and their count.                            | `awk 'BEGIN { for (i = 0; i < ARGC; i++) print ARGV[i] }' file1.txt file2.txt` <!-- Print all command-line arguments. -->
+| `ENVIRON`    | An associative array that provides access to environment variables.                  | `awk 'BEGIN { print ENVIRON["PATH"] }'` <!-- Print the value of the "PATH" environment variable. -->
+| `IGNORECASE` | If set to a non-zero value, it makes string matching case-insensitive.               | `awk 'BEGIN { IGNORECASE=1 } /apple/ { print $0 }' input.txt` <!-- Perform a case-insensitive search for the word "apple." -->
+| `RS`          | The value of the input record separator, usually a newline.                           | `awk 'BEGIN { RS=";" } { print $0 }' input.txt` <!-- Use a semicolon as the input record separator. -->
+
 
 
 
