@@ -192,6 +192,7 @@ awk '/pattern/ { print "Line number:", NR, "Content:", $0 }' input.txt
 | `$0`          | Represents the entire input record (the current line).                             |
 | `$1, $2, $3...` | Represent the fields in the input record. Fields are separated by a field separator (usually whitespace by default). |
 | `NF`          | Stands for "Number of Fields." It contains the number of fields in the current input record. |
+| `$NF`         | is a variable that represents the value of the last field |
 | `NR`          | Stands for "Number of Records." It contains the current record number (line number). |
 | `FS`          | Stands for "Field Separator." It specifies the character or regular expression used to separate fields. By default, it's set to a space or tab. |
 | `OFS`         | Stands for "Output Field Separator." It specifies the character used to separate fields in the output. By default, it's a space. |
