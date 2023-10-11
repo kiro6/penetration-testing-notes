@@ -179,6 +179,10 @@ awk '{ total += $2 } END { print "Total:", total }' input.txt
 
 ## Using field separators:
 awk -F':' '{ print $1, $3 }' /etc/passwd
+
+
+## Using predefined variables:
+awk '/pattern/ { print "Line number:", NR, "Content:", $0 }' input.txt
 ```
 
 **awk predefined variables:**
