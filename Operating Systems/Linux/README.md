@@ -16,6 +16,7 @@
     - [Change Owner](#change-owner)
     - [SUID & SGID](#suid--sgid)
     - [Sticky Bit](#sticky-bit)
+- [User Management](#user-management)
 
 # File System Hierarchy
 
@@ -341,6 +342,7 @@ $ ls -lah  sh.sh
 ### Sticky Bit
 When the sticky bit is set on a directory, it ensures that only the owner of a file can delete or rename their own files within that directory
 
+
 ```bash
 $ sudo chmod +x dir 
 
@@ -355,3 +357,18 @@ drw-rw-r-T 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:32 reports
 
 **Lowercase 't' (t):**  - When the sticky bit is represented as 't', it means that the execute (x) permission for "others" is set. 
                         - This allows other users to access and execute files within that directory if they have appropriate permissions on the individual files, in addition to read permission on the directory.
+
+
+                        
+## User Management
+
+| Command   | Description                                                        |
+|-----------|--------------------------------------------------------------------|
+| sudo      | Execute a command as a different user with superuser privileges.   |
+| su        | Request and switch to user credentials and execute a shell.        |
+| useradd   | Create a new user or update default user information.             |
+| userdel   | Delete a user account and related files.                           |
+| usermod   | Modify a user account, changing user attributes.                   |
+| addgroup  | Add a new group to the system.                                     |
+| delgroup  | Remove a group from the system.                                    |
+| passwd    | Change a user's password.                                          |
