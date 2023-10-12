@@ -321,3 +321,33 @@ chmod 644 example.txt
 ```bash
 chown <user>:<group> <file/directory>
 ```
+
+### SUID & SGID
+- When an executable file has the SUID/SGID permission set, it allows a user to execute the file with the permissions of user/group that owns the file .
+- SUID and SGID permissions are typically designed for binary executables and not scripts for security reasons .
+
+```bash
+$ sudo chmod +s sh.sh
+
+$ ls -lah  sh.sh 
+-rwsr-sr-x 1 user user 61 Oct 12 14:47 sh.sh
+
+```
+
+### Sticky Bit
+When the sticky bit is set on a directory, it ensures that only the owner of a file can delete or rename their own files within that directory
+
+```bash
+$ sudo chmod +x dir 
+
+$ ls -l
+
+drw-rw-r-t 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:30 scripts
+drw-rw-r-T 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:32 reports
+```
+
+**Uppercase 'T' (T):** - When the sticky bit is represented as 'T', it means that the execute (x) permission for "others" is not set. 
+                       - This implies that other users do not have permission to access or execute files within that directory, even if they have read or write permissions on those files.
+
+**Lowercase 't' (t):**  - When the sticky bit is represented as 't', it means that the execute (x) permission for "others" is set. 
+                        - This allows other users to access and execute files within that directory if they have appropriate permissions on the individual files, in addition to read permission on the directory.
