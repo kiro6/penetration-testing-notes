@@ -285,17 +285,20 @@ $ ls -l /etc/passwd
 ### Change Permissions
 
 **Symbolic Mode**
-| Symbolic value | Explanation                                        |
-|---------------|----------------------------------------------------|
-| +             | Adds permissions.                                 |
-| -             | Removes permissions.                              |
-| =             | Sets permissions explicitly.                      |
-| r             | Read permission.                                  |
-| w             | Write permission.                                 |
-| x             | Execute permission.                               |
-| u             | Stands for the user or owner of the file.        |
-| g             | Stands for the group that the file belongs to.   |
-| o             | Stands for others, which includes everyone else who is not the owner or in the group. |
+| Symbolic Value | Explanation                                    |
+| --------------- | ---------------------------------------------- |
+| +               | Adds permissions.                              |
+| -               | Removes permissions.                           |
+| =               | Sets permissions explicitly.                    |
+| r               | Read permission.                               |
+| w               | Write permission.                              |
+| x               | Execute permission.                            |
+| u               | Stands for the user or owner of the file.     |
+| g               | Stands for the group that the file belongs to. |
+| o               | Stands for others, which includes everyone else who is not the owner or in the group. |
+| s               | Sets the Set User ID (SUID) or Set Group ID (SGID) permission on an executable file. |
+| t               | Sets the "sticky bit" permission on a directory, allowing only the owner to delete or rename their own files. |
+
 
 
 ```bash
