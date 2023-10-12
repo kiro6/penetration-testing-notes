@@ -12,6 +12,10 @@
 - [Find Files and Directories](#find-files-and-directories)
   - [find syntax](#find-syntax)
 - [Permission Management](#permission-management)
+    - [Change Permissions](#change-permissions)
+    - [Change Owner](#change-owner)
+    - [SUID & SGID](#suid--sgid)
+    - [Sticky Bit](#sticky-bit)
 
 # File System Hierarchy
 
