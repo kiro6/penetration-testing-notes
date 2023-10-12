@@ -313,3 +313,8 @@ chmod u+rw,go+r example.txt
 chmod 644 example.txt
 
 ```
+
+### Change Owner
+```bash
+chown <user>:<group> <file/directory>
+```
