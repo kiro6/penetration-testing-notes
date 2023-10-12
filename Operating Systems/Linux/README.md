@@ -10,7 +10,8 @@
     - [awk syntax](#awk-syntax)
     - [sed syntax](#sed-syntax)
 - [Find Files and Directories](#find-files-and-directories)
-  - [find syntax](#find-syntax) 
+  - [find syntax](#find-syntax)
+- [Permission Management](#permission-management)
 
 # File System Hierarchy
 
@@ -261,4 +262,54 @@ sed -i 's/pattern/replacement/' inputfile
 ```bash
 #find <location> <options>
 find / -type f -name *.conf -user root -size -28k -size +20k -newermt 2020-03-03 -exec ls -al {} \; 2>/dev/null
+```
+
+## Permission Management
+
+```bash
+$ ls -l /etc/passwd
+
+- rwx rw- r--   1 root root 1641 May  4 23:42 /etc/passwd
+- --- --- ---   |  |    |    |   |__________|
+|  |   |   |    |  |    |    |        |_ Date
+|  |   |   |    |  |    |    |__________ File Size
+|  |   |   |    |  |    |_______________ Group
+|  |   |   |    |  |____________________ User
+|  |   |   |    |_______________________ Number of hard links
+|  |   |   |_ Permission of others (read)
+|  |   |_____ Permissions of the group (read, write)
+|  |_________ Permissions of the owner (read, write, execute)
+|____________ File type (- = File, d = Directory, l = Link, ... )
+```
+
+### Change Permissions
+
+**Symbolic Mode**
+| Symbolic value | Explanation                                        |
+|---------------|----------------------------------------------------|
+| +             | Adds permissions.                                 |
+| -             | Removes permissions.                              |
+| =             | Sets permissions explicitly.                      |
+| r             | Read permission.                                  |
+| w             | Write permission.                                 |
+| x             | Execute permission.                               |
+| u             | Stands for the user or owner of the file.        |
+| g             | Stands for the group that the file belongs to.   |
+| o             | Stands for others, which includes everyone else who is not the owner or in the group. |
+
+
+```bash
+chmod u+rw,go+r example.txt
+```
+**Numeric Mode**
+| Numeric Value | Permission       |
+|---------------|-------------------|
+| 4             | Read Permission  |
+| 2             | Write Permission |
+| 1             | Execute Permission|
+| 0             | No Permission    |
+
+```
+chmod 644 example.txt
+
 ```
