@@ -18,7 +18,7 @@
     - [Sticky Bit](#sticky-bit)
 - [User Management](#user-management)
 - [Package Management](#package-management)
-- [Service and Process Management](#service-and-process-management)
+- [Service Management](#service-management)
 
 # File System Hierarchy
 
@@ -387,4 +387,15 @@ drw-rw-r-T 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:32 reports
 | pip       | Pip is a Python package installer recommended for installing Python packages that are not available in the Debian archive. It can work with version control repositories (currently only Git, Mercurial, and Bazaar repositories), logs output extensively, and prevents partial installs by downloading all requirements before starting installation. |
 | git       | Git is a fast, scalable, distributed revision control system with an unusually rich command set that provides both high-level operations and full access to internals. |
 | npm       | Npm is the package manager for JavaScript, used to install, manage, and publish JavaScript packages.               |
+
+
+## Service Management
+### systemctl & systemd
+When Linux system starts up, the bootloader loads the Linux kernel, and the init process (the first process with process ID 1) is executed which is `systemd` in many modern linux distributions 
+
+Systemd reads the unit files from service configuration files which typically stored in : 
+- `/lib/systemd/system` contains system-provided unit files, 
+- `/etc/systemd/system` is for user-customized unit files.
+These `unit files`  define how systemd should start, stop, and manage services. After that `systemd` start the units
+#### systemd syntax 
 
