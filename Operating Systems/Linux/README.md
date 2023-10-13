@@ -18,6 +18,7 @@
     - [Sticky Bit](#sticky-bit)
 - [User Management](#user-management)
 - [Package Management](#package-management)
+- [Service and Process Management](#service-and-process-management)
 
 # File System Hierarchy
 
