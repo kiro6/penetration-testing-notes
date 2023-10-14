@@ -445,3 +445,8 @@ WantedBy=multi-user.target
 
 ![seq](https://github.com/kiro6/penetration-testing-notes/assets/57776872/e5dc9bd7-9d63-47f0-aa7c-f1beb903d098)
 
+#### systemctl syntax 
+```bash
+systemctl (action) servicename
+
+```
