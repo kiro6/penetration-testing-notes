@@ -352,12 +352,12 @@ When the sticky bit is set on a directory, it ensures that only the owner of a f
 
 
 ```bash
-$ sudo chmod +x dir 
+sudo chmod +t,o-x scripts 
+sudo chmod +t reports 
+$ ls -lh
 
-$ ls -l
-
-drw-rw-r-t 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:30 scripts
-drw-rw-r-T 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:32 reports
+drwxr-xr-t 1 user group 0 Oct 14 13:08 reports
+drwxr-xr-T 1 user group 0 Oct 14 13:07 scripts
 ```
 
 **Uppercase 'T' (T):** - When the sticky bit is represented as 'T', it means that the execute (x) permission for "others" is not set. 
