@@ -467,7 +467,7 @@ $ journalctl -u ssh.service --no-pager
 ## Process Management
 
 ### PS 
-
+The "ps" command, short for "process status," is a command-line utility in Unix-like operating systems used to view information about running processes.
 ```bash
 # List all running processes with details
 ps aux
@@ -499,7 +499,7 @@ ps -p PID -o cmd
 # Interactive real-time process monitoring tools (use in the terminal)
 # top
 # htop
-
+```
 
 ### Kill a Process
 A process can be in the following states:
