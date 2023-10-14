@@ -19,7 +19,12 @@
 - [User Management](#user-management)
 - [Package Management](#package-management)
 - [Service Management](#service-management)
+  - [systemd](#systemd)
+  - [systemctl](#systemctl)
+  - [journalctl](#journalctl) 
 - [Process Management](#process-management)
+  - [PS](#ps)
+  - [Kill a Process](#kill-a-process) 
 
 # File System Hierarchy
 
