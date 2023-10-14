@@ -629,8 +629,8 @@ $ disown PID
 
 ### Crons 
 
-Cron files can be stored in /etc/cron.d ,cron.daily ,cron.hourly ,cron.monthly ,crontab ,cron.weekly
-
+- System-Wide Cron Jobs stored in /etc/cron.d ,/etc/cron.daily ,/etc/cron.hourly ,/etc/cron.monthly ,/etc/crontab ,/etc/cron.weekly
+- User Cron Jobs stored in /var/spool/cron
 
 **Cron Syntax**
 
