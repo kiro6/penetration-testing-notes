@@ -24,7 +24,8 @@
   - [journalctl](#journalctl) 
 - [Process Management](#process-management)
   - [PS](#ps)
-  - [Kill a Process](#kill-a-process) 
+  - [Kill a Process](#kill-a-process)
+  - [Jobs](#jobs)
 
 # File System Hierarchy
 
@@ -548,3 +549,68 @@ $ kill -l
 | 15     | SIGTERM - Program termination.                                                                      |
 | 19     | SIGSTOP - Stop the program. It cannot be handled anymore.                                            |
 | 20     | SIGTSTP - Sent when a user presses [Ctrl] + Z to request for a service to suspend. The user can handle it afterward. |
+
+
+### Jobs
+jobs can be managed and monitored, and users can view information about running jobs, pause them, resume them, or terminate them.
+
+#### **fg (Foreground)**
+- When a process or job is in the foreground, it means that it is currently the active task that receives user input and has control over the terminal.
+- Users can bring a background job into the foreground using the "fg" command, allowing them to interact with it directly
+
+```bash
+$ jobs                                                                                                                                              148 ↵
+[1]  + suspended  ping -c 100 google.com
+
+$ fg %1
+[1]  + 12447 continued  ping -c 100 google.com
+PING google.com (216.58.205.206) 56(84) bytes of data.
+64 bytes from mil04s29-in-f14.1e100.net (216.58.205.206): icmp_seq=1 ttl=118 time=1024 ms
+64 bytes from mil04s29-in-f14.1e100.net (216.58.205.206): icmp_seq=2 ttl=118 time=86.2 ms
+64 bytes from mil04s29-in-f14.1e100.net (216.58.205.206): icmp_seq=3 ttl=118 time=70.0 ms
+
+
+```
+
+#### **bg (Background)**
+- Background processes or jobs run independently of the foreground and do not typically receive user input directly.
+- That does not mean that the output of the jobs will not appear , if you don't want it to appear redirect the output
+
+```shell
+
+$ bg %1
+$ bg PID
+
+
+$ jobs
+[1]  + suspended  ping -c 100 google.com
+
+$ bg %1
+[1]  + 12490 continued  ping -c 100 google.com
+ 64 bytes from mil04s29-in-f14.1e100.net (216.58.205.206): icmp_seq=3 ttl=118 time=90.1 ms
+64 bytes from mil04s29-in-f14.1e100.net (216.58.205.206): icmp_seq=4 ttl=118 time=103 ms
+64 bytes from mil04s29-in-f14.1e100.net (216.58.205.206): icmp_seq=5 ttl=118 time=56.7 ms
+
+```
+
+#### **nohup (No Hang-Up):**
+- When a command is executed with nohup it means that the command will continue running even if the terminal session is closed or disconnected
+- nohup redirects the standard output and standard error to a file called "nohup.out" in the user's home directory by default
+```bash
+
+$ nohup ping -c 10  google.com &                                                                                                                      1 ↵
+[1] 13149
+nohup: ignoring input and appending output to 'nohup.out'         
+
+```
+
+#### **disown**
+- The disown command in Unix-like operating systems is used to remove background jobs from the shell's job table.
+- This is useful if you want to keep a background job running even after you've logged out or closed your terminal session.
+```shell
+
+$ disown %1
+
+$ disown PID
+
+```
