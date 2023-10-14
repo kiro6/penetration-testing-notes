@@ -30,6 +30,8 @@
         - [Background](#bg-background)
         - [No Hang Up](#nohup-no-hang-up)
         - [disown](#disown)
+- [Task Scheduling](#task-scheduling)
+    - [Crons](#crons)
 
 # File System Hierarchy
 
@@ -621,5 +623,44 @@ nohup: ignoring input and appending output to 'nohup.out'
 $ disown %1
 
 $ disown PID
+
+```
+## Task Scheduling
+
+### Crons 
+
+Cron files can be stored in /etc/cron.d ,cron.daily ,cron.hourly ,cron.monthly ,crontab ,cron.weekly
+
+
+**Cron Syntax**
+
+```
+* * * * * command-to-be-executed
+| | | | |
+| | | | +----- Day of the week (0 - 6) (Sunday is both 0 and 7)
+| | | +------- Month (1 - 12)
+| | +--------- Day of the month (1 - 31)
+| +----------- Hour (0 - 23)
++------------- Minute (0 - 59)
+```
+
+**Cron Special Strings**
+- @reboot: This special string schedules a job to run when the system reboots.
+
+- @yearly or @annually: These strings are equivalent and schedule a job to run once a year at midnight on January 1st (0 0 1 1 *).
+
+- @monthly: This string schedules a job to run once a month at midnight on the 1st of the month (0 0 1 * *).
+
+- @weekly: This string schedules a job to run once a week at midnight on Sunday (0 0 * * 0).
+
+- @daily or @midnight: These strings are equivalent and schedule a job to run once a day at midnight (0 0 * * *).
+
+- @hourly: This string schedules a job to run once an hour at the beginning of the hour (0 * * * *).
+
+#### crontab
+```
+crontab -e ## Edit the Cron Table
+
+crontab -l ## View Your Cron Jobs
 
 ```
