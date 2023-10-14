@@ -558,8 +558,13 @@ jobs can be managed and monitored, and users can view information about running 
 - When a process or job is in the foreground, it means that it is currently the active task that receives user input and has control over the terminal.
 - Users can bring a background job into the foreground using the "fg" command, allowing them to interact with it directly
 
-```bash
-$ jobs                                                                                                                                              148 ↵
+```shell
+
+$ fg %1
+$ fg PID
+
+
+$ jobs                                                                                                                                             
 [1]  + suspended  ping -c 100 google.com
 
 $ fg %1
@@ -596,7 +601,7 @@ $ bg %1
 #### **nohup (No Hang-Up):**
 - When a command is executed with nohup it means that the command will continue running even if the terminal session is closed or disconnected
 - nohup redirects the standard output and standard error to a file called "nohup.out" in the user's home directory by default
-```bash
+```shell
 
 $ nohup ping -c 10  google.com &                                                                                                                      1 ↵
 [1] 13149
