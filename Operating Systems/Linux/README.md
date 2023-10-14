@@ -397,5 +397,51 @@ Systemd reads the unit files from service configuration files which typically st
 - `/lib/systemd/system` contains system-provided unit files, 
 - `/etc/systemd/system` is for user-customized unit files.
 These `unit files`  define how systemd should start, stop, and manage services. After that `systemd` start the units
-#### systemd syntax 
+#### systemd syntax
+
+**Files and directories :**
+- `.target` represents a unit that defines a specific system state or target.
+- `.service` is a unit type that defines a system service or program.
+- `.wants` is a directory where symbolic links to dependencies are placed to establish relationships between units.
+- `.socket` files in systemd represent network sockets that are used to manage communication between services and external clients.
+- `.mount` files in systemd define how file systems or remote network shares should be mounted in the system.
+
+**In unit configuration files:**
+- `WantedBy` specifies the target unit that should include the current unit in its start dependencies, meaning the current unit should start when the specified target is activated.
+- `Requires` indicates a mandatory dependency that must be active for the unit to start.
+- `Wants` denotes an optional dependency that can be active for the unit to start.
+- `After` defines units that should start after the current unit.
+- `Before` specifies units that should start before the current unit.
+
+**Special systemd units**
+- `sysinit.target` is the initial system initialization target, responsible for basic system setup and early service activation. It is one of the first targets to be reached during the boot process.
+
+- `multi-user.target` in systemd represents the system state where multiple users can log in and access the system with various services and user interfaces available, typically the default target for a multi-user mode.
+
+- `graphical.target` in systemd represents the system state where the graphical user interface is available and is often used as the default target for systems running with a graphical desktop environment.
+
+- there is alot more
+
+These targets in systemd indicate synchronous points in the system boot process, providing a structured way to manage the initialization and transitioning of the system between different states or modes.
+
+**Example of a serivce** 
+```ini
+[Unit]
+Description=My Example Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/my-service-command
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+**Example of the relationships between services**
+![relation](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a198041d-b897-4625-b8a2-960e25227b1e)
+
+![seq](https://github.com/kiro6/penetration-testing-notes/assets/57776872/e5dc9bd7-9d63-47f0-aa7c-f1beb903d098)
 
