@@ -26,7 +26,10 @@
     - [PS](#ps)
     - [Kill a Process](#kill-a-process)
     - [Jobs](#jobs)
-        - []()
+        - [Foreground](#fg-foreground)
+        - [Background](#bg-background)
+        - [No Hang Up](#nohup-no-hang-up)
+        - [disown](#disown)
 
 # File System Hierarchy
 
