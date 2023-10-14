@@ -664,3 +664,12 @@ crontab -e ## Edit the Cron Table
 crontab -l ## View Your Cron Jobs
 
 ```
+
+**Example Cron Job**
+
+```shell
+crontab -e
+
+@reboot echo "cron worked" > ~/cron_output.txt   ## write in the crontab page this will echo this text every time the system boots
+
+```
