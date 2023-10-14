@@ -391,14 +391,16 @@ drw-rw-r-T 3 cry0l1t3 cry0l1t3   4096 Jan 12 12:32 reports
 
 
 ## Service Management
-### systemctl & systemd
+
+### systemd 
+
 When Linux system starts up, the bootloader loads the Linux kernel, and the init process (the first process with process ID 1) is executed which is `systemd` in many modern linux distributions 
 
 Systemd reads the unit files from service configuration files which typically stored in : 
 - `/lib/systemd/system` contains system-provided unit files, 
 - `/etc/systemd/system` is for user-customized unit files.
 These `unit files`  define how systemd should start, stop, and manage services. After that `systemd` start the units
-#### systemd syntax
+
 
 **Files and directories :**
 - `.target` represents a unit that defines a specific system state or target.
@@ -446,14 +448,58 @@ WantedBy=multi-user.target
 
 ![seq](https://github.com/kiro6/penetration-testing-notes/assets/57776872/e5dc9bd7-9d63-47f0-aa7c-f1beb903d098)
 
-#### systemctl syntax 
+
+### systemctl 
+Control the systemd system and service manager
 ```bash
-systemctl (action) servicename
+systemctl (action) servicename          ## start,stop,enable,.....etc
+
+systemctl list-units --type=service     ## list all services.
 
 ```
+### journalctl 
 
+It is quite possible that the services do not start due to an error. To see the problem, we can use the tool journalctl to view the logs.
+```bash
+$ journalctl -u ssh.service --no-pager
+```
 
 ## Process Management
+
+### PS 
+
+```bash
+# List all running processes with details
+ps aux
+
+# Filter and find specific processes by name
+ps aux | grep process_name
+
+# Display a hierarchical view of processes
+ps -ejH
+
+# List processes associated with a specific user
+ps -u username
+
+# Show processes in a tree structure
+ps auxf
+
+# Customize the output format
+ps -o format
+
+# Continuously monitor processes
+watch 'ps aux | grep process_name'
+
+# List processes sorted by CPU usage
+ps -eo pid,ppid,%cpu,%mem,cmd --sort=-%cpu | head
+
+# Show the full command line of a specific process
+ps -p PID -o cmd
+
+# Interactive real-time process monitoring tools (use in the terminal)
+# top
+# htop
+
 
 ### Kill a Process
 A process can be in the following states:
