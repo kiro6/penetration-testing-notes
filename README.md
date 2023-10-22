@@ -8,5 +8,5 @@ this my is repo with notes i take in penetration testing & related technologies/
 - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 - [owasp](https://owasp.org/)
 - [MDN](https://developer.mozilla.org/en-US/docs/Web)
-- meduim blogs
-  -    
+- [meduim blogs](https://medium.com/)
+  - 
