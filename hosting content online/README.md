@@ -28,6 +28,17 @@ $ curl "https://dumyy.free.beeceptor.com/exp.html"
 ```
 
 
+## using webhook.site 
+- free
+- need no account
+- can create custom responses
+
+![Screenshot 2023-11-07 at 07-29-00 Webhook site - Test process and transform emails and HTTP requests](https://github.com/kiro6/penetration-testing-notes/assets/57776872/95205240-47c6-4cb6-98d9-bac9880bcb4b)
+
+- click on edit button in the top right to edit response
+
+![Screenshot 2023-11-07 at 07-29-47 Webhook site - Test process and transform emails and HTTP requests](https://github.com/kiro6/penetration-testing-notes/assets/57776872/7ca14670-0516-4385-b9da-5befffdf6a5a)
+
 ## using [ngrok](https://ngrok.com/download)
 
 ### how to use 
