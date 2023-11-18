@@ -31,8 +31,8 @@
 | Traverse Folder          | This allows or denies the ability to move through folders to reach other files or folders. For example, a user may not have permission to list the directory contents or view files in the documents or web apps directory in this example c:\users\bsmith\documents\webapps\backups\backup_02042020.zip but with Traverse Folder permissions applied, they can access the backup archive. |
 
 
-- (OI) Object Inherit:           This folder and files. (No inheritance to subfolders)
-- (CI) Container Inherit:        This folder and subfolders.
-- (IO) Inherit Only:             The ACE does not apply to the current file/directory.
-- (I) Permission Inherited:      Permission on the current object is inherited from its parent container.
-- (NP) Don't Propagate Inherit:  Prevents the inheritance of permissions to child objects.
+- **(OI) Object Inherit:**           This folder and files. (No inheritance to subfolders)
+- **(CI) Container Inherit:**        This folder and subfolders.
+- **(IO) Inherit Only:**             The ACE does not apply to the current file/directory.
+- **(I) Permission Inherited:**      Permission on the current object is inherited from its parent container.
+- **(NP) Don't Propagate Inherit:**  Prevents the inheritance of permissions to child objects.
