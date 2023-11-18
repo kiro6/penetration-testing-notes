@@ -20,6 +20,9 @@
 
 
 # Permissions
+NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
+## NTFS Basic permissions
+
 | Permission Type          | Description                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------|
 | Full Control             | Allows reading, writing, changing, deleting of files/folders.                                                    |
@@ -29,6 +32,27 @@
 | Write                    | Allows for adding files to folders and subfolders and writing to a file.                                           |
 | Read                     | Allows for viewing and listing of folders and subfolders and viewing a file's contents.                             |
 | Traverse Folder          | This allows or denies the ability to move through folders to reach other files or folders. For example, a user may not have permission to list the directory contents or view files in the documents or web apps directory in this example c:\users\bsmith\documents\webapps\backups\backup_02042020.zip but with Traverse Folder permissions applied, they can access the backup archive. |
+
+
+## NTFS special permissions
+
+| Permission                         | Description                                                                                                          |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Full control                       | Users are permitted or denied permissions to add, edit, move, delete files & folders as well as change NTFS permissions that apply to all permitted folders. |
+| Traverse folder / execute file      | Users are permitted or denied permissions to access a subfolder within a directory structure even if the user is denied access to contents at the parent folder level. Users may also be permitted or denied permissions to execute programs. |
+| List folder/read data               | Users are permitted or denied permissions to view files and folders contained in the parent folder. Users can also be permitted to open and view files. |
+| Read attributes                    | Users are permitted or denied permissions to view basic attributes of a file or folder. Examples of basic attributes: system, archive, read-only, and hidden. |
+| Read extended attributes           | Users are permitted or denied permissions to view extended attributes of a file or folder. Attributes differ depending on the program. |
+| Create files/write data             | Users are permitted or denied permissions to create files within a folder and make changes to a file. |
+| Create folders/append data          | Users are permitted or denied permissions to create subfolders within a folder. Data can be added to files but pre-existing content cannot be overwritten. |
+| Write attributes                   | Users are permitted or denied to change file attributes. This permission does not grant access to creating files or folders. |
+| Write extended attributes          | Users are permitted or denied permissions to change extended attributes on a file or folder. Attributes differ depending on the program. |
+| Delete subfolders and files         | Users are permitted or denied permissions to delete subfolders and files. Parent folders will not be deleted. |
+| Delete                             | Users are permitted or denied permissions to delete parent folders, subfolders, and files. |
+| Read permissions                   | Users are permitted or denied permissions to read permissions of a folder. |
+| Change permissions                 | Users are permitted or denied permissions to change permissions of a file or folder. |
+| Take ownership                     | Users are permitted or denied permission to take ownership of a file or folder. The owner of a file has full permissions to change any permissions. |
+
 
 ## inheritance rights:
 - **(OI) Object Inherit:**           This folder and files. (No inheritance to subfolders)
