@@ -45,3 +45,12 @@
 - RX : Read and eXecute access
 - R : Read-only access
 - W : Write-only access
+```powershell
+icacls c:\Users
+c:\Users NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+         BUILTIN\Administrators:(OI)(CI)(F)
+         BUILTIN\Users:(RX)
+         BUILTIN\Users:(OI)(CI)(IO)(GR,GE)
+         Everyone:(RX)
+         Everyone:(OI)(CI)(IO)(GR,GE)
+```
