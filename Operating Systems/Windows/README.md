@@ -90,3 +90,20 @@ c:\Users NT AUTHORITY\SYSTEM:(OI)(CI)(F)
   - System Services
 - Services can usually only be created, modified, and deleted by users with administrative privileges.
 - Misconfigurations around service permissions are a common privilege escalation vector on Windows systems.
+
+
+### In Windows, we have some critical system services that cannot be stopped and restarted without a system restart.
+
+| Service                | Description                                                                                              |
+|------------------------|----------------------------------------------------------------------------------------------------------|
+| smss.exe               | Session Manager SubSystem. Responsible for handling sessions on the system.                              |
+| csrss.exe              | Client Server Runtime Process. The user-mode portion of the Windows subsystem.                            |
+| wininit.exe            | Starts the Wininit file .ini file that lists all of the changes to be made to Windows during restart.    |
+| logonui.exe            | Used for facilitating user login into a PC.                                                              |
+| lsass.exe              | The Local Security Authentication Server verifies the validity of user logons.                             |
+| services.exe           | Manages the operation of starting and stopping services.                                                 |
+| winlogon.exe           | Responsible for handling the secure attention sequence, loading user profiles, and locking the computer. |
+| System                 | A background system process that runs the Windows kernel.                                                 |
+| svchost.exe (RPCSS)   | Manages system services using Remote Procedure Call (RPC) Service (RPCSS).                                |
+| svchost.exe (Dcom/PnP) | Manages system services using Distributed Component Object Model (DCOM) and Plug and Play (PnP) services. |
+
