@@ -1,6 +1,7 @@
 # Content 
 - [Structure](#structure)
 - [Permissions](#permissions)
+- [Windows Services](Windows Services)
 
 
 # Structure
@@ -78,3 +79,14 @@ c:\Users NT AUTHORITY\SYSTEM:(OI)(CI)(F)
          Everyone:(RX)
          Everyone:(OI)(CI)(IO)(GR,GE)
 ```
+
+
+# Windows Services
+
+- Windows services are managed via the Service Control Manager (SCM) system, accessible via the services.msc MMC add-in.
+- Windows has three categories of services:
+  - Local Services
+  - Network Services
+  - System Services
+- Services can usually only be created, modified, and deleted by users with administrative privileges.
+- Misconfigurations around service permissions are a common privilege escalation vector on Windows systems.
