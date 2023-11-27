@@ -43,7 +43,7 @@ These accounts serve specific purposes and are often associated with system task
 | Administrators         | The built-in Administrators group is a group that includes the Administrator account and any other accounts added during installation. | Members of this group have elevated privileges and can perform administrative tasks.                        |
 
 
-Windows security model following key components:
+## Windows security model following key components:
 
 - User Accounts and Groups
 - Windows Security Groups
