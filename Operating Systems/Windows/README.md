@@ -20,9 +20,18 @@
 | WinSxS               | The Windows Component Store contains a copy of all Windows components, updates, and service packs.                                                                                                                                               |
 
 
+
+
+
+
 # Permissions
+
+## Service Permissions
+service permissions are typically managed through the Windows service control manager (SCM) and the associated security subsystem
+
+## NTFS permissions
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
-## NTFS Basic permissions
+### NTFS Basic permissions
 
 | Permission Type          | Description                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------|
@@ -35,7 +44,7 @@ NTFS (New Technology File System) is responsible for handling file and folder pe
 | Traverse Folder          | This allows or denies the ability to move through folders to reach other files or folders. For example, a user may not have permission to list the directory contents or view files in the documents or web apps directory in this example c:\users\bsmith\documents\webapps\backups\backup_02042020.zip but with Traverse Folder permissions applied, they can access the backup archive. |
 
 
-## NTFS special permissions
+### NTFS special permissions
 
 | Permission                         | Description                                                                                                          |
 |------------------------------------|----------------------------------------------------------------------------------------------------------------------|
@@ -55,14 +64,14 @@ NTFS (New Technology File System) is responsible for handling file and folder pe
 | Take ownership                     | Users are permitted or denied permission to take ownership of a file or folder. The owner of a file has full permissions to change any permissions. |
 
 
-## inheritance rights:
+### inheritance rights:
 - **(OI) Object Inherit:**           This folder and files. (No inheritance to subfolders)
 - **(CI) Container Inherit:**        This folder and subfolders.
 - **(IO) Inherit Only:**             The ACE does not apply to the current file/directory.
 - **(I) Permission Inherited:**      Permission on the current object is inherited from its parent container.
 - **(NP) Don't Propagate Inherit:**  Prevents the inheritance of permissions to child objects.
 
-## simple rights:
+### simple rights:
 - D : Delete access
 - F : Full access (Edit_Permissions+Create+Delete+Read+Write)
 - N : No access
@@ -81,44 +90,3 @@ c:\Users NT AUTHORITY\SYSTEM:(OI)(CI)(F)
 ```
 
 
-# Windows Services
-
-- Windows services are managed via the Service Control Manager (SCM) system, accessible via the services.msc MMC add-in.
-- Windows has three categories of services:
-  - Local Services
-  - Network Services
-  - System Services
-- Services can usually only be created, modified, and deleted by users with administrative privileges.
-- Misconfigurations around service permissions are a common privilege escalation vector on Windows systems.
-
-
-### In Windows, we have some critical system services that cannot be stopped and restarted without a system restart.
-
-| Service                | Description                                                                                              |
-|------------------------|----------------------------------------------------------------------------------------------------------|
-| smss.exe               | Session Manager SubSystem. Responsible for handling sessions on the system.                              |
-| csrss.exe              | Client Server Runtime Process. The user-mode portion of the Windows subsystem.                            |
-| wininit.exe            | Starts the Wininit file .ini file that lists all of the changes to be made to Windows during restart.    |
-| logonui.exe            | Used for facilitating user login into a PC.                                                              |
-| lsass.exe              | The Local Security Authentication Server verifies the validity of user logons.                             |
-| services.exe           | Manages the operation of starting and stopping services.                                                 |
-| winlogon.exe           | Responsible for handling the secure attention sequence, loading user profiles, and locking the computer. |
-| System                 | A background system process that runs the Windows kernel.                                                 |
-| svchost.exe (RPCSS)   | Manages system services using Remote Procedure Call (RPC) Service (RPCSS).                                |
-| svchost.exe (Dcom/PnP) | Manages system services using Distributed Component Object Model (DCOM) and Plug and Play (PnP) services. |
-
-
-### Local Security Authority Subsystem Service (LSASS)
-- lsass.exe is the process that is responsible for enforcing the security policy on Windows systems.
-- LSASS is also responsible for user account password changes.
-- LSASS is an extremely high-value target as several tools exist to extract both cleartext and hashed credentials stored in memory by this process.
-
-### Sysinternals Tools
-The SysInternals Tools suite is a set of portable Windows applications that can be used to administer Windows systems
-
-```powershell
-
-\\live.sysinternals.com\tools\procdump.exe -accepteula  # online
-
-procdump.exe -accepteula                                # local
-```
