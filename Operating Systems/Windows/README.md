@@ -107,3 +107,18 @@ c:\Users NT AUTHORITY\SYSTEM:(OI)(CI)(F)
 | svchost.exe (RPCSS)   | Manages system services using Remote Procedure Call (RPC) Service (RPCSS).                                |
 | svchost.exe (Dcom/PnP) | Manages system services using Distributed Component Object Model (DCOM) and Plug and Play (PnP) services. |
 
+
+### Local Security Authority Subsystem Service (LSASS)
+- lsass.exe is the process that is responsible for enforcing the security policy on Windows systems.
+- LSASS is also responsible for user account password changes.
+- LSASS is an extremely high-value target as several tools exist to extract both cleartext and hashed credentials stored in memory by this process.
+
+### Sysinternals Tools
+The SysInternals Tools suite is a set of portable Windows applications that can be used to administer Windows systems
+
+```powershell
+
+\\live.sysinternals.com\tools\procdump.exe -accepteula  # online
+
+procdump.exe -accepteula                                # local
+```
