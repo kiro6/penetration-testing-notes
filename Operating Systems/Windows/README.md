@@ -26,8 +26,17 @@
 
 # Permissions
 
-## Service Permissions
-service permissions are typically managed through the Windows service control manager (SCM) and the associated security subsystem
+prmission management in Windows is primarily governed by the Windows security model, which includes the following key components:
+
+- NTFS (New Technology File System)
+- Security Descriptors
+- User Accounts and Groups
+- Windows Security Groups
+- Group Policy
+- Active Director:
+- Service Control Manager (SCM)
+
+
 
 ## NTFS permissions
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
