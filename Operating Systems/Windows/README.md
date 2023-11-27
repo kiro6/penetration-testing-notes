@@ -24,9 +24,46 @@
 
 
 
-# Permissions
+# Security
 
-prmission management in Windows is primarily governed by the Windows security model, which includes the following key components:
+## built-in Windows account
+Built-in Windows accounts are predefined user accounts that are created during the installation of the Windows operating system. 
+
+
+These accounts serve specific purposes and are often associated with system tasks, services, or groups
+
+
+#### Administrator:
+Description: The built-in Administrator account is created during Windows installation. It has full control over the system and is often used for administrative tasks.
+Usage: This account is typically used for initial system setup and configuration.
+
+#### Guest:
+        Description: The built-in Guest account is created during Windows installation. It is disabled by default for security reasons.
+        Usage: The Guest account is designed for occasional or temporary use and has limited permissions.
+#### SYSTEM:
+        Description: The SYSTEM account is not a user account but a built-in account used by the operating system itself.
+        Usage: Various system processes, services, and tasks run under the context of the SYSTEM account for elevated privileges
+        
+#### Network Service:
+        Description: The built-in Network Service account is used by some Windows services that need network resources.
+        Usage: Services running under this account have limited local privileges but can access network resources.
+#### Local Service:
+        Description: The built-in Local Service account is used by some Windows services that need minimal privileges.
+        Usage: Services running under this account have restricted access to the network but can interact with local resources.
+
+#### Authenticated Users:
+        Description: Authenticated Users is a built-in group that includes all user accounts that have successfully authenticated to the domain or local machine.
+        Usage: Permissions can be assigned to the Authenticated Users group to grant access to resources for all authenticated users.
+
+#### Interactive Users:
+        Description: Interactive Users is a built-in group that includes all users currently logged on interactively to the system.
+        Usage: Permissions can be assigned to the Interactive Users group to grant access to resources for users actively using the system.
+
+#### Administrators:
+        Description: The built-in Administrators group is a group that includes the Administrator account and any other accounts added during installation.
+        Usage: Members of this group have elevated privileges and can perform administrative tasks.
+
+Windows security model following key components:
 
 - User Accounts and Groups
 - Windows Security Groups
@@ -37,7 +74,7 @@ prmission management in Windows is primarily governed by the Windows security mo
 - Active Director:
 
 
-
+# Permissions
 
 ## NTFS permissions
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
