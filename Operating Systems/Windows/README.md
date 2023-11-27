@@ -28,13 +28,14 @@
 
 prmission management in Windows is primarily governed by the Windows security model, which includes the following key components:
 
-- NTFS (New Technology File System)
-- Security Descriptors
 - User Accounts and Groups
 - Windows Security Groups
+- Security Descriptors
+- NTFS (New Technology File System)
+- Service Control Manager (SCM)
 - Group Policy
 - Active Director:
-- Service Control Manager (SCM)
+
 
 
 
