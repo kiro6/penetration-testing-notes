@@ -31,6 +31,8 @@ Built-in Windows accounts are predefined user accounts that are created during t
 
 These accounts serve specific purposes and are often associated with system tasks, services, or groups
 
+Examples:
+
 | Account or Group      | Description                                                                                                        | Usage                                                                                                   |
 |------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | Administrator          | The built-in Administrator account is created during Windows installation. It has full control over the system and is often used for administrative tasks. | This account is typically used for initial system setup and configuration.                              |
