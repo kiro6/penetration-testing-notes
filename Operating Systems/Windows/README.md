@@ -113,6 +113,24 @@ The SID for Contoso\Domain Admins has:
 | S-1-5-6       | Service                |
 | S-1-5-2       | Network                |
 
+## Access tokens
+- An access token is an object that describes the security context of a process or thread.
+- Every process executed on behalf of this user has a copy of this access token.
+- When a user logs on, the system verifies the user's password by comparing it with information stored in a security database. If the password is authenticated, the system produces an access token
+
+- Access tokens contain the following information:
+   - The security identifier (SID) for the user's account
+   - SIDs for the groups of which the user is a member
+   - A logon SID that identifies the current logon session
+   - A list of the privileges held by either the user or the user's groups
+   - An owner SID
+   - The SID for the primary group
+   - The default DACL that the system uses when the user creates a securable object without specifying a security descriptor
+   - The source of the access token
+   - Whether the token is a primary or impersonation token
+   - An optional list of restricting SIDs
+   - Current impersonation levels
+   - Other statistics
 
 
 ## NTFS
