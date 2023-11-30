@@ -103,6 +103,15 @@ The SID for Contoso\Domain Admins has:
 
 **The SECURITY_NT_AUTHORITY (S-1-5):** predefined identifier authority produces SIDs that aren't universal and are meaningful only in installations of the Windows operating systems
 
+### some of installations of the Windows operating systems well-known SIDs
+| SID           | Name                   | 
+|-------------- |------------------------| 
+| S-1-5-18      | System (or LocalSystem)|
+| S-1-5-19      | NT Authority (LocalService)|
+| S-1-5-20      | Network Service        |
+| S-1-5-domain-500 | Administrator      |
+| S-1-5-6       | Service                |
+| S-1-5-2       | Network                |
 
 
 
