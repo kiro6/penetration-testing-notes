@@ -1,7 +1,7 @@
 # Content 
 - [Structure](#structure)
 - [Security](#Security)
-         - [Windows security model](#windows-security-model)
+  - [Windows security model](#windows-security-model)
 - [Windows Services](#windows-services)
 
 
