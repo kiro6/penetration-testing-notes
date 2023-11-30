@@ -5,6 +5,7 @@
   - [Security identifiers](#security-identifiers)
   - [Access Tokens](#access-tokens)
 - [Windows Services](#windows-services)
+- [Windows Management Instrumentation (WMI)]()
 
 
 # Structure
@@ -234,3 +235,9 @@ The SysInternals Tools suite is a set of portable Windows applications that can 
 \\live.sysinternals.com\tools\procdump.exe -accepteula  # online
 procdump.exe -accepteula                                # local
 ```
+
+
+# Windows Management Instrumentation (WMI)
+[documntation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-executionpolicy?view=powershell-7.4)
+- WMI is a subsystem of PowerShell that provides system administrators with powerful tools for system monitoring. 
+- The goal of WMI is to consolidate device and application management across corporate networks. 
