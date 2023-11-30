@@ -2,6 +2,7 @@
 - [Structure](#structure)
 - [Security](#Security)
   - [Windows security model](#windows-security-model)
+  - [Security identifiers](#security-identifiers)
 - [Windows Services](#windows-services)
 
 
