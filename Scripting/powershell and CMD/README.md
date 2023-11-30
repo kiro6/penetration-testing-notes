@@ -15,7 +15,7 @@ SYNTAX
     Archive | Device | Normal | Temporary | SparseFile | ReparsePoint | Compressed | Offline | NotContentIndexed |
     Encrypted | IntegrityStream | NoScrubData}] [-FollowSymlink] [-Directory] [-File] [-Hidden] [-ReadOnly] [-System]
     [<CommonParameters>]
-
+--------------------------------------------------------------------------------------------------------------------------
 
 ipconfig.exe /?
 
