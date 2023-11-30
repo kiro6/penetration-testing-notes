@@ -1,7 +1,7 @@
 # Content 
 - [Structure](#structure)
 - [Security](#Security)
-- [Windows security model](#windows-security-model)
+         - [Windows security model](#windows-security-model)
 - [Windows Services](#windows-services)
 
 
@@ -26,27 +26,7 @@
 
 
 # Security
-
-## built-in Windows account
-Built-in Windows accounts are predefined user accounts that are created during the installation of the Windows operating system. 
-
-These accounts serve specific purposes and are often associated with system tasks, services, or groups
-
-Examples:
-
-| Account or Group      | Description                                                                                                        | Usage                                                                                                   |
-|------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| Administrator          | The built-in Administrator account is created during Windows installation. It has full control over the system and is often used for administrative tasks. | This account is typically used for initial system setup and configuration.                              |
-| Guest                  | The built-in Guest account is created during Windows installation. It is disabled by default for security reasons. | The Guest account is designed for occasional or temporary use and has limited permissions.                |
-| SYSTEM                 | The SYSTEM account is not a user account but a built-in account used by the operating system itself.               | Various system processes, services, and tasks run under the context of the SYSTEM account for elevated privileges. |
-| Network Service        | The built-in Network Service account is used by some Windows services that need network resources.                | Services running under this account have limited local privileges but can access network resources.         |
-| Local Service          | The built-in Local Service account is used by some Windows services that need minimal privileges.                 | Services running under this account have restricted access to the network but can interact with local resources. |
-| Authenticated Users    | Authenticated Users is a built-in group that includes all user accounts that have successfully authenticated to the domain or local machine. | Permissions can be assigned to the Authenticated Users group to grant access to resources for all authenticated users. |
-| Interactive Users       | Interactive Users is a built-in group that includes all users currently logged on interactively to the system. | Permissions can be assigned to the Interactive Users group to grant access to resources for users actively using the system. |
-| Administrators         | The built-in Administrators group is a group that includes the Administrator account and any other accounts added during installation. | Members of this group have elevated privileges and can perform administrative tasks.                        |
-
-
-## Windows security model following key components:
+Windows security model following key components:
 - Security identifiers (SIDs)
 - Access tokens
 - Security descriptors
@@ -57,15 +37,11 @@ Examples:
 
 ## Windows security model
 
-### Security identifiers   
-[documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
-
-- A security identifier (SID, also called a principal) identifies a user, a group, or a logon session.
-- Each user has a unique SID, which is retrieved by the operating system at logon.
-- SIDs are issued by an authority such as the operating system or a domain server.
-- Some SIDs are well-known and have names as well as identifiers.
-         - For example, the SID S-1-1-0 identifies Everyone (or World)
-
+### Security identifiers   [documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
+- operating system internally refers to accounts and processes that run in the security context of the account by using their SIDs. 
+- For domain accounts, the SID of a security principal is created by concatenating the SID of the domain with a relative identifier (RID) for the account.
+![Screenshot_31](https://github.com/kiro6/penetration-testing-notes/assets/57776872/8ca13621-c4e7-419f-9f32-b1084244a18b)
+- SIDs are unique within their scope (domain or local), and they're never reused.
 
 ## NTFS
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
