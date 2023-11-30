@@ -47,19 +47,27 @@ Examples:
 
 
 ## Windows security model following key components:
+- Security identifiers (SIDs)
+- Access tokens
+- Security descriptors
+- Access Control Lists (ACLs)
+- Privileges
 
-- User Accounts and Groups
-- Windows Security Groups
-- Security Descriptors
-- NTFS (New Technology File System)
-- Service Control Manager (SCM)
-- Group Policy
-- Active Director:
 
 
 ## Windows security model
 
-## NTFS permissions
+### Security identifiers   
+[documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
+
+- A security identifier (SID, also called a principal) identifies a user, a group, or a logon session.
+- Each user has a unique SID, which is retrieved by the operating system at logon.
+- SIDs are issued by an authority such as the operating system or a domain server.
+- Some SIDs are well-known and have names as well as identifiers.
+         - For example, the SID S-1-1-0 identifies Everyone (or World)
+
+
+## NTFS
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
 ### NTFS Basic permissions
 
