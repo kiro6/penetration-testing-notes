@@ -5,7 +5,7 @@
   - [Security identifiers](#security-identifiers)
   - [Access Tokens](#access-tokens)
 - [Windows Services](#windows-services)
-- [Windows Management Instrumentation (WMI)]()
+- [Windows Management Instrumentation (WMI)](#windows-management-instrumentation-wmi)
 
 
 # Structure
