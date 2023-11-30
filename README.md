@@ -8,5 +8,7 @@ this my is repo with notes i take in penetration testing & related technologies/
 - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 - [owasp](https://owasp.org/)
 - [MDN](https://developer.mozilla.org/en-US/docs/Web)
-- [meduim blogs](https://medium.com/)
-  - [github-dork](https://infosecwriteups.com/github-dork-553b7b84bcf4)  
+- [microsoft docs](https://learn.microsoft.com/en-us/docs/)
+- blogs
+  - [github-dork](https://infosecwriteups.com/github-dork-553b7b84bcf4)
+  - [windows SID](https://morgantechspace.com/2013/10/difference-between-rid-and-sid-in.html)  
