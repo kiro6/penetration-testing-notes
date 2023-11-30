@@ -38,7 +38,7 @@ Windows security model following key components:
 
 ## Windows security model
 
-### Security identifiers   
+## Security identifiers   
 [documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
 - operating system internally refers to accounts and processes that run in the security context of the account by using their SIDs. 
 - For domain accounts, the SID of a security principal is created by concatenating the SID of the domain with a relative identifier (RID) for the account.
@@ -46,6 +46,45 @@ Windows security model following key components:
 
 ![Screenshot_31](https://github.com/kiro6/penetration-testing-notes/assets/57776872/8ca13621-c4e7-419f-9f32-b1084244a18b)
 - SIDs are unique within their scope (domain or local), and they're never reused.
+
+
+### SID components
+
+`S-R-X-Y1-Y2-Yn-1-Yn`
+
+| Comment | Description                                         |
+| ------- | --------------------------------------------------- |
+| S       | Indicates that the string is a SID                 |
+| R       | Indicates the revision level                        |
+| X       | Indicates the identifier authority value            |
+| Y       | Represents a series of subauthority values, where n is the number of values |
+
+
+**Examples:** the SID for the built-in Administrators group is represented in standardized SID notation as the following string:
+
+```
+S-1-5-32-544
+```
+
+This SID has four components:
+- A revision level (1)
+- An identifier authority value (5, NT Authority)
+- A domain identifier (32, Builtin)
+- A relative identifier (544, Administrators)
+
+
+**Examples:** The following example represents the SID for the Domain Admins group in the Contoso, Ltd. domain (Contoso\Domain Admins):
+```
+S-1-5-21-1004336348-1177238915-682003330-512
+```
+
+The SID for Contoso\Domain Admins has:
+- A revision level (1)
+- An identifier authority (5, NT Authority)
+- A domain identifier (21-1004336348-1177238915-682003330, Contoso)
+- A relative identifier (512, Domain Admins)
+
+
 
 ## NTFS
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
