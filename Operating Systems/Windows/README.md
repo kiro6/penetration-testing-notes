@@ -1,6 +1,7 @@
 # Content 
 - [Structure](#structure)
-- [Permissions](#permissions)
+- [Security](#Security)
+- [Windows security model](#windows-security-model)
 - [Windows Services](#windows-services)
 
 
@@ -56,7 +57,7 @@ Examples:
 - Active Director:
 
 
-# Permissions
+## Windows security model
 
 ## NTFS permissions
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
