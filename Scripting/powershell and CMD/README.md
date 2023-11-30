@@ -1,6 +1,8 @@
 
 # CMD 
 ## Basic Usage 
+[quick reference](https://ss64.com/nt/)
+
 - dir
 - help or /?
 ```powershell
