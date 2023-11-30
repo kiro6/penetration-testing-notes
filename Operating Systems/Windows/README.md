@@ -85,6 +85,26 @@ The SID for Contoso\Domain Admins has:
 - A relative identifier (512, Domain Admins)
 
 
+### universal well-known SIDs 
+![Screenshot 2023-11-30 101718](https://github.com/kiro6/penetration-testing-notes/assets/57776872/748726c4-217d-4348-998e-f31647da1845)
+
+
+### predefined identifier authority constants
+
+| Identifier Authority                  | Value | SID String Prefix |
+|----------------------------------------|-------|-------------------|
+| SECURITY_NULL_SID_AUTHORITY           | 0     | S-1-0             |
+| SECURITY_WORLD_SID_AUTHORITY          | 1     | S-1-1             |
+| SECURITY_LOCAL_SID_AUTHORITY          | 2     | S-1-2             |
+| SECURITY_CREATOR_SID_AUTHORITY        | 3     | S-1-3             |
+| SECURITY_NT_AUTHORITY                 | 5     | S-1-5             |
+| SECURITY_AUTHENTICATION_AUTHORITY     | 18    | S-1-18            |
+
+
+**The SECURITY_NT_AUTHORITY (S-1-5):** predefined identifier authority produces SIDs that aren't universal and are meaningful only in installations of the Windows operating systems
+
+
+
 
 ## NTFS
 NTFS (New Technology File System) is responsible for handling file and folder permissions in the Windows operating system.
