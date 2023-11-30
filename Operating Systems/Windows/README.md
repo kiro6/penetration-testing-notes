@@ -115,6 +115,7 @@ The SID for Contoso\Domain Admins has:
 | S-1-5-2       | Network                |
 
 ## Access tokens
+[documntation](https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens)
 - An access token is an object that describes the security context of a process or thread.
 - Every process executed on behalf of this user has a copy of this access token.
 - When a user logs on, the system verifies the user's password by comparing it with information stored in a security database. If the password is authenticated, the system produces an access token
