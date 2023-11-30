@@ -40,6 +40,8 @@ Windows security model following key components:
 ### Security identifiers   [documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
 - operating system internally refers to accounts and processes that run in the security context of the account by using their SIDs. 
 - For domain accounts, the SID of a security principal is created by concatenating the SID of the domain with a relative identifier (RID) for the account.
+
+
 ![Screenshot_31](https://github.com/kiro6/penetration-testing-notes/assets/57776872/8ca13621-c4e7-419f-9f32-b1084244a18b)
 - SIDs are unique within their scope (domain or local), and they're never reused.
 
