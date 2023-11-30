@@ -38,7 +38,8 @@ Windows security model following key components:
 
 ## Windows security model
 
-### Security identifiers   [documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
+### Security identifiers   
+[documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
 - operating system internally refers to accounts and processes that run in the security context of the account by using their SIDs. 
 - For domain accounts, the SID of a security principal is created by concatenating the SID of the domain with a relative identifier (RID) for the account.
 
