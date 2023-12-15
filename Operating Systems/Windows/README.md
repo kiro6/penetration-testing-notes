@@ -25,18 +25,38 @@
 
 
 
+## C:\Windows\
+| Directory            | Function |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Temp                 | Global directory containing temporary system files accessible to all users on the system. All users, regardless of authority, are provided full read, write, and execute permissions in this directory. Useful for dropping files as a low-privilege user on the system.  | 
+
+
 ## C:\Users
 | Directory            | Function |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Default              | This is the default user profile template for all created users. Whenever a new user is added to the system, their profile is based on the Default profile.|
 | Public               | This folder is intended for computer users to share files and is accessible to all users by default. This folder is shared over the network by default but requires a valid network account to access.|
-| AppData              | Per user application data and settings are stored in a hidden user subfolder (i.e., cliff.moore\AppData). Each of these folders contains three subfolders. The Roaming folder contains machine-independent data that should follow the user's profile, such as custom dictionaries. The Local folder is specific to the computer itself and is never synchronized across the network. LocalLow is similar to the Local folder, but it has a lower data integrity level. Therefore it can be used, for example, by a web browser set to protected or safe mode. |
-| \<user>\AppData\Local\Temp  | Local directory containing a user's temporary files accessible only to the user account that it is attached to. Provides full ownership to the user that owns this folder. Useful when the attacker gains control of a local/domain joined user account. | 
 
-## C:\Windows\
+
+## C:\Users\<user>
 | Directory            | Function |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Temp                 | Global directory containing temporary system files accessible to all users on the system. All users, regardless of authority, are provided full read, write, and execute permissions in this directory. Useful for dropping files as a low-privilege user on the system.  | 
+| AppData | Per user application data and settings are stored in a hidden user subfolder (i.e., cliff.moore\AppData)..   |
+
+## C:\Users\<user>\AppData
+| Directory            | Function |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Roaming | The Roaming folder contains machine-independent data that should follow the user's profile, such as custom dictionaries. |
+| Local | The Local folder is specific to the computer itself and is never synchronized across the network. |
+| LocalLow | LocalLow is similar to the Local folder, but it has a lower data integrity level. Therefore it can be used, for example, by a web browser set to protected or safe mode. |
+
+## C:\Users\<user>\AppData\Local
+| Directory            | Function |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Temp | Local directory containing a user's temporary files accessible only to the user account that it is attached to. Provides full ownership to the user that owns this folder. Useful when the attacker gains control of a local/domain joined user account. | 
+
+
+
 
 
 # Security
