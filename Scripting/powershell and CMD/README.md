@@ -25,4 +25,4 @@
 - `robocopy`        (copy file/dir)
 - `more`            (read file)
 - `type`            (read file)
-- 
+- `del`             (delete file)
