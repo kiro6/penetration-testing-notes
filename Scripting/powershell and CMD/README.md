@@ -15,6 +15,7 @@
 - `A & B`   (run A then B)
 - `A && B`  (do B if A successed)
 - `A || B`  (do B if A fails)
+- `find`    (like grep in linux)
 
 
 ## Working with Files and Directories 
