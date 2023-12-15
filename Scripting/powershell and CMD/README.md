@@ -26,3 +26,4 @@
 - `more`            (read file)
 - `type`            (read file)
 - `del`             (delete file)
+- `fsutil`          (It allows users to perform tasks related to the file system)
