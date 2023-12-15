@@ -11,7 +11,10 @@
 - `cls`
 - `|`   (pipline)
 - `>` and `>>`
-- 
+- `<`
+- `A & B`   (run A then B)
+- `A && B`  (do B if A successed)
+- `A || B`  (do B if A fails)
 
 
 ## Working with Files and Directories 
@@ -26,4 +29,5 @@
 - `more`            (read file)
 - `type`            (read file)
 - `del`             (delete file)
+- `ren`             (rename file)
 - `fsutil`          (It allows users to perform tasks related to the file system)
