@@ -31,19 +31,19 @@
 | Temp                 | Global directory containing temporary system files accessible to all users on the system. All users, regardless of authority, are provided full read, write, and execute permissions in this directory. Useful for dropping files as a low-privilege user on the system.  | 
 
 
-## C:\Users
+## C:\Users\
 | Directory            | Function |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Default              | This is the default user profile template for all created users. Whenever a new user is added to the system, their profile is based on the Default profile.|
 | Public               | This folder is intended for computer users to share files and is accessible to all users by default. This folder is shared over the network by default but requires a valid network account to access.|
 
 
-## C:\Users\<user>
+## C:\Users\ <user>
 | Directory            | Function |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AppData | Per user application data and settings are stored in a hidden user subfolder (i.e., cliff.moore\AppData)..   |
 
-## C:\Users\<user>\AppData
+## C:\Users\ <user>\AppData
 | Directory            | Function |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Roaming | The Roaming folder contains machine-independent data that should follow the user's profile, such as custom dictionaries. |
