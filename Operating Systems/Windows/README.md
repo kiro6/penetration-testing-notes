@@ -71,7 +71,7 @@ Windows security model following key components:
 
 ## CMD and PowerShell
 
-check 
+check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration-testing-notes/tree/main/Scripting/powershell%20and%20CMD)
 
 ## Windows security model
 
