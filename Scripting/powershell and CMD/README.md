@@ -38,3 +38,14 @@
 ## System Information
 ![InformationTypesChart_Updated_2](https://github.com/kiro6/penetration-testing-notes/assets/57776872/1d8ac151-10e9-48a8-898f-f658c58a23ab)
 
+- `systeminfo`
+- `hostname`
+- `ver`
+- `ipconfig`         (`/all` )
+- `arp`              (`/a`)
+- `whoami`           (`/priv`,`/group`) 
+- `net user`         (allows us to display a list of all users on a host, information and to create or delete users.)
+- `net localgroup`
+- `net group`        (must be run against a domain server such as the DC)
+- `net share`    (allows us to display info about shared resources on the host and to create new shared resources as well.)
+- `net view` (will display to us any shared resources the host you are issuing the command against knows of. This includes domain resources, shares, printers, and more.)
