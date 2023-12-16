@@ -34,3 +34,6 @@
 - `erase`           (delete file)      
 - `ren`             (rename file)
 - `fsutil`          (It allows users to perform tasks related to the file system)
+
+## System Information
+![InformationTypesChart_Updated](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a98927c1-1a0f-4603-aaa7-eb36fe868c20)
