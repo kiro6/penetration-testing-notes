@@ -73,6 +73,7 @@
 - `set`              (session scope)(set var will be removed when the cmd session end)
 - `setx`             (user scope)(set a var will hat persists across sessions even after restarting the computer)
 - `setx /M`          (system scope)
+- `set/setx var_name=""`  (will delete the env variable)
 EX: 
 ```cmd
 C:\Users\alice> set SECRET_VAR=VerySecretInfo
