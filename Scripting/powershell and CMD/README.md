@@ -16,6 +16,8 @@
 - `A && B`  (do B if A successed)
 - `A || B`  (do B if A fails)
 - `find`    (like grep in linux)
+- `findstr` (like grep in linux)
+- `where`   (`where PATH  file_want_to_find` or `where file` will search in path env )
 
 
 ## Working with Files and Directories 
