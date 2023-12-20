@@ -135,6 +135,7 @@ tasklist /svc
 - `Update-Help`
 - `Get-Location`
 - `Get-History`
+- `Get-Alias`  (print aliases)
 - `Get-Command`
 ```powershell
 Get-Command -verb get         # list commands with verp get
@@ -145,7 +146,7 @@ Get-Command -noun windows*    # list commands with name windows
 ## Working with Files and Directories 
 - `Get-ChildItem` (list dir)
 ```powershell
- get-content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt  # read powershell history (can reveal secret info)
+get-content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt  # read powershell history (can reveal secret info)
 ```
 - `Set-Location`  (change dir)
 - `Get-Content`   (read file)
