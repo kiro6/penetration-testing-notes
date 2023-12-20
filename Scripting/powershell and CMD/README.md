@@ -62,6 +62,9 @@ net stop         rem  stop a service
 net pause        rem  pause a service
 net continue     rem  continue a service
 ```
+
+### `WMIC` command
+
 ## Env Variables
 
 ## environment variables types
