@@ -127,3 +127,9 @@ C:\user> sc config <service name> start= disabled    rem  Modifying Services
 ```
 C:\user> tasklist /svc
 ```
+
+# PowerShell 
+
+## Basic Usage 
+- `Get-Help`
+- 
