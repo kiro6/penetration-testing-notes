@@ -83,3 +83,17 @@ VerySecretInfo
 C:\Users\alice> setx SECRET_VAR "VerySecretInfo"
 
 ```
+
+## Managing Services
+- `sc` (Service Controller)
+```cmd
+C:\user> sc query type= service                      ## Query All Active Services
+
+C:\user> sc query <service name>                     ## Querying for service
+
+C:\user> sc start <service name>                     ## Starting Services
+
+C:\user> sc stop <service name>                      ## Stopping Services
+
+C:\user> sc config <service name> start= disabled    ## Modifying Services
+```
