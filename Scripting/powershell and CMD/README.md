@@ -1,4 +1,15 @@
+# Content 
+- [CMD vs PowerShell](#cmd-vs-powershell)
+- [CMD](#cmd)
+  -  [Basic Usage](#basic-usage)
 
+# CMD vs PowerShell
+| Feature              | CMD                                       | PowerShell                                                   |
+|----------------------|-------------------------------------------|-------------------------------------------------------------|
+| Language             | Batch and basic CMD commands only.         | PowerShell can interpret Batch, CMD, PS cmdlets, and aliases.|
+| Command Utilization  | The output from one command cannot be passed into another directly. | The output from one command can be passed into another directly.|
+| Command Output       | Text only                                 | PowerShell outputs in object formatting.                     |
+| Parallel Execution   | CMD must finish one command before running another. | PowerShell can multi-thread commands to run in parallel.     |
 
 
 # CMD 
