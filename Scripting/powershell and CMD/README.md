@@ -18,6 +18,9 @@
 - `find`    (like grep in linux)
 - `findstr` (like grep in linux)
 - `where`   (`where PATH  file_want_to_find` or `where file` will search in path env )
+- `sort`
+- `fc`      (check diff between files)
+- `comp`    (compare byte to byte)
 
 
 ## Working with Files and Directories 
