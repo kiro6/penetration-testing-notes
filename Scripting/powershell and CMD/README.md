@@ -54,3 +54,17 @@
 - `net group`        (must be run against a domain server such as the DC)
 - `net share`    (allows us to display info about shared resources on the host and to create new shared resources as well.)
 - `net view` (will display to us any shared resources the host you are issuing the command against knows of. This includes domain resources, shares, printers, and more.)
+
+## Env Variables
+- `%variable_name%`  (access variable)
+- `set`              (set var will be removed when the cmd session end )
+- `setx`             (set a var will hat persists across sessions even after restarting the computer)
+EX: 
+```cmd
+C:\Users\alice> set SECRET_VAR=VerySecretInfo
+C:\Users\alice> echo %SECRET%
+VerySecretInfo
+
+C:\Users\alice> setx SECRET_VAR "VerySecretInfo"
+
+```
