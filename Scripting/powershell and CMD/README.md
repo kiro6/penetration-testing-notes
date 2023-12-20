@@ -56,9 +56,23 @@
 - `net view` (will display to us any shared resources the host you are issuing the command against knows of. This includes domain resources, shares, printers, and more.)
 
 ## Env Variables
+
+## environment variables types
+
+| Scope            | Permissions Required to Access                   | Registry Location                                               |
+|-------------------|-------------------------------------------------|-----------------------------------------------------------------|
+| System (Machine)  | Local Administrator or Domain Administrator      | `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` |
+| User              | Current Active User, Local Administrator, or Domain Administrator | `HKEY_CURRENT_USER\Environment`                                  |
+| Process           | Current Child Process, Parent Process, or Current Active User | None (Stored in Process Memory)                                  |
+
+
+
+
+
 - `%variable_name%`  (access variable)
-- `set`              (set var will be removed when the cmd session end )
-- `setx`             (set a var will hat persists across sessions even after restarting the computer)
+- `set`              (session scope)(set var will be removed when the cmd session end)
+- `setx`             (user scope)(set a var will hat persists across sessions even after restarting the computer)
+- `setx /M`          (system scope)
 EX: 
 ```cmd
 C:\Users\alice> set SECRET_VAR=VerySecretInfo
