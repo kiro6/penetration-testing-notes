@@ -2,6 +2,10 @@
 - [CMD vs PowerShell](#cmd-vs-powershell)
 - [CMD](#cmd)
   -  [Basic Usage](#basic-usage)
+  -  [Working with Files and Directories ](#working-with-files-and-directories )
+  -  [System Information](#system-information)
+  -  [Env Variables](#env-variables)
+  -  [Managing Services](#managing-services)
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
@@ -78,7 +82,7 @@ net continue     rem  continue a service
 
 ## Env Variables
 
-## environment variables types
+### environment variables types
 
 | Scope            | Permissions Required to Access                   | Registry Location                                               |
 |-------------------|-------------------------------------------------|-----------------------------------------------------------------|
