@@ -48,13 +48,20 @@
 - `ver`
 - `ipconfig`         (`/all` )
 - `arp`              (`/a`)
-- `whoami`           (`/priv`,`/group`) 
-- `net user`         (allows us to display a list of all users on a host, information and to create or delete users.)
-- `net localgroup`
-- `net group`        (must be run against a domain server such as the DC)
-- `net share`    (allows us to display info about shared resources on the host and to create new shared resources as well.)
-- `net view` (will display to us any shared resources the host you are issuing the command against knows of. This includes domain resources, shares, printers, and more.)
+- `whoami`           (`/priv`,`/group`)
 
+### `net` command
+```cmd 
+net user         rem  allows us to display a list of all users on a host, information and to create or delete users
+net localgroup
+net group        rem  manage local or domain groups on a computer. must be run against a domain server such as the DC
+net share        rem  display or configure shared resources on a computer. 
+net view         rem  display a list of resources, such as computers or shared resources, that are available on the network. This includes domain resources, shares, printers, and more.
+net start        rem  start a service and list all services in the system
+net stop         rem  stop a service
+net pause        rem  pause a service
+net continue     rem  continue a service
+```
 ## Env Variables
 
 ## environment variables types
@@ -96,4 +103,9 @@ C:\user> sc start <service name>                     rem  Starting Services
 C:\user> sc stop <service name>                      rem  Stopping Services
 
 C:\user> sc config <service name> start= disabled    rem  Modifying Services
+```
+
+- `tasklist` (list of currently running processes)
+```
+C:\user> tasklist /svc
 ```
