@@ -5,7 +5,7 @@
 ## Basic Usage 
 [quick reference](https://ss64.com/nt/)
 
-
+- `rem ` (for comments)
 - `help` or `"command" /?`
 - `doskey /history`              
 - `cls`
@@ -89,11 +89,11 @@ C:\Users\alice> setx SECRET_VAR "VerySecretInfo"
 ```cmd
 C:\user> sc query type= service                      rem  Query All Active Services
 
-C:\user> sc query <service name>                     / Querying for service
+C:\user> sc query <service name>                     rem  Querying for service
 
-C:\user> sc start <service name>                     / Starting Services
+C:\user> sc start <service name>                     rem  Starting Services
 
-C:\user> sc stop <service name>                      / Stopping Services
+C:\user> sc stop <service name>                      rem  Stopping Services
 
-C:\user> sc config <service name> start= disabled    / Modifying Services
+C:\user> sc config <service name> start= disabled    rem  Modifying Services
 ```
