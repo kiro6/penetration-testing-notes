@@ -112,24 +112,40 @@ C:\Users\alice> setx SECRET_VAR "VerySecretInfo"
 ## Managing Services
 - `sc` (Service Controller)
 ```cmd
-C:\user> sc query type= service                      rem  Query All Active Services
+sc query type= service                      rem  Query All Active Services
 
-C:\user> sc query <service name>                     rem  Querying for service
+sc query <service name>                     rem  Querying for service
 
-C:\user> sc start <service name>                     rem  Starting Services
+sc start <service name>                     rem  Starting Services
 
-C:\user> sc stop <service name>                      rem  Stopping Services
+sc stop <service name>                      rem  Stopping Services
 
-C:\user> sc config <service name> start= disabled    rem  Modifying Services
+sc config <service name> start= disabled    rem  Modifying Services
 ```
 
 - `tasklist` (list of currently running processes)
 ```
-C:\user> tasklist /svc
+tasklist /svc
 ```
 
 # PowerShell 
 
 ## Basic Usage 
 - `Get-Help`
-- 
+- `Update-Help`
+- `Get-Location`
+- `Get-History`
+- `Get-Command`
+```powershell
+Get-Command -verb get         # list commands with verp get
+
+Get-Command -noun windows*    # list commands with name windows
+```
+
+## Working with Files and Directories 
+- `Get-ChildItem` (list dir)
+```powershell
+ get-content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt  # read powershell history (can reveal secret info)
+```
+- `Set-Location`  (change dir)
+- `Get-Content`   (read file)
