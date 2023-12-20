@@ -70,7 +70,7 @@
 
 
 - `%variable_name%`  (access variable)
-- `set`              (session scope)(set var will be removed when the cmd session end)
+- `set`              (Process scope)(set var will be removed when the cmd session end)
 - `setx`             (user scope)(set a var will hat persists across sessions even after restarting the computer)
 - `setx /M`          (system scope)
 - `set/setx var_name=""`  (will delete the env variable)
