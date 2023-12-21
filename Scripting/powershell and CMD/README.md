@@ -19,24 +19,25 @@
 # CMD 
 ## Basic Usage 
 [quick reference](https://ss64.com/nt/)
-
-- `rem ` (for comments)
-- `help` or `"command" /?`
-- `doskey /history`              
-- `cls`
-- `|`   (pipline)
-- `>` and `>>`
-- `<`
-- `A & B`   (run A then B)
-- `A && B`  (do B if A successed)
-- `A || B`  (do B if A fails)
-- `find`    (like grep in linux)
-- `findstr` (like grep in linux)
-- `where`   (`where PATH  file_want_to_find` or `where file` will search in path env )
-- `sort`
-- `fc`      (check diff between files)
-- `comp`    (compare byte to byte)
-
+```cmd
+rem                 rem (for comments)
+help                rem help
+command /?          rem help
+doskey /history              
+cls                 rem (clear)
+|                   rem (pipline)
+> and >>            rem output redirection
+<                   rem input redirection
+A & B               rem (run A then B)
+A && B              rem (do B if A successed)
+A || B              rem (do B if A fails)
+find                rem (like grep in linux)
+findstr             rem (like grep in linux)
+where               rem (`where PATH  file_want_to_find` or `where file` will search in path env )
+sort
+fc                  rem (check diff between files)
+comp                rem (compare byte to byte)
+```
 
 ## Working with Files and Directories 
 - `cd` or `chdir `  (change dir)
@@ -150,3 +151,22 @@ get-content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSRea
 ```
 - `Set-Location`  (change dir)
 - `Get-Content`   (read file)
+- 
+## working with modules
+
+#### list modules 
+```powershell
+Get-Module                       ## list loaded modules
+Get-Module -ListAvailable        ## all available modules to load
+
+```
+
+#### importing modules
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process       ## allow to load module for one session (this is the safest option)
+Set-ExecutionPolicy Bypass -Scope CurrentUser   ## allow to load module for this user 
+Set-ExecutionPolicy Bypass -Scope LocalMachine  ## allow to load module for this machine  
+
+Import-Module .\ModuleName.ps1                  ## import module
+```
+
