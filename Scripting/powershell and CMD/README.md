@@ -20,7 +20,7 @@
 ## Basic Usage 
 [quick reference](https://ss64.com/nt/)
 ```cmd
-"rem"                 rem (for comments)
+rem (for comments)
 help                rem help
 command /?          rem help
 doskey /history              
