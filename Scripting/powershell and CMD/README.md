@@ -172,6 +172,14 @@ Set-ExecutionPolicy Bypass -Scope LocalMachine  ## set Execution Policy bypass t
 ```
 
 ## working with modules
+https://www.powershellgallery.com/
+#### install moduels
+```powershell
+Find-Module -Name <module name>                    ## to search in powershell gallery
+
+Find-Module -Name <module name> | Install-Module   ## will install module    
+```
+
 
 #### list modules 
 ```powershell
