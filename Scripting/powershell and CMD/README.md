@@ -144,6 +144,8 @@ Get-Command -verb get         ## list commands with verp get
 Get-Command -noun windows*    ## list commands with name windows
 ```
 
+
+
 ## Working with Files and Directories 
 ```powershell
 Get-ChildItem     ## (list dir)
@@ -151,7 +153,24 @@ get-content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSRea
 
 Set-Location      ## (change dir)
 Get-Content       ## (read file)
-``` 
+```
+
+## Execution Policy
+```
+
+Get-ExecutionPolicy                             ## know the Execution Policy
+
+Get-ExecutionPolicy -list                       ## see every scope Execution Policy
+
+
+Set-ExecutionPolicy Default                     ## set Execution Policy to default options
+Set-ExecutionPolicy undefined                   ## set Execution Policy to undefined options
+
+Set-ExecutionPolicy Bypass -Scope Process       ## set Execution Policy bypass for one session (this is the safest option)
+Set-ExecutionPolicy Bypass -Scope CurrentUser   ## set Execution Policy bypass this user 
+Set-ExecutionPolicy Bypass -Scope LocalMachine  ## set Execution Policy bypass this machine  
+```
+
 ## working with modules
 
 #### list modules 
@@ -164,9 +183,11 @@ Get-Module -ListAvailable        ## all available modules to load
 #### importing modules
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process       ## allow to load module for one session (this is the safest option)
-Set-ExecutionPolicy Bypass -Scope CurrentUser   ## allow to load module for this user 
-Set-ExecutionPolicy Bypass -Scope LocalMachine  ## allow to load module for this machine  
 
 Import-Module .\ModuleName.ps1                  ## import module
 ```
 
+#### using imported modules
+```
+Get-Command -Module imported module             ## Calling Cmdlets and Functions From Within a Module
+```
