@@ -156,7 +156,7 @@ Get-Content       ## (read file)
 ```
 
 ## Execution Policy
-```
+```powershell
 
 Get-ExecutionPolicy                             ## know the Execution Policy
 
