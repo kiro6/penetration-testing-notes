@@ -348,6 +348,10 @@ where prop -Like '*Defender*'              ## filter based on prop pattern
 
 
 
+## fining files or dir
+Get-ChildItem -Path D:\ -File -Recurse | where {($_.Name -like "*.txt")}
+Get-ChildItem -Path D:\ -File -Recurse -ErrorAction SilentlyContinue | where {($_.Name -like "*.txt" -or $_.Name -like "*.py" -or $_.Name -like "*.ps1" -or $_.Name -like "*.md" -or $_.Name -like "*.csv")}
+
 ## dealing with user object
 Get-LocalUser administrator | get-member
 
