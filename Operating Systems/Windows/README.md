@@ -77,6 +77,42 @@ User accounts are a way for personnel to access and use a host's resources. In c
 
 
 
+
+
+# CMD and PowerShell
+
+check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration-testing-notes/tree/main/Scripting/powershell%20and%20CMD)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Security
 Windows security model following key components:
 - Security identifiers (SIDs)
@@ -86,9 +122,6 @@ Windows security model following key components:
 - Privileges
 
 
-## CMD and PowerShell
-
-check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration-testing-notes/tree/main/Scripting/powershell%20and%20CMD)
 
 ## Windows security model
 
