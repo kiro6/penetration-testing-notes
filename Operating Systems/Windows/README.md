@@ -89,6 +89,38 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 
 
 
+# Windows Registry
+- the Registry can be considered a hierarchal tree that contains two essential elements: **keys** and **values**. 
+- This tree stores all the required information for the operating system and the software installed to run under subtrees (think of them as branches of a tree). 
+- This information can be anything from settings to installation directories to specific options and values that determine how everything functions.
+
+
+
+### Registry Key
+
+#### registry-hives
+- they are high-level structures in the Windows Registry that organize and contain multiple keys, subkeys, and values.
+- The term "hive" is used to describe these top-level containers that hold different sections of the registry
+- [registry hives doc](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-hives)
+
+
+| Registry Hive            | Description                                                                                                           |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| HKEY_CLASSES_ROOT (HKCR) | This hive contains information about file associations, shortcuts, and OLE (Object Linking and Embedding) object classes. |
+| HKEY_CURRENT_USER (HKCU) | This hive contains configuration information for the user currently logged in. It includes user-specific settings such as desktop configurations and environment variables. |
+| HKEY_LOCAL_MACHINE (HKLM)| This hive contains configuration information for the local machine. It includes system-wide settings such as hardware configurations, installed software, and system policies. |
+| HKEY_USERS (HKU)         | This hive contains user profiles information for all users who have logged into the system.                              |
+| HKEY_CURRENT_CONFIG      | This hive contains information about the current hardware configuration. It is a link to a specific key in the HKLM hive. |
+| HKEY_DYN_DATA            | This hive contains information about plug-and-play devices and is used by the operating system to configure dynamic hardware. |
+
+#### registry hives files extension 
+| Extension | Description                                                                                                                                                                                         |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| none      | A complete copy of the hive data.                                                                                                                                                                  |
+| .alt      | A backup copy of the critical HKEY_LOCAL_MACHINE\System hive. Only the System key has an .alt file.                                                                                              |
+| .log      | A transaction log of changes to the keys and value entries in the hive.                                                                                                                            |
+| .sav      | A backup copy of a hive. Windows Server 2003 and Windows XP/2000: Copies of the hive files as they looked at the end of the text-mode stage in Setup. Setup has two stages: text mode and graphics mode. The hive is copied to a .sav file after the text-mode stage of setup to protect it from errors that might occur if the graphics-mode stage of setup fails. If setup fails during the graphics-mode stage, only the graphics-mode stage is repeated when the computer is restarted; the .sav file is used to restore the hive data. |
+
 
 
 ------------------------------------------------------------------------------------------------------------------------
