@@ -210,15 +210,50 @@ Get-Command -Module imported module             ## Calling Cmdlets and Functions
 ## User and Group Management
 ####
 ```powershell
-Get-LocalUser                                                                      ## list users in local machine
-get-localgroup                                                                     ## list groups in local machine
-Get-LocalGroupMember                                                               ## list members of a group
-New-LocalUser                                                                      ## create user 
-Set-LocalUser -Name "JLawrence" -Password $Password -Description "CEO EagleFang"   ## edit user
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "JLawrence"             ## add user to group
+# List users in the local machine
+Get-LocalUser
 
+# List groups in the local machine
+Get-LocalGroup
+
+# List members of a group
+Get-LocalGroupMember
+
+# Create a new user
+New-LocalUser
+
+# Create a new group
+New-LocalGroup
+
+# Edit user properties
+Set-LocalUser -Name "JLawrence" -Password $Password -Description "CEO EagleFang"
+
+# Edit group properties
+Set-LocalGroup
+
+# Add a user to a group
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "JLawrence"
+
+# Remove a user from the local machine
 Remove-LocalUser
+
+# Remove a group from the local machine
 Remove-LocalGroup
+
+# Remove a user from a group
 Remove-LocalGroupMember
+
+# Rename a group
+Rename-LocalGroup
+
+# Rename a user
+Rename-LocalUser
+
+# Disable a user account
+Disable-LocalUser
+
+# Enable a user account
+Enable-LocalUser
+ 
 
 ```
