@@ -206,3 +206,10 @@ Import-Module .\ModuleName.ps1                  ## import module
 ```
 Get-Command -Module imported module             ## Calling Cmdlets and Functions From Within a Module
 ```
+
+## User and Group Management
+####
+```powershell
+get-localgroup                                  ## list groups in local machine
+
+```
