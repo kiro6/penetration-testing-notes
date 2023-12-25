@@ -1,5 +1,6 @@
 # Content 
 - [Structure](#structure)
+- [User and Group Management]()
 - [CMD and PowerShell](#cmd-and-powerShell)
 - [Security](#Security)
   - [Windows security model](#windows-security-model)
@@ -57,6 +58,22 @@
 | Temp | Local directory containing a user's temporary files accessible only to the user account that it is attached to. Provides full ownership to the user that owns this folder. Useful when the attacker gains control of a local/domain joined user account. | 
 
 
+# Account , User and Group Management
+User accounts are a way for personnel to access and use a host's resources. In certain circumstances, the system will also utilize a specially provisioned user account to perform actions.
+
+##### Account Types
+- Service Accounts
+- Built-in accounts
+- Local users
+- Domain users
+
+##### Built-in accounts
+| Account           | Description                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- |
+| Administrator     | This account is used to accomplish administrative tasks on the local host.                                      |
+| Default Account    | The default account is used by the system for running multi-user auth apps like the Xbox utility.                |
+| Guest Account      | This account is a limited rights account that allows users without a normal user account to access the host. It is disabled by default and should stay that way. |
+| WDAGUtility Account| This account is in place for the Defender Application Guard, which can sandbox application sessions.             |
 
 
 
