@@ -121,7 +121,10 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 | .log      | A transaction log of changes to the keys and value entries in the hive.                                                                                                                            |
 | .sav      | A backup copy of a hive. Windows Server 2003 and Windows XP/2000: Copies of the hive files as they looked at the end of the text-mode stage in Setup. Setup has two stages: text mode and graphics mode. The hive is copied to a .sav file after the text-mode stage of setup to protect it from errors that might occur if the graphics-mode stage of setup fails. If setup fails during the graphics-mode stage, only the graphics-mode stage is repeated when the computer is restarted; the .sav file is used to restore the hive data. |
 
-
+### Registry value
+- Values represent data in the form of objects that pertain to that specific Key. 
+- These values consist of a name, a type specification, and the required data to identify what it's for.
+- [Registry value types](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-value-types)
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
