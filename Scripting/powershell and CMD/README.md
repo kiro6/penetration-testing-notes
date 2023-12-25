@@ -6,6 +6,11 @@
   -  [System Information](#system-information)
   -  [Env Variables](#env-variables)
   -  [Managing Services](#managing-services)
+- [PowerShell](#powershell)
+  - [Basic Usage](#basic-usage-1)
+  - [Working with Files and Directories ](#working-with-files-and-directories-1)
+  - [Execution Policy](#execution-policy)
+  - [Working With Modules](#working-with-modules)
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
