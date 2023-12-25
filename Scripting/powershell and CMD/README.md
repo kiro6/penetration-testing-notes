@@ -302,3 +302,32 @@ Enable-LocalUser
  
 
 ```
+
+## Finding & Filtering Content
+```powerhsell
+
+
+Select-Object                              ## select and manipulate object properties
+Get-Member                                 ## retrieving the members (properties and methods) of objects. 
+Sort-Object -Property Name                 ## sort object props by prop name 
+Group-Object -property Enabled             ## group object props by prop Enabled
+
+where prop -Like '*Defender*'              ## filter based on prop pattern
+
+
+
+## dealing with user object
+Get-LocalUser administrator | get-member
+
+Get-LocalUser administrator | Get-Member -MemberType Properties
+
+Get-LocalUser administrator | Select-Object -Property *
+
+Get-LocalUser administrator | Get-Member -MemberType Methods
+
+## dealing with service object
+get-service | Select-Object -Property Name | Sort-Object Name | fl
+
+get-service | where DisplayName -Like '*Defender*'
+
+```
