@@ -151,7 +151,7 @@ Get-Command -verb get         ## list commands with verp get
 Get-Command -noun windows*    ## list commands with name windows
 ```
 
-```
+```powershell
 # variable declaration
 $name = "John"
 $age = 25
