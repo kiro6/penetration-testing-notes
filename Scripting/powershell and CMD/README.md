@@ -210,6 +210,7 @@ Get-Command -Module imported module             ## Calling Cmdlets and Functions
 ## User and Group Management
 ####
 ```powershell
+Get-LocalUser                                   ## list users in local machine
 get-localgroup                                  ## list groups in local machine
-
+Get-LocalGroupMember                            ## list members of a group
 ```
