@@ -61,13 +61,13 @@
 # Account , User and Group Management
 User accounts are a way for personnel to access and use a host's resources. In certain circumstances, the system will also utilize a specially provisioned user account to perform actions.
 
-##### Account Types
+#### Account Types
 - Service Accounts
 - Built-in accounts
 - Local users
 - Domain users
 
-##### Built-in accounts
+#### Built-in accounts
 | Account           | Description                                                                                                     |
 | ----------------- | --------------------------------------------------------------------------------------------------------------- |
 | Administrator     | This account is used to accomplish administrative tasks on the local host.                                      |
