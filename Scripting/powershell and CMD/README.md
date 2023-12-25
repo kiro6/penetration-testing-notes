@@ -153,11 +153,56 @@ Get-Command -noun windows*    ## list commands with name windows
 
 ## Working with Files and Directories 
 ```powershell
-Get-ChildItem     ## (list dir)
+# Retrieve an object (could be a file, folder, registry object, etc.)
+Get-Item
+
+# Lists out the content of a folder or registry hive.
+Get-ChildItem  # Alias: ls / dir / gci
+
+# Create new objects. (Can be files, folders, symlinks, registry entries, and more)
+New-Item  # Alias: md / mkdir / ni
+
+# Modify the property values of an object.
+Set-Item  # Alias: si
+
+# Make a duplicate of the item.
+Copy-Item  # Alias: copy / cp / ci
+
+# Changes the object name.
+Rename-Item  # Alias: ren / rni
+
+# Deletes the object.
+Remove-Item  # Alias: rm / del / rmdir
+
+# Displays the content within a file or object.
+Get-Content  # Alias: cat / type
+
+# Append content to a file.
+Add-Content  # Alias: ac
+
+# Overwrite any content in a file with new data.
+Set-Content  # Alias: sc
+
+# Clear the content of the files without deleting the file itself.
+Clear-Content  # Alias: clc
+
+# Compare two or more objects against each other. This includes the object itself and the content within.
+Compare-Object  # Alias: diff / compare
+
+# List directory contents
+Get-ChildItem
+
+# Read PowerShell history (can reveal secret info)
+Get-Content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+
+# Change directory
+Set-Location
+
+# Read file
+Get-Content
 get-content C:\Users\DLarusso\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt  # read powershell history (can reveal secret info)
 
-Set-Location      ## (change dir)
-Get-Content       ## (read file)
+
 ```
 
 ## Execution Policy
