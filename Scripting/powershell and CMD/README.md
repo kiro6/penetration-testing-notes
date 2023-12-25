@@ -402,4 +402,8 @@ Get-ChildItem -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion -Recurse
 
 ## retrieving and displaying the values associated with the properties (entries) within the key
 Get-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+reg.exe query 'HKEY_LOCAL_MACHINE\SOFTWARE\Android Studio'
+
+## search for passwords keys using reg
+REG QUERY HKCU /F "password" /t REG_SZ /S /K
 ```
