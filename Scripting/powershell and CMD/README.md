@@ -369,3 +369,15 @@ get-service | Select-Object -Property Name | Sort-Object Name | fl
 get-service | where DisplayName -Like '*Defender*'
 
 ```
+## Working with Services
+
+```powershell
+Get-Service                        
+New-Service                             
+Restart-Service                 
+Resume-Service                
+Set-Service                     
+Start-Service                                
+Stop-Service                               
+Suspend-Service     
+```
