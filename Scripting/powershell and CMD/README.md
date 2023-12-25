@@ -379,5 +379,13 @@ Resume-Service
 Set-Service                     
 Start-Service                                
 Stop-Service                               
-Suspend-Service     
+Suspend-Service
+
+
+## Remotely Query Services
+Get-Service -ComputerName ACADEMY-ICL-DC
+Get-Service -ComputerName ACADEMY-ICL-DC | Where-Object {$_.Status -eq "Running"}     
+
+invoke-command -ComputerName ACADEMY-ICL-DC,LOCALHOST -ScriptBlock {Get-Service -Name 'windefend'}
+
 ```
