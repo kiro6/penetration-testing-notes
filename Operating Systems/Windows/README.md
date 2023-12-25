@@ -77,6 +77,8 @@ User accounts are a way for personnel to access and use a host's resources. In c
 | WDAGUtility Account| This account is in place for the Defender Application Guard, which can sandbox application sessions.             |
 
 
+#### Local Accounts Doc
+[Local Accounts Doc](https://learn.microsoft.com/en-us/windows/security/identity-protection/access-control/local-accounts)
 
 
 
