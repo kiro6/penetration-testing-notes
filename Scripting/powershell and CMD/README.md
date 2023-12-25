@@ -406,4 +406,15 @@ reg.exe query 'HKEY_LOCAL_MACHINE\SOFTWARE\Android Studio'
 
 ## search for passwords keys using reg
 REG QUERY HKCU /F "password" /t REG_SZ /S /K
+
+New-Item
+Set-Item
+New-ItemProperty
+Set-ItemProperty
+
+New-Item -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\ -Name TestKey
+
+New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\TestKey -Name  "access" -PropertyType String -Value "C:\Users\htb-student\Downloads\payload.exe"
+
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce\TestKey" /v access /t REG_SZ /d "C:\Users\htb-student\Downloads\payload.exe"  
 ```
