@@ -137,18 +137,50 @@ tasklist /svc
 # PowerShell 
 
 ## Basic Usage 
-- `Get-Help`
-- `Update-Help`
-- `Get-Location`
-- `Get-History`
-- `Get-Alias`  (print aliases)
-- `Get-Command`
 ```powershell
+
+Get-Help
+Update-Help
+Get-Location
+Get-History
+Get-Alias                     ## (print aliases)
+Get-Command
+
 Get-Command -verb get         ## list commands with verp get
 
 Get-Command -noun windows*    ## list commands with name windows
 ```
 
+```
+# variable declaration
+$name = "John"
+$age = 25
+$isStudent = $true
+
+# print
+Write-Output
+
+# read
+Read-Host
+
+
+# for loop
+for ($i = 1 ; $i -le 5 ; $i++){
+Write-Output "current value is : $i " 
+}
+
+# if condition
+$number = 10
+
+if ($number -gt 5) {
+    Write-Output "The number is greater than 5."
+} elseif ($number -eq 5) {
+    Write-Output "The number is equal to 5."
+} else {
+    Write-Output "The number is less than 5."
+}
+
+```
 
 
 ## Working with Files and Directories 
@@ -304,7 +336,7 @@ Enable-LocalUser
 ```
 
 ## Finding & Filtering Content
-```powerhsell
+```powershell
 
 
 Select-Object                              ## select and manipulate object properties
