@@ -71,7 +71,7 @@ User accounts are a way for personnel to access and use a host's resources. In c
 | Account           | Description                                                                                                     |
 | ----------------- | --------------------------------------------------------------------------------------------------------------- |
 | Administrator     | This account is used to accomplish administrative tasks on the local host.                                      |
-| SYSTEM             | Used by the operating system and services running under Windows for internal processes and tasks.               |
+| SYSTEM             | Used by the operating system and services running under Windows for internal processes and tasks. It's an internal account that doesn't show up in User Manager, and it can't be added to any groups.               |
 | Default Account    | The default account is used by the system for running multi-user auth apps like the Xbox utility.                |
 | Guest Account      | This account is a limited rights account that allows users without a normal user account to access the host. It is disabled by default and should stay that way. |
 | WDAGUtility Account| This account is in place for the Defender Application Guard, which can sandbox application sessions.             |
