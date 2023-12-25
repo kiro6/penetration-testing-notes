@@ -389,3 +389,17 @@ Get-Service -ComputerName ACADEMY-ICL-DC | Where-Object {$_.Status -eq "Running"
 invoke-command -ComputerName ACADEMY-ICL-DC,LOCALHOST -ScriptBlock {Get-Service -Name 'windefend'}
 
 ```
+## Working with the Registry
+
+```powershell
+
+## displaying information about the registry key itself
+Get-Item -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | Select-Object -ExpandProperty Property
+Get-Item -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | Select-Object -Property * 
+
+## see each key and object within a hive
+Get-ChildItem -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion -Recurse
+
+## retrieving and displaying the values associated with the properties (entries) within the key
+Get-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+```
