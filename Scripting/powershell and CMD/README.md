@@ -215,4 +215,10 @@ get-localgroup                                                                  
 Get-LocalGroupMember                                                               ## list members of a group
 New-LocalUser                                                                      ## create user 
 Set-LocalUser -Name "JLawrence" -Password $Password -Description "CEO EagleFang"   ## edit user
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "JLawrence"             ## add user to group
+
+Remove-LocalUser
+Remove-LocalGroup
+Remove-LocalGroupMember
+
 ```
