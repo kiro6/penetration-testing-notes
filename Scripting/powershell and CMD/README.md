@@ -11,6 +11,8 @@
   - [Working with Files and Directories ](#working-with-files-and-directories-1)
   - [Execution Policy](#execution-policy)
   - [Working With Modules](#working-with-modules)
+  - [User and Group Management](#user-and-group-management)
+  - [Finding & Filtering Content](#finding--filtering-content)
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
