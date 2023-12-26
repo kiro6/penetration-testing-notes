@@ -18,7 +18,7 @@
   - [Working with Services](#working-with-services)
   - [Working with the Registry](#working-with-the-registry)
   - [Working with the Windows Event Log](#working-with-the-windows-event-log-1)
-  -   -  [Networking Management](#networking-management-1)
+  - [Networking Management](#networking-management-1)
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
