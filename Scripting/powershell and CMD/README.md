@@ -477,4 +477,42 @@ Get-WinEvent -FilterHashTable @{LogName='System';Level='1'} | select-object -Exp
 
 ## Networking Management
 ```
+# PowerShell script to perform various network-related tasks
+
+# Retrieve all visible network adapter properties
+Get-NetIPInterface
+
+# Retrieves the IP configurations of each adapter (Similar to IPConfig)
+Get-NetIPAddress
+
+# Retrieves the neighbor entries from the cache (Similar to arp -a)
+Get-NetNeighbor
+
+# Print the current route table (Similar to IPRoute)
+Get-NetRoute
+
+# Set basic adapter properties at the Layer-2 level such as VLAN id, description, and MAC-Address
+Set-NetAdapter -InterfaceAlias "Ethernet" -Description "New Description" -MacAddress "00:11:22:33:44:55" -VlanID 10
+
+# Modifies the settings of an interface to include DHCP status, MTU, and other metrics
+Set-NetIPInterface -InterfaceAlias "Ethernet" -Dhcp Enabled -Mtu 1500 -NlMtu 1400
+
+# Creates and configures an IP address
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.100" -PrefixLength 24
+
+# Modifies the configuration of a network adapter
+Set-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.101" -PrefixLength 24
+
+# Disable network adapter interfaces
+Disable-NetAdapter -InterfaceAlias "Ethernet"
+
+# Enable network adapters to allow network connections
+Enable-NetAdapter -InterfaceAlias "Ethernet"
+
+# Restart a network adapter (useful to push changes made to adapter settings)
+Restart-NetAdapter -InterfaceAlias "Ethernet"
+
+# Perform diagnostic checks on a connection (supports ping, tcp, route tracing, etc.)
+Test-NetConnection -ComputerName "example.com" -Port 80 -InformationLevel Detailed
+
 ```
