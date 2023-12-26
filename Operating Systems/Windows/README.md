@@ -3,7 +3,7 @@
 - [User and Group Management](#account--user-and-group-management)
 - [CMD and PowerShell](#cmd-and-powerShell)
 - [Windows Registry](#windows-registry)
-- [Windows Event Log]()
+- [Windows Event Log](#windows-event-log)
 - [Security](#Security)
   - [Windows security model](#windows-security-model)
   - [Security identifiers](#security-identifiers)
@@ -132,6 +132,8 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 
 
 # Windows Event Log
+Event Logging as defined by Microsoft:
+"...provides a standard, centralized way for applications (and the operating system) to record important software and hardware events."
 
 #### Event Log Categories 
 
