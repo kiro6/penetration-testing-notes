@@ -15,6 +15,7 @@
   - [Finding & Filtering Content](#finding--filtering-content)
   - [Working with Services](#working-with-services)
   - [Working with the Registry](#working-with-the-registry)
+  - []()
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
@@ -444,3 +445,18 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce\Tes
 ```
 
 ## Working with the Windows Event Log
+```
+## Listing All Logs
+Get-WinEvent -ListLog *
+
+## Security Log Details
+Get-WinEvent -ListLog Security
+
+## Querying Events
+Get-WinEvent -LogName 'Security' -MaxEvents 5 | Select-Object -ExpandProperty Message
+
+## Filtering 
+Get-WinEvent -FilterHashTable @{LogName='Security';ID='4625 '}
+Get-WinEvent -FilterHashTable @{LogName='System';Level='1'} | select-object -ExpandProperty Message
+
+```
