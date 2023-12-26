@@ -164,6 +164,13 @@ wevtutil epl System C:\system_export.evtx
 
 ## Networking Management
 ```
+ipconfig
+
+arp
+
+nslookup 
+
+netstat 
 ```
 
 # PowerShell 
