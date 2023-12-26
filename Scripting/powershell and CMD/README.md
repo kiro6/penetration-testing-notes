@@ -6,6 +6,8 @@
   -  [System Information](#system-information)
   -  [Env Variables](#env-variables)
   -  [Managing Services](#managing-services)
+  -  [Working with the Windows Event Log](#working-with-the-windows-event-log)
+  -  [Networking Management](#networking-management)
 - [PowerShell](#powershell)
   - [Basic Usage](#basic-usage-1)
   - [Working with Files and Directories ](#working-with-files-and-directories-1)
@@ -15,7 +17,8 @@
   - [Finding & Filtering Content](#finding--filtering-content)
   - [Working with Services](#working-with-services)
   - [Working with the Registry](#working-with-the-registry)
-  - []()
+  - [Working with the Windows Event Log](#working-with-the-windows-event-log-1)
+  -   -  [Networking Management](#networking-management-1)
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
