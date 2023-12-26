@@ -135,6 +135,10 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 Event Logging as defined by Microsoft:
 "...provides a standard, centralized way for applications (and the operating system) to record important software and hardware events."
 
+
+
+The Windows Event Log is handled by the EventLog services
+
 #### Event Log Categories 
 
 | Log Category       | Log Description                                                                                              |
