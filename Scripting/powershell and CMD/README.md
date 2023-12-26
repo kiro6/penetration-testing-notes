@@ -13,6 +13,8 @@
   - [Working With Modules](#working-with-modules)
   - [User and Group Management](#user-and-group-management)
   - [Finding & Filtering Content](#finding--filtering-content)
+  - [Working with Services](#working-with-services)
+  - [Working with the Registry](#working-with-the-registry)
 
 # CMD vs PowerShell
 | Feature              | CMD                                       | PowerShell                                                   |
