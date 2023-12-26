@@ -29,6 +29,12 @@
 
 
 
+
+## C:\Windows\System32
+| Directory            | Function |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \winevt\logs         | Windows Event Logs are stored in it with the file extension .evtx  | 
+
 ## C:\Windows\
 | Directory            | Function |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -132,12 +138,10 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 
 
 # Windows Event Log
-Event Logging as defined by Microsoft:
+- Event Logging as defined by Microsoft:
 "...provides a standard, centralized way for applications (and the operating system) to record important software and hardware events."
-
-
-
-The Windows Event Log is handled by the EventLog services
+- The Windows Event Log is handled by the EventLog services
+- On a Windows system, the service's display name is `Windows Event Log`, and it runs inside the service host process svchost.exe. It is set to start automatically at system boot by default.
 
 #### Event Log Categories 
 
