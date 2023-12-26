@@ -138,6 +138,17 @@ sc config <service name> start= disabled    rem  Modifying Services
 tasklist /svc
 ```
 
+## Working with the Windows Event Log
+```CMD
+wevtutil
+
+rem Enumerating Log Sources
+wevtutil el
+
+rem Gathering Log Information
+wevtutil gl "Windows PowerShell"
+```
+
 # PowerShell 
 
 ## Basic Usage 
