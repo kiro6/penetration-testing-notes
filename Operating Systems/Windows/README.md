@@ -165,6 +165,15 @@ Event Logging as defined by Microsoft:
 | Error          | 2       | An issue related to the system or service that does not require immediate attention.                                          |
 | Critical       | 1       | This indicates a significant issue related to an application or a system that requires urgent attention by a sysadmin, and if not addressed, could lead to system or application instability. |
 
+#### Elements of a Windows Event Log
+- **Log name:** As discussed above, the name of the event log where the events will be written. By default, events are logged for system, security, and applications.
+- **Event date/time:** Date and time when the event occurred
+- **Task Category:** The type of recorded event log
+- **Event ID:** A unique identifier for sysadmins to identify a specific logged event
+- **Source:** Where the log originated from, typically the name of a program or software application
+- **Level:** Severity level of the event. This can be information, error, verbose, warning, critical
+- **User:** Username of who logged onto the host when the event occurred
+- **Computer:** Name of the computer where the event is logged
 
 
 ------------------------------------------------------------------------------------------------------------------------
