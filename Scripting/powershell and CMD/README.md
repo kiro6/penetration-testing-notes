@@ -147,6 +147,15 @@ wevtutil el
 
 rem Gathering Log Information
 wevtutil gl "Windows PowerShell"
+
+rem specific status information about the log or log file
+wevtutil gli "Windows PowerShell"
+
+rem Querying Events
+wevtutil qe Security /c:5 /rd:true /f:text
+
+rem Exporting Events
+wevtutil epl System C:\system_export.evtx
 ```
 
 # PowerShell 
