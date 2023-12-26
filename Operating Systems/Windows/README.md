@@ -175,6 +175,10 @@ Event Logging as defined by Microsoft:
 - **User:** Username of who logged onto the host when the event occurred
 - **Computer:** Name of the computer where the event is logged
 
+#### lists 
+- [searchable database of Event IDs](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/)
+- [list includes key events that are recommended to be monitored for to look for signs of a compromise](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor)
+
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
