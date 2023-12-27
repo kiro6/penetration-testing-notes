@@ -175,6 +175,13 @@ netstat
 
 # PowerShell 
 
+| Extension | Description                                                          |
+|-----------|----------------------------------------------------------------------|
+| ps1       | The *.ps1 file extension represents executable PowerShell scripts.  |
+| psm1      | The *.psm1 file extension represents a PowerShell module file. It defines what the module is and what is contained within it. |
+| psd1      | The *.psd1 is a PowerShell data file detailing the contents of a PowerShell module in a table of key/value pairs. |
+
+
 ## Basic Usage 
 ```powershell
 
