@@ -466,7 +466,7 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce\Tes
 ```
 
 ## Working with the Windows Event Log
-```
+```powershell
 ## Listing All Logs
 Get-WinEvent -ListLog *
 
@@ -483,7 +483,7 @@ Get-WinEvent -FilterHashTable @{LogName='System';Level='1'} | select-object -Exp
 ```
 
 ## Networking Management
-```
+```powershell
 # PowerShell script to perform various network-related tasks
 
 # Retrieve all visible network adapter properties
