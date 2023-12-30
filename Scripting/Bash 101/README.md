@@ -11,6 +11,7 @@
 - [Debugging](#debugging)
   - [Return Values](#return-values)
   - [xtrace](#xtrace--x)
+- Condtions
 
 # Special Variables
 
@@ -119,4 +120,28 @@ bash -x  bash.sh
 asas
 + not_a_function
 bash.sh: line 8: not_a_function: command not found
+```
+
+
+# Condtions
+
+always use `[[]]` not `[]` which is enhanced version 
+```bash
+if [[ $variable1 -eq $variable2 ]]; then
+    echo "Variables are equal."
+elif [[ $variable1 -eq $variable3 ]]; then
+    echo "Variables are equal."
+else
+    echo "Variables are not equal."
+fi
+
+```
+`(())` used for Arithmetic Expressions
+```bash
+if (( num1 > num2 )); then
+    echo "$num1 is greater than $num2."
+else
+    echo "$num1 is not greater than $num2."
+fi
+
 ```
