@@ -126,6 +126,16 @@ my_array=("apple" "banana" "cherry")
 echo  ${my_array[1]}
 ```
 
+## parentheses 
+1. Command Substitution
+```
+#!/bin/bash
+
+result=$(echo "Hello, World!")
+echo $result
+
+```
+
 # Manipulation 
 
 ## Substitution
