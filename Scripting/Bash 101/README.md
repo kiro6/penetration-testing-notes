@@ -13,6 +13,7 @@
   - [Return Values](#return-values)
   - [xtrace](#xtrace--x)
 - Condtions
+- loops
 
 # Special Variables
 
@@ -199,4 +200,43 @@ else
     echo "$num1 is not greater than $num2."
 fi
 
+```
+# loops 
+```bash
+
+# for
+for i in {1..5}
+do
+    echo "Iteration $i"
+done
+
+# while
+count=1
+while [[ $count -le 5 ]]
+do
+    echo "Iteration $count"
+    ((count++))
+done
+
+# until
+count=1
+until [[ $count -gt 5 ]]
+do
+    echo "Iteration $count"
+    ((count++))
+done
+
+
+```
+# read files
+```
+filepath="/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt"
+
+subs=()
+
+if [[ -e $filepath ]]; then
+    while IFS= read -r line ; do
+        subs+=("$line")
+    done < "$filepath"
+fi; 
 ```
