@@ -5,6 +5,7 @@
   - [Integer Operators](#integer-operators)
   - [File Operators](#file-operators)
   - [Logical Operators](#logical-operators)
+- Braces 
 - [Manipulation](#manipulation)
   - [Substitution](#substitution)  
   - [Slicing](#slicing)
@@ -80,6 +81,50 @@
 | !        | logical negation NOT |
 | &&       | logical AND          |
 | ||       | logical OR           |
+
+
+# Braces
+
+## Curly braces { }
+1. Grouping Commands
+```bash
+#!/bin/bash
+{
+    echo "Command 1"
+    echo "Command 2"
+} > output.txt
+
+```
+2. Creating a Sequence:
+```bash
+#!/bin/bash
+echo Number_{1..5}
+```
+3. parameter/array expansion
+```bash
+#!/bin/bash
+string="Hello"
+echo "${string} World!"
+
+
+my_array=("apple" "banana" "cherry")
+echo  ${my_array[1]}
+
+```
+## Double square brackets
+1. conditional expressions
+```bash
+if [[ $string1 == $string2 ]]; then
+    echo "Strings are equal."
+else
+    echo "Strings are not equal."
+fi
+```
+2. access array index
+```bash
+my_array=("apple" "banana" "cherry")
+echo  ${my_array[1]}
+```
 
 # Manipulation 
 
