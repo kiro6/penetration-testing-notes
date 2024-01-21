@@ -246,6 +246,9 @@ Windows security model following key components:
 
 ### SID components
 
+
+https://ldapwiki.com/wiki/Wiki.jsp?page=Well-known%20Security%20Identifiers
+
 `S-R-X-Y1-Y2-Yn-1-Yn`
 
 | Comment | Description                                         |
