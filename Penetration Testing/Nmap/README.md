@@ -12,6 +12,7 @@ sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5
 sudo nmap -sn -oA tnet -iL hosts.lst | grep for | cut -d" " -f5
 ```
 - `-PE/PP/PM` ICMP  (echo, timestamp, and netmask request discovery probes)
+- `-PU` UDP ping scan , `-PT` TCP ping scan
 - `--disable-arp-ping` when you are in local network or vpn will be useful
 - `--packet-trace`
 - `--reason` reson for result
@@ -31,3 +32,49 @@ sudo nmap -sn -oA tnet -iL hosts.lst | grep for | cut -d" " -f5
 
 - `-n` for Disables DNS resolution.
 - `-Pn` disable ping when yor know the port is opned to low traffic
+
+### scan types 
+
+1. **`-sS` (TCP SYN Scan):**
+   - This is the default scan type. It sends a SYN packet to the target port.
+   - If the port is open, the target responds with a SYN-ACK, indicating that the port is open.
+   - If the port is closed, the target responds with a RST (reset) packet.
+
+Example:
+```bash
+   nmap -sS target_ip
+```
+
+2. **`-sT` (TCP Connect Scan):**
+- It attempts to establish a full TCP connection to the target port.
+- If successful, it means the port is open.
+```bash
+nmap -sT target_ip
+```
+
+3. **`-sA` (TCP ACK Scan):**
+- It sends an ACK packet to the target port.
+- If the port is unfiltered, the target responds with a RST, indicating the port is closed.
+- If the port is filtered, there is no response.
+```bash
+nmap -sA target_ip
+```
+
+4. **`-sW` (TCP Window Scan):**
+- This scan type looks at the TCP window size in the response.
+- The TCP window size is a parameter in the TCP header that specifies the amount of data, in bytes
+- The -sW option in Nmap sends a SYN packet to the target port, just like a SYN Scan (-sS). However, instead of focusing on whether the port is open based on a SYN-ACK or RST response, the Window Scan is interested in the TCP window size.
+- If the window size is non-zero, Nmap considers the port as open.
+- If the window size is zero, Nmap considers the port as closed.
+```bash
+nmap -sW target_ip
+```
+
+5. **`-sM` (TCP Maimon Scan):**
+- The Maimon Scan sends a combination of TCP flags—FIN (Finish), URG (Urgent), and PUSH
+- If the target port is closed, the normal response would be a RST (reset) packet
+- If the port is open , the system does not respond
+
+```bash
+nmap -sM target_ip
+```
