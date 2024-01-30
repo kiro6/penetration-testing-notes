@@ -1,3 +1,8 @@
+# Content
+- [Host Discovery](#host-discovery)
+- [Host and Port Scanning](#host-and-port-scanning)
+- [Service Enumeration](#service-enumeration)
+
 
 ## Host Discovery
 
@@ -99,3 +104,6 @@ nmap -sN target_ip
 
 8. **`-sX`(TCP Xmas Scan):**
 Sets FIN, URG, and PUSH flags in TCP packets. Similar to Null Scan but uses additional flags.
+
+
+## Service Enumeration
