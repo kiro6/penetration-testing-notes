@@ -126,3 +126,21 @@ Connection to 10.129.2.28 port 25 [tcp/*] succeeded!
 
 
 ## Nmap Scripting Engine
+
+| Category   | Description                                                         |
+|------------|---------------------------------------------------------------------|
+| auth       | Determination of authentication credentials.                       |
+| broadcast  | Host discovery through broadcasting; discovered hosts can be added to remaining scans. |
+| brute      | Scripts attempting to log in to services by brute-forcing with credentials. |
+| default    | Default scripts executed using the -sC option.                     |
+| discovery  | Evaluation of accessible services.                                  |
+| dos        | Scripts checking services for denial of service vulnerabilities (used with caution). |
+| exploit    | Scripts attempting to exploit known vulnerabilities for the scanned port. |
+| external   | Scripts using external services for further processing.             |
+| fuzzer     | Scripts for identifying vulnerabilities and unexpected packet handling. |
+| intrusive  | Intrusive scripts that could negatively affect the target system.   |
+| malware    | Checks for malware infecting the target system.                     |
+| safe       | Defensive scripts that do not perform intrusive and destructive access. |
+| version    | Extension for service detection.                                    |
+| vuln       | Identification of specific vulnerabilities.                        |
+
