@@ -107,3 +107,18 @@ Sets FIN, URG, and PUSH flags in TCP packets. Similar to Null Scan but uses addi
 
 
 ## Service Enumeration
+- `-sV` determine service/version
+- `-O` Enable OS detection
+- `-A` Enable OS detection, version detection, script scanning, and traceroute
+- `--stats-every=n` 5s,5m
+- To view the scan status, we can press the [Space Bar]
+```bash
+sudo nmap 10.129.2.28 -p- -sV -Pn -n --disable-arp-ping
+```
+- it woth using `nc` to connect open ports if NMAP does not show the version
+```
+nc -nv 10.129.2.28 25
+
+Connection to 10.129.2.28 port 25 [tcp/*] succeeded!
+220 inlane ESMTP Postfix (Ubuntu)
+```
