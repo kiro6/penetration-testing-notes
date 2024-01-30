@@ -160,3 +160,9 @@ sudo nmap <target> --script <category>
 ```
 sudo nmap <target> --script <script-name>,<script-name>,...
 ```
+## Performance
+- `-T <0-5>` speed
+- `--min-parallelism <number>` frequency
+- `--max-rtt-timeout <time>` and `--initial-rtt-timeout` timeouts
+- `--min-rate <number>` simultaneously 
+- `--max-retries <number>` number of retries 
