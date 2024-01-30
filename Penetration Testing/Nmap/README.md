@@ -27,3 +27,7 @@ sudo nmap -sn -oA tnet -iL hosts.lst | grep for | cut -d" " -f5
 | unfiltered       | This state of a port only occurs during the TCP-ACK scan and means that the port is accessible, but it cannot be determined whether it is open or closed.  |
 | open\|filtered    | If we do not get a response for a specific port, Nmap will set it to that state. This indicates that a firewall or packet filter may protect the port.  |
 | closed\|filtered  | This state only occurs in the IP ID idle scans and indicates that it was impossible to determine if the scanned port is closed or filtered by a firewall.  |
+
+
+- `-n` for Disables DNS resolution.
+- `-Pn` disable ping when yor know the port is opned to low traffic
