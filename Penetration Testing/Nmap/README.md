@@ -78,3 +78,22 @@ nmap -sW target_ip
 ```bash
 nmap -sM target_ip
 ```
+
+6. **`-sU` (UDP Scan):**
+- Nmap sends a empty UDP packet to each specified target port
+- If we get an ICMP response with error code 3 (port unreachable), we know that the port is indeed closed.
+- If the target port is open, the system may respond with a UDP packet OR not
+```bash
+nmap -sU target_ip
+```
+
+7. **`-sN` (TCP Null Scan):**
+- Nmap sends TCP packets with none of the flags set
+- If the system does not respond the port is open
+- If the target port is closed, the normal response is a TCP RST
+```
+nmap -sN target_ip
+```
+
+8. **`-sX`(TCP Xmas Scan):**
+Sets FIN, URG, and PUSH flags in TCP packets. Similar to Null Scan but uses additional flags.
