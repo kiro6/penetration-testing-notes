@@ -32,8 +32,10 @@ sudo nmap -sn -oA tnet -iL hosts.lst | grep for | cut -d" " -f5
 
 - `-n` for Disables DNS resolution.
 - `-Pn` disable ping when yor know the port is opned to low traffic
+- `-A` enable os detection
+- `--top-ports=n`
 
-### scan types 
+### port scan types 
 
 1. **`-sS` (TCP SYN Scan):**
    - This is the default scan type. It sends a SYN packet to the target port.
