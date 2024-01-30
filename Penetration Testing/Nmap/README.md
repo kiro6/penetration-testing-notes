@@ -144,3 +144,19 @@ Connection to 10.129.2.28 port 25 [tcp/*] succeeded!
 | version    | Extension for service detection.                                    |
 | vuln       | Identification of specific vulnerabilities.                        |
 
+
+1. **Default Scripts**
+
+```
+sudo nmap <target> -sC
+```
+
+2. **Specific Scripts Category**
+```
+sudo nmap <target> --script <category>
+```
+
+3. **Defined Scripts**
+```
+sudo nmap <target> --script <script-name>,<script-name>,...
+```
