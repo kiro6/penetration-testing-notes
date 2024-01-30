@@ -188,3 +188,10 @@ if the seconed one gives better result that the first we can use decoys
 ```bash
 sudo nmap 10.129.2.28 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
 ```
+
+### DNS Proxying
+- we can use TCP port 53 as a source port (--source-port) , may be treated as dns traffic
+- or can use The company's DNS servers are usually more trusted than those from the Internet (--dns-server <ns>,<ns>)
+```bash
+sudo nmap 10.129.2.28 -p50000 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
+```
