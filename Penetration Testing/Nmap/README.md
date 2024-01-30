@@ -165,4 +165,7 @@ sudo nmap <target> --script <script-name>,<script-name>,...
 - `--min-parallelism <number>` frequency
 - `--max-rtt-timeout <time>` and `--initial-rtt-timeout` timeouts
 - `--min-rate <number>` simultaneously 
-- `--max-retries <number>` number of retries 
+- `--max-retries <number>` number of retries
+
+## Firewall and IDS/IPS Evasion
+
