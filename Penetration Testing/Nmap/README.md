@@ -3,6 +3,8 @@
 - [Host and Port Scanning](#host-and-port-scanning)
 - [Service Enumeration](#service-enumeration)
 - [Nmap Scripting Engine](#nmap-scripting-engine)
+- [Performance](#performance)
+- [Firewall and IDS/IPS Evasion](#firewall-and-idsips-evasion)
 
 
 ## Host Discovery
