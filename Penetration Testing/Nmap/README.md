@@ -169,3 +169,20 @@ sudo nmap <target> --script <script-name>,<script-name>,...
 
 ## Firewall and IDS/IPS Evasion
 
+### Different Source IP
+- `-S` can be used to use different source IP
+```bash
+sudo nmap 10.129.2.28 -n -Pn -p 445 -O 
+```
+```bash
+sudo nmap 10.129.2.28 -n -Pn -p 445 -O -S 10.129.2.200 -e tun0
+```
+if the seconed one gives better result that the first we can use decoys 
+
+### Decoys
+- `-D` generates various random IP addresses inserted into the IP header to disguise the origin of the packet sent
+- that the decoys must be alive. Otherwise, the service on the target may be unreachable
+
+```bash
+sudo nmap 10.129.2.28 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
+```
