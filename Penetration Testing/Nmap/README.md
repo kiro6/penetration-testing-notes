@@ -162,6 +162,8 @@ sudo nmap <target> --script <category>
 ```
 sudo nmap <target> --script <script-name>,<script-name>,...
 ```
+4. **--script-trace**
+
 ## Performance
 - `-T <0-5>` speed
 - `--min-parallelism <number>` frequency
