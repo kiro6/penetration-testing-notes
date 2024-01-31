@@ -9,12 +9,9 @@
 ## DNS concepts:
 
 **Resource Record:**
-
 - A domain name, usually a fully qualified domain name, is the first part of a Resource Record.
 
-
 **TTL (Time-To-Live):**
-
 - In seconds, the Time-To-Live (TTL) defaults to the minimum value specified in the SOA record.
 
 **Record Class:**
