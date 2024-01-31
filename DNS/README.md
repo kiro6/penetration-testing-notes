@@ -1,15 +1,15 @@
 
-# DNS concepts:
+# Content
+- [DNS concept](#dns-concept)
+- [Types of DNS Name Servers](#types-of-dns-name-servers)
+- [Resource Records](#resource-records)
 
+## DNS concepts:
 
 **Resource Record:**
 
 - A domain name, usually a fully qualified domain name, is the first part of a Resource Record.
-- If you don't use a fully qualified domain name, the zone's name where the record is located will be appended to the end of the name.
-    - Example:
-        - Zone: example.com
-        - Domain: [www.example.com](http://www.example.com)
-        - If you use "www," the domain will be automatically appended as [www.example.com](http://www.example.com).
+
 
 **TTL (Time-To-Live):**
 
@@ -53,7 +53,7 @@
 - When a DNS resolver sends a query for a particular domain name, the DNS name server provides the resolver with the corresponding DNS records.
 
 
-### Types of DNS Name Servers:
+### Types of DNS Name Servers
 
 **Authoritative Name Server:**
 
@@ -74,7 +74,7 @@
 
 DNS server === Name Server
 
-# Resource Records
+### Resource Records
 
 **TTL:**
 
@@ -190,6 +190,13 @@ An SOA (Start of Authority) record is an essential part of a DNS zone file and p
 **Records:**
 - Records specify the DNS resource records for the domain. In the example, you have various record types, such as SOA, NS, MX, TXT, and A. 
 - Each record has a specific purpose and provides different types of information.
+
+
+- If you don't use a fully qualified domain name, the zone's name where the record is located will be appended to the end of the name.
+    - Example:
+        - Zone: example.com
+        - Domain: [www.example.com](http://www.example.com)
+        - If you use "www," the domain will be automatically appended as [www.example.com](http://www.example.com).
 
 
 ## examples :
