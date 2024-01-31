@@ -3,6 +3,7 @@
 - [DNS concept](#dns-concept)
 - [Types of DNS Name Servers](#types-of-dns-name-servers)
 - [Resource Records](#resource-records)
+- [SOA (Start of Authority) Records]()
 
 ## DNS concepts:
 
@@ -126,7 +127,7 @@ DNS server === Name Server
 ```
 
 
-### SOA (Start of Authority) Records:
+#### SOA (Start of Authority) Records:
 
 An SOA (Start of Authority) record is an essential part of a DNS zone file and provides important information about the zone's configuration and management. It includes the following fields:
 
