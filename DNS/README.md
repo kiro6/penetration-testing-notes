@@ -203,110 +203,62 @@ An SOA (Start of Authority) record is an essential part of a DNS zone file and p
 
 ## examples :
 
-### Authoritative Name Server contain more than one zone
+**zone file for one domain and it's subdomains**
 
 ```d
-Name Server: ns1.example.com  
-; Zone: example.com  
-$TTL 3600  
-@   IN  SOA   ns1.example.com. admin.example.com. (  
-                 2023062201  ; Serial number  
-                 3600        ; Refresh  
-                 1800        ; Retry  
-                 604800      ; Expire  
-                 86400       ; Minimum TTL  
-                 )  
-     IN  NS    ns1.example.com.  
-     IN  NS    ns2.example.com.  
-     IN  A     192.168.0.1  
-  
-; Zone: subdomain.example.com  
-$TTL 3600  
-@   IN  SOA   ns1.example.com. admin.example.com. (  
-                 2023062201  ; Serial number  
-                 3600        ; Refresh  
-                 1800        ; Retry  
-                 604800      ; Expire  
-                 86400       ; Minimum TTL  
-                 )  
-     IN  NS    ns1.example.com.  
-     IN  NS    ns2.example.com.  
-     IN  A     192.168.0.2  
-  
-; Zone: anotherdomain.com  
-$TTL 3600  
-@   IN  SOA   ns1.example.com. admin.example.com. (  
-                 2023062201  ; Serial number  
-                 3600        ; Refresh  
-                 1800        ; Retry  
-                 604800      ; Expire  
-                 86400       ; Minimum TTL  
-                 )  
-     IN  NS    ns1.example.com.  
-     IN  NS    ns2.example.com.  
-     IN  A     192.168.0.3
+; Zone file for example.com (Primary Name Server)
+$TTL 3600
+example.com.  IN  SOA  ns1.example.com. admin.example.com. (
+                2024013101 ; Serial number
+                3600       ; Refresh
+                1800       ; Retry
+                604800     ; Expire
+                3600 )     ; Minimum TTL
+
+; Name Server (NS) records for subdomains
+@  IN  NS  ns1.example.com.
+   IN  NS  ns2.example.com.
+
+; A records for subdomains
+subdomain1  IN  A   192.168.1.30
+subdomain2  IN  A   192.168.1.31
+
+; Additional records for other services...
+
 ```
 
 
 
-### one zone contain more than one domain
+**one zone contain more than one domain**
 
 ```d
-$ORIGIN example.com.  
-@    IN    SOA    ns1.example.com. hostmaster.example.com. (  
-                  2023062201 ; Serial  
-                  3600       ; Refresh  
-                  1800       ; Retry  
-                  604800     ; Expire  
-                  86400 )    ; Minimum TTL  
-     IN    NS     ns1.example.com.  
-     IN    NS     ns2.example.com.  
-     IN    MX     10 mail.example.com.  
-  
-example.com.        IN    A      192.168.1.1  
-www.example.com.    IN    CNAME  example.com.  
-mail.example.com.   IN    A      192.168.1.2  
-  
-$ORIGIN example.net.  
-@    IN    SOA    ns1.example.net. hostmaster.example.net. (  
-                  2023062201 ; Serial  
-                  3600       ; Refresh  
-                  1800       ; Retry  
-                  604800     ; Expire  
-                  86400 )    ; Minimum TTL  
-     IN    NS     ns1.example.net.  
-     IN    NS     ns2.example.net.  
-     IN    MX     10 mail.example.net.  
-  
-example.net.        IN    A      192.168.2.1  
-www.example.net.    IN    CNAME  example.net.  
-mail.example.net.   IN    A      192.168.2.2
-```
+; Zone file for domain1.com
+$TTL 3600
+domain1.com.  IN  SOA  ns1.domain1.com. admin.domain1.com. (
+                2024013101 ; Serial number
+                3600       ; Refresh
+                1800       ; Retry
+                604800     ; Expire
+                3600 )     ; Minimum TTL
 
+@  IN  NS  ns1.domain1.com.
+   IN  NS  ns2.domain1.com.
 
+www  IN  A   192.168.1.40
+mail IN  A   192.168.1.41
 
-### one zone contain more than one domain (another way)
+; Zone file for domain2.net
+$TTL 3600
+domain2.net.  IN  SOA  ns1.domain2.net. admin.domain2.net. (
+                2024013101 ; Serial number
+                3600       ; Refresh
+                1800       ; Retry
+                604800     ; Expire
+                3600 )     ; Minimum TTL
 
-```d
-$ORIGIN example.com.  
-$TTL 3600  
-@   IN  SOA   ns1.example.com. admin.example.com. (  
-                 2023062201  ; Serial number  
-                 3600        ; Refresh  
-                 1800        ; Retry  
-                 604800      ; Expire  
-                 86400       ; Minimum TTL  
-                 )  
-     IN  NS    ns1.example.com.  
-     IN  NS    ns2.example.com.  
-     IN  MX    10 mail.example.com.  
-     IN  TXT   "This is a TXT record for example.com"  
-  
-ns1  IN  A     192.168.0.1  
-ns2  IN  A     192.168.0.2  
-mail IN  A     192.168.0.10  
-  
-www   IN  A     192.168.0.100  
-blog  IN  A     192.168.0.101  
-shop  IN  A     192.168.0.102
+@  IN  NS  ns1.domain2.net.
+   IN  NS  ns2.domain2.net.
+
+www  IN  A   192.168.1.50
+ftp  IN  A   192.168.1.51
 ```
