@@ -3,7 +3,7 @@
 - [DNS concept](#dns-concept)
 - [Types of DNS Name Servers](#types-of-dns-name-servers)
 - [Resource Records](#resource-records)
-- [SOA (Start of Authority) Records](##soa-start-of-authority-records)
+- [SOA (Start of Authority) Records](#soa-start-of-authority-records)
 - [DNS zone conf syntax](#dns-zone-conf-syntax)
 
 ## DNS concepts:
