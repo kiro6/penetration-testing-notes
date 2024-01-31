@@ -3,7 +3,8 @@
 - [DNS concept](#dns-concept)
 - [Types of DNS Name Servers](#types-of-dns-name-servers)
 - [Resource Records](#resource-records)
-- [SOA (Start of Authority) Records]()
+- [SOA (Start of Authority) Records](##soa-start-of-authority-records)
+- [DNS zone conf syntax](#dns-zone-conf-syntax)
 
 ## DNS concepts:
 
@@ -127,7 +128,7 @@ DNS server === Name Server
 ```
 
 
-#### SOA (Start of Authority) Records:
+### SOA (Start of Authority) Records:
 
 An SOA (Start of Authority) record is an essential part of a DNS zone file and provides important information about the zone's configuration and management. It includes the following fields:
 
@@ -178,7 +179,7 @@ An SOA (Start of Authority) record is an essential part of a DNS zone file and p
 
 
 
-# DNS zone conf syntax
+## DNS zone conf syntax
 
 - The $ORIGIN directive sets the origin for the zone to "example.com." This means that any domain names specified without a trailing dot (.) will be considered relative to "example.com."
 
