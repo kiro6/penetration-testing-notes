@@ -101,3 +101,10 @@ func main() {
 
 }
 ```
+## packages 
+```go
+import (
+	"fmt"  // import local package
+	"github.com/example/examplepackage" // import external package online with downloading it
+)
+```
