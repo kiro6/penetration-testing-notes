@@ -156,7 +156,7 @@ func main() {
 
 ## custom data types
 - create struct (simillar to classes)
-```
+```go
 // this util.go 
 package main
 
