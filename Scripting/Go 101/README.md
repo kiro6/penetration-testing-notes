@@ -167,9 +167,9 @@ type person struct {
 }
 
 // this function is like constructor in other languages
-func newPerson(name string, age int, job string) person {
+func newPerson(name string, age int, job string) *person { // *person is a pointer to a person to make it more efficient
 	p := person{name: name, age: age, job: job}
-	return p
+	return &p
 }
 
 // this function is like class functions in other languages like java
