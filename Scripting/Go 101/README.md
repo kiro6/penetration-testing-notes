@@ -11,9 +11,75 @@ func main() {
 	var varWithDataType string = "initial value"
 	var varWithoutDataType = "initial value"
 	varShortCut := "initial value"
-	fmt.Println(varWithDataType, varWithoutDataType, varShortCut)
+	var varWithoutValue string
+	fmt.Println(varWithDataType, varWithoutDataType, varShortCut, varWithoutValue)
 
 }
 ```
+- [builtin types](https://pkg.go.dev/builtin#pkg-types)
 
-- 
+- arrays and slices
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	array := [3]int{1, 2, 3} // array is fixed size
+	slice := []int{1, 2, 3}  // slice is dynamic size
+	fmt.Println(array, "\n", slice)
+	newSlice := append(slice, 4)
+	fmt.Print(newSlice)
+}
+```
+
+## Loops
+
+- while loop
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	x := 0
+	for x < 10 {
+		fmt.Println(x)
+		x++
+	}
+}
+
+```
+- for loop
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+	}
+}
+```
+- for each
+```go
+package main
+
+func main() {
+
+	slice := []int{1, 2, 3, 4, 5}
+
+	for i, v := range slice {
+		println("index: ", i, " value: ", v)
+	}
+
+	for _, v := range slice { //we can use _ to ignore the index or value
+		println(" value: ", v)
+	}
+
+}
+```
