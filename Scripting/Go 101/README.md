@@ -181,6 +181,10 @@ func (p person) getName() string {
 	return p.name
 }
 
+func (p *person) setAge(a int) {
+	p.age = a
+}
+
 // main.go
 package main
 
@@ -189,7 +193,9 @@ func main() {
 	person := newPerson("John", 30, "Developer")
 
 	person.printPerson()
-
+	person.setAge(90)
+	person.printPerson()
 }
+
 
 ```
