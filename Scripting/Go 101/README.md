@@ -153,3 +153,43 @@ func main() {
 }
 
 ```
+
+## custom data types
+- create struct (simillar to classes)
+```
+// this util.go 
+package main
+
+type person struct {
+	name string
+	age  int
+	job  string
+}
+
+// this function is like constructor in other languages
+func newPerson(name string, age int, job string) person {
+	p := person{name: name, age: age, job: job}
+	return p
+}
+
+// this function is like class functions in other languages like java
+func (p person) printPerson() {
+	println(p.name, p.age, p.job)
+}
+
+func (p person) getName() string {
+	return p.name
+}
+
+// main.go
+package main
+
+func main() {
+
+	person := newPerson("John", 30, "Developer")
+
+	person.printPerson()
+
+}
+
+```
