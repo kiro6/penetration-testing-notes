@@ -83,3 +83,21 @@ func main() {
 
 }
 ```
+## if condtions
+```go
+package main
+
+func main() {
+
+	value := 10
+
+	if value > 5 {
+		println("value is greater than 5")
+	} else if value < 5 {
+		println("value is less than 5")
+	} else {
+		println("value is equal to 5")
+	}
+
+}
+```
