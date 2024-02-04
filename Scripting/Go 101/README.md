@@ -34,6 +34,25 @@ func main() {
 }
 ```
 
+- maps
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	mapVar := map[int64]string{
+		1: "value1",
+		2: "value2",
+		3: "value3",
+	}
+
+	fmt.Println(mapVar)
+}
+
+```
+
 ## Loops
 
 - while loop
@@ -107,4 +126,30 @@ import (
 	"fmt"  // import local package
 	"github.com/example/examplepackage" // import external package online with downloading it
 )
+```
+## Functions
+- functions declare
+```go
+package main
+
+import "fmt"
+
+func firstFunc(x string) {
+	fmt.Print(x)
+}
+
+func seconedFunc(x string) string {
+	return x
+}
+
+func thirdFunc(x string, z string) (string, string) {
+	return x, z
+}
+
+func main() {
+	firstFunc("Hello World")
+	fmt.Println(seconedFunc("Hello World"))
+	fmt.Println(thirdFunc("Hello", "World"))
+}
+
 ```
