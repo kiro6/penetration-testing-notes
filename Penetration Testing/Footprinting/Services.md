@@ -95,9 +95,9 @@ smbmap -H 10.129.202.5 -s sambashare
 msf > use auxiliary/scanner/smb/smb_login
 ```
 ### Service Interaction
-- rpcclient
+- smbclient
 ```
-rpcclient -U "" 10.129.14.128
+smbclient -N -L //10.129.14.128
 ```
 
 ```bash
