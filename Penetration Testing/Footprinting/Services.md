@@ -2,6 +2,7 @@
 - [FTP](#ftp)
 
 ## FTP
+File Transfer Protocol
 ### port used  
 - 21/TCP for control channel
 - 20/TCP for data channel in active mode
