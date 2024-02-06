@@ -101,6 +101,7 @@ smbclient -N -L //10.129.14.128
 ```
 
 - smb commands
+
 | Command        | Description                                                  |
 |----------------|--------------------------------------------------------------|
 | `?`            | Displays a list of available commands or provides help.       |
