@@ -1,5 +1,6 @@
 # Content 
 - [FTP](#ftp)
+- [SMB](#smb)
 
 ## FTP
 File Transfer Protocol
@@ -50,3 +51,48 @@ openssl s_client -connect 10.129.14.136:21 -starttls ftp
 ```bash
 wget -m --no-passive ftp://anonymous:anonymous@10.129.14.136
 ```
+## SMB
+Server Message Block (SMB) is a client-server protocol that regulates access to files and entire directories and other network resources such as printers, routers, or interfaces released for the network
+
+- `CIFS` was used as the same as SMB but now it's old and work on the same ports as SMB
+
+### port used  
+-  `OLD` 137, 138, and 139 TCP
+-  `NEW` 445 TCP
+
+### Dangerous Settings
+| Setting             | Description                                                   |
+|---------------------|---------------------------------------------------------------|
+| browseable = yes    | Allow listing available shares in the current share?          |
+| read only = no      | Forbid the creation and modification of files?                |
+| writable = yes      | Allow users to create and modify files?                       |
+| guest ok = yes      | Allow connecting to the service without using a password?     |
+| enable privileges = yes | Honor privileges assigned to specific SID?                 |
+| create mask = 0777 | What permissions must be assigned to the newly created files? |
+| directory mask = 0777 | What permissions must be assigned to the newly created directories? |
+| logon script = script.sh | What script needs to be executed on the user's login?     |
+| magic script = script.sh | Which script should be executed when the script gets closed? |
+| magic output = script.out | Where the output of the magic script needs to be stored?   |
+
+
+### Footprinting the Service
+- nmap
+```bash
+ sudo nmap 10.129.14.128 -sV -sC -p139,445
+```
+- 
+### Service Interaction
+```bash
+rpcclient -U "" 10.129.14.128
+```
+- rpcclient commands
+
+| Query               | Description                                                   |
+|---------------------|---------------------------------------------------------------|
+| srvinfo             | Server information.                                           |
+| enumdomains         | Enumerate all domains that are deployed in the network.       |
+| querydominfo        | Provides domain, server, and user information of deployed domains. |
+| netshareenumall     | Enumerates all available shares.                              |
+| netsharegetinfo \<share\> | Provides information about a specific share.               |
+| enumdomusers        | Enumerates all domain users.                                  |
+| queryuser \<RID\>     | Provides information about a specific user.                  |
