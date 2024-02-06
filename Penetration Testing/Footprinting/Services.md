@@ -89,6 +89,11 @@ Server Message Block (SMB) is a client-server protocol that regulates access to 
 ```
 smbmap -H 10.129.202.5 -s sambashare
 ```
+- metasploit
+```
+# bruteforce login
+msf > use auxiliary/scanner/smb/smb_login
+```
 ### Service Interaction
 - rpcclient
 ```
