@@ -86,11 +86,11 @@ Server Message Block (SMB) is a client-server protocol that regulates access to 
 /usr/share/doc/python3-impacket/examples/samrdump.py 10.129.14.128
 ```
 - smbmap
-```
+```bash
 smbmap -H 10.129.202.5 -s sambashare
 ```
 - metasploit
-```
+```bash
 # bruteforce login
 msf > use auxiliary/scanner/smb/smb_login
 ```
