@@ -80,8 +80,21 @@ Server Message Block (SMB) is a client-server protocol that regulates access to 
 ```bash
  sudo nmap 10.129.14.128 -sV -sC -p139,445
 ```
-- 
+- Impacket - Samrdump.py
+```bash
+# used to enumrate RIDs
+/usr/share/doc/python3-impacket/examples/samrdump.py 10.129.14.128
+```
+- smbmap
+```
+smbmap -H 10.129.202.5 -s sambashare
+```
 ### Service Interaction
+- rpcclient
+```
+rpcclient -U "" 10.129.14.128
+```
+
 ```bash
 rpcclient -U "" 10.129.14.128
 ```
