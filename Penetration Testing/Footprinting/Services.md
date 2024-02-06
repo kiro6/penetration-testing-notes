@@ -22,6 +22,7 @@
 sudo nmap -sV -p21 -sC -A 10.129.14.136
 
 sudo nmap -sV -p21 -sC -A 10.129.14.136 --script ftp*
+echo "aa"
 ```
 ### Service Interaction
 ```bash
