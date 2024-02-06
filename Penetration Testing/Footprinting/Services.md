@@ -100,6 +100,20 @@ msf > use auxiliary/scanner/smb/smb_login
 smbclient -N -L //10.129.14.128
 ```
 
+- smb commands
+| Command        | Description                                                  |
+|----------------|--------------------------------------------------------------|
+| `?`            | Displays a list of available commands or provides help.       |
+| `allinfo`      | Displays detailed information about a file or directory.     |
+| `cd`           | Changes the current working directory on the remote server.   |
+| `get`          | Downloads a file from the remote server.                     |
+| `put`          | Uploads a file to the remote server.                         |
+| `ls`           | Lists the contents of the current directory on the server.   |
+| `mkdir`        | Creates a new directory on the remote server.                |
+| `pwd`          | Prints the current working directory on the server.          |
+| `quit` (`q`)   | Exits the `smbclient` session.                               |
+
+
 ```bash
 rpcclient -U "" 10.129.14.128
 ```
