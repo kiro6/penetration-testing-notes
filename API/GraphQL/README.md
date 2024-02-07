@@ -130,3 +130,21 @@ mutation CreateUser {
   }
 }
 ```
+##  Components of queries and mutations 
+
+**Variables**
+```graphql
+mutation CreateUser($name: String!, $email: String!) {
+  createUser(name: $name, email: $email) {
+    id
+    name
+    email
+  }
+}
+
+Variables:
+    {
+          "name": "John Doe",
+          "email": "john@example.com"
+    }
+```
