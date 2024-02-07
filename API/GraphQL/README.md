@@ -105,3 +105,28 @@ query GetPostById($postId: ID!) {  # Query name: GetPostById, with an argument p
 
 
 ```
+## GraphQL mutations
+- Mutations change data in some way, either adding, deleting, or editing it
+
+**Mutation Request:**
+```graphql
+mutation CreateUser {
+  createUser(name: "John Doe", email: "john@example.com") {
+    id
+    name
+    email
+  }
+}
+```
+**Mutation Response:**
+```graphql
+{
+  "data": {
+    "createUser": {
+      "id": "123",
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  }
+}
+```
