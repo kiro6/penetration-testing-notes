@@ -3,7 +3,8 @@
 ## GraphQL schema
 - the schema represents a contract between the frontend and backend of the service. 
 - It defines the data available as a series of types
-- The `!` operator indicates that the field is non-nullable when called (that is, mandatory). 
+- The `!` operator indicates that the field is non-nullable when called (that is, mandatory).
+- `[]` This indicates that the field returns an array or list.
 ```graphql
 type Post {
   id: ID!
@@ -41,3 +42,5 @@ type Mutation {
 }
 
 ```
+
+## GraphQL queries
