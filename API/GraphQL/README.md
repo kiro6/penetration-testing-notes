@@ -7,7 +7,7 @@
   - [Variables](#variables)
   - [Aliases](#aliases)
   - [Fragments](#fragments)
- 
+- [Introspection](#introspection)
 
 ## GraphQL datatypes
 | Type          | Description                                                |
@@ -208,6 +208,47 @@ query GetTwoPosts {
 fragment PostFields on Post {
   title
   content
+}
+
+```
+## Introspection
+
+- Introspection is a built-in GraphQL function that enables you to query a server for information about the schema.
+
+introspection request
+```graphql
+query IntrospectionQuery {
+  __schema {
+    types {
+      name
+      description
+      kind
+      fields {
+        name
+        description
+        args {
+          name
+          description
+          type {
+            name
+            kind
+            ofType {
+              name
+              kind
+            }
+          }
+          defaultValue
+        }
+      }
+      enumValues {
+        name
+        description
+      }
+      possibleTypes {
+        name
+      }
+    }
+  }
 }
 
 ```
