@@ -51,3 +51,38 @@ type Mutation {
 - A query name. This can be anything you want. The query name is optional, but encouraged as it can help with debugging.
 - A data structure. This is the data that the query should return.
 - Optionally, one or more arguments.
+
+```graphql
+query GetPosts {   # Query name: GetPosts
+  posts {          # Query operation: Query
+    id             # Data structure: id of each post
+    title          # Data structure: title of each post
+    author {       # Data structure: information about the author of each post
+      id           # Data structure: id of the author
+      name         # Data structure: name of the author
+    }
+  }
+}
+
+query GetPostById($postId: ID!) {  # Query name: GetPostById, with an argument postId
+  post(id: $postId) {              # Query operation: Query, with an argument id
+    id
+    title
+    content
+    author {
+      id
+      name
+    }
+    comments {
+      id
+      content
+      author {
+        id
+        name
+      }
+    }
+  }
+}
+
+
+```
