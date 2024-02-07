@@ -166,5 +166,20 @@ Variables:
   "postId": "your_post_id_here"
 }
 
+```
+**Aliases **
+```graphql
+query GetTwoPosts {
+  firstPost: post(id: "post_id_1") {
+    title
+    content
+  }
+  secondPost: post(id: "post_id_2") {
+    title
+    content
+  }
+}
 
 ```
+
+**Fragments**
