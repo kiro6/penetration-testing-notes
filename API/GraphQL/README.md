@@ -44,3 +44,9 @@ type Mutation {
 ```
 
 ## GraphQL queries
+
+**GraphQL query contain**
+- A query operation type. This is technically optional but encouraged, as it explicitly tells the server that the incoming request is a query.
+- A query name. This can be anything you want. The query name is optional, but encouraged as it can help with debugging.
+- A data structure. This is the data that the query should return.
+- Optionally, one or more arguments.
