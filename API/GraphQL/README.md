@@ -1,4 +1,13 @@
 # Content
+- [GraphQL datatypes](#graphql-datatypes)
+- [GraphQL schema](#graphql-schema)
+- [GraphQL queries](#graphql-queries)
+- [GraphQL mutations](#graphql-mutations)
+- [Components of queries and mutations](#components-of-queries-and-mutations)
+  - [Variables](#variables)
+  - [Aliases](#aliases)
+  - [Fragments](#fragments)
+ 
 
 ## GraphQL datatypes
 | Type          | Description                                                |
