@@ -119,7 +119,7 @@ mutation CreateUser {
 }
 ```
 **Mutation Response:**
-```graphql
+```json
 {
   "data": {
     "createUser": {
