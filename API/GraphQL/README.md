@@ -192,3 +192,22 @@ query GetTwoPosts {
 ```
 
 ### Fragments
+- Fragments are reusable parts of queries or mutations.
+- use `...` to call a fragment
+
+```graphql
+query GetTwoPosts {
+  firstPost: post(id: "post_id_1") {
+    ...PostFields
+  }
+  secondPost: post(id: "post_id_2") {
+    ...PostFields
+  }
+}
+
+fragment PostFields on Post {
+  title
+  content
+}
+
+```
