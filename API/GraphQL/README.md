@@ -1,5 +1,24 @@
 # Content
 
+## GraphQL datatypes
+| Type          | Description                                                |
+|---------------|------------------------------------------------------------|
+| Int           | A signed 32-bit integer.                                   |
+| Float         | A signed double-precision floating-point value.            |
+| String        | A UTF-8 character sequence.                                |
+| Boolean       | `true` or `false`.                                         |
+| ID            | Represents a unique identifier. Serialized like a String.  |
+
+| Type          | Description                                                |
+|---------------|------------------------------------------------------------|
+| Object types | Represent a group of fields with name and value type.      |
+| Enum types    | Scalar type restricted to a particular set of allowed values. |
+| List types    | Represent arrays of values, holding multiple items of the same type. |
+| NonNull types | Represent a type that cannot be null.                      |
+
+
+
+
 ## GraphQL schema
 - the schema represents a contract between the frontend and backend of the service. 
 - It defines the data available as a series of types
