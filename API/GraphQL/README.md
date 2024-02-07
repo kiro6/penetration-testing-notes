@@ -132,7 +132,7 @@ mutation CreateUser {
 ```
 ##  Components of queries and mutations 
 
-**Variables**
+### Variables
 - use `$` to define a variable
 
 variables with mutation
@@ -167,7 +167,7 @@ Variables:
 }
 
 ```
-**Aliases **
+### Aliases
 ```graphql
 query GetTwoPosts {
   firstPost: post(id: "post_id_1") {
@@ -182,4 +182,4 @@ query GetTwoPosts {
 
 ```
 
-**Fragments**
+### Fragments
