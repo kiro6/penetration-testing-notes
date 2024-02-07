@@ -5,6 +5,7 @@
 - It defines the data available as a series of types
 - The `!` operator indicates that the field is non-nullable when called (that is, mandatory).
 - `[]` This indicates that the field returns an array or list.
+- `:` This define the return type
 ```graphql
 type Post {
   id: ID!
