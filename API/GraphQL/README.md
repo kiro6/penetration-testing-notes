@@ -133,6 +133,9 @@ mutation CreateUser {
 ##  Components of queries and mutations 
 
 **Variables**
+- use `$` to define a variable
+
+variables with mutation
 ```graphql
 mutation CreateUser($name: String!, $email: String!) {
   createUser(name: $name, email: $email) {
@@ -147,4 +150,21 @@ Variables:
           "name": "John Doe",
           "email": "john@example.com"
     }
+```
+
+variables with query
+```graphql
+query GetPost($postId: ID!) {
+  post(id: $postId) {
+    title
+    content
+  }
+}
+
+Variables:
+{
+  "postId": "your_post_id_here"
+}
+
+
 ```
