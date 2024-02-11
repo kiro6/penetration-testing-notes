@@ -3,6 +3,7 @@
 - [SMB](#smb)
 - [NFS](#nfs)
 - [DNS](#dns)
+- [SMTP](#smtp)
 
 ## FTP
 File Transfer Protocol
@@ -195,3 +196,46 @@ $ sudo umount ./target-NFS
 ```bash
 dnsenum --dnsserver 10.129.14.128 --enum -p 0 -s 0 -o subdomains.txt -f /opt/useful/SecLists/Discovery/DNS/subdomains-top1million-110000.txt inlanefreight.htb
 ```
+
+## SMTP
+
+### port used
+- Port 25/tcp  old but gold smtp
+- Port 587/tcp modern smtp support tls
+- Port 465/tcp deprcated but still widly used for smtp and support tls
+- Port 2525/tcp not an official SMTP port but still popularly used 
+
+### Dangerous Settings
+- open relay
+```
+mynetworks = 0.0.0.0/0
+```
+### Footprinting the Service
+- nmap 
+```
+sudo nmap 10.129.14.128 -sC -sV -p25 --script smtp-open-relay
+```
+
+### Service Interaction
+- Telnet
+```
+telnet 10.129.14.128 25
+```
+
+- smtp commands
+
+| Command     | Description                                            |
+|-------------|--------------------------------------------------------|
+| HELO        | Identifies the sender's SMTP client to the server.     |
+| EHLO        | Extended HELO command providing additional capabilities.|
+| MAIL FROM:  | Specifies the email address of the sender.             |
+| RCPT TO:    | Specifies the email address of the recipient.          |
+| DATA        | Indicates the start of the email message data.         |
+| QUIT        | Terminates the SMTP session and closes the connection. |
+| AUTH        | Initiates authentication process with the server.      |
+| NOOP        | No-operation command, used to keep the connection alive.|
+| RSET        | Resets the current session, discarding previous commands.|
+| VRFY        | Verifies the existence of a specific email address.    |
+| HELP        | Requests help information from the server.             |
+| STARTTLS    | Initiates a secure connection using TLS encryption.    |
+
