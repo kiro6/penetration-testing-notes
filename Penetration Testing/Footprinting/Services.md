@@ -251,8 +251,64 @@ telnet 10.129.14.128 25
 - POP3 ports 110 , 995 (TLS/SSL) both of them tcp
 - IMAP ports 143 , 993 (TLS/SSL) both of them tcp
 
+### Dangerous Settings
+
+| Setting                  | Description                                                                    |
+|--------------------------|--------------------------------------------------------------------------------|
+| auth_debug               | Enables all authentication debug logging.                                      |
+| auth_debug_passwords     | Adjusts log verbosity, the submitted passwords, and the scheme gets logged.    |
+| auth_verbose             | Logs unsuccessful authentication attempts and their reasons.                    |
+| auth_verbose_passwords   | Passwords used for authentication are logged and can also be truncated.        |
+| auth_anonymous_username | Specifies the username to be used when logging in with the ANONYMOUS SASL mechanism. |
 
 
+
+### Footprinting the Service
+
+```
+sudo nmap 10.129.14.128 -sV -p110,143,993,995 -sC
+```
+
+### Service Interaction
+
+
+
+```
+openssl s_client -connect 10.129.14.128:pop3s
+
+openssl s_client -connect 10.129.14.128:imaps
+```
+
+
+- IMAP Commands
+
+| Command               | Description                                                             |
+|-----------------------|-------------------------------------------------------------------------|
+| LOGIN username password | User's login.                                                           |
+| LIST "" *             | Lists all directories.                                                  |
+| CREATE "INBOX"        | Creates a mailbox with a specified name.                                |
+| DELETE "INBOX"        | Deletes a mailbox.                                                      |
+| RENAME "ToRead" "Important" | Renames a mailbox.                                                   |
+| LSUB "" *             | Returns a subset of names from the set of names that the User has declared as being active or subscribed. |
+| SELECT INBOX          | Selects a mailbox so that messages in the mailbox can be accessed.      |
+| UNSELECT INBOX        | Exits the selected mailbox.                                             |
+| FETCH <ID> all        | Retrieves data associated with a message in the mailbox.                |
+| CLOSE                 | Removes all messages with the Deleted flag set.                         |
+| LOGOUT                | Closes the connection with the IMAP server.                             |
+
+- POP3 Commands
+
+| Command    | Description                                                     |
+|------------|-----------------------------------------------------------------|
+| USER username | Identifies the user.                                            |
+| PASS password | Authentication of the user using its password.                  |
+| STAT         | Requests the number of saved emails from the server.            |
+| LIST         | Requests from the server the number and size of all emails.     |
+| RETR id      | Requests the server to deliver the requested email by ID.       |
+| DELE id      | Requests the server to delete the requested email by ID.        |
+| CAPA         | Requests the server to display the server capabilities.         |
+| RSET         | Requests the server to reset the transmitted information.       |
+| QUIT         | Closes the connection with the POP3 server.                     |
 
 
 
