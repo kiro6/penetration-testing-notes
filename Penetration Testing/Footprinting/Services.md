@@ -216,6 +216,11 @@ mynetworks = 0.0.0.0/0
 sudo nmap 10.129.14.128 -sC -sV -p25 --script smtp-open-relay
 ```
 
+- enum usernames
+```
+smtp-user-enum -M VRFY -U username   -t 10.129.247.222  -p 25 -w 60
+```
+
 ### Service Interaction
 - Telnet
 ```
