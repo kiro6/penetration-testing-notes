@@ -1,6 +1,7 @@
 # Content 
 - [FTP](#ftp)
 - [SMB](#smb)
+- [NFS](#nfs)
 
 ## FTP
 File Transfer Protocol
@@ -115,6 +116,8 @@ smbclient -N -L //10.129.14.128
 | `quit` (`q`)   | Exits the `smbclient` session.                               |
 
 
+
+- rpcclient
 ```bash
 rpcclient -U "" 10.129.14.128
 ```
@@ -129,3 +132,47 @@ rpcclient -U "" 10.129.14.128
 | netsharegetinfo \<share\> | Provides information about a specific share.               |
 | enumdomusers        | Enumerates all domain users.                                  |
 | queryuser \<RID\>     | Provides information about a specific user.                  |
+
+## NFS
+- Network File System (NFS) is a network file system developed by Sun Microsystems and has the same purpose as SMB. 
+- NFS is used between Linux and Unix systems. This means that NFS clients cannot communicate directly with SMB servers.
+
+### port used  
+- Port 2049 TCP or UDP: NFS 
+- Port 111 TCP or UDP : for SUN Remote Procedure Call which is used as portmapper .and nfs rely on it for auth
+### Dangerous Settings
+
+| Option          | Description                                                                                      |
+|-----------------|--------------------------------------------------------------------------------------------------|
+| rw              | Read and write permissions.                                                                      |
+| insecure        | Ports above 1024 will be used.                                                                   |
+| nohide          | If another file system was mounted below an exported directory, this directory is exported by its own exports entry. |
+| no_root_squash  | All files created by root are kept with the UID/GID 0.                                           |
+
+### Footprinting the Service
+- nmap
+```
+sudo nmap 10.129.14.128 -p111,2049 -sV -sC --script nfs*
+```
+### Service Interaction
+```bash
+$ showmount -e 10.129.14.128
+
+$ mkdir target-NFS
+$ sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
+$ cd target-NFS
+$ tree .
+
+.
+└── mnt
+    └── nfs
+        ├── id_rsa
+        ├── id_rsa.pub
+        └── nfs.share
+
+
+
+
+$ cd ..
+$ sudo umount ./target-NFS
+```
