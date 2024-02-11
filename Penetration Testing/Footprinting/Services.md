@@ -2,6 +2,7 @@
 - [FTP](#ftp)
 - [SMB](#smb)
 - [NFS](#nfs)
+- [DNS](#dns)
 
 ## FTP
 File Transfer Protocol
@@ -175,4 +176,22 @@ $ tree .
 
 $ cd ..
 $ sudo umount ./target-NFS
+```
+## DNS
+
+### Dangerous Settings
+
+| Option            | Description                                                     |
+|-------------------|-----------------------------------------------------------------|
+| allow-query       | Defines which hosts are allowed to send requests to the DNS server. |
+| allow-recursion   | Defines which hosts are allowed to send recursive requests to the DNS server. |
+| allow-transfer    | Defines which hosts are allowed to receive zone transfers from the DNS server. |
+| zone-statistics   | Collects statistical data of zones.                             |
+
+
+### Service Interaction
+- dig
+- dnsenum
+```bash
+dnsenum --dnsserver 10.129.14.128 --enum -p 0 -s 0 -o subdomains.txt -f /opt/useful/SecLists/Discovery/DNS/subdomains-top1million-110000.txt inlanefreight.htb
 ```
