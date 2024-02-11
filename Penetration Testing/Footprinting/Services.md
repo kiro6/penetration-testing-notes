@@ -246,3 +246,18 @@ telnet 10.129.14.128 25
 | STARTTLS    | Initiates a secure connection using TLS encryption.    |
 
 ## IMAP / POP3
+
+### port used
+- POP3 ports 110 , 995 (TLS/SSL) both of them tcp
+- IMAP ports 143 , 993 (TLS/SSL) both of them tcp
+
+
+
+
+
+
+
+
+
+
+
