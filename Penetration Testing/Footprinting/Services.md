@@ -473,9 +473,9 @@ $ curl -X GET http://10.129.204.235/testing.txt
 ## IPMI
 - Intelligent Platform Management Interface (IPMI) is a set of standardized specifications for hardware-based host management systems used for system management and monitoring.
 - IPMI is typically used in three ways:
- - Before the OS has booted to modify BIOS settings
- - When the host is fully powered down
- - Access to a host after a system failure
+  - Before the OS has booted to modify BIOS settings
+  - When the host is fully powered down
+  - Access to a host after a system failure
 
 ### port used
 - port 623/UDP 
