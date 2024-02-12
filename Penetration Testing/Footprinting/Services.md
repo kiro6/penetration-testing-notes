@@ -5,6 +5,7 @@
 - [DNS](#dns)
 - [SMTP](#smtp)
 - [IMAP / POP3](#imap--pop3)
+- [SNMP](#snmp)
 
 ## FTP
 File Transfer Protocol
@@ -316,5 +317,50 @@ openssl s_client -connect 10.129.14.128:imaps
 
 
 
+## SNMP
+- Simple Network Management Protocol (SNMP) was created to monitor network devices. 
+- In addition, this protocol can also be used to handle configuration tasks and change settings remotely. 
+
+**Components of SNMP:**
+- SNMP Manager: The central management station responsible for monitoring and managing network devices. It sends SNMP requests to agents and receives responses.
+- SNMP Agent: Software running on network devices that collects and maintains management information. Agents respond to SNMP requests from managers and can also send notifications (traps) to managers.
+- MIB: Management Information Base is a collection of hierarchical data definitions that describe the managed objects in a device.  Each object has a unique identifier (OID) and can be read, written, or polled via SNMP.
+
+**versions**
+- SNMPv1:
+  - Lacks built-in authentication and encryption.
+  - Vulnerable to unauthorized access and interception of data.
+  - Still used in some small networks but considered insecure for larger or sensitive environments.
+- SNMPv2 (SNMPv2c):
+  - use community strings for auth.
+  - Community strings transmitted in plain text, lacking encryption.
+- SNMPv3:
+  - Introduces authentication using username and password.
+  - Supports transmission encryption via pre-shared key.
 
 
+### port used
+- port 161/UDP to transmit control commands
+- port 162/UDB send notifications sent by agents to managers
+
+### Dangerous Settings
+
+| Setting              | Description                                                                                  |
+|----------------------|----------------------------------------------------------------------------------------------|
+| rwuser noauth        | Provides access to the full OID tree without authentication.                                 |
+| rwcommunity `community string` `IPv4 address` | Provides access to the full OID tree regardless of where the requests were sent from.  |
+| rwcommunity6 `community string` `IPv6 address` | Same access as with rwcommunity with the difference of using IPv6.                   |
+
+### Footprinting the Service
+- SNMPwalk
+```
+snmpwalk -v2c -c public 10.129.14.128
+```
+- OneSixtyOne (brute community string)
+```
+onesixtyone -c /opt/useful/SecLists/Discovery/SNMP/snmp.txt 10.129.14.128
+```
+- Braa (brute-force the individual OIDs)
+```
+ braa public@10.129.14.128:.1.3.6.*
+```
