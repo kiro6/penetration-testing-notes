@@ -6,6 +6,7 @@
 - [SMTP](#smtp)
 - [IMAP / POP3](#imap--pop3)
 - [SNMP](#snmp)
+- [MySQL](#mysql)
 
 ## FTP
 File Transfer Protocol
@@ -363,4 +364,30 @@ onesixtyone -c /opt/useful/SecLists/Discovery/SNMP/snmp.txt 10.129.14.128
 - Braa (brute-force the individual OIDs)
 ```
  braa public@10.129.14.128:.1.3.6.*
+```
+
+## MySQL
+
+### port used
+- Port 3306/tcp default
+### Dangerous Settings
+
+| Setting          | Description                                                                                          |
+|------------------|------------------------------------------------------------------------------------------------------|
+| user             | Sets which user the MySQL service will run as.                                                       |
+| password         | Sets the password for the MySQL user.                                                                |
+| admin_address    | The IP address on which to listen for TCP/IP connections on the administrative network interface.    |
+| debug            | Indicates the current debugging settings.                                                            |
+| sql_warnings     | Controls whether single-row INSERT statements produce an information string if warnings occur.       |
+| secure_file_priv | Used to limit the effect of data import and export operations.                                        |
+
+### Footprinting the Service
+- nmap
+```
+sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*
+```
+### Service Interaction
+- mysql
+```
+mysql -u root -h 10.129.14.132
 ```
