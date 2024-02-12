@@ -280,7 +280,7 @@ openssl s_client -connect 10.129.14.128:imaps
 ```
 
 
-- IMAP Commands
+- IMAP Commands (add `a` befire every command)
 
 | Command               | Description                                                             |
 |-----------------------|-------------------------------------------------------------------------|
