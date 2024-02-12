@@ -14,6 +14,7 @@
   - [SSH](#ssh)
   - [Rsync](#rsync)
   - [R-Services](#r-services)
+- Windows Remote Management Protocols
 
 ## FTP
 File Transfer Protocol
