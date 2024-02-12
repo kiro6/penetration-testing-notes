@@ -292,7 +292,8 @@ openssl s_client -connect 10.129.14.128:imaps
 | LSUB "" *             | Returns a subset of names from the set of names that the User has declared as being active or subscribed. |
 | SELECT INBOX          | Selects a mailbox so that messages in the mailbox can be accessed.      |
 | UNSELECT INBOX        | Exits the selected mailbox.                                             |
-| FETCH <ID> all        | Retrieves data associated with a message in the mailbox.                |
+| FETCH ID all        | Retrieves data associated with a message in the mailbox.                |
+| FETCH ID BODY[]        | Retrieves email body               |
 | CLOSE                 | Removes all messages with the Deleted flag set.                         |
 | LOGOUT                | Closes the connection with the IMAP server.                             |
 
