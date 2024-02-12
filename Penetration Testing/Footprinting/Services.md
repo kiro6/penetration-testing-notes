@@ -15,7 +15,8 @@
   - [Rsync](#rsync)
   - [R-Services](#r-services)
 - Windows Remote Management Protocols
-  - [RDP](#rdp) 
+  - [RDP](#rdp)
+  - [WinRM](#winrm)
 
 ## FTP
 File Transfer Protocol
@@ -620,3 +621,32 @@ xfreerdp /u:cry0l1t3 /p:"P455w0rd!" /v:10.129.201.248
 ```
  - rdesktop
  - Remmina
+
+## WinRM
+The Windows Remote Management (WinRM) is a simple Windows integrated remote management protocol based on the command line
+### port used
+- 5985/tcp
+- 5986/tcp with tls
+### Footprinting the Service
+- nmap
+```bash
+ nmap -sV -sC 10.129.201.248 -p5985,5986 --disable-arp-ping -n
+```
+### Service Interaction
+- evil-winrm
+```
+evil-winrm -i 10.129.201.248 -u Cry0l1t3 -p P455w0rD!
+```
+
+## WMI
+### port used
+- 135/TCP
+### Service Interaction
+```
+nmap -sV -sC 10.129.201.248 -p 135 --script rdp*
+```
+### Service Interaction
+- wmiexec
+```
+/usr/share/doc/python3-impacket/examples/wmiexec.py Cry0l1t3:"P455w0rD!"@10.129.201.248 "hostname"
+```
