@@ -17,6 +17,7 @@
 - Windows Remote Management Protocols
   - [RDP](#rdp)
   - [WinRM](#winrm)
+  - [WMI](#wmi)
 
 ## FTP
 File Transfer Protocol
