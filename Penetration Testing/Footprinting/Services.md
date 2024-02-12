@@ -10,6 +10,8 @@
 - [MSSQL](#mssql)
 - [Oracle TNS](#oracle-tns)
 - [IPMI](#ipmi)
+- Remote Management Protocols
+  - [SSH](#ssh)
 
 ## FTP
 File Transfer Protocol
@@ -499,3 +501,43 @@ $ sudo nmap -sU --script ipmi-version -p 623 ilo.inlanfreight.local
 ```
 - auxiliary/scanner/ipmi/ipmi_version (metasploit)
 - auxiliary/scanner/ipmi/ipmi_dumphashes (metasploit)
+
+
+## SSH
+### port used
+- port 22/TCP-UDP
+### Dangerous Settings
+
+| Setting                  | Description                                       |
+|--------------------------|---------------------------------------------------|
+| PasswordAuthentication  | Allows password-based authentication.            |
+| PermitEmptyPasswords    | Allows the use of empty passwords.               |
+| PermitRootLogin         | Allows logging in as the root user.              |
+| Protocol                 | Uses an outdated version of encryption.          |
+| X11Forwarding           | Allows X11 forwarding for GUI applications.       |
+| AllowTcpForwarding      | Allows forwarding of TCP ports.                  |
+| PermitTunnel            | Allows tunneling.                                 |
+| DebianBanner            | Displays a specific banner when logging in.      |
+
+### Footprinting the Service
+- nmap
+```bash
+ sudo nmap -sV -p22 10.129.247.222 --script ssh*
+```
+
+## Rsync
+Rsync is a fast and efficient tool for locally and remotely copying files.
+### port used
+- 873/TCP
+### Dangerous Settings
+- open share
+- no auth 
+### Footprinting the Service
+- nmap
+```
+sudo nmap -sV -p 873 127.0.0.1
+```
+### Service Interaction
+```
+rsync -av --list-only rsync://127.0.0.1/dev
+```
