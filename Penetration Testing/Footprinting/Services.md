@@ -10,8 +10,9 @@
 - [MSSQL](#mssql)
 - [Oracle TNS](#oracle-tns)
 - [IPMI](#ipmi)
-- Remote Management Protocols
+- Linux Remote Management Protocols
   - [SSH](#ssh)
+  - [Rsync](#rsync)
 
 ## FTP
 File Transfer Protocol
