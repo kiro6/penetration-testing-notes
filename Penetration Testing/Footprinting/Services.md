@@ -9,6 +9,7 @@
 - [MySQL](#mysql)
 - [MSSQL](#mssql)
 - [Oracle TNS](#oracle-tns)
+- [IPMI](#ipmi)
 
 ## FTP
 File Transfer Protocol
@@ -469,3 +470,32 @@ $ echo "Oracle File Upload Test" > testing.txt
 $ ./odat.py utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
 $ curl -X GET http://10.129.204.235/testing.txt
 ```
+## IPMI
+- Intelligent Platform Management Interface (IPMI) is a set of standardized specifications for hardware-based host management systems used for system management and monitoring.
+- IPMI is typically used in three ways:
+ - Before the OS has booted to modify BIOS settings
+ - When the host is fully powered down
+ - Access to a host after a system failure
+
+### port used
+- port 623/UDP 
+
+### Dangerous Settings
+
+- default password
+
+| Product             | Username       | Password                                                  |
+|---------------------|----------------|-----------------------------------------------------------|
+| Dell iDRAC         | root           | calvin                                                    |
+| HP iLO             | Administrator  | Randomized 8-character string consisting of numbers and uppercase letters |
+| Supermicro IPMI    | ADMIN          | ADMIN                                                     |
+
+
+
+### Footprinting the Service
+- nmap
+```
+$ sudo nmap -sU --script ipmi-version -p 623 ilo.inlanfreight.local
+```
+- auxiliary/scanner/ipmi/ipmi_version (metasploit)
+- auxiliary/scanner/ipmi/ipmi_dumphashes (metasploit)
