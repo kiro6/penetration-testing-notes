@@ -15,6 +15,7 @@
   - [Rsync](#rsync)
   - [R-Services](#r-services)
 - Windows Remote Management Protocols
+  - [RDP](#rdp) 
 
 ## FTP
 File Transfer Protocol
@@ -564,3 +565,14 @@ sudo nmap -sV -p 512,513,514 10.0.17.2
 ```
 rlogin 10.0.17.2 -l htb-student
 ```
+
+
+## RDP
+### port used
+- 3389/TCP-UDP as the transport protocol.
+### Dangerous Settings
+### Footprinting the Service
+```
+nmap -sV -sC 10.129.201.248 -p3389 --script rdp*
+```
+### Service Interaction
