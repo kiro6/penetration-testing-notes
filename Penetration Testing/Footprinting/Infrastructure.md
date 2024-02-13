@@ -3,3 +3,6 @@
 - [shodan](https://www.shodan.io/)
 - [censys](https://search.censys.io/)
 - [sitereport.netcraft](https://sitereport.netcraft.com)
+- WafW00f
+- whatweb
+- Wappalyzer
