@@ -193,6 +193,8 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 ## File System
 NTFS (New Technology File System) is the default Windows file system since Windows NT 3.1.
 
+
+- [icacls commands](https://ss64.com/nt/icacls.html)
 - **Inheritance settings are:**
 
 | Inheritance Setting | Description                                                    |
