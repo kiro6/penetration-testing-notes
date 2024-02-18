@@ -6,12 +6,13 @@
 - [Windows Event Log](#windows-event-log)
 - [File System](#file-system)
 - [Windows Services](#windows-services)
+- [Windows Management Instrumentation (WMI)](#windows-management-instrumentation-wmi)
 - [Security](#Security)
   - [Windows security model](#windows-security-model)
   - [Security identifiers](#security-identifiers)
   - [Access Tokens](#access-tokens)
 
-- [Windows Management Instrumentation (WMI)](#windows-management-instrumentation-wmi)
+
 
 
 # Structure
@@ -287,7 +288,23 @@ procdump.exe -accepteula                                # local
 ```
 
 
+## Windows Management Instrumentation (WMI)
+- WMI is a subsystem of PowerShell that provides system administrators with powerful tools for system monitoring. 
+- The goal of WMI is to consolidate device and application management across corporate networks.
 
+**Some of the uses for WMI are:**
+
+- Status information for local/remote systems
+- Configuring security settings on remote machines/-
+- Setting and changing user and group permissions
+- Setting/modifying system properties
+- Code execution
+- Scheduling processes
+- Setting up logging
+
+``cmd
+wmic /?
+```
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -438,18 +455,4 @@ The SID for Contoso\Domain Admins has:
 
 
 
-# Windows Management Instrumentation (WMI)
-[documntation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-executionpolicy?view=powershell-7.4)
-- WMI is a subsystem of PowerShell that provides system administrators with powerful tools for system monitoring. 
-- The goal of WMI is to consolidate device and application management across corporate networks.
-
-**Some of the uses for WMI are:**
-
-- Status information for local/remote systems
-- Configuring security settings on remote machines/-
-- Setting and changing user and group permissions
-- Setting/modifying system properties
-- Code execution
-- Scheduling processes
-- Setting up logging
 
