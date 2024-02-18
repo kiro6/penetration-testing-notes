@@ -4,6 +4,7 @@
 - [CMD and PowerShell](#cmd-and-powerShell)
 - [Windows Registry](#windows-registry)
 - [Windows Event Log](#windows-event-log)
+- [File System](#file-system)
 - [Security](#Security)
   - [Windows security model](#windows-security-model)
   - [Security identifiers](#security-identifiers)
@@ -186,6 +187,33 @@ check [CMD and PowerShell notes in my repo](https://github.com/kiro6/penetration
 #### lists 
 - [searchable database of Event IDs](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/)
 - [list includes key events that are recommended to be monitored for to look for signs of a compromise](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor)
+
+
+
+## File System
+NTFS (New Technology File System) is the default Windows file system since Windows NT 3.1.
+
+- **Inheritance settings are:**
+
+| Inheritance Setting | Description                                                    |
+|---------------------|----------------------------------------------------------------|
+| OI                  | Object inherit - Applies to this folder and files only. No inheritance to subfolders. |
+| CI                  | Container inherit - Applies to this folder and subfolders.      |
+| IO                  | Inherit only - The ACE does not apply to the current file/directory. |
+| NP                  | Do not propagate inherit - The ACE is not inherited by child objects. |
+| I                   | Permission inherited from parent container.                     |
+
+- **Basic access permissions**
+
+| Access Right | Description                         |
+|--------------|-------------------------------------|
+| F            | Full access                         |
+| D            | Delete access                       |
+| N            | No access                           |
+| M            | Modify access                       |
+| RX           | Read and execute access             |
+| R            | Read-only access                    |
+| W            | Write-only access                   |
 
 
 ------------------------------------------------------------------------------------------------------------------------
