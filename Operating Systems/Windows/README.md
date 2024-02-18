@@ -430,7 +430,7 @@ https://ldapwiki.com/wiki/Wiki.jsp?page=Well-known%20Security%20Identifiers)
 [documntation](https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens)
 - An access token is an object that describes the security context of a process or thread.
 - Every process executed on behalf of this user has a copy of this access token.
-- When a user logs on, the system verifies the user's password by comparing it with information stored in a security database. If the password is authenticated, the system produces an access token
+- When a user logs on, the system verifies the user's password by comparing it with information stored in a security database in SAM. If the password is authenticated, the system produces an access token
 
 - Access tokens contain the following information:
    - The security identifier (SID) for the user's account
