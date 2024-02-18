@@ -380,7 +380,7 @@ Windows security model following key components:
 | Y       | Represents a series of subauthority values, where n is the number of values |
 
 
-**Examples:** the SID for the built-in Administrators group is represented in standardized SID notation as the following string:
+**Example 1:** the SID for the built-in Administrators group is represented in standardized SID notation as the following string:
 
 ```
 S-1-5-32-544
@@ -393,16 +393,27 @@ This SID has four components:
 - A relative identifier (544, Administrators)
 
 
-**Examples:** The following example represents the SID for the Domain Admins group in the Contoso, Ltd. domain (Contoso\Domain Admins):
-```
-S-1-5-21-1004336348-1177238915-682003330-512
+**Example 2:** 
+```powershell
+PS C:\htb> whoami /user
+
+USER INFORMATION
+----------------
+
+User Name           SID
+=================== =============================================
+ws01\bob S-1-5-21-674899381-4069889467-2080702030-1002
 ```
 
-The SID for Contoso\Domain Admins has:
-- A revision level (1)
-- An identifier authority (5, NT Authority)
-- A domain identifier (21-1004336348-1177238915-682003330, Contoso)
-- A relative identifier (512, Domain Admins)
+| Number | Meaning           | Description                                                                                      |
+|--------|-------------------|--------------------------------------------------------------------------------------------------|
+| S      | SID               | Identifies the string as a SID.                                                                 |
+| 1      | Revision Level    | To date, this has never changed and has always been 1.                                           |
+| 5      | Identifier-authority | A 48-bit string that identifies the authority (the computer or network) that created the SID. |
+| 21     | Subauthority1     | This is a variable number that identifies the user's relation or group described by the SID to the authority that created it. It tells us in what order this authority created the user's account. |
+| 674899381-4069889467-2080702030 | Subauthority2 | Tells us which computer (or domain) created the number.                                           |
+| 1002   | Subauthority3     | The RID that distinguishes one account from another. Tells us whether this user is a normal user, a guest, an administrator, or part of some other group. |
+
 
 
 ### universal well-known SIDs 
