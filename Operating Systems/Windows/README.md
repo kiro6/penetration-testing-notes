@@ -218,6 +218,17 @@ NTFS (New Technology File System) is the default Windows file system since Windo
 | W            | Write-only access                   |
 
 
+### NTFS vs. Share Permissions
+
+- **Share permissions**
+
+| Permission    | Description                                                                                              |
+|---------------|----------------------------------------------------------------------------------------------------------|
+| Full Control  | Users are permitted to perform all actions given by Change and Read permissions as well as change permissions for NTFS files and subfolders. |
+| Change        | Users are permitted to read, edit, delete, and add files and subfolders.                                 |
+| Read          | Users are allowed to view file and subfolder contents.                                                    |
+
+
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
