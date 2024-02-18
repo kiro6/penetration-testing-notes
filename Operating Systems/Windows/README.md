@@ -449,6 +449,18 @@ https://ldapwiki.com/wiki/Wiki.jsp?page=Well-known%20Security%20Identifiers)
 
 
 
+## Access Control Lists (ACLs)
 
+### Access Control List (ACL)
+An Access Control List (ACL) is the ordered collection of Access Control Entries (ACEs) that apply to an object.
+
+### Access Control Entries (ACEs)
+Each Access Control Entry (ACE) in an ACL identifies a trustee (user account, group account, or logon session) and lists the access rights that are allowed, denied, or audited for the given trustee.
+
+### Discretionary Access Control List (DACL)
+DACLs define which security principles are granted or denied access to an object; it contains a list of ACEs. When a process tries to access a securable object, the system checks the ACEs in the object's DACL to determine whether or not to grant access. If an object does NOT have a DACL, then the system will grant full access to everyone, but if the DACL has no ACE entries, the system will deny all access attempts. ACEs in the DACL are checked in sequence until a match is found that allows the requested rights or until access is denied.
+
+### System Access Control Lists (SACL)
+Allows for administrators to log access attempts that are made to secured objects. ACEs specify the types of access attempts that cause the system to generate a record in the security event log.
 
 
