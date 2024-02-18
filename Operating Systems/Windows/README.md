@@ -302,7 +302,7 @@ procdump.exe -accepteula                                # local
 - Scheduling processes
 - Setting up logging
 
-``cmd
+```cmd
 wmic /?
 ```
 
