@@ -423,7 +423,8 @@ https://ldapwiki.com/wiki/Wiki.jsp?page=Well-known%20Security%20Identifiers)
 
 ![Screenshot 2023-11-30 101718](https://github.com/kiro6/penetration-testing-notes/assets/57776872/748726c4-217d-4348-998e-f31647da1845)
 
-
+### RID 
+[check defntion here](https://en.wikipedia.org/wiki/Relative_identifier)
 
 ## Access tokens
 [documntation](https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens)
