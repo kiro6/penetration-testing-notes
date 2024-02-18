@@ -5,11 +5,12 @@
 - [Windows Registry](#windows-registry)
 - [Windows Event Log](#windows-event-log)
 - [File System](#file-system)
+- [Windows Services](#windows-services)
 - [Security](#Security)
   - [Windows security model](#windows-security-model)
   - [Security identifiers](#security-identifiers)
   - [Access Tokens](#access-tokens)
-- [Windows Services](#windows-services)
+
 - [Windows Management Instrumentation (WMI)](#windows-management-instrumentation-wmi)
 
 
