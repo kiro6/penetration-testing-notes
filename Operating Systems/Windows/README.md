@@ -460,7 +460,10 @@ Each Access Control Entry (ACE) in an ACL identifies a trustee (user account, gr
 ### Discretionary Access Control List (DACL)
 DACLs define which security principles are granted or denied access to an object; it contains a list of ACEs. When a process tries to access a securable object, the system checks the ACEs in the object's DACL to determine whether or not to grant access. If an object does NOT have a DACL, then the system will grant full access to everyone, but if the DACL has no ACE entries, the system will deny all access attempts. ACEs in the DACL are checked in sequence until a match is found that allows the requested rights or until access is denied.
 
+- is type of ACL
+
 ### System Access Control Lists (SACL)
 Allows for administrators to log access attempts that are made to secured objects. ACEs specify the types of access attempts that cause the system to generate a record in the security event log.
 
+- is type of ACL
 
