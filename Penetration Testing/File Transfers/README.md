@@ -30,7 +30,7 @@ MD5             2EEBC05B20651F70EFB2D195BBDAF2C2
 
 **Note:** While this method is convenient, it's not always possible to use. Windows Command Line utility (cmd.exe) has a maximum string length of 8,191 characters. Also, a web shell may error if you attempt to send extremely large strings.
 
-## PowerShell HTTP download
+## 2) PowerShell HTTP download
 
 ### 1) PowerShell DownloadFile Method
 ```powershell
