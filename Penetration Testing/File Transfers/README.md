@@ -53,5 +53,5 @@ PS C:\user> Invoke-WebRequest https://raw.githubusercontent.com/PowerShellMafia/
 
 if the certificate is not trusted. We can bypass that error with the following command:
 ```powershell
-PS C:\htb> [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+PS C:\user> [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
 ```
