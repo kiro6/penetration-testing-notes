@@ -5,7 +5,7 @@ if you have access to terminal using a webshell you can
 
 - base64 a file that you want to transfer
 ```bash
-cat shell| base64 -w 0 ; echo
+cat backdoor| base64 -w 0 ; echo
 YmFkIHRoaW5ncyBoYXBwZW4gaGVyZQo=
 
 
@@ -16,10 +16,10 @@ YmFkIHRoaW5ncyBoYXBwZW4gaGVyZQo=
 
 - paste it in powershell
 ```powershell
-[IO.File]::WriteAllBytes("C:\Users\kokom\Desktop\testing\shell",[Convert]::FromBase64String("YmFkIHRoaW5ncyBoYXBwZW4gaGVyZQo="))
+[IO.File]::WriteAllBytes("C:\Users\public\Desktop\testing\backdoor",[Convert]::FromBase64String("YmFkIHRoaW5ncyBoYXBwZW4gaGVyZQo="))
 
 
-Get-FileHash .\shell -Algorithm MD5
+Get-FileHash .\backdoor -Algorithm MD5
 
 Algorithm       Hash                                                                   Path                                 
 ---------       ----                                                                   ----                                 
