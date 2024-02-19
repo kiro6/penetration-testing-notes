@@ -14,7 +14,7 @@ YmFkIHRoaW5ncyBoYXBwZW4gaGVyZQo=
 ```
 
 
-- copy it in powershell
+- paste it in powershell
 ```powershell
 [IO.File]::WriteAllBytes("C:\Users\kokom\Desktop\testing\shell",[Convert]::FromBase64String("YmFkIHRoaW5ncyBoYXBwZW4gaGVyZQo="))
 
