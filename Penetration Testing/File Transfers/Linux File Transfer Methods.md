@@ -1,3 +1,13 @@
+# Content
+- [Download Operations](#download-operations)
+  - [Base64 Encoding / Decoding](#1-base64-encoding--decoding)
+  - [Web Downloads](#2-web-downloads)
+  - [SSH Downloads](#3-ssh-downloads)
+- [Upload Operations](#upload-operations)
+  - [Web Upload](#web-upload)
+  - [Alternative Web File Transfer Method](#alternative-web-file-transfer-method)
+  - [SCP Upload](#scp-upload)
+
 # Download Operations
 
 ## 1) Base64 Encoding / Decoding
