@@ -1,3 +1,16 @@
+# Content
+- [Download Operations](#download-operations)
+  - [PowerShell Base64 Encode & Decode](#1-powershell-base64-encode--decode)
+  - [PowerShell HTTP Downloads](#2-powershell-http-downloads)
+  - [PowerShell SMB Downloads](#3-powershell-smb-downloads)
+  - [PowerShell FTP Downloads](#4-powershell-ftp-downloads)
+- [Upload Operations](#upload-operations)
+  - [PowerShell Base64 Encode & Decode](#1-powershell-base64-encode--decode-1)
+  - [PowerShell HTTP Upload](#2-powershell-http-upload)
+  - [PowerShell SMB Uploads](#3-powershell-smb-uploads)
+  - [PowerShell FTP Uploads](#4-powershell-ftp-uploads)
+
+
 # Download Operations
 
 ## 1) PowerShell Base64 Encode & Decode
