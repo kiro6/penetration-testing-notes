@@ -4,9 +4,9 @@ hashes are stored in certain formats.
 
 **you can identify through id**
 ```bash
-$1$  : MD5
-$2a$ : Blowfish
-$2y$ : Blowfish, with correct handling of 8 bit characters
-$5$  : SHA256
-$6$  : SHA512
+$ hashid '$apr1$71850310$gh9m4xcAn3MGxogwX/ztb.'
+
+Analyzing '$apr1$71850310$gh9m4xcAn3MGxogwX/ztb.'
+[+] MD5(APR) 
+[+] Apache MD5                    
 ```
