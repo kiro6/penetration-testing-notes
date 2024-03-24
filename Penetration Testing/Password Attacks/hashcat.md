@@ -8,7 +8,7 @@
 |-----:|-----------------------------|
 | 0    | Straight                    |
 | 1    | Combination                 |
-| 3    | Brute-force                 |
+| 3    | Brute-force and Mask attack |
 | 6    | Hybrid Wordlist + Mask      |
 | 7    | Hybrid Mask + Wordlist      |
 
