@@ -18,6 +18,10 @@
 .\hashcat.exe -a 1 -m 0 19672a3f042ae1b592289f8333bf76c5 .\wordlists\w1.txt .\wordlists\w2.txt
 
 .\hashcat.exe -a 3 -m 0 50a742905949102c961929823a2e8ca0 -1 02 'HASHCAT?l?l?l?l?l20?1?d'
+
+.\hashcat.exe -a 6 -m 0 f7a4a94ff3a722bf500d60805e16b604 /opt/useful/SecLists/Passwords/Leaked-Databases/rockyou.txt '?d?s'
+
+.\hashcat.exe -a 7 -m 0 eac4fe196339e1b511278911cb77d453 -1 01 '20?1?d' /opt/useful/SecLists/Passwords/Leaked-Databases/rockyou.txt
 ```
 
 
