@@ -26,4 +26,8 @@ princeprocessor  -o wordlist < words
 princeprocessor --pw-min=10 --pw-max=25 -o wordlist.txt < words
 
 ```
- 
+ ## CeWL 
+
+```bash
+cewl -d <depth to spider> -m <minimum word length> -w <output wordlist> <url of website>
+```
