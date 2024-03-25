@@ -49,3 +49,10 @@
 | { / }    | Rotate word left / right                               | InlaneFreight2020    | nlaneFreight2020I / 0InlaneFreight202 |
 | ^X / $X  | Prepend / Append character X                           | InlaneFreight2020 (^! / $!) | !InlaneFreight2020 / InlaneFreight2020! |
 | r        | Reverse                                                 | InlaneFreight2020    | 0202thgierFenalnI                    |
+
+```
+# The first letter word is capitalized with the c function. Then rule uses the substitute function s to replace o with 0, i with 1, e with 3 and a with @. At the end, the year 2019 is appended to it.
+echo 'c so0 si1 se3 ss5 sa@ $2 $0 $1 $9' > rule.txt
+echo 'password_ilfreight' > test.txt
+hashcat -r rule.txt test.txt --stdout
+```
