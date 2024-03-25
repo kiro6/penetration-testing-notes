@@ -36,7 +36,10 @@
 
 ## rules 
 
-- [full list](https://hashcat.net/wiki/doku.php?id=rule_based_attack#implemented_compatible_functions)
+- [full rules' list descrption](https://hashcat.net/wiki/doku.php?id=rule_based_attack#implemented_compatible_functions)
+- [nsa-rules](https://github.com/NSAKEY/nsa-rules)
+- [Hob0Rules](https://github.com/praetorian-inc/Hob0Rules)
+- [corporate.rule](https://github.com/sparcflow/HackLikeALegend/blob/master/old/chap3/corporate.rule)
 
 
 | Function | Description                                             | Input                | Output                                |
