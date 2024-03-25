@@ -16,6 +16,8 @@
 .\hashcat.exe -a 0 -m 0 0c352d5b2f45217c57bef9f8452ce376 .\wordlists\rockyou.txt
 
 .\hashcat.exe -a 1 -m 0 19672a3f042ae1b592289f8333bf76c5 .\wordlists\w1.txt .\wordlists\w2.txt
+
+.\hashcat.exe -a 3 -m 0 50a742905949102c961929823a2e8ca0 -1 02 'HASHCAT?l?l?l?l?l20?1?d'
 ```
 
 
