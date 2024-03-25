@@ -1,4 +1,4 @@
-# crunch
+## crunch
 
 ```bash
 crunch <minimum length> <maximum length> <charset> -t <pattern> -o <output file>
@@ -15,3 +15,15 @@ can be used to create custom wordlists
 ```
 cupp -i 
 ```
+
+
+## princeprocessor
+password candidate generator using the PRINCE algorithm 
+
+```bash 
+princeprocessor  -o wordlist < words
+
+princeprocessor --pw-min=10 --pw-max=25 -o wordlist.txt < words
+
+```
+ 
