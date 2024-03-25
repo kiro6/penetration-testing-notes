@@ -55,7 +55,9 @@
 
 ```
 # The first letter word is capitalized with the c function. Then rule uses the substitute function s to replace o with 0, i with 1, e with 3 and a with @. At the end, the year 2019 is appended to it.
-echo 'c so0 si1 se3 ss5 sa@ $2 $0 $1 $9' > rule.txt
+echo 'c so0 si1 se3 ss5 sa@ $2 $0 $2 $0' > rule.txt
 echo 'password_ilfreight' > test.txt
 hashcat -r rule.txt test.txt --stdout
+
+hashcat -a 0 -m 100 46244749d1e8fb99c37ad4f14fccb601ed4ae283  rockyou.txt -r rule.txt
 ```
