@@ -32,3 +32,20 @@
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Optimized Kernels | This is the `-O` flag, which according to the documentation, means Enable optimized kernels (limits password length). The magical password length number is generally 32, with most wordlists won't even hit that number. This can take the estimated time from days to hours, so it is always recommended to run with `-O` first and then rerun after without the `-O` if your GPU is idle. |
 | Workload          | This is the `-w` flag, which, according to the documentation, means Enable a specific workload profile. The default number is 2, but if you want to use your computer while Hashcat is running, set this to 1. If you plan on the computer only running Hashcat, this can be set to 3.                         |
+
+
+## rules 
+
+- [full list](https://hashcat.net/wiki/doku.php?id=rule_based_attack#implemented_compatible_functions)
+
+
+| Function | Description                                             | Input                | Output                                |
+|----------|---------------------------------------------------------|----------------------|---------------------------------------|
+| l        | Convert all letters to lowercase                       | InlaneFreight2020    | inlanefreight2020                    |
+| u        | Convert all letters to uppercase                       | InlaneFreight2020    | INLANEFREIGHT2020                    |
+| c / C    | Capitalize / lowercase first letter and invert the rest| inlaneFreight2020 / Inlanefreight2020 | Inlanefreight2020 / iNLANEFREIGHT2020 |
+| t / TN   | Toggle case: whole word / at position N                | InlaneFreight2020    | iNLANEfREIGHT2020                    |
+| d / q / zN / ZN | Duplicate word / all characters / first character / last character | InlaneFreight2020 | InlaneFreight2020InlaneFreight2020 / IInnllaanneeFFrreeiigghhtt22002200 / IInlaneFreight2020 / InlaneFreight20200 |
+| { / }    | Rotate word left / right                               | InlaneFreight2020    | nlaneFreight2020I / 0InlaneFreight202 |
+| ^X / $X  | Prepend / Append character X                           | InlaneFreight2020 (^! / $!) | !InlaneFreight2020 / InlaneFreight2020! |
+| r        | Reverse                                                 | InlaneFreight2020    | 0202thgierFenalnI                    |
