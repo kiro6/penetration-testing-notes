@@ -2,6 +2,9 @@
 
 # Hashcat
 
+check [hashcat hashes' id list](https://hashcat.net/wiki/doku.php?id=example_hashes)
+
+
  - `-a` stands for attack mode  
 
 | Mode | Description                 |
