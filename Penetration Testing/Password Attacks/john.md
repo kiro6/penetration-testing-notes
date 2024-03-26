@@ -34,6 +34,4 @@ $ john --wordlist=<wordlist.txt> server_doc.hash
 | wpa2john             | Converts WPA/WPA2 handshakes for John          |
 
 
-# CrackMapExec
-
 
