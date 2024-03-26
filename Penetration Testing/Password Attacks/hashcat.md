@@ -12,6 +12,9 @@
 | 6    | Hybrid Wordlist + Mask      |
 | 7    | Hybrid Mask + Wordlist      |
 
+
+- [mask lists](https://hashcat.net/wiki/doku.php?id=mask_attack)
+
 ```powershell
 .\hashcat.exe -a 0 -m 0 0c352d5b2f45217c57bef9f8452ce376 .\wordlists\rockyou.txt
 
