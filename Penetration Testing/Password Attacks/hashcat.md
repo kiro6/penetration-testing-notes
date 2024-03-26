@@ -66,4 +66,6 @@ echo 'password_ilfreight' > test.txt
 hashcat -r rule.txt test.txt --stdout
 
 hashcat -a 0 -m 100 46244749d1e8fb99c37ad4f14fccb601ed4ae283  rockyou.txt -r rule.txt
+
+hashcat --force password.list -r custom.rule --stdout | sort -u > mut_password.list
 ```
