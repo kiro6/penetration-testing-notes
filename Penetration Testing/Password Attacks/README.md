@@ -10,4 +10,4 @@ Analyzing '$apr1$71850310$gh9m4xcAn3MGxogwX/ztb.'
 [+] MD5(APR) 
 [+] Apache MD5                    
 ```
-check [hashcat hashes' id list](https://hashcat.net/wiki/doku.php?id=example_hashes)
+
