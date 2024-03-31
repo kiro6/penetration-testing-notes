@@ -1,5 +1,5 @@
 - [Attacking SAM](#attacking-sam)
-- [Attacking LSASS](#attacking-lasass)
+- [Attacking LSASS](#attacking-lsass)
 
 
 
