@@ -136,6 +136,14 @@ result=$(echo "Hello, World!")
 echo $result
 
 ```
+2. math
+```
+$ echo $((1+1))
+2
+
+$ num=5 ; ((num++)) ; echo $num
+6
+```
 
 # Manipulation 
 
