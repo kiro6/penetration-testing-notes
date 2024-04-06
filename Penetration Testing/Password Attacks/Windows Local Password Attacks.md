@@ -1,5 +1,6 @@
 - [Attacking SAM](#attacking-sam)
 - [Attacking LSASS](#attacking-lsass)
+- [Attacking Active Directory & NTDS.dit](#attacking-active-directory--ntdsdit)
 
 
 
