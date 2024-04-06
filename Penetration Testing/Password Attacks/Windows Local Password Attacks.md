@@ -201,6 +201,8 @@ Mimikatz and Pypykatz can extract the DPAPI masterkey for the logged-on user who
 ./username-anarchy -i /home/ltnbob/names.txt
 
 crackmapexec smb 10.129.201.57 -u bwilliamson -p /usr/share/wordlists/fasttrack.txt
+## or
+netexec smb 10.129.111.214 -u posi -p passwords2
 ```
 
 ### Capturing NTDS.dit
