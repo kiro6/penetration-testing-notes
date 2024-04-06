@@ -190,3 +190,7 @@ Mimikatz and Pypykatz can extract the DPAPI masterkey for the logged-on user who
 | Outlook                  | Passwords for email accounts.                            |
 | Remote Desktop Connection| Saved credentials for connections to remote machines.    |
 | Credential Manager       | Saved credentials for accessing shared resources, joining wireless networks, VPNs, and more. |
+
+
+## Attacking Active Directory & NTDS.dit
+
