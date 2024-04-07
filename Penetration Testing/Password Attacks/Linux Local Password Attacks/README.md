@@ -43,3 +43,46 @@ can be found in /etc/cron.daily, /etc/cron.hourly, /etc/cron.monthly, /etc/cron.
 cat /etc/crontab
 ls -la /etc/cron.*/
 ```
+
+## History
+
+### Command-line History
+- look in `.bash_history` and other files like `.bashrc` or `.bash_profile` can contain important information.
+
+```bash
+tail -n5 /home/*/.bash*
+```
+
+### Logs
+we have 3 types of logs: Application Logs,Event Logs, Service Logs and System Logs
+
+
+| Log File           | Description                                         |
+|--------------------|-----------------------------------------------------|
+| /var/log/messages  | Generic system activity logs.                       |
+| /var/log/syslog    | Generic system activity logs.                       |
+| /var/log/auth.log  | (Debian) All authentication related logs.          |
+| /var/log/secure    | (RedHat/CentOS) All authentication related logs.   |
+| /var/log/boot.log  | Booting information.                                |
+| /var/log/dmesg     | Hardware and drivers related information and logs. |
+| /var/log/kern.log  | Kernel related warnings, errors and logs.          |
+| /var/log/faillog   | Failed login attempts.                              |
+| /var/log/cron      | Information related to cron jobs.                   |
+| /var/log/mail.log  | All mail server related logs.                       |
+| /var/log/httpd     | All Apache related logs.                            |
+| /var/log/mysqld.log| All MySQL server related logs.                      |
+
+
+```bash
+for i in $(ls /var/log/* 2>/dev/null);do GREP=$(grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND\=\|logs" $i 2>/dev/null); if [[ $GREP ]];then echo -e "\n#### Log file: " $i; grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND\=\|logs" $i 2>/dev/null;fi;done
+```
+
+## Memory and Cache
+- [https://github.com/huntergregal/mimipenguin](https://github.com/huntergregal/mimipenguin)
+
+```bash
+sudo python3 mimipenguin.py
+
+sudo bash mimipenguin.sh 
+```
+
