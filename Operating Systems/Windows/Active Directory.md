@@ -31,8 +31,9 @@ These are used primarily for email distribution purposes. Distribution groups al
 | Group Scope        | Can Contain                                             | Cannot Contain                                     |
 |--------------------|---------------------------------------------------------|-----------------------------------------------------|
 | Global Groups      | Users from the same domain, global groups from the same domain | Users from other domains or forests, local groups |
-| Domain Local Groups| Users, global groups from the same domain, universal groups from any domain within the forest | Users or groups from other forests                |
-| Universal Groups   | Users from any domain within the forest, global groups from any domain within the forest, other universal groups | Users or groups from trusted external forests     |
+| Domain Local Groups| Users, global groups from the same domain, universal groups from any domain within the forest, users or groups from any trusted forest | Users or groups from other forests |
+| Universal Groups   | Users from any domain within the forest, global groups from any domain within the forest, other universal groups | Users or groups from trusted external forests |
+
 
 
 
