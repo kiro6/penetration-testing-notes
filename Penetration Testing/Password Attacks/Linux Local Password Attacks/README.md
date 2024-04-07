@@ -86,3 +86,7 @@ sudo python3 mimipenguin.py
 sudo bash mimipenguin.sh 
 ```
 
+- [https://github.com/AlessandroZ/LaZagne?](https://github.com/AlessandroZ/LaZagne?)
+```
+sudo python2.7 laZagne.py all
+```
