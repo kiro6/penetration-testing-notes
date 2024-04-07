@@ -10,6 +10,14 @@
 Group Policy Objects (GPOs) can be linked to OUs to apply specific configurations, settings, and policies to the objects within those OUs. This allows administrators to apply different policies based on the requirements of different departments or organizational units.
 
 
+#### for example : 
+- Password Policy: Enforce password complexity requirements, minimum password length, and password expiration policies to enhance security.
+
+- Account Lockout Policy: Configure settings to lock out user accounts after a certain number of incorrect login attempts, helping to prevent unauthorized access.
+
+- Software Installation: Automatically install software applications on users' computers upon startup or user login, ensuring consistent software deployment across the organization.
+
+
 ## Objects 
 
 ### Groups
