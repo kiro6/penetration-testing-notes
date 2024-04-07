@@ -13,7 +13,7 @@ Group Policy Objects (GPOs) can be linked to OUs to apply specific configuration
 ## Objects 
 
 ### Groups
-there are 2 types of groups 
+**there are 2 types of groups** 
 1) **security Group:**
 used to manage access permissions to resources such as files, folders, printers, and other objects within the network. Security groups allow you to grant or deny access to these resources based on the membership of users or other groups.
 
