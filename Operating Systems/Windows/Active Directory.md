@@ -19,3 +19,21 @@ used to manage access permissions to resources such as files, folders, printers,
 
 2) **Distribution Groups:**
 These are used primarily for email distribution purposes. Distribution groups allow you to send emails to multiple recipients by simply addressing the email to the group rather than individual email addresses.
+
+
+**there 3 types of scope:** 
+
+1) **Domain Local Groups**
+2) **Global Groups**
+3) **Universal Groups**
+
+
+| Group Scope        | Can Contain                                             | Cannot Contain                                     |
+|--------------------|---------------------------------------------------------|-----------------------------------------------------|
+| Global Groups      | Users from the same domain, global groups from the same domain | Users from other domains or forests, local groups |
+| Domain Local Groups| Users, global groups from the same domain, universal groups from any domain within the forest | Users or groups from other forests                |
+| Universal Groups   | Users from any domain within the forest, global groups from any domain within the forest, other universal groups | Users or groups from trusted external forests     |
+
+
+
+In a small environment, there's really no difference in practicebut in an environment with multiple domains and/or forests, a common approach to managing permissions involves using domain local groups to attach permissions to resources. Then, access is granted via universal groups, which can span across domains within the forest. Finally, global groups containing users are added to the universal groups.
