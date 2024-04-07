@@ -9,6 +9,9 @@
 ## Group Policy Objects 
 Group Policy Objects (GPOs) can be linked to OUs to apply specific configurations, settings, and policies to the objects within those OUs. This allows administrators to apply different policies based on the requirements of different departments or organizational units.
 
+![Screenshot_1](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a0c7ec7a-de08-405b-b48c-43e0ec1b45a3)
+
+
 
 #### for example : 
 - Password Policy: Enforce password complexity requirements, minimum password length, and password expiration policies to enhance security.
