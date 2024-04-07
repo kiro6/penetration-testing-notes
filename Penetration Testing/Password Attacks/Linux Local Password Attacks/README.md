@@ -1,5 +1,5 @@
 
-**There are several sources that can provide us with credentials that we put in four categories: **
+**There are several sources that can provide us with credentials that we put in four categories:**
 
 | Files              | History              | Memory               | Key-Rings                      |
 |--------------------|----------------------|----------------------|--------------------------------|
