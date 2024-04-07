@@ -90,3 +90,10 @@ sudo bash mimipenguin.sh
 ```
 sudo python2.7 laZagne.py all
 ```
+
+## Browsers
+
+```bash
+ls -l .mozilla/firefox/ | grep default
+cat .mozilla/firefox/1bplpd86.default-release/logins.json | jq .
+```
