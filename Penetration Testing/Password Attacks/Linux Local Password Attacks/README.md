@@ -101,3 +101,14 @@ cat .mozilla/firefox/1bplpd86.default-release/logins.json | jq .
 python3.9 firefox_decrypt.py
 
 ```
+
+## Passwd, Shadow & Opasswd
+
+```bash
+## check if u can wirte
+/etc/passwd
+## contain hashes (root only)
+/etc/shadow
+## old password hashes (root only)
+/etc/security/opasswd 
+```
