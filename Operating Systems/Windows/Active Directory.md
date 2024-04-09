@@ -100,3 +100,33 @@ In a small environment, there's really no difference in practicebut in an enviro
 
 
 
+## Flexible Single Master Operations(FSMO) Roles
+
+#### Per Forest
+**Schema Master:**
+- Manages the read/write copy of the Active Directory schema.
+- Controls the structure and attributes of objects stored in Active Directory.
+- Responsible for making changes to the schema, such as adding or modifying attributes.
+
+**Domain Naming Master:**
+- Manages domain names within the forest.
+- Ensures the uniqueness of domain names across the entire forest.
+- Controls the addition or removal of domains from the forest.
+
+#### Per Domain
+**Relative Identifier (RID) Master:**
+- Allocates unique Relative Identifiers (RIDs) to objects within a domain.
+- Ensures that each object in the domain has a unique security identifier (SID).
+- Prevents SID conflicts by managing RID pools.
+
+**Primary Domain Controller (PDC) Emulator:**
+- Provides backward compatibility for older Windows clients.
+- Handles authentication requests, password changes, and time synchronization.
+- Acts as the primary source for Group Policy updates within the domain.
+
+**Infrastructure Master:**
+- Updates references to objects in other domains within the same forest.
+- This role translates GUIDs, SIDs, and DNs between domains
+- Ensures that cross-domain object references are properly maintained.
+- Only relevant in domains where not all domain controllers are also Global Catalog servers.
+- If this role is not functioning properly, Access Control Lists (ACLs) will show SIDs instead of fully resolved names.
