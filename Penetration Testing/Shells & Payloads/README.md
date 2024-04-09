@@ -3,6 +3,8 @@
 - [Bind Shell Cheat Sheet](https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-bind-cheatsheet/)
 - [Microsoft CVEs](https://www.cvedetails.com/vendor/26/Microsoft.html)
 - [Web shells](https://github.com/jbarcia/Web-Shells/tree/master/laudanum)
+- [online revshells tool](https://www.revshells.com/)
+
 
 
 ## Windows Payload Types to Consider
