@@ -226,7 +226,6 @@ response = DES(K1,C) | DES(K2,C) | DES(K3,C)
 
 ### NTLMv2 (Net-NTLMv2)
 - NTLMv2 is an enhanced authentication protocol introduced as a stronger alternative to NTLMv1.
-- NTLMv2 primarily uses HMAC-MD5
 
 
 **V2 Challenge & Response Algorithm**
