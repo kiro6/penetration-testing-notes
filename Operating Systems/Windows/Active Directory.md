@@ -1,3 +1,11 @@
+# Content
+- [Organizational unit](#organizational-unit)
+- [Group Policy Objects](#group-policy-objects)
+  - [GPO types](#gpo-types)   
+- [Objects](#objects)
+  - [Groups](#groups)
+
+
 ## Organizational unit
 - An Organizational Unit (OU) in Active Directory is a logical container object used to organize and manage users, groups, computers, and other Active Directory objects within a domain. 
 - can apply policy using `Group Policy`
