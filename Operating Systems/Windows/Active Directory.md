@@ -2,8 +2,10 @@
 - [Organizational unit](#organizational-unit)
 - [Group Policy Objects](#group-policy-objects)
   - [GPO types](#gpo-types)   
-- [Active Directory Objects](#objects)
+- [Active Directory Objects](#active-directory-objects)
+  - [Users](#users)
   - [Groups](#groups)
+  - [Contacts](#contacts)
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 
 ## Organizational unit
