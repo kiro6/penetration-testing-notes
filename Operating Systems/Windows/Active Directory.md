@@ -7,6 +7,8 @@
   - [Groups](#groups)
   - [Contacts](#contacts)
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
+- [Flexible Single Master Operations(FSMO) Roles](#flexible-single-master-operationsfsmo-roles)
+
 
 ## Organizational unit
 - An Organizational Unit (OU) in Active Directory is a logical container object used to organize and manage users, groups, computers, and other Active Directory objects within a domain. 
@@ -102,7 +104,7 @@ In a small environment, there's really no difference in practicebut in an enviro
 
 ## Flexible Single Master Operations(FSMO) Roles
 
-#### Per Forest
+### Per Forest
 **Schema Master:**
 - Manages the read/write copy of the Active Directory schema.
 - Controls the structure and attributes of objects stored in Active Directory.
@@ -113,7 +115,7 @@ In a small environment, there's really no difference in practicebut in an enviro
 - Ensures the uniqueness of domain names across the entire forest.
 - Controls the addition or removal of domains from the forest.
 
-#### Per Domain
+### Per Domain
 **Relative Identifier (RID) Master:**
 - Allocates unique Relative Identifiers (RIDs) to objects within a domain.
 - Ensures that each object in the domain has a unique security identifier (SID).
