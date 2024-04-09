@@ -223,3 +223,19 @@ C = 8-byte server challenge, random
 K1 | K2 | K3 = LM/NT-hash | 5-bytes-0
 response = DES(K1,C) | DES(K2,C) | DES(K3,C)
 ```
+
+### NTLMv2 (Net-NTLMv2)
+- NTLMv2 is an enhanced authentication protocol introduced as a stronger alternative to NTLMv1.
+- NTLMv2 primarily uses HMAC-MD5
+
+
+**V2 Challenge & Response Algorithm**
+```bash
+SC = 8-byte server challenge, random
+CC = 8-byte client challenge, random
+CC* = (X, time, CC2, domain name)
+v2-Hash = HMAC-MD5(NT-Hash, user name, domain name)
+LMv2 = HMAC-MD5(v2-Hash, SC, CC)
+NTv2 = HMAC-MD5(v2-Hash, SC, CC*)
+response = LMv2 | CC | NTv2 | CC*
+```
