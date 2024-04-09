@@ -2,7 +2,7 @@
 - [Organizational unit](#organizational-unit)
 - [Group Policy Objects](#group-policy-objects)
   - [GPO types](#gpo-types)   
-- [Objects](#objects)
+- [Active Directory Objects](#objects)
   - [Groups](#groups)
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 
@@ -46,7 +46,13 @@ Group Policy Objects (GPOs) can be linked to OUs to apply specific configuration
 ![Screenshot_4](https://github.com/kiro6/penetration-testing-notes/assets/57776872/d2eadbff-043d-49c0-aae5-bba627ae372a)
 
 
-## Objects 
+## Active Directory Objects 
+
+### Users
+- Users are considered leaf objects, which means that they cannot contain any other objects within them
+- A user object is considered a security principal and has a security identifier (SID) and a global unique identifier (GUID).
+- User objects have many possible attributes, such as their display name, last login time, date of last password change, email address, account description, manager, address, and more.
+- [all active directory user object attributes](https://www.easy365manager.com/how-to-get-all-active-directory-user-object-attributes/)
 
 ### Groups
 **there are 2 types of groups** 
@@ -72,6 +78,17 @@ These are used primarily for email distribution purposes. Distribution groups al
 
 
 In a small environment, there's really no difference in practicebut in an environment with multiple domains and/or forests, a common approach to managing permissions involves using domain local groups to attach permissions to resources. Then, access is granted via universal groups, which can span across domains within the forest. Finally, global groups containing users are added to the universal groups.
+
+
+### Contacts 
+- In Active Directory, "Contacts" refer to objects used to represent external entities, such as people or resources, who are not part of the Active Directory domain.
+- They are leaf objects and are NOT security principals (securable objects), so they don't have a SID, only a GUID. 
+- Contacts are typically created for entities outside of the organization, such as partners, clients, vendors, or individuals in other domains.
+- Administrators can define permissions for Contacts, specifying who can view, modify, or delete them. This allows for controlled access to contact information within the organization.
+
+
+![Screenshot_6](https://github.com/kiro6/penetration-testing-notes/assets/57776872/7b6c6d9f-6c52-47dc-96ed-60270d6b042e)
+
 
 ## Distinguished Name & Relative Distinguished Name
 - A Distinguished Name (DN) describes the full path to an object in AD `(such as cn=bjones, ou=IT, ou=Employees, dc=inlanefreight, dc=local)`
