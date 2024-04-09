@@ -213,3 +213,13 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 ```bash
 netexec smb 10.129.41.19 -u rachel -H e46b9e548fa0d122de7f59fb6d48eaa2
 ```
+
+### NTLMv1 (Net-NTLMv1)
+NTLMv1 is the first version of the NTLM authentication protocol.
+
+**V1 Challenge & Response Algorithm**
+```
+C = 8-byte server challenge, random
+K1 | K2 | K3 = LM/NT-hash | 5-bytes-0
+response = DES(K1,C) | DES(K2,C) | DES(K3,C)
+```
