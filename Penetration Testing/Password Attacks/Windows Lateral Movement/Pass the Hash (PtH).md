@@ -16,6 +16,7 @@ Now we can use cmd.exe to execute commands in the user's context.
 
 
 ### Pass the Hash with PowerShell Invoke-TheHash (Windows)
+- [revshells online tool](https://www.revshells.com/)
 
 **Invoke-TheHash with SMB**
 ```powershell
