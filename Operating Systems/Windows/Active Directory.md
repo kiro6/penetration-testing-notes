@@ -9,7 +9,8 @@
   - [Contacts](#contacts)
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 - [Flexible Single Master Operations(FSMO) Roles](#flexible-single-master-operationsfsmo-roles)
-- [Active Directory Protocols]()
+- [Active Directory Protocols](#active-directory-protocols)
+  - [Kerberos](#kerberos) 
 
 
 
@@ -169,4 +170,4 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 4. The TGS is encrypted with the NTLM password hash of the service or computer account in whose context the service instance is running and is delivered to the user in the TGS_REP.
 5. The user presents the TGS to the service, and if it is valid, the user is permitted to connect to the resource (AP_REQ).
 
-![Screenshot 2024-04-09 at 15-19-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/b8cb9c04-876e-4cce-ab34-0d7b3d7604a3)
+![Screenshot 2024-04-09 at 15-20-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bab56808-5196-4d76-97ca-44920c058794)
