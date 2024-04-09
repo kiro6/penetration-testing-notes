@@ -10,8 +10,12 @@
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 - [Flexible Single Master Operations(FSMO) Roles](#flexible-single-master-operationsfsmo-roles)
 - [Active Directory Protocols](#active-directory-protocols)
-  - [Kerberos](#kerberos)
   - [LDAP](#ldap)
+  - [Kerberos](#kerberos)
+  - [NTHash (NTLM)](#nthash-ntlm)
+  - [NTLMv1 (Net-NTLMv1)](#ntlmv1-net-ntlmv1)
+  - [NTLMv2 (Net-NTLMv2)](#ntlmv2-net-ntlmv2)
+  
 
 
 
@@ -161,17 +165,6 @@ Microsoft introduced the concept of FSMO roles, which designate specific domain 
 
 ## Active Directory Protocols
 
-### Kerberos
-Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory Domain Services (AD DS) include a Kerberos Key Distribution Center (KDC).
-
-#### **Kerberos Authentication Process**
-1. The user logs on, and their password is converted to an NTLM hash, which is used to encrypt the TGT ticket. This decouples the user's credentials from requests to resources.
-2. The KDC service on the DC checks the authentication service request (AS-REQ), verifies the user information, and creates a Ticket Granting Ticket (TGT), which is delivered to the user.
-3. The user presents the TGT to the DC, requesting a Ticket Granting Service (TGS) ticket for a specific service. This is the TGS-REQ. If the TGT is successfully validated, its data is copied to create a TGS ticket.
-4. The TGS is encrypted with the NTLM password hash of the service or computer account in whose context the service instance is running and is delivered to the user in the TGS_REP.
-5. The user presents the TGS to the service, and if it is valid, the user is permitted to connect to the resource (AP_REQ).
-
-![Screenshot 2024-04-09 at 15-20-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bab56808-5196-4d76-97ca-44920c058794)
 
 ### LDAP
 - LDAP is how systems in the network environment can "speak" to AD
@@ -183,6 +176,30 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 1. **Simple Authentication:** This includes anonymous authentication, unauthenticated authentication, and username/password authentication. Simple authentication means that a username and password create a BIND request to authenticate to the LDAP server.
 
 2. **SASL Authentication:** The Simple Authentication and Security Layer (SASL) framework uses other authentication services, such as Kerberos, to bind to the LDAP server and then uses this authentication service (Kerberos in this example) to authenticate to LDAP.
+
+
+
+
+**auth protocols table**
+| Hash/Protocol | Cryptographic Technique       | Mutual Authentication | Message Type      | Trusted Third Party              |
+|---------------|-------------------------------|-----------------------|-------------------|---------------------------------|
+| NTLM          | Symmetric key cryptography   | No                    | Random number     | Domain Controller               |
+| NTLMv1        | Symmetric key cryptography   | No                    | MD4 hash, random number | Domain Controller               |
+| NTLMv2        | Symmetric key cryptography   | No                    | MD4 hash, random number | Domain Controller               |
+| Kerberos      | Symmetric key cryptography & asymmetric cryptography | Yes   | Encrypted ticket using DES, MD5 | Domain Controller/Key Distribution Center (KDC) |
+
+
+### Kerberos
+Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory Domain Services (AD DS) include a Kerberos Key Distribution Center (KDC).
+
+#### **Kerberos Authentication Process**
+1. The user logs on, and their password is converted to an NTLM hash, which is used to encrypt the TGT ticket. This decouples the user's credentials from requests to resources.
+2. The KDC service on the DC checks the authentication service request (AS-REQ), verifies the user information, and creates a Ticket Granting Ticket (TGT), which is delivered to the user.
+3. The user presents the TGT to the DC, requesting a Ticket Granting Service (TGS) ticket for a specific service. This is the TGS-REQ. If the TGT is successfully validated, its data is copied to create a TGS ticket.
+4. The TGS is encrypted with the NTLM password hash of the service or computer account in whose context the service instance is running and is delivered to the user in the TGS_REP.
+5. The user presents the TGS to the service, and if it is valid, the user is permitted to connect to the resource (AP_REQ).
+
+![Screenshot 2024-04-09 at 15-20-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bab56808-5196-4d76-97ca-44920c058794)
 
 
 ### LM
