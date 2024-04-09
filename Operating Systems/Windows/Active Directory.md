@@ -71,6 +71,13 @@ These are used primarily for email distribution purposes. Distribution groups al
 | Universal Groups   | Users from any domain within the forest, global groups from any domain within the forest, other universal groups | Users or groups from trusted external forests |
 
 
-
-
 In a small environment, there's really no difference in practicebut in an environment with multiple domains and/or forests, a common approach to managing permissions involves using domain local groups to attach permissions to resources. Then, access is granted via universal groups, which can span across domains within the forest. Finally, global groups containing users are added to the universal groups.
+
+## Distinguished Name & Relative Distinguished Name
+- A Distinguished Name (DN) describes the full path to an object in AD (such as cn=bjones, ou=IT, ou=Employees, dc=inlanefreight, dc=local)
+- A Relative Distinguished Name (RDN) is a single component of the Distinguished Name that identifies the object as unique from other objects at the current level in the naming hierarchy. In our example, bjones
+
+![Screenshot_5](https://github.com/kiro6/penetration-testing-notes/assets/57776872/39be0a60-df9f-495b-a8d3-626e3d66edd2)
+
+
+
