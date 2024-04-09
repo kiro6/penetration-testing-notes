@@ -10,7 +10,8 @@
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 - [Flexible Single Master Operations(FSMO) Roles](#flexible-single-master-operationsfsmo-roles)
 - [Active Directory Protocols](#active-directory-protocols)
-  - [Kerberos](#kerberos) 
+  - [Kerberos](#kerberos)
+  - [LDAP](#ldap)
 
 
 
@@ -171,3 +172,14 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 5. The user presents the TGS to the service, and if it is valid, the user is permitted to connect to the resource (AP_REQ).
 
 ![Screenshot 2024-04-09 at 15-20-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bab56808-5196-4d76-97ca-44920c058794)
+
+### LDAP
+- LDAP is how systems in the network environment can "speak" to AD
+- The relationship between AD and LDAP can be compared to Apache and HTTP, Active Directory is a directory server that uses the LDAP protocol.
+
+![Screenshot 2024-04-09 at 15-26-55 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/4c8a6038-339e-41fd-b2bc-c47abaaef6f9)
+
+#### **AD LDAP Authentication**
+1. **Simple Authentication:** This includes anonymous authentication, unauthenticated authentication, and username/password authentication. Simple authentication means that a username and password create a BIND request to authenticate to the LDAP server.
+
+2. **SASL Authentication:** The Simple Authentication and Security Layer (SASL) framework uses other authentication services, such as Kerberos, to bind to the LDAP server and then uses this authentication service (Kerberos in this example) to authenticate to LDAP.
