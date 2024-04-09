@@ -1,4 +1,5 @@
 # Content
+- [Active Directory Structure]()
 - [Organizational unit](#organizational-unit)
 - [Group Policy Objects](#group-policy-objects)
   - [GPO types](#gpo-types)   
@@ -8,6 +9,25 @@
   - [Contacts](#contacts)
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 - [Flexible Single Master Operations(FSMO) Roles](#flexible-single-master-operationsfsmo-roles)
+
+
+
+
+## Active Directory Structure
+
+![Screenshot_8](https://github.com/kiro6/penetration-testing-notes/assets/57776872/d2fa839d-504e-419e-ac02-22651486362d)
+
+### Trusts
+| Trust Type    | Description                                                                                                                     |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Parent-child  | Domains within the same forest. The child domain has a two-way transitive trust with the parent domain.                        |
+| Cross-link    | A trust between child domains to speed up authentication.                                                                       |
+| External      | A non-transitive trust between two separate domains in separate forests which are not already joined by a forest trust.        |
+| Tree-root     | A two-way transitive trust between a forest root domain and a new tree root domain. Created when setting up a new tree root domain within a forest. |
+| Forest        | A transitive trust between two forest root domains.                                                                              |
+
+![Screenshot_9](https://github.com/kiro6/penetration-testing-notes/assets/57776872/d7bab82f-f01e-400c-af1b-481541f2f876)
+
 
 
 ## Organizational unit
@@ -103,6 +123,9 @@ In a small environment, there's really no difference in practicebut in an enviro
 
 
 ## Flexible Single Master Operations(FSMO) Roles
+Microsoft introduced the concept of FSMO roles, which designate specific domain controllers within the Active Directory environment to perform certain critical operations.
+
+
 
 ### Per Forest
 **Schema Master:**
