@@ -194,10 +194,10 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 ### NTHash (NTLM)
 - NT LAN Manager (NTLM) hashes are used on modern Windows systems.
 - **It is a challenge-response authentication protocol and uses three messages to authenticate:**
-1. The client sends a message to the server indicating its intention to authenticate using NTLM.
-2. The server responds with a challenge, which is a random number.
-3. The client encrypts this challenge using the MD4 hash of the user's password. This encrypted result, along with the username and domain name, is sent back to the server.
-4. The server uses the same method to encrypt the challenge and compares the result with what the client sent. If they match, authentication is successful
+  1. The client sends a message to the server indicating its intention to authenticate using NTLM.
+  2. The server responds with a challenge, which is a random number.
+  3. The client encrypts this challenge using the MD4 hash of the user's password. This encrypted result, along with the username and domain name, is sent back to the server.
+  4. The server uses the same method to encrypt the challenge and compares the result with what the client sent. If they match, authentication is successful
 
 - These hashes are stored locally in the SAM database or the NTDS.DIT database file on a Domain Controller.
 
