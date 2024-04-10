@@ -1,3 +1,13 @@
+# Content 
+- [Pass the Hash with Mimikatz (Windows)](#pass-the-hash-with-mimikatz-windows)
+- [Pass the Hash with PowerShell Invoke-TheHash (Windows)](#pass-the-hash-with-powershell-invoke-thehash-windows)
+- [Pass the Hash with Impacket (Linux)](#pass-the-hash-with-impacket-linux)
+- [Pass the Hash with CrackMapExec or netexec (Linux)](#pass-the-hash-with-crackmapexec-or-netexec-linux)
+- [Pass the Hash with evil-winrm (Linux)](#pass-the-hash-with-evil-winrm-linux)
+- [Pass the Hash with RDP (Linux)](#pass-the-hash-with-rdp-linux)
+
+
+
 A Pass the Hash (PtH) attack is a technique where an attacker uses a password hash instead of the plain text password for authentication.
 
 
