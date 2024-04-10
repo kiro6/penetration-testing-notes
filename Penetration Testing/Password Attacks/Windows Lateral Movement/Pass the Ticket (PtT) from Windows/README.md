@@ -1,3 +1,16 @@
+# Content 
+- [Harvesting Kerberos Tickets from Windows](#harvesting-kerberos-tickets-from-windows)
+ - [Mimikatz - Export Tickets](#mimikatz---export-tickets)
+ - [Rubeus - Export Tickets](#rubeus---export-tickets)
+- [Pass the Key or OverPass the Hash](#pass-the-key-or-overpass-the-hash)
+ - [Mimikatz - Extract Kerberos Keys](#mimikatz---extract-kerberos-keys)
+ - [Mimikatz - Pass the Key or OverPass the Hash](#mimikatz---pass-the-key-or-overpass-the-hash)
+ - [Rubeus - Pass the Key or OverPass the Hash](#rubeus---pass-the-key-or-overpass-the-hash)
+- [Pass the Ticket (PtT)](#pass-the-ticket-ptt)
+ - [Rubeus - Pass the Ticket](#rubeus---pass-the-ticket)
+ - [Mimikatz - Pass the Ticket](#mimikatz---pass-the-ticket)
+ - [Mimikatz - PowerShell Remoting with Pass the Ticket](#mimikatz---powershell-remoting-with-pass-the-ticket)
+ - [Rubeus - PowerShell Remoting with Pass the Ticket](#rubeus---powershell-remoting-with-pass-the-ticket)
 
 - On Windows, tickets are processed and stored by the LSASS (Local Security Authority Subsystem Service) process. 
 - Therefore, to get a ticket from a Windows system, you must communicate with LSASS and request it. As a non-administrative user, you can only get your tickets, but as a local administrator, you can collect everything.
@@ -34,7 +47,7 @@ Rubeus.exe dump /nowrap
 
 
 ## Pass the Key or OverPass the Hash
-- The Pass the Key or OverPass the Hash approach converts a hash/key (rc4_hmac, aes256_cts_hmac_sha1, etc.) for a domain-joined user into a full Ticket-Granting-Ticket (TGT).
+- The Pass the Key or OverPass the Hash approach converts a hash/key (rc4_hmac, aes256_cts_hmac_sha1, etc.) for a domain-joined user into a full `Ticket-Granting-Ticket (TGT)`.
 - To forge our tickets, we need to have the user's hash
 - we can use Mimikatz to dump all users Kerberos encryption keys using the module sekurlsa::ekeys. This module will enumerate all key types present for the Kerberos package.
 - once we have access to the `AES256_HMAC` and `RC4_HMAC` keys, we can perform the OverPass the Hash or Pass the Key attack using Mimikatz and Rubeus.
@@ -58,7 +71,7 @@ Rubeus.exe  asktgt /domain:inlanefreight.htb /user:plaintext /aes256:b21c99fc068
 ```
 
 ## Pass the Ticket (PtT)
-Now that we have some Kerberos tickets, we can use them to move laterally within an environment.
+Now that we have some Kerberos tickets , we can get some `TGS` and use them to move laterally within an environment.
 
 ### Rubeus - Pass the Ticket
 ```powershell
