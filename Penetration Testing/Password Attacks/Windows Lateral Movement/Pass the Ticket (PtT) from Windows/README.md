@@ -71,7 +71,7 @@ Rubeus.exe  asktgt /domain:inlanefreight.htb /user:plaintext /aes256:b21c99fc068
 ```
 
 ## Pass the Ticket (PtT)
-Now that we have some Kerberos tickets , we can get some `TGS` and use them to move laterally within an environment.
+Now that we have some Kerberos tickets `TGT` , we can get some `TGS` and use them to move laterally within an environment.
 
 ### Rubeus - Pass the Ticket
 ```powershell
