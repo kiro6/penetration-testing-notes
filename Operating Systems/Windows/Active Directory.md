@@ -198,7 +198,7 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 3. The user presents the TGT to the DC, requesting a Ticket Granting Service (TGS) ticket for a specific service. This is the TGS-REQ. If the TGT is successfully validated, its data is copied to create a TGS ticket.
 4. The TGS is encrypted with the NTLM password hash of the service or computer account in whose context the service instance is running and is delivered to the user in the TGS_REP.
 5. The user presents the TGS to the service, and if it is valid, the user is permitted to connect to the resource (AP_REQ).
-
+6. both TGT and TGS  stored in memory 
 ![Screenshot 2024-04-09 at 15-20-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bab56808-5196-4d76-97ca-44920c058794)
 
 
