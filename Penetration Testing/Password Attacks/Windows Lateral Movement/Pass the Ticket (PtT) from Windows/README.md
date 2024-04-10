@@ -38,6 +38,7 @@ Rubeus.exe dump /nowrap
 - To forge our tickets, we need to have the user's hash
 - we can use Mimikatz to dump all users Kerberos encryption keys using the module sekurlsa::ekeys. This module will enumerate all key types present for the Kerberos package.
 - once we have access to the `AES256_HMAC` and `RC4_HMAC` keys, we can perform the OverPass the Hash or Pass the Key attack using Mimikatz and Rubeus.
+- Modern Windows domains (functional level 2008 and above) use `AES` encryption by default in normal Kerberos exchanges. If we use a `rc4_hmac` (NTLM) hash in a Kerberos exchange instead of an` aes256_cts_hmac_sha1 (or aes128) key`, it may be detected as an "encryption downgrade." 
 
 ### Mimikatz - Extract Kerberos Keys
 
