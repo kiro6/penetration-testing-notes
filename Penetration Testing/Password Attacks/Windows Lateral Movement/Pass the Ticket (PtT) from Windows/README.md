@@ -1,16 +1,16 @@
 # Content 
 - [Harvesting Kerberos Tickets from Windows](#harvesting-kerberos-tickets-from-windows)
- - [Mimikatz - Export Tickets](#mimikatz---export-tickets)
- - [Rubeus - Export Tickets](#rubeus---export-tickets)
+  - [Mimikatz - Export Tickets](#mimikatz---export-tickets)
+  - [Rubeus - Export Tickets](#rubeus---export-tickets)
 - [Pass the Key or OverPass the Hash](#pass-the-key-or-overpass-the-hash)
- - [Mimikatz - Extract Kerberos Keys](#mimikatz---extract-kerberos-keys)
- - [Mimikatz - Pass the Key or OverPass the Hash](#mimikatz---pass-the-key-or-overpass-the-hash)
- - [Rubeus - Pass the Key or OverPass the Hash](#rubeus---pass-the-key-or-overpass-the-hash)
+  - [Mimikatz - Extract Kerberos Keys](#mimikatz---extract-kerberos-keys)
+  - [Mimikatz - Pass the Key or OverPass the Hash](#mimikatz---pass-the-key-or-overpass-the-hash)
+  - [Rubeus - Pass the Key or OverPass the Hash](#rubeus---pass-the-key-or-overpass-the-hash)
 - [Pass the Ticket (PtT)](#pass-the-ticket-ptt)
- - [Rubeus - Pass the Ticket](#rubeus---pass-the-ticket)
- - [Mimikatz - Pass the Ticket](#mimikatz---pass-the-ticket)
- - [Mimikatz - PowerShell Remoting with Pass the Ticket](#mimikatz---powershell-remoting-with-pass-the-ticket)
- - [Rubeus - PowerShell Remoting with Pass the Ticket](#rubeus---powershell-remoting-with-pass-the-ticket)
+  - [Rubeus - Pass the Ticket](#rubeus---pass-the-ticket)
+  - [Mimikatz - Pass the Ticket](#mimikatz---pass-the-ticket)
+  - [Mimikatz - PowerShell Remoting with Pass the Ticket](#mimikatz---powershell-remoting-with-pass-the-ticket)
+  - [Rubeus - PowerShell Remoting with Pass the Ticket](#rubeus---powershell-remoting-with-pass-the-ticket)
 
 - On Windows, tickets are processed and stored by the LSASS (Local Security Authority Subsystem Service) process. 
 - Therefore, to get a ticket from a Windows system, you must communicate with LSASS and request it. As a non-administrative user, you can only get your tickets, but as a local administrator, you can collect everything.
