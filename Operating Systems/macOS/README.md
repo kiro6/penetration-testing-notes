@@ -92,3 +92,23 @@ The Network directory contains files that belong to the network domain. This dir
 
 #### /System
 The System directory contains the system resources required by macOS to run. These files are installed by Apple and shouldn't be modified.
+
+### Unix-Specific Directories
+
+![Screenshot 2024-04-10 at 14-21-56 MacOS Fundamentals](https://github.com/kiro6/penetration-testing-notes/assets/57776872/5f332767-c4dc-4455-8fce-c7d199f9d084)
+
+| Directory  | Description                                                                                           |
+|------------|-------------------------------------------------------------------------------------------------------|
+| /          | Is the root filesystem and contains everything the operating system needs to complete the boot cycle. |
+| /bin       | Is our main storage point for binaries.                                                               |
+| /dev       | Maintains our device-id files that enable the use of hardware devices attached to the system.         |
+| /etc       | /etc contains our system and application configuration files.                                          |
+| /sbin      | Contains all the essential and common administrative binaries we need to keep our systems running smoothly. |
+| /tmp       | The /tmp directory is used by the operating system to store temporary files that do not need to be persistent. |
+| /usr       | This is one of the largest directories on our host. It contains all of the libraries we may need, applications such as FTP, SSH, and even vim. |
+| /var       | This is where we store our system log files, sources for our web servers, backups, and more.           |
+| /private   | Stores critical system files and caches required to operate. They are hidden in the /Private directory to ensure the standard user does not modify them. |
+| /opt       | This is our storage point for any third-party applications or packages we install.                     |
+| /cores     | Contains Core Dumps stored by macOS that are intended for developers to troubleshoot any issues that arise. |
+| /home      | Each user on the system has a subdirectory here for storage. Our user Desktop, Downloads, and Documents folders can be found here. |
+
