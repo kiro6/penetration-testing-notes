@@ -112,3 +112,5 @@ The System directory contains the system resources required by macOS to run. The
 | /cores     | Contains Core Dumps stored by macOS that are intended for developers to troubleshoot any issues that arise. |
 | /home      | Each user on the system has a subdirectory here for storage. Our user Desktop, Downloads, and Documents folders can be found here. |
 
+### File and Directory Permissions
+same as linux 
