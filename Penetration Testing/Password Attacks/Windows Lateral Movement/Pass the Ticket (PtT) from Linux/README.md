@@ -8,6 +8,8 @@ realm list
 
 ### command line - Check if Linux Machine is Domain Joined
 we can also look for other tools used to integrate Linux with Active Directory such as `sssd` or `winbind`. 
+
+#### check whether the Linux server is integrated with AD using PS Command
 ```powershell
 # You might get the output similar to below if the system is integrated with AD using SSSD service.
 $ ps -ef | grep -i "winbind\|sssd"
@@ -17,12 +19,14 @@ root        2141    2140  0 Sep29 ?        00:00:08 /usr/libexec/sssd/sssd_be --
 # You might get the output similar to below if the system is integrated with AD using winbind service.
 $ ps -ef | grep -i "winbind\|sssd"
 root       676 21055  0  2017 ?        00:00:22 winbindd
-
-# Ceck whether the Linux server is integrated with AD using id Command
+```
+#### Check whether the Linux server is integrated with AD using id Command
+```
 $ id daygeek
 uid=1918901106(daygeek) gid=1918900513(domain users) groups=1918900513(domain users)
-
-# check whether the Linux server is integrated with AD using nsswitch.conf file
+```
+#### check whether the Linux server is integrated with AD using nsswitch.conf file
+```
 ## You might get the output similar to below if the system is integrated with AD using SSSD service.
 $ cat /etc/nsswitch.conf | grep -i "sss\|winbind\|ldap"
 
