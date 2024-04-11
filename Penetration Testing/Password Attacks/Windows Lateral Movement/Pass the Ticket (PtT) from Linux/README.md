@@ -1,3 +1,13 @@
+# Content 
+- [Identifying Linux and Active Directory Integration](#identifying-linux-and-active-directory-integration)
+  - [realm - Check If Linux Machine is Domain Joined](#realm---check-if-linux-machine-is-domain-joined)
+  - [command line - Check if Linux Machine is Domain Joined](#command-line---check-if-linux-machine-is-domain-joined) 
+- [Finding Kerberos Tickets in Linux](#finding-kerberos-tickets-in-linux)
+  - [Finding Keytab Files](#finding-keytab-files)
+  - [Finding ccache Files](#finding-ccache-files)
+- [Abusing KeyTab Files](#abusing-keytab-files)
+- [Abusing Keytab ccache](#abusing-keytab-ccache)
+
 
 ## Identifying Linux and Active Directory Integration
 
