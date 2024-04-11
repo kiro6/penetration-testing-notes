@@ -71,3 +71,29 @@ auth        sufficient    pam_ldap.so cached_login use_first_pass
 
 ## Finding Kerberos Tickets in Linux
 
+### Finding Keytab Files
+- A keytab is a file containing pairs of Kerberos principals and encrypted keys (which are derived from the Kerberos password).
+- You can use a keytab file to authenticate to various remote systems using Kerberos without entering a password.
+- Keytab files can be created on one computer and copied for use on other computers because they are not restricted to the systems on which they were initially created.
+ 
+#### Using Find to Search for Files with Keytab in the Name
+- The ticket is represented as a keytab file located by default at /etc/krb5.keytab and can only be read by the root user.
+```powershell
+$ find / -name *keytab* -ls 2>/dev/null
+
+   131610      4 -rw-------   1 root     root         1348 Oct  4 16:26 /etc/krb5.keytab
+   262169      4 -rw-rw-rw-   1 root     root          216 Oct 12 15:13 /opt/specialfiles/carlos.keytab
+```
+#### Identifying Keytab Files in Cronjobs
+- we notice the use of kinit, which means that Kerberos is in use. kinit allows interaction with Kerberos, and its function is to request the user's TGT and store this ticket in the cache (ccache file). 
+- We can use kinit to import a keytab into our session and act as the user.
+
+```powershell
+$ crontab -l
+
+kinit svc_workstations@INLANEFREIGHT.HTB -k -t /home/carlos@inlanefreight.htb/.scripts/svc_workstations.kt
+smbclient //dc01.inlanefreight.htb/svc_workstations -c 'ls'  -k -no-pass > /home/carlos@inlanefreight.htb/script-test-results.txt
+```
+
+
+### Finding ccache Files
