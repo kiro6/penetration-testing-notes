@@ -21,12 +21,12 @@ $ ps -ef | grep -i "winbind\|sssd"
 root       676 21055  0  2017 ?        00:00:22 winbindd
 ```
 #### Check whether the Linux server is integrated with AD using id Command
-```
+```powershell
 $ id daygeek
 uid=1918901106(daygeek) gid=1918900513(domain users) groups=1918900513(domain users)
 ```
 #### check whether the Linux server is integrated with AD using nsswitch.conf file
-```
+```powershell
 ## You might get the output similar to below if the system is integrated with AD using SSSD service.
 $ cat /etc/nsswitch.conf | grep -i "sss\|winbind\|ldap"
 
