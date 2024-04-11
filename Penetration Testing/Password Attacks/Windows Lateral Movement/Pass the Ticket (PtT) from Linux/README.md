@@ -7,6 +7,7 @@
   - [Finding ccache Files](#finding-ccache-files)
 - [Abusing KeyTab Files](#abusing-keytab-files)
 - [Abusing Keytab ccache](#abusing-keytab-ccache)
+- [Linikatz](#linikatz)
 
 
 ## Identifying Linux and Active Directory Integration
