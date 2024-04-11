@@ -41,6 +41,28 @@ passwd:         files ldap
 shadow:         files ldap
 ```
 
+#### check whether the Linux server is integrated with AD using system-auth file
+
+```powershell
+# You might get the output similar to below if the system is integrated with AD using SSSD service.
+$ cat /etc/pam.d/system-auth  | grep -i "pam_sss.so\|pam_winbind.so\|pam_ldap.so"
+# or
+$ cat /etc/pam.d/system-auth-ac  | grep -i "pam_sss.so\|pam_winbind.so\|pam_ldap.so"
+auth        sufficient    pam_sss.so use_first_pass
+
+# You might get the output similar to below if the system is integrated with AD using winbind service.
+$ cat /etc/pam.d/system-auth  | grep -i "pam_sss.so\|pam_winbind.so\|pam_ldap.so"
+# or
+$ cat /etc/pam.d/system-auth-ac  | grep -i "pam_sss.so\|pam_winbind.so\|pam_ldap.so"
+auth        sufficient    pam_winbind.so cached_login use_first_pass
+
+# You might get the output similar to below if the system is integrated with AD using ldap service.
+$ cat /etc/pam.d/system-auth  | grep -i "pam_sss.so\|pam_winbind.so\|pam_ldap.so"
+# or
+$ cat /etc/pam.d/system-auth-ac  | grep -i "pam_sss.so\|pam_winbind.so\|pam_ldap.so"
+auth        sufficient    pam_ldap.so cached_login use_first_pass
+
+```
 
 
 ## Finding Kerberos Tickets in Linux
