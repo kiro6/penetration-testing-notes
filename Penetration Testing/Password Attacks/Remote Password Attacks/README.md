@@ -14,4 +14,8 @@ hydra -L wordlist.txt -P wordlist.txt -u -f SERVER_IP -s PORT http-get /
 
 # for openvpn, rdp, sshkey, vnckey
 crowbar -b rdp -s xx.xxx.xxx.xxx/32 -u johanna -C <full-mutated-password-list
+
+
+# medusa is also awesome for smb
+
 ```
