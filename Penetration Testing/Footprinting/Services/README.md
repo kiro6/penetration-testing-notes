@@ -339,6 +339,7 @@ swaks --from notifications@inlanefreight.com --to employees@inlanefreight.com --
 - enum usernames
 ```
 smtp-user-enum -M VRFY -U username   -t 10.129.247.222  -p 25 -w 60
+smtp-user-enum -M RCPT -U users.list -D inlanefreight.htb -t 10.129.204.164
 ```
 
 ### Service Interaction
