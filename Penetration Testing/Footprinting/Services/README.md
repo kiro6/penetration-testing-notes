@@ -296,9 +296,15 @@ fierce --domain zonetransfer.me # Tools like Fierce can also be used to enumerat
 ```shell
 subfinder -d inlanefreight.com -v
 
-./subbrute inlanefreight.com -s ./names.txt -r ./resolvers.txt   # pure DNS brute-forcing attacks during internal penetration tests on hosts that do not have Internet access.
 
-dig cname example.com # check for cname
+# pure DNS brute-forcing attacks during internal penetration tests on hosts that do not have Internet access.
+git clone https://github.com/TheRook/subbrute.git >> /dev/null 2>&1
+cd subbrute
+"ns1.inlanefreight.com" > ./resolvers.txt
+./subbrute inlanefreight.com -s ./names.txt -r ./resolvers.txt
+
+# after you find subdomains check for cname
+dig cname example.com 
 
 ```
 
