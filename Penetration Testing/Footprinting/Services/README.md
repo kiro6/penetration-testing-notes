@@ -284,6 +284,28 @@ $ sudo umount ./target-NFS
 ```bash
 dnsenum --dnsserver 10.129.14.128 --enum -p 0 -s 0 -o subdomains.txt -f /opt/useful/SecLists/Discovery/DNS/subdomains-top1million-110000.txt inlanefreight.htb
 ```
+#### DIG - AXFR Zone Transfer 
+```shell
+dig AXFR @ns1.inlanefreight.htb inlanefreight.htb
+
+fierce --domain zonetransfer.me # Tools like Fierce can also be used to enumerate all DNS servers of the root domain and scan for a DNS zone transfer
+```
+#### Domain Takeovers & Subdomain Enumeration
+- [subbrute](https://github.com/TheRook/subbrute)
+- [can-i-take-over-xyz](https://github.com/EdOverflow/can-i-take-over-xyz)
+```shell
+subfinder -d inlanefreight.com -v
+
+./subbrute inlanefreight.com -s ./names.txt -r ./resolvers.txt   # pure DNS brute-forcing attacks during internal penetration tests on hosts that do not have Internet access.
+
+dig cname example.com # check for cname
+
+```
+
+#### DNS Spoofing & DNS Cache Poisoning
+- From a local network perspective, an attacker can also perform DNS Cache Poisoning using MITM tools like [Ettercap](https://www.ettercap-project.org/) or [Bettercap](https://www.bettercap.org/).
+
+![Screenshot 2024-04-24 at 11-32-12 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bfc4dc6e-5683-4607-9615-1ec087f6d82a)
 
 ## SMTP
 
