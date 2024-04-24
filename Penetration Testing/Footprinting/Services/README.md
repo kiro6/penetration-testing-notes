@@ -285,6 +285,7 @@ $ sudo umount ./target-NFS
 dnsenum --dnsserver 10.129.14.128 --enum -p 0 -s 0 -o subdomains.txt -f /opt/useful/SecLists/Discovery/DNS/subdomains-top1million-110000.txt inlanefreight.htb
 ```
 #### DIG - AXFR Zone Transfer 
+- [fierce](https://github.com/mschwager/fierce)
 ```shell
 dig AXFR @ns1.inlanefreight.htb inlanefreight.htb
 
