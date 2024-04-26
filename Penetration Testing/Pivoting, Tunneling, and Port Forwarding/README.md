@@ -1,5 +1,8 @@
 
 ## Pivoting
+![PivotingandTunnelingVisualized](https://github.com/kiro6/penetration-testing-notes/assets/57776872/b721b187-e810-4985-b4ce-9b25f0d72fb9)
+
+
 Utilizing multiple hosts to cross network boundaries you would not usually have access to. This is more of a targeted objective. The goal here is to allow us to move deeper into a network by compromising targeted hosts or infrastructure.
 
 ## Tunneling
