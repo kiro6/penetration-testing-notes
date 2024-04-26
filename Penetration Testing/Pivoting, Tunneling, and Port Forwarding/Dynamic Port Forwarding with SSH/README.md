@@ -3,7 +3,7 @@
 
 
 enable dynamic port forwarding 
-```shell
+```zsh
 ssh -D 9050 ubuntu@10.129.202.64
 ```
 route any tool's packets over the port 9050. 
