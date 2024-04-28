@@ -42,6 +42,14 @@ for /L %i in (1 1 254) do ping 172.16.5.%i -n 1 -w 100 | find "Reply"
 1..254 | % {"172.16.5.$($_): $(Test-Connection -count 1 -comp 172.15.5.$($_) -quiet)"}
 ```
 
+### conf check proxychain 
+```
+cat /etc/proxychains.conf
+
+socks4 	127.0.0.1 9050
+
+```
+
 ### Configuring MSF's SOCKS Proxy
 This SOCKS configuration will start a listener on port 9050 and route all the traffic received via our Meterpreter session.
 ```shell
@@ -75,11 +83,17 @@ Auxiliary action:
    ----   -----------
    Proxy  Run a SOCKS proxy server
 ```
-### conf check proxychain 
-```
-cat /etc/proxychains.conf
 
-socks4 	127.0.0.1 9050
+### Confirming Proxy Server is Running
+```shell
+msf6 auxiliary(server/socks_proxy) > jobs
+
+Jobs
+====
+
+  Id  Name                           Payload  Payload opts
+  --  ----                           -------  ------------
+  0   Auxiliary: server/socks_proxy
 ```
 
 ### Creating Routes with AutoRoute
