@@ -61,6 +61,12 @@ Auxiliary action:
    ----   -----------
    Proxy  Run a SOCKS proxy server
 ```
+### conf check proxychain 
+```
+cat /etc/proxychains.conf
+
+socks4 	127.0.0.1 9050
+```
 
 ### Creating Routes with AutoRoute
 Finally, we need to tell our socks_proxy module to route all the traffic via our Meterpreter session. 
