@@ -109,6 +109,12 @@ These are used primarily for email distribution purposes. Distribution groups al
 
 In a small environment, there's really no difference in practicebut in an environment with multiple domains and/or forests, a common approach to managing permissions involves using domain local groups to attach permissions to resources. Then, access is granted via universal groups, which can span across domains within the forest. Finally, global groups containing users are added to the universal groups.
 
+So, the flow would typically be:
+- Permissions are assigned to local groups for specific resources within a domain.
+- Users are added to global groups within their respective domains based on their roles or permissions requirements.
+- These global groups are then added to universal groups, which serve as a way to aggregate permissions across multiple domains within the forest.
+- Finally, the universal groups are granted access to the resources by being added to the appropriate local groups that have the necessary permissions.
+
 
 ### Contacts 
 - In Active Directory, "Contacts" refer to objects used to represent external entities, such as people or resources, who are not part of the Active Directory domain.
