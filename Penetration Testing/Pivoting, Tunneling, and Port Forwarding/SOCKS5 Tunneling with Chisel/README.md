@@ -9,6 +9,10 @@
 - Chisel can create a client-server tunnel connection in a firewall restricted environment.
 
 
+![Screenshot_3](https://github.com/kiro6/penetration-testing-notes/assets/57776872/139f0117-4f36-436d-b4e2-29a9a58f1cec)
+
+
+
 ## Chisel Pivot
 ### Setting Up & Using Chisel
 ```shell
