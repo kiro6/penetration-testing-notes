@@ -25,7 +25,14 @@ $ cd chisel
 $ go build
 ## shrinking the size of the binary
 $ go build -ldflags="-s -w"
-$ upx brute chisel 
+$ upx brute chisel
+
+
+# if u have depend proplems in pivot host
+go build --ldflags '-linkmode external -extldflags "-static"'
+# or install older versions from https://github.com/jpillora/chisel/releases
+wget "https://github.com/jpillora/chisel/releases/download/v1.7.4/chisel_1.7.4_linux_amd64.gz"
+  
 ```
 
 ### Transferring Chisel Binary to Pivot Host
