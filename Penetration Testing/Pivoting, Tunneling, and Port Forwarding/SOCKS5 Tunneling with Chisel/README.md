@@ -15,6 +15,7 @@ $ cd chisel
 $ go build
 ## shrinking the size of the binary
 $ go build -ldflags="-s -w"
+$ upx brute chisel 
 ```
 
 ### 
