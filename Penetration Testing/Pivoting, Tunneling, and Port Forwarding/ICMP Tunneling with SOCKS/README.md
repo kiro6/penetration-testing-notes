@@ -15,7 +15,7 @@ $ git clone https://github.com/utoni/ptunnel-ng.git
 $ sudo ./autogen.sh
 $ sudo make clean
 $ cd src
-$ nano Makefile  # LDFLAGS: -static -lssl -lcrypto
+$ nano Makefile  # LDFLAGS: -static -lssl -lcrypto     adjust the needed libraries as you need but it will make the binary bigger
 $ sudo make -j4 all
 
 
