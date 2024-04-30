@@ -13,12 +13,12 @@ $ git clone https://github.com/utoni/ptunnel-ng.git
 
 # Building Ptunnel-ng with Autogen.sh
 $ sudo ./autogen.sh
+$ sudo make clean
+$ cd src
+$ nano Makefile  # LDFLAGS: -static -lssl -lcrypto
+$ sudo make -j4 all
 
 
-# or
-
-sudo apt install ptunnel
-which ptunnel  
 ```
 
 ### Transferring Ptunnel-ng to the Pivot Host
