@@ -12,7 +12,13 @@ ICMP tunneling encapsulates your traffic within ICMP packets containing echo req
 $ git clone https://github.com/utoni/ptunnel-ng.git
 
 # Building Ptunnel-ng with Autogen.sh
-$ sudo ./autogen.sh 
+$ sudo ./autogen.sh
+
+
+# or
+
+sudo apt install ptunnel
+which ptunnel  
 ```
 
 ### Transferring Ptunnel-ng to the Pivot Host
