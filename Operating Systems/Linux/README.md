@@ -673,3 +673,7 @@ crontab -e
 @reboot echo "cron worked" > ~/cron_output.txt   ## write in the crontab page this will echo this text every time the system boots
 
 ```
+
+# System Files
+
+- **/etc/fstab** :  It serves as a central configuration file that lists the filesystems to be automatically mounted during system boot.
