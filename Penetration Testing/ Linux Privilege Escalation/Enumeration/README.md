@@ -1,6 +1,6 @@
 
+
 # Enumeration
-- [LinEnum tool](https://github.com/rebootuser/LinEnum)
 - OS Version
 - Kernel Version
 - Running Services
@@ -22,3 +22,7 @@ find / -path /proc -prune -o -type d -perm -o+w 2>/dev/null
 ```shell
 find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 ```
+
+# Tools
+- [LinEnum tool](https://github.com/rebootuser/LinEnum)
+- [linPEAS tool](https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS)
