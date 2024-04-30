@@ -1,5 +1,8 @@
 if we have a windows machine to attack and we want to make a pivot 
 
+![Screenshot_4](https://github.com/kiro6/penetration-testing-notes/assets/57776872/e64cd12c-071a-46d8-85a8-8d0d0b92fae6)
+
+
 
 we will need in out attack machine : 
 - [SocksOverRDP x64 Binaries](https://github.com/nccgroup/SocksOverRDP/releases)
