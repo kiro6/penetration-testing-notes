@@ -74,7 +74,7 @@ cat /etc/resolv.conf
 arp -a
 
 # All Hidden Files
-find / -type f -name ".*" -exec ls -l {} \; 2>/dev/null | grep htb-student
+find / -type f -name ".*" -exec ls -l {} \; 2>/dev/null 
 
 # All Hidden Directories
 find / -type d -name ".*" -ls 2>/dev/null
