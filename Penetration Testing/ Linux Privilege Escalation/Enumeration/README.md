@@ -82,6 +82,8 @@ find / -type d -name ".*" -ls 2>/dev/null
 # Temporary Files
 ls -l /tmp /var/tmp /dev/shm
 
+# search the file system for words
+grep -r -l 'HTB{' /
 
 ```
 
