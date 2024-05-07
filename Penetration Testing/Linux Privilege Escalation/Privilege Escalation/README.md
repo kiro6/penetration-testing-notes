@@ -1,5 +1,9 @@
 # Content 
 - [Environment-based Privilege Escalation](#environment-based-privilege-escalation)
+- [Permissions-based Privilege Escalation](#permissions-based-privilege-escalation)
+
+
+check [gtfobins](https://gtfobins.github.io/)
 
 # Environment-based Privilege Escalation
 
@@ -58,8 +62,15 @@ drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
 
 ## Escaping Restricted Shells
 - [escape restricted shells](https://0xffsec.com/handbook/shells/restricted-shells/)
-- [gtfobins](https://gtfobins.github.io/)
+
 
 # Permissions-based Privilege Escalation
 
+```shell
+# find binaries with setuid set
+# It may be possible to reverse engineer the program with the SETUID bit set, identify a vulnerability, and exploit this to escalate our privileges. 
+find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
 
+# find binaries with setgid set
+find / -user root -perm -6000 -exec ls -ldb {} \; 2>/dev/null
+```
