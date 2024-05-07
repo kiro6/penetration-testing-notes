@@ -166,3 +166,15 @@ check for avaialble services and binaries versions to see if there is available 
 
 #### EX: 
 Screen. Version 4.5.0 suffers from a privilege escalation vulnerability due to a lack of a permissions check when opening a log file.
+
+## Cron Job Abuse
+- search for editable cron jobs
+- even if the crontabe is only editable by the root user. You may find a world-writable script that is used in it and run as root 
+- you can monitor the process using [pspy](https://github.com/DominicBreuker/pspy) without sudo privliage to know when the crontabe executed 
+```shell
+# find writable files or directories
+find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
+
+# monitor every seconed 
+pspy64 -pf -i 1000
+```
