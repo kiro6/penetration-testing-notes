@@ -174,6 +174,7 @@ search in the system
 # Configuration Files
 find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
 for l in $(echo ".conf .config .cnf");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "lib\|fonts\|share\|core" ;done
+find / ! -path "*/proc/*" -iname "*config*" -type f 2>/dev/null
 
 ## Credentials in Configuration Files
 for i in $(find / -name *.cnf 2>/dev/null | grep -v "doc\|lib");do echo -e "\nFile: " $i; grep "user\|password\|pass" $i 2>/dev/null | grep -v "\#";done
