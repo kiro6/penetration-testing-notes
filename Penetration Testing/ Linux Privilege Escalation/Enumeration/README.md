@@ -120,4 +120,80 @@ getent group sudo
 - [Uncomplicated Firewall (ufw)](https://wiki.ubuntu.com/UncomplicatedFirewall)
 
 
+## Services & Internals Enumeration
 
+```shell
+# Network Interfaces
+ip a
+
+# Hosts
+cat /etc/hosts
+
+# User's Last Login
+lastlog
+
+#  is currently on the system with us
+who <username>
+finger <username>
+
+# Logged In Users
+w
+
+# history
+history
+
+# Cron
+ls -la /etc/cron.daily/
+
+# Proc
+find /proc -name cmdline -exec cat {} \; 2>/dev/null | tr " " "\n"
+
+# Installed Packages
+apt list --installed | tr "/" " " | cut -d" " -f1,3 | sed 's/[0-9]://g' | tee -a installed_pkgs.list
+
+# Sudo Version
+sudo -V
+
+# Binaries
+ls -l /bin /usr/bin/ /usr/sbin/
+
+# GTFObins exploitable binaries
+for i in $(curl -s https://gtfobins.github.io/ | html2text | cut -d" " -f1 | sed '/^[[:space:]]*$/d');do if grep -q "$i" installed_pkgs.list;then echo "Check GTFO for: $i";fi;done
+
+# Trace System Calls
+strace ping -c1 10.129.112.20
+
+
+# Running Services by User
+ps aux | grep root
+
+```
+
+search in the system 
+```shell
+# Configuration Files
+find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
+for l in $(echo ".conf .config .cnf");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "lib\|fonts\|share\|core" ;done
+
+## Credentials in Configuration Files
+for i in $(find / -name *.cnf 2>/dev/null | grep -v "doc\|lib");do echo -e "\nFile: " $i; grep "user\|password\|pass" $i 2>/dev/null | grep -v "\#";done
+
+# Finding History Files
+find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
+
+
+## Databases
+for l in $(echo ".sql .db .*db .db*");do echo -e "\nDB File extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share\|man";done
+
+## Notes
+find /home/* -type f -name "*.txt" -o ! -name "*.*"
+
+## Scripts
+for l in $(echo ".py .pyc .pl .go .jar .c .sh");do echo -e "\nFile extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share";done
+find / -type f -name "*.sh" 2>/dev/null | grep -v "src\|snap\|share"
+
+## ssh keys
+grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"   ## private
+grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1        ## public
+
+```
