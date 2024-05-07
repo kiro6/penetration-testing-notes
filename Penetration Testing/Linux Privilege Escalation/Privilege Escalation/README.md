@@ -55,3 +55,7 @@ drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .font-unix
 drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
 -rw-rw-r--  1 htb-student htb-student   60 Aug 31 23:11 root.sh
 ```
+
+## Escaping Restricted Shells
+- [escape restricted shells](https://0xffsec.com/handbook/shells/restricted-shells/)
+- [gtfobins](https://gtfobins.github.io/)
