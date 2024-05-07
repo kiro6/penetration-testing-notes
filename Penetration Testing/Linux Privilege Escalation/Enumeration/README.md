@@ -197,8 +197,7 @@ find / -type f -name "*.sh" 2>/dev/null | grep -v "src\|snap\|share"
 find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 
 ## find crontabs
-find /etc -type d -name '*cron*' -exec ls -lah {} \;
-
+find /etc -type d -name '*cron*' -exec sh -c 'echo "Parent Directory: $1"; ls -lah "$1"' sh {} \;
 
 ## ssh keys
 grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"   ## private
