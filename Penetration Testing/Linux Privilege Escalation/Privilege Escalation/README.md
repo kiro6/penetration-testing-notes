@@ -1,9 +1,9 @@
 # Content 
 - [Environment-based Privilege Escalation](#environment-based-privilege-escalation)
 
-## Environment-based Privilege Escalation
+# Environment-based Privilege Escalation
 
-### Path Abuse
+## Path Abuse
 we could replace a common binary such as ls with a malicious script such as a reverse shell.
 
 ```shell
@@ -12,7 +12,7 @@ $ export PATH
 $ echo $PATH
 ```
 
-### Wildcard Abuse
+## Wildcard Abuse
 - [Linux-PrivEsc-Wildcard](https://materials.rangeforce.com/tutorial/2019/11/08/Linux-PrivEsc-Wildcard/)
 
 | Character | Significance                                                   |
@@ -24,7 +24,7 @@ $ echo $PATH
 | -         | A hyphen within brackets will denote a range of characters.   |
 
 
-#### EX: privilege escalation in tar
+### EX: privilege escalation in tar
 
 - cron job
 ```shell
@@ -59,3 +59,7 @@ drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
 ## Escaping Restricted Shells
 - [escape restricted shells](https://0xffsec.com/handbook/shells/restricted-shells/)
 - [gtfobins](https://gtfobins.github.io/)
+
+# Permissions-based Privilege Escalation
+
+
