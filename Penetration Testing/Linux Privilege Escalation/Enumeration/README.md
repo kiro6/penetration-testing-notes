@@ -196,6 +196,10 @@ find / -type f -name "*.sh" 2>/dev/null | grep -v "src\|snap\|share"
 # find writable files or directories
 find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 
+## find crontabs
+find /etc -type d -name '*cron*' -exec ls -lah {} \;
+
+
 ## ssh keys
 grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"   ## private
 grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1        ## public
