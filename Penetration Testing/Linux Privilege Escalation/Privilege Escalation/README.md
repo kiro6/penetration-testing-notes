@@ -1,6 +1,13 @@
 # Content 
 - [Environment-based Privilege Escalation](#environment-based-privilege-escalation)
+    - [Path Abuse](#path-abuse)
+    - [Wildcard Abuse](#wildcard-abuse)
+    - [Escaping Restricted Shells](#escaping-restricted-shells)
 - [Permissions-based Privilege Escalation](#permissions-based-privilege-escalation)
+    - [Special Permissions](#special-permissions)
+    - [Sudo Rights Abuse](#sudo-rights-abuse)
+    - [Privileged Groups](#privileged-groups)
+    - [Capabilities](#capabilities)
 
 
 check [gtfobins](https://gtfobins.github.io/)
