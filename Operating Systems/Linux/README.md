@@ -32,6 +32,8 @@
         - [disown](#disown)
 - [Task Scheduling](#task-scheduling)
     - [Crons](#crons)
+- [System Files](#system-files)
+- [Linux Capabilities](#linux-capabilities)
 
 # File System Hierarchy
 
