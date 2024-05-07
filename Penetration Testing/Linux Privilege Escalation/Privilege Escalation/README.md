@@ -172,6 +172,9 @@ Screen. Version 4.5.0 suffers from a privilege escalation vulnerability due to a
 - even if the crontabe is only editable by the root user. You may find a world-writable script that is used in it and run as root 
 - you can monitor the process using [pspy](https://github.com/DominicBreuker/pspy) without sudo privliage to know when the crontabe executed 
 ```shell
+# Cron
+find /etc -type d -name '*cron*' -exec sh -c 'echo "Parent Directory: $1"; ls -lah "$1"' sh {} \;
+
 # find writable files or directories
 find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 
