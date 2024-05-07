@@ -674,6 +674,86 @@ crontab -e
 
 ```
 
+
 # System Files
 
 - **/etc/fstab** :  It serves as a central configuration file that lists the filesystems to be automatically mounted during system boot.
+
+# Linux Capabilities
+
+| Capability             | Description                                                                                                                     |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| cap_chown              | Allows changing of file ownership.                                                                                              |
+| cap_dac_override       | Allows bypassing of file read, write, and execute permission checks.                                                            |
+| cap_dac_read_search    | Allows reading files outside of a process's permitted directories and searching directories for files outside of a process's permitted directories. |
+| cap_fowner             | Allows changing of file owner.                                                                                                 |
+| cap_fsetid             | Allows setting of the setuid and setgid permission bits.                                                                       |
+| cap_kill               | Allows sending signals to processes owned by others.                                                                           |
+| cap_setgid             | Allows setting of the process's effective group ID to a value other than the real group ID or the saved set group ID.          |
+| cap_setuid             | Allows setting of the process's effective user ID to a value other than the real user ID or the saved set user ID.             |
+| cap_setpcap            | Allows setting of process capabilities.                                                                                        |
+| cap_linux_immutable    | Allows modification of the immutable and append-only flags of files.                                                           |
+| cap_net_bind_service   | Allows binding to network ports below 1024.                                                                                    |
+| cap_net_broadcast      | Allows broadcasting network packets.                                                                                           |
+| cap_net_admin          | Allows various network-related operations.                                                                                     |
+| cap_net_raw            | Allows use of RAW and PACKET sockets.                                                                                          |
+| cap_ipc_lock           | Allows locking of shared memory segments.                                                                                      |
+| cap_ipc_owner          | Allows modification of System V IPC ownerships.                                                                                |
+| cap_sys_module         | Allows loading and unloading of kernel modules.                                                                                |
+| cap_sys_rawio          | Allows use of privileged I/O operations.                                                                                       |
+| cap_sys_chroot         | Allows use of chroot().                                                                                                       |
+| cap_sys_ptrace         | Allows tracing of arbitrary processes using ptrace().                                                                          |
+| cap_sys_pacct          | Allows use of acct().                                                                                                          |
+| cap_sys_admin          | Allows a wide range of system administration operations.                                                                       |
+| cap_sys_boot           | Allows use of reboot().                                                                                                       |
+| cap_sys_nice           | Allows raising of process nice value.                                                                                          |
+| cap_sys_resource       | Allows various system resource management operations.                                                                          |
+| cap_sys_time           | Allows modification of system clock.                                                                                           |
+| cap_sys_tty_config     | Allows configuration of tty devices.                                                                                           |
+| cap_mknod              | Allows creation of special files using mknod().                                                                                |
+| cap_lease              | Allows triggering and revoking file leases.                                                                                    |
+| cap_audit_write        | Allows writing to the audit log via the audit system.                                                                          |
+| cap_audit_control      | Allows configuration of audit system.                                                                                          |
+| cap_setfcap            | Allows setting of file capabilities.                                                                                           |
+| cap_mac_override       | Allows MAC configuration or state changes.                                                                                     |
+| cap_mac_admin          | Allows MAC configuration or state changes.                                                                                     |
+| cap_syslog             | Allows configuration of kernel's syslog (printk behaviour).                                                                    |
+| cap_wake_alarm         | Allows triggering system wake alarms.                                                                                          |
+| cap_block_suspend      | Allows preventing system suspends.                                                                                             |
+| cap_audit_read         | Allows reading the audit log via the audit system.                                                                             |
+
+
+### usage
+
+```shell
+setcap cap_net_bind_service+ep /path/to/executable
+```
+
+```shell
+getcap /path/to/executable
+```
+
+### options
+
+#### **+p (Permitted Privileges):**
+**Usage:**
+- Grants permitted privileges for the specified capability to the executable.
+
+
+**Definition:**
+- Permitted privileges mean that the capability is permitted to the executable, but it doesn't necessarily use it immediately. Instead, it can be used later during execution if needed.
+
+#### **+ep (Effective and Permitted Privileges):**
+**Usage:**
+- Grants both effective and permitted privileges for the specified capability to the executable.
+
+**Definition:**
+- Effective privileges mean that the executable can perform actions that the capability allows when it is executed. Permitted privileges mean that the capability is permitted to the executable, but it doesn't necessarily use it immediately.
+
+#### **+ei (Effective and Inheritable Privileges):**
+**Usage:**
+- Grants both sufficient and inheritable privileges for the specified capability to the executable.
+
+
+**Definition:**
+- Sufficient privileges mean that the executable can perform actions that the capability allows when it is executed. Inheritable privileges mean that any child processes spawned by the executable inherit the capability and can perform the same actions.
