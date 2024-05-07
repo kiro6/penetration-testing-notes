@@ -66,6 +66,7 @@ drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
 
 # Permissions-based Privilege Escalation
 
+## Special Permissions
 ```shell
 # find binaries with setuid set
 # It may be possible to reverse engineer the program with the SETUID bit set, identify a vulnerability, and exploit this to escalate our privileges. 
@@ -74,3 +75,14 @@ find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
 # find binaries with setgid set
 find / -user root -perm -6000 -exec ls -ldb {} \; 2>/dev/null
 ```
+## Sudo Rights Abuse
+
+```shell
+sudo -l 
+```
+
+AppArmor in more recent distributions has predefined the commands used with the postrotate-command, effectively preventing command execution. Two best practices that should always be considered when provisioning sudo rights:
+
+1. Always specify the absolute path to any binaries listed in the sudoers file entry. Otherwise, an attacker may be able to leverage PATH abuse (which we will see in the next section) to create a malicious binary that will be executed when the command runs (i.e., if the sudoers entry specifies cat instead of /bin/cat this could likely be abused).
+
+2. Grant sudo rights sparingly and based on the principle of least privilege. Does the user need full sudo rights? Can they still perform their job with one or two entries in the sudoers file? Limiting the privileged command that a user can run will greatly reduce the likelihood of successful privilege escalation.
