@@ -8,7 +8,11 @@
     - [Sudo Rights Abuse](#sudo-rights-abuse)
     - [Privileged Groups](#privileged-groups)
     - [Capabilities](#capabilities)
-- [Service-based Privilege Escalation]()
+- [Service-based Privilege Escalation](#service-based-privilege-escalation)
+    - [Vulnerable Services](#vulnerable-services)
+    - [Cron Job Abuse](#cron-job-abuse)
+    - []()
+    - []()
 
 
 check [gtfobins](https://gtfobins.github.io/)
