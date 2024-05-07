@@ -86,3 +86,21 @@ AppArmor in more recent distributions has predefined the commands used with the 
 1. Always specify the absolute path to any binaries listed in the sudoers file entry. Otherwise, an attacker may be able to leverage PATH abuse (which we will see in the next section) to create a malicious binary that will be executed when the command runs (i.e., if the sudoers entry specifies cat instead of /bin/cat this could likely be abused).
 
 2. Grant sudo rights sparingly and based on the principle of least privilege. Does the user need full sudo rights? Can they still perform their job with one or two entries in the sudoers file? Limiting the privileged command that a user can run will greatly reduce the likelihood of successful privilege escalation.
+
+## Privileged Groups
+
+### 1) LXC / LXD
+all users are added to the LXD group. Membership of this group can be used to escalate privileges by creating an LXD container, making it privileged, and then accessing the host file system at /mnt/root
+
+### 2) Docker
+- Placing a user in the docker group is essentially equivalent to root level access to the file system without requiring a password. 
+- One example would be running the command `docker run -v /root:/mnt -it ubuntu`. This command create a new Docker instance with the /root directory on the host file system mounted as a volume.
+- Once the container is started we are able to browse to the mounted directory and retrieve or add SSH keys for the root user. 
+
+### 3) Disk
+- Users within the disk group have full access to any devices contained within /dev, such as `/dev/sda1`, which is typically the main device used by the operating system.
+- An attacker with these privileges can use debugfs to access the entire file system with root level privileges. this could be leveraged to retrieve SSH keys, credentials or to add a user.
+
+### 4) ADM
+- Members of the adm group are able to read all logs stored in `/var/log`.
+- This does not directly grant root access, but could be leveraged to gather sensitive data stored in log files or enumerate user actions and running cron jobs.
