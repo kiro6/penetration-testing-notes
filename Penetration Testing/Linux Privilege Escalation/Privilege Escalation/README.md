@@ -19,7 +19,8 @@
     - [Miscellaneous Techniques](#miscellaneous-techniques)
         - [Passive Traffic Capture](#passive-traffic-capture)
         - [Weak NFS Privileges](#weak-nfs-privileges)
-        - [Hijacking Tmux Sessions](#hijacking-tmux-sessions) 
+        - [Hijacking Tmux Sessions](#hijacking-tmux-sessions)
+- [Linux Internals-based Privilege Escalation]() 
 
 
 check [gtfobins](https://gtfobins.github.io/)
@@ -591,4 +592,14 @@ $ ps aux | grep tmux
 $ id
 
 $ tmux -S /shareds
+```
+
+# Linux Internals-based Privilege Escalation
+
+## Kernel Exploits
+check for the kernal version for cve
+```shell
+uname -a
+
+cat /etc/lsb-release 
 ```
