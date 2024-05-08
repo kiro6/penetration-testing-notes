@@ -81,6 +81,7 @@ drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
 # Permissions-based Privilege Escalation
 
 ## Special Permissions
+- check [gtfobins](https://gtfobins.github.io/#+suid)
 ```shell
 # find binaries with setuid set
 # It may be possible to reverse engineer the program with the SETUID bit set, identify a vulnerability, and exploit this to escalate our privileges. 
@@ -90,6 +91,8 @@ find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
 find / -user root -perm -6000 -exec ls -ldb {} \; 2>/dev/null
 ```
 ## Sudo Rights Abuse
+
+- [gtfobins](https://gtfobins.github.io/#+sudo)
 
 ```shell
 sudo -l 
