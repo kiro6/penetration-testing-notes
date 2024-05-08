@@ -11,8 +11,10 @@
 - [Service-based Privilege Escalation](#service-based-privilege-escalation)
     - [Vulnerable Services](#vulnerable-services)
     - [Cron Job Abuse](#cron-job-abuse)
-    - []()
-    - []()
+    - [Containers](#containers)
+        - [Linux Containers](#linux-containers)
+        - [Docker](#docker)
+        - [Kubernetes](#kubernetes)
 
 
 check [gtfobins](https://gtfobins.github.io/)
