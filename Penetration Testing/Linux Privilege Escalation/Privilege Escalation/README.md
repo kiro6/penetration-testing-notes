@@ -15,6 +15,11 @@
         - [Linux Containers](#linux-containers)
         - [Docker](#docker)
         - [Kubernetes](#kubernetes)
+    - [Logrotate](#logrotate)
+    - [Miscellaneous Techniques](#miscellaneous-techniques)
+        - [Passive Traffic Capture](#passive-traffic-capture)
+        - [Weak NFS Privileges](#weak-nfs-privileges)
+        - [Hijacking Tmux Sessions](#hijacking-tmux-sessions) 
 
 
 check [gtfobins](https://gtfobins.github.io/)
