@@ -440,12 +440,24 @@ $ kubeletctl --server 10.129.10.11 exec "cat /root/root/.ssh/id_rsa" -p privesc 
 
 # Logrotate 
 1. we need write permissions on the log files
-2. logrotate must run as a privileged user or root
-3. vulnerable versions:
+```shell
+# find writable files or directories
+find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
+```
+3. logrotate must run as a privileged user or root
+```shell
+ls -l $(which logrotate)
+
+-rwxr-xr-x 1 root root 107712 Nov  6  2022 /usr/sbin/logrotate
+```
+4. vulnerable versions:
     - 3.8.6
     - 3.11.0
     - 3.15.0
     - 3.18.0
+```shell
+logrotate -v
+```
 
 here is the exploit [logrotten](https://github.com/whotwagner/logrotten)
 
