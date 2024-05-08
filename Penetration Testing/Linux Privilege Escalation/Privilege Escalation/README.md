@@ -601,5 +601,9 @@ check for the kernal version for cve
 ```shell
 uname -a
 
-cat /etc/lsb-release 
+cat /etc/lsb-release
+
+searchsploit Linux Kernel 4.15.0
+
+searchsploit Ubuntu 18.04
 ```
