@@ -20,7 +20,12 @@
         - [Passive Traffic Capture](#passive-traffic-capture)
         - [Weak NFS Privileges](#weak-nfs-privileges)
         - [Hijacking Tmux Sessions](#hijacking-tmux-sessions)
-- [Linux Internals-based Privilege Escalation]() 
+- [Linux Internals-based Privilege Escalation](#linux-internals-based-privilege-escalation)
+    - [Kernel Exploits](#kernel-exploits)
+    - [Shared Libraries](#shared-libraries)
+    	- [LD_PRELOAD Privilege Escalation](#ld_preload-privilege-escalation)
+     	- [Shared Object Hijacking](#shared-object-hijacking)
+    - [Python Library Hijacking]()
 
 
 check [gtfobins](https://gtfobins.github.io/)
