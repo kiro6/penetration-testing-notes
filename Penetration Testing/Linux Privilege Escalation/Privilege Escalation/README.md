@@ -25,7 +25,7 @@
     - [Shared Libraries](#shared-libraries)
     	- [LD_PRELOAD Privilege Escalation](#ld_preload-privilege-escalation)
      	- [Shared Object Hijacking](#shared-object-hijacking)
-    - [Python Library Hijacking]()
+    - [Python Library Hijacking](#python-library-hijacking)
 
 
 check [gtfobins](https://gtfobins.github.io/)
