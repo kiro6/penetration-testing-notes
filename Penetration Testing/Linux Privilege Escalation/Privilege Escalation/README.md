@@ -43,6 +43,7 @@ $ echo $PATH
 
 ## Wildcard Abuse
 - [Linux-PrivEsc-Wildcard](https://materials.rangeforce.com/tutorial/2019/11/08/Linux-PrivEsc-Wildcard/)
+- https://book.hacktricks.xyz/linux-hardening/privilege-escalation/wildcards-spare-trick
 
 | Character | Significance                                                   |
 |-----------|----------------------------------------------------------------|
