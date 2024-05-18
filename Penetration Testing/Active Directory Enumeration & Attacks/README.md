@@ -8,6 +8,7 @@
 - [viewdns](https://viewdns.info/)
 - [domaintools](https://whois.domaintools.com/)
 - [domain.glass](https://domain.glass/)
+- [hackertarget zone-transfer](https://hackertarget.com/zone-transfer/)
 - manual using dig
 
 ### Public Data
