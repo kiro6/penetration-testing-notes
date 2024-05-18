@@ -1,6 +1,13 @@
+# Content
+- [Initial Enumeration](#initial-enumeration)
+  - [Basic Info](#basic-info)
+  - [Enumeration of the Domain](#enumeration-of-the-domain)
+  - [Internal AD Username Enumeration](#internal-ad-username-enumeration)
+
 
 # Initial Enumeration
 
+## Basic Info 
 ### IP Space
 - check [BGP Toolkit](https://bgp.he.net/) for ASN and ip ranges
 
@@ -24,7 +31,7 @@
 - [chr3st5an Google-Dorking cheatsheet](https://github.com/chr3st5an/Google-Dorking)
 - [sundowndev Google-Dorking cheatsheet](https://gist.github.com/sundowndev/283efaddbcf896ab405488330d1bbc06)
 
-### Enumeration of the Domain
+## Enumeration of the Domain
 - wireshark / tcpdump
 - responder
 ```shell
@@ -51,7 +58,7 @@ for /L %i in (1 1 254) do ping 172.16.5.%i -n 1 -w 100 | find "Reply"
 - nmap
 
 ## Internal AD Username Enumeration
-### Kerbrute 
+#### Kerbrute 
 
 - [kerbrute](ttps://github.com/ropnop/kerbrute/)
 - [statistically-likely-usernames](https://github.com/insidetrust/statistically-likely-usernames)
