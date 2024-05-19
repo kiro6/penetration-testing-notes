@@ -126,4 +126,9 @@ Invoke-Inveigh Y -NBNS Y -ConsoleOutput Y -FileOutput Y
 - [Inveigh c# version](https://github.com/Kevin-Robertson/Inveigh)
 ```
  .\Inveigh.exe
+
+# Press ESC to enter/exit interactive console
+HELP 
+GET NTLMV2USERNAMES
+GET NTLMV2UNIQUE
 ```
