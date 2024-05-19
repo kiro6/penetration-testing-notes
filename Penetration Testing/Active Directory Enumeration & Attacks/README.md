@@ -69,7 +69,7 @@ kerbrute userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o valid_ad_
 ## or check compiled binaries https://github.com/ropnop/kerbrute/releases/tag/v1.0.3
 ```
 
-# Sniffing out a Foothold
+# Get a Foothold
 
 ## LLMNR/NBT-NS Poisoning
 [Link-Local Multicast Name Resolution](https://datatracker.ietf.org/doc/html/rfc4795) (LLMNR) and [NetBIOS Name Service](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)?redirectedfrom=MSDN) (NBT-NS) are Microsoft Windows components that serve as alternate methods of host identification that can be used when DNS fails. 
