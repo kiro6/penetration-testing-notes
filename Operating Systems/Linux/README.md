@@ -741,16 +741,19 @@ getcap /path/to/executable
 **Usage:**
 - Grants permitted privileges for the specified capability to the executable.
 
-
 **Definition:**
-- Permitted privileges mean that the capability is permitted to the executable, but it doesn't necessarily use it immediately. Instead, it can be used later during execution if needed.
+- Permitted privileges mean that the capability is permitted to the executable, indicating that it has the potential to use it during execution.
+- However, the capability is not necessarily activated immediately. Instead, the executable has the permission to utilize this capability if needed, as specified by the system's security policies.
+- The capability remains available for activation at a later point during execution if required by the program's logic or circumstances.
 
 #### **+ep (Effective and Permitted Privileges):**
 **Usage:**
 - Grants both effective and permitted privileges for the specified capability to the executable.
 
 **Definition:**
-- Effective privileges mean that the executable can perform actions that the capability allows when it is executed. Permitted privileges mean that the capability is permitted to the executable, but it doesn't necessarily use it immediately.
+- Effective privileges mean that the capability is both permitted and immediately utilized by the executable when it is executed. This indicates that the executable can perform actions that the capability allows from the beginning of its execution.
+- The operating system enforces the necessary checks and permissions at runtime, allowing the executable to exercise the capability without requiring explicit activation steps.
+- The capability is actively utilized as part of the executable's primary functionality or operations.
 
 #### **+ei (Effective and Inheritable Privileges):**
 **Usage:**
