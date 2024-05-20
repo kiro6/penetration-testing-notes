@@ -8,7 +8,8 @@
   - [Password Spraying](#password-spraying)
     - [Enumerating & Retrieving Password Policies](#enumerating--retrieving-password-policies)
     - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
-    - [Internal Password Spraying]() 
+    - [Internal Password Spraying](#internal-password-spraying)
+    - []()
 
 
 # Initial Enumeration
@@ -284,3 +285,7 @@ kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  W
 4) We may obtain valid credentials for a user in `domain A` that are valid for a user with the same or similar username in `domain B` or vice-versa.
 5) Sometimes we may only retrieve the `NTLM hash` for the `local administrator account` from the local SAM database. In these instances, we can spray the NT hash across an entire subnet (or multiple subnets) to hunt for local administrator accounts with the same password set.
 6) event ID `4771` which is logged when Kerberos logging is enabled on the Domain Controllers when password spraying against LDAP and kerbros.
+
+#### Pass the Hash , Pass the Ticket and Relay Attacks
+
+check [this section in my repo](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Password%20Attacks/Windows%20Lateral%20Movement)
