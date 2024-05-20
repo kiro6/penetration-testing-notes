@@ -179,12 +179,12 @@ ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "*" | grep -m 
 
 
 #### from windows 
-**Using net.exe**
+- Using net.exe
 ```cmd
 net accounts
 ```
 
-**Using PowerView**
+- Using PowerView 
 ```
 import-module .\PowerView.ps1
 Get-DomainPolicy
