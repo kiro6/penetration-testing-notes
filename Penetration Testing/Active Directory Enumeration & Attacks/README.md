@@ -37,6 +37,9 @@
 - [chr3st5an Google-Dorking cheatsheet](https://github.com/chr3st5an/Google-Dorking)
 - [sundowndev Google-Dorking cheatsheet](https://gist.github.com/sundowndev/283efaddbcf896ab405488330d1bbc06)
 
+#### linkedin usernames
+- [linkedin2username](https://github.com/initstring/linkedin2username)
+
 ## Enumeration of the Domain
 - wireshark / tcpdump
 - responder
