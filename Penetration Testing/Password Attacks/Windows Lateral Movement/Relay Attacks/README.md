@@ -5,7 +5,7 @@ Ntlmv2 has a challenge/response component to it, so each hash is unique and cann
 Ntlmv2 can however be used in relay, but you’ll have to set up a proper relay and capture it again. 
 
 #### steps 
-1) Use crackmapexec‘s genrelay flag to get a list of all hosts that don’t enforce SMB signing - it’ll output a targets list.
+1) Use crackmapexec‘s genrelay flag to get a list of all hosts that **don’t enforce SMB signing** - it’ll output a targets list.
 
 2) Run ntlmrelayx with the target file from above. You may wish to also run it with socks and smb2support flags.
 
