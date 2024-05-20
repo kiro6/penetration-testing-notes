@@ -5,7 +5,10 @@
   - [Internal AD Username Enumeration](#internal-ad-username-enumeration)
 - [Get a Foothold](#get-a-foothold)
   - [LLMNR/NBT-NS Poisoning](#llmnrnbt-ns-poisoning)
-  - [Password Spraying]()
+  - [Password Spraying](#password-spraying)
+    - [Enumerating & Retrieving Password Policies](#enumerating--retrieving-password-policies)
+    - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
+    - [Internal Password Spraying]() 
 
 
 # Initial Enumeration
