@@ -164,6 +164,8 @@ enum4linux-ng -P 172.16.5.5 -oA ilfreight
 **from windows**
 ```cmd
 net use \\DC01\ipc$ "" /u:""
+
+net accounts /domain
 ```
 
 #### 2) LDAP Anonymous Bind
