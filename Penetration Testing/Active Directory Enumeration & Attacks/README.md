@@ -141,7 +141,7 @@ GET NTLMV2UNIQUE
 ## Password Spraying
 ### Enumerating & Retrieving Password Policies
 
-#### SMB NULL Sessions 
+#### 1) SMB NULL Sessions 
 **from linux**
 
 - CrackMapExec
@@ -166,7 +166,7 @@ enum4linux-ng -P 172.16.5.5 -oA ilfreight
 net use \\DC01\ipc$ "" /u:""
 ```
 
-#### LDAP Anonymous Bind
+#### 2) LDAP Anonymous Bind
 - [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump)
 - [windapsearch](https://github.com/ropnop/windapsearch)
 - [ldapsearch](https://docs.ldap.com/ldap-sdk/docs/tool-usages/ldapsearch.html)
@@ -178,7 +178,7 @@ ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "*" | grep -m 
 ```
 
 
-#### from windows 
+#### 3) From windows 
 - Using net.exe
 ```cmd
 net accounts
@@ -191,7 +191,7 @@ Get-DomainPolicy
 ```
 
 ### Enumerating & Retrieving Valid users
-#### SMB NULL Session
+#### 1) SMB NULL Session
 **from linux**
 
 - crackmapexec 
@@ -210,7 +210,7 @@ rpcclient -U "" -N 172.16.5.5
 enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
 ```
 
-#### LDAP Anonymous Bind
+#### 2) LDAP Anonymous Bind
 
 ```shell
 ./windapsearch.py --dc-ip 172.16.5.5 -u "" -U
@@ -218,7 +218,7 @@ enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
 ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
 ```
 
-#### Enumerating Users with Kerbrute
+#### 3) Enumerating Users with Kerbrute
 - This tool uses Kerberos Pre-Authentication for password spraying, which is faster and stealthier than traditional methods.
 - It avoids generating Windows event ID `4625` for `logon failures`.
 - The tool sends TGT requests without Kerberos Pre-Authentication to identify valid usernames: a PRINCIPAL UNKNOWN error means the username is invalid, while a prompt for `Pre-Authentication` means the username exists.
