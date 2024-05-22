@@ -103,7 +103,7 @@ Group Policy Objects (GPOs) can be linked to OUs to apply specific configuration
 - They are created automatically after adding a security principal to a group.
 - Every foreign security principal is a placeholder object that holds the SID of the foreign object (an object that belongs to another forest.)
 - Windows uses this SID to resolve the object's name via the trust relationship.
-- FSPs are created in a specific container named ForeignSecurityPrincipals with a distinguished name like cn=ForeignSecurityPrincipals,dc=inlanefreight,dc=local.
+- FSPs are created in a specific container named ForeignSecurityPrincipals with a distinguished name like `CN=User1,ForeignSecurityPrincipals,DC=domain1,DC=com`.
 
 ### Users
 - Users are considered leaf objects, which means that they cannot contain any other objects within them
