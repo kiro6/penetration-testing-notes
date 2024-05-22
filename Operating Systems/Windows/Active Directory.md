@@ -4,9 +4,17 @@
 - [Group Policy Objects](#group-policy-objects)
   - [GPO types](#gpo-types)   
 - [Active Directory Objects](#active-directory-objects)
+  - [Domain](#domain)
+  - [Domain Controllers](#domain-controllers)
+  - [Sites](#sites)
+  - [Built-in](#built-in)
+  - [Foreign Security Principals](#foreign-security-principals)
   - [Users](#users)
+  - [Computers](#computers)
   - [Groups](#groups)
   - [Contacts](#contacts)
+  - [Printers](#printers)
+  - [Shared Folders](#shared-folders)
 - [Distinguished Name & Relative Distinguished Name](#distinguished-name--relative-distinguished-name)
 - [Flexible Single Master Operations(FSMO) Roles](#flexible-single-master-operationsfsmo-roles)
 - [Active Directory Protocols](#active-directory-protocols)
@@ -103,7 +111,7 @@ Group Policy Objects (GPOs) can be linked to OUs to apply specific configuration
 - They are created automatically after adding a security principal to a group.
 - Every foreign security principal is a placeholder object that holds the SID of the foreign object (an object that belongs to another forest.)
 - Windows uses this SID to resolve the object's name via the trust relationship.
-- FSPs are created in a specific container named ForeignSecurityPrincipals with a distinguished name like `CN=User1,ForeignSecurityPrincipals,DC=domain1,DC=com`.
+- FSPs are created in a specific container named ForeignSecurityPrincipals with a distinguished name like `CN=ForeignSecurityPrincipals,DC=domain1,DC=com` or for a user in it `CN=User1,ForeignSecurityPrincipals,DC=domain1,DC=com`.
 
 ### Users
 - Users are considered leaf objects, which means that they cannot contain any other objects within them
