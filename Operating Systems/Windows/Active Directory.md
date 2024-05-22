@@ -78,6 +78,33 @@ Group Policy Objects (GPOs) can be linked to OUs to apply specific configuration
 
 ## Active Directory Objects 
 
+
+### Domain
+- A domain is the structure of an AD network. Domains contain objects such as users and computers, which are organized into container objects: groups and OUs.
+- Every domain has its own separate database and sets of policies that can be applied to any and all objects within the domain.
+
+### Domain Controllers
+- Domain Controllers are essentially the brains of an AD network.
+- They handle authentication requests, verify users on the network, and control who can access the various resources in the domain.
+- All access requests are validated via the domain controller and privileged access requests are based on predetermined roles assigned to users.
+- It also enforces security policies and stores information about every other object in the domain.
+
+### Sites
+- A site in AD is a set of computers across one or more subnets connected using high-speed links. 
+- They are used to make replication across domain controllers run efficiently.
+
+### Built-in
+- In AD, built-in is a container that holds default groups in an AD domain. They are predefined when an AD domain is created.
+
+
+### Foreign Security Principals
+- A foreign security principal (FSP) is an object created in AD to represent a security principal that belongs to a trusted external forest.
+- They are created when an object such as a user, group, or computer from an external (outside of the current) forest is added to a group in the current domain.
+- They are created automatically after adding a security principal to a group.
+- Every foreign security principal is a placeholder object that holds the SID of the foreign object (an object that belongs to another forest.)
+- Windows uses this SID to resolve the object's name via the trust relationship.
+- FSPs are created in a specific container named ForeignSecurityPrincipals with a distinguished name like cn=ForeignSecurityPrincipals,dc=inlanefreight,dc=local.
+
 ### Users
 - Users are considered leaf objects, which means that they cannot contain any other objects within them
 - A user object is considered a security principal and has a security identifier (SID) and a global unique identifier (GUID).
@@ -116,6 +143,11 @@ So, the flow would typically be:
 - Finally, the universal groups are granted access to the resources by being added to the appropriate local groups that have the necessary permissions.
 
 
+### Computers
+- A computer object is any computer joined to the AD network (workstation or server). 
+- Computers are leaf objects because they do not contain other objects. However, they are considered `security principals` and have a `SID and a GUID` .
+- Like users, they are prime targets for attackers since full administrative access to a computer (as the all-powerful NT AUTHORITY\SYSTEM account) grants similar rights to a standard domain user and can be used to perform the majority of the enumeration tasks that a user account can (save for a few exceptions across domain trusts.)
+
 ### Contacts 
 - In Active Directory, "Contacts" refer to objects used to represent external entities, such as people or resources, who are not part of the Active Directory domain.
 - They are leaf objects and are NOT security principals (securable objects), so they don't have a SID, only a GUID. 
@@ -124,6 +156,23 @@ So, the flow would typically be:
 
 
 ![Screenshot_6](https://github.com/kiro6/penetration-testing-notes/assets/57776872/7b6c6d9f-6c52-47dc-96ed-60270d6b042e)
+
+
+### Printers
+- A printer object points to a printer accessible within the AD network. Like a contact, a printer is a leaf object and `not a security principal`, so it only has a `GUID`. 
+- Printers have attributes such as the printer's name, driver information, port number, etc.
+
+### Shared Folders
+- A shared folder object points to a shared folder on the specific computer where the folder resides.
+- Shared folders can have stringent access control applied to them and can be either accessible to everyone (even those without a valid AD account), open to only authenticated users (which means anyone with even the lowest privileged user account OR a computer account (NT AUTHORITY\SYSTEM) could access it), or be locked down to only allow certain users/groups access. Anyone not explicitly allowed access will be denied from listing or reading its contents.
+- Shared folders are NOT security principals and only have a GUID. 
+- A shared folder's attributes can include the name, location on the system, security access rights.
+
+### Organizational Units
+[Organizational unit](#organizational-unit)
+
+
+
 
 
 ## Distinguished Name & Relative Distinguished Name
