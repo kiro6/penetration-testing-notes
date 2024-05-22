@@ -194,6 +194,8 @@ So, the flow would typically be:
 ## Flexible Single Master Operations(FSMO) Roles
 Microsoft introduced the concept of FSMO roles, which designate specific domain controllers within the Active Directory environment to perform certain critical operations.
 
+Think of it of a way to seperate servcices instead of runing this on a single machine when a DC server is assigned to any role it will a have the servcices related to that role runing on it 
+
 
 
 ### Per Forest
