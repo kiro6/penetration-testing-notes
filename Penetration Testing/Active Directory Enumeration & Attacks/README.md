@@ -330,3 +330,13 @@ Action              : Deny
 PS C:\user> $ExecutionContext.SessionState.LanguageMode
 ```
 ## LAPS
+- The Microsoft Local Administrator Password Solution (LAPS) is used to randomize and rotate local administrator passwords on Windows hosts and prevent lateral movement. 
+- We can enumerate what domain users can read the LAPS password set for machines with LAPS installed and what machines do not have LAPS installed.
+
+**check using [LAPSToolkit](https://github.com/leoloobeek/LAPSToolkit)**
+```
+Find-LAPSDelegatedGroups
+Find-AdmPwdExtendedRights
+Get-LAPSComputers
+
+```
