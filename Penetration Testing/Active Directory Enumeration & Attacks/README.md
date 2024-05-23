@@ -289,3 +289,44 @@ kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  W
 ### Pass the Hash , Pass the Ticket and Relay Attacks
 
 check [this section in my repo](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Password%20Attacks/Windows%20Lateral%20Movement)
+
+# Deeper Down Digging 
+## Enumerating Security Controls
+
+### Windows Defender
+- **Checking the Status of Defender with Get-MpComputerStatus**
+```powershell
+PS C:\user> Get-MpComputerStatus
+```
+### AppLocker
+AppLocker is Microsoft's application whitelisting solution and gives system administrators control over which applications and files users can run. It provides granular control over executables, scripts, Windows installer files, DLLs, packaged apps, and packed app installers
+
+
+Organizations also often focus on blocking the PowerShell.exe executable, but forget about the other[PowerShell executable locations](https://www.powershelladmin.com/wiki/PowerShell_Executables_File_System_Locations.php) such as `%SystemRoot%\SysWOW64\WindowsPowerShell\v1.0\powershell.exe` or `PowerShell_ISE.exe`
+
+
+**Check Using Get-AppLockerPolicy cmdlet**
+
+```
+PS C:\user> Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+
+PathConditions      : {%SYSTEM32%\WINDOWSPOWERSHELL\V1.0\POWERSHELL.EXE}
+PathExceptions      : {}
+PublisherExceptions : {}
+HashExceptions      : {}
+Id                  : 3d57af4a-6cf8-4e5b-acfc-c2c2956061fa
+Name                : Block PowerShell
+Description         : Blocks Domain Users from using PowerShell on workstations
+UserOrGroupSid      : S-1-5-21-2974783224-3764228556-2640795941-513
+Action              : Deny
+
+```
+
+## PowerShell Constrained Language Mode
+- PowerShell Constrained Language Mode locks down many of the features needed to use PowerShell effectively, such as blocking COM objects, only allowing approved .NET types, XAML-based workflows, PowerShell classes, and more. 
+- We can quickly enumerate whether we are in Full Language Mode or Constrained Language Mode.
+
+```powershell
+PS C:\user> $ExecutionContext.SessionState.LanguageMode
+```
+## LAPS
