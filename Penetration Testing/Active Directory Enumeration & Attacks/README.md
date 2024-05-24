@@ -10,6 +10,10 @@
     - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
     - [Internal Password Spraying](#internal-password-spraying)
     - [Pass the Hash , Pass the Ticket and Relay Attacks](#pass-the-hash--pass-the-ticket-and-relay-attacks)
+- [Deeper Down Digging](#deeper-down-digging)
+  - [Enumerating Security Controls](#enumerating-security-controls)
+  - [Credentialed Enumeration - from Linux](#credentialed-enumeration---from-linux)
+  - [Credentialed Enumeration - from Windows]() 
 
 
 # Initial Enumeration
