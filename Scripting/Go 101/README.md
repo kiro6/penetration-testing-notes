@@ -1,4 +1,13 @@
 # Content
+- [Variables](#variables)
+- [Loops](#loops)
+- [if condtions](#if-condtions)
+- [packages](#packages)
+- [Functions](#functions)
+- [custom data types](#custom-data-types)
+- [Pointers](#pointers)
+- [Pointer receivers vs Value](#pointer-receivers-vs-value)
+
 
 ## Variables
 - declare variables types
