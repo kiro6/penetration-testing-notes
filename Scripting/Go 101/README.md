@@ -199,3 +199,34 @@ func main() {
 
 
 ```
+
+## Pointers 
+```
+package main
+
+import "fmt"
+
+func main() {
+	var pnt *int
+
+	i := 15
+
+	pnt = &i
+
+	// Address of pnt
+	fmt.Println("the Address of pnt", &pnt)
+	// Address of i which is stored in pnt
+	fmt.Println("Address of i : ", pnt)
+	// The value of i which is stored in address that the pnt store it
+	fmt.Println("Value of i: ", *pnt)
+}
+
+```
+
+```
+Pointer Variable               Memory Address (points to)              Stored Value
++--------------+          +--------------------------------+          +-------------+
+|      ptr     |  ----->  |  Memory location of the value |  ----->  |   42        |
++--------------+          +--------------------------------+          +-------------+
+
+```
