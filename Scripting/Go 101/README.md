@@ -230,3 +230,37 @@ Pointer Variable               Memory Address (points to)              Stored Va
 +--------------+          +--------------------------------+          +-------------+
 
 ```
+- **Pointer receivers**
+
+```go 
+package main
+
+type person struct {
+	name string
+	age  int
+}
+
+func (p *person) changeNameWithPointerReciver() {
+	p.name = "Bob"
+}
+
+func (p person) changeName() {
+	p.name = "Bob"
+}
+
+func main() {
+	p := person{name: "Alice", age: 30}
+	println(p.name, p.age)
+	p.changeName()
+	println(p.name, p.age)
+	p.changeNameWithPointerReciver()
+	println(p.name, p.age)
+
+}
+
+
+
+Alice 30
+Alice 30
+Bob 30
+```
