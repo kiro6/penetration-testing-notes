@@ -30,6 +30,12 @@ func main() {
 		return
 	}
 
+	// Follow Redirects 
+	// if err := client.DoRedirects(req, resp, 5); err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	return
+	// }
+
 	// Print response status code
 	fmt.Println("Status code:", resp.StatusCode())
 
