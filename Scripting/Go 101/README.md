@@ -230,7 +230,9 @@ Pointer Variable               Memory Address (points to)              Stored Va
 +--------------+          +--------------------------------+          +-------------+
 
 ```
-- **Pointer receivers**
+
+
+## Pointer receivers vs Value
 
 ```go 
 package main
