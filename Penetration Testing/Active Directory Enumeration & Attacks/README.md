@@ -396,5 +396,6 @@ sudo bloodhound-python -u 'forend' -p 'Klmcargo2' -ns 172.16.5.5 -d inlanefreigh
 ls
 sudo neo4j start 
 zip -r ilfreight_bh.zip *.json
-## upload zip file in neo4j
+## upload zip file in bloodhound
+bloodhound
 ```
