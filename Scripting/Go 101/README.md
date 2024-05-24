@@ -201,7 +201,7 @@ func main() {
 ```
 
 ## Pointers 
-```
+```go
 package main
 
 import "fmt"
