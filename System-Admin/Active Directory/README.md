@@ -1,4 +1,11 @@
-## How Start Pssession between mangment host and DC
+
+
+# Setup Active Directory on windows server core using powershell
+```powershell
+
+```
+
+# How Start Pssession between mangment host and DC
 
 - on DC
 
@@ -22,3 +29,5 @@ Get-PSSession
 
 Enter-PSSession 2 # pssession id
 ```
+
+
