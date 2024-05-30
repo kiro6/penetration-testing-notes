@@ -372,10 +372,16 @@ sudo crackmapexec smb 172.16.5.5 -u forend -p Klmcargo2 -M spider_plus --share '
 #### Psexec.py
 - The tool creates a remote service by uploading a randomly-named executable to the ADMIN$ share on the target host. 
 - It then registers the service via RPC and the Windows Service Control Manager. Once established, communication happens over a named pipe, providing an interactive remote shell as SYSTEM on the victim host.
+- On a non-domain join computer, you must have a local admin user. You will use that username when connecting to the machine via psexec.
+- If the computer is domain joined, then you will want to use either a local administrator on the target machine or a domain administrator account.
+- The machine must have the administrative share open on the computer and the user you are connecting as must have permissions to the share. (Administrators)
+- You must have certain firewall rules in place. (Again, something that is normally turned on on a domain join.)
+
 
 ```
 psexec.py inlanefreight.local/wley:'transporter@4'@172.16.5.125  
 ```
+
 #### wmiexec.py
 - it runs as the local admin user we connected 
 - each command issued will execute a new cmd.exe from WMI and execute your command. 
