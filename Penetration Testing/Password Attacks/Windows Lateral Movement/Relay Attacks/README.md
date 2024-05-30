@@ -1,8 +1,8 @@
 
 
 
-Ntlmv2 has a challenge/response component to it, so each hash is unique and cannot be used in pass-the-hash.  
-Ntlmv2 can however be used in relay, but you’ll have to set up a proper relay and capture it again. 
+Ntlmv1/2 has a challenge/response component to it, so each hash is unique and cannot be used in pass-the-hash.  
+Ntlmv1/2 can however be used in relay, but you’ll have to set up a proper relay and capture it again. 
 
 #### steps 
 1) Use crackmapexec‘s genrelay flag to get a list of all hosts that **don’t enforce SMB signing** - it’ll output a targets list.
