@@ -8,8 +8,17 @@
 
 
 
-A Pass the Hash (PtH) attack is a technique where an attacker uses a password hash instead of the plain text password for authentication.
+**A Pass the Hash (PtH) attack is a technique where an attacker uses a password hash instead of the plain text password for authentication.**
 
+**Notes:**
+- If the target system you are passing the hash to, has the following registry key/value/data set to 0x1, pass the hash will work even for accounts that are not RID 500 (built-in Administrator account):
+```
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\LocalAccountTokenFilterPoli
+```
+- PtH only work on NTLMv1 hashes
+- NTLMv2 hashes needs to be relyed by non-signed SMB sessions
+
+****
 
 ## Pass the Hash with Mimikatz (Windows)
 Mimikatz has a module named sekurlsa::pth that allows us to perform a Pass the Hash attack by starting a process using the hash of the user's password.
