@@ -19,7 +19,9 @@
 1) get Kerberos keys
 2) use Kerberos keys to get TGT
 3) use TGT to get TGS
+
 or 
+
 1) if admin dump TGS from memory 
 
 ## Harvesting Kerberos Tickets from Windows
