@@ -157,7 +157,7 @@ GET NTLMV2UNIQUE
 
 - CrackMapExec
 ```
-crackmapexec smb 172.16.5.5 -u avazquez -p Password123 --pass-pol
+crackmapexec smb 172.16.5.5 -u "" -p "" --pass-pol
 ```
 
 - rpcclient
