@@ -15,8 +15,8 @@
 ```
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\LocalAccountTokenFilterPoli
 ```
-- PtH only work on NTLMv1 hashes
-- NTLMv2 hashes needs to be relyed by non-signed SMB sessions
+- PtH only work on NT  hashes
+- NTLMv1/2 hashes needs to be relyed by non-signed SMB sessions check [Relay Attacks](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Password%20Attacks/Windows%20Lateral%20Movement/Relay%20Attacks)
 
 ****
 
