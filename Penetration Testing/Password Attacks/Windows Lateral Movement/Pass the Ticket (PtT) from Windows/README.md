@@ -17,9 +17,8 @@
 
 ## Harvesting Kerberos Tickets from Windows
 We need a valid Kerberos ticket to perform a Pass the Ticket (PtT). It can be:
-
-- Service Ticket (TGS - Ticket Granting Service) to allow access to a particular resource.
 - Ticket Granting Ticket (TGT), which we use to request service tickets to access any resource the user has privileges.
+- Service Ticket (TGS - Ticket Granting Service) to allow access to a particular resource.
 
 
 
@@ -46,7 +45,7 @@ Rubeus.exe dump /nowrap
 ```
 
 
-## Pass the Key or OverPass the Hash
+## Pass the Key or OverPass the Hash (Get `TGT`)
 - The Pass the Key or OverPass the Hash approach converts a hash/key (rc4_hmac, aes256_cts_hmac_sha1, etc.) for a domain-joined user into a full `Ticket-Granting-Ticket (TGT)`.
 - To forge our tickets, we need to have the user's hash
 - we can use Mimikatz to dump all users Kerberos encryption keys using the module sekurlsa::ekeys. This module will enumerate all key types present for the Kerberos package.
@@ -60,12 +59,12 @@ mimikatz.exe privilege::debug "sekurlsa::ekeys"
 ```
 after we got the keys we can use Mimikatz or Rubeus to Get the `TGT`
 
-### Mimikatz - Pass the Key or OverPass the Hash (Get `TGT`)
+### Mimikatz - Pass the Key or OverPass the Hash 
 This will create a new cmd.exe window that we can use to request access to any service we want in the context of the target user.
 ```powershell
 mimikatz.exe privilege::debug "sekurlsa::pth /domain:inlanefreight.htb /user:plaintext /ntlm:3f74aa8f08f712f09cd5177b5c1ce50f"
 ```
-### Rubeus - Pass the Key or OverPass the Hash (Get `TGT`)
+### Rubeus - Pass the Key or OverPass the Hash 
 Note: Mimikatz requires administrative rights to perform the Pass the Key/OverPass the Hash attacks, while Rubeus doesn't.
 
 ```powershell
