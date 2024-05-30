@@ -226,7 +226,7 @@ enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
 #### 2) LDAP Anonymous Bind
 
 ```shell
-./windapsearch.py --dc-ip 172.16.5.5 -u "" -U
+./windapsearch.py --dc-ip 172.16.5.5 --dc-ip -u "" -U
 
 ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
 ```
