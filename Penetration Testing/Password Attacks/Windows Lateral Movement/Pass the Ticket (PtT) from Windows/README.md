@@ -15,6 +15,13 @@
 - On Windows, tickets are processed and stored by the LSASS (Local Security Authority Subsystem Service) process. 
 - Therefore, to get a ticket from a Windows system, you must communicate with LSASS and request it. As a non-administrative user, you can only get your tickets, but as a local administrator, you can collect everything.
 
+## Steps 
+1) get Kerberos keys
+2) use Kerberos keys to get TGT
+3) use TGT to get TGS
+or 
+1) if admin dump TGS from memory 
+
 ## Harvesting Kerberos Tickets from Windows
 We need a valid Kerberos ticket to perform a Pass the Ticket (PtT). It can be:
 - Ticket Granting Ticket (TGT), which we use to request service tickets to access any resource the user has privileges.
