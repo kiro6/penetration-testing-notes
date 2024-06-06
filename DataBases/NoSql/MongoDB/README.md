@@ -348,6 +348,7 @@ db.coll.unhideIndex("name_1")
 - **$or**: Joins query clauses with a logical OR.
 - **$not**: Inverts the effect of a query expression.
 - **$nor**: Joins query clauses with a logical NOR.
+- **$where**: Matches documents based on JavaScript expression.
 
 ### Element Operators:
 - **$exists**: Matches documents that contain the specified field.
