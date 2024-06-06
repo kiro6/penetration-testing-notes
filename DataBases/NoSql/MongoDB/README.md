@@ -1,3 +1,18 @@
+# Content
+- [Database Commanda](#database-commanda)
+- [Collection Commands](#collection-commands)
+   - [General](#general)
+   - [Count](#count)
+   - [Insert](#insert)
+   - [Read](#read)
+   - [Update](#update)
+   - [Replace](#replace)
+   - [Delete](#delete)
+   - [Indexes](#indexes)
+- [Data Types](#data-types)
+- [Operators](#operators)
+
+
 
 ## Database Commanda
 
@@ -290,7 +305,7 @@ db.coll.unhideIndex("name_1")
 ```
 
 
-## data Types
+## Data Types
 
 ```
 1: Double
