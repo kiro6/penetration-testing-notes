@@ -260,7 +260,7 @@ db.coll.findOneAndDelete({"name": "Max"})
 ```
 
 ### Indexes
-```
+```js
 db.coll.getIndexes()
 db.coll.getIndexKeys()
 
