@@ -494,3 +494,14 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 
 
 ```
+
+### SharpView
+- [BC-SECURITY version of PowerView](https://github.com/BC-SECURITY/Empire/blob/main/empire/server/data/module_source/situational_awareness/network/powerview.ps1)
+- [.NET port of PowerView](https://github.com/tevora-threat/SharpView?tab=readme-ov-file)
+
+```
+.\SharpView.exe Get-DomainUser -Identity forend
+
+
+
+```
