@@ -726,6 +726,15 @@ dsquery * -filter "(&(objectCategory=person)(objectClass=user)(userAccountContro
 # Searching for Domain Controllers
 dsquery * -filter "(userAccountControl:1.2.840.113556.1.4.803:=8192)" -limit 5 -attr sAMAccountName
 
+# search for a disabled user with distinguishedName
+dsquery * -filter "(&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2)(distinguishedName=CN=Betty Ross,OU=IT Admins,OU=IT,OU=HQ-NYC,OU=Employees,OU=Corp,DC=INLANEFREIGHT,DC=LOCAL))" -attr distinguishedName userAccountControl description
+
+# search for user in Administrators group and have the "PASSWD_NOTREQD" flag set
+dsquery * -filter  (&(objectClass=user)(memberOf=CN=Administrators,CN=Builtin,DC=yourdomain,DC=com)(userAccountControl:1.2.840.113556.1.4.803:=32)) -attr distinguishedName userAccountControl description
+
+# disabled account user with admin rights
+dsquery * -filter "(&(objectCategory=user)(userAccountControl:1.2.840.113556.1.4.803:=2)(adminCount=1)(description=*))" -limit 5 -attr SAMAccountName description
+
 ```
 
 #### LDAP Filtering Explained
