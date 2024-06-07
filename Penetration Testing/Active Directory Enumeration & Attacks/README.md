@@ -520,3 +520,6 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 
 bloodhound 
 ```
+
+## Living Off the Land
+This can also be a more stealthy approach and may not create as many log entries , also when there is noway to upload the tools
