@@ -510,3 +510,13 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 ```powershell
 .\Snaffler.exe  -d INLANEFREIGHT.LOCAL -s -v data
 ```
+
+### BloodHound
+- [SharpHound .NET](https://github.com/BloodHoundAD/SharpHound)
+- [SharpHound powershell](https://github.com/BloodHoundAD/BloodHound/blob/master/Collectors/SharpHound.ps1)
+
+```powershell
+.\SharpHound.exe -c All --zipfilename ILFREIGHT
+
+bloodhound 
+```
