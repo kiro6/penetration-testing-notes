@@ -608,6 +608,8 @@ Get-MpComputerStatus
 
 ### Net Commands
 
+- `net1` instead of `net` will execute the same functions without the potential trigger from the net string.
+
 | Command                                                       | Description                                                                                             |
 |---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | net accounts                                                  | Information about password requirements                                                                 |
@@ -633,3 +635,111 @@ Get-MpComputerStatus
 | net view /domain                                              | List of PCs of the domain                                                                               |
 
 
+### check other users logged in the system 
+
+```powershell
+qwinsta
+```
+
+### Dsquery
+- `dsquery` will exist on any host with the `Active Directory Domain Services Role` installed
+
+**User Search**
+```powershell
+# Find all user accounts in the domain
+dsquery user
+
+# Find user accounts by name, wildcard * can be used
+dsquery user -name "John*"
+
+# Find user accounts by SAM account name
+dsquery user -samid johndoe
+
+# Find user accounts by description
+dsquery user -desc "Administrator"
+
+# Find user accounts that have been inactive for a certain number of weeks
+dsquery user -inactive 4
+
+# Find all disabled user accounts
+dsquery user -disabled
+
+# Find user accounts that have not changed their password in a certain number of days
+dsquery user -stalepwd 30
+
+# Find user accounts in a specific organizational unit (OU)
+dsquery user "OU=Employees,DC=example,DC=com"
+
+# Find user accounts with a specific email address
+dsquery user -email "john.doe@example.com"
+
+# Find user accounts by department
+dsquery user -dept "IT Department"
+
+# Combining multiple criteria: find users by name and inactive status
+dsquery user -name "John*" -inactive 4
+
+```
+
+**Computer Search**
+```powershell
+# Find all computer accounts in the domain
+dsquery computer
+
+# Find computer accounts by name, wildcard * can be used
+dsquery computer -name "Server*"
+
+# Find computer accounts by description
+dsquery computer -desc "Web Server"
+
+# Find computer accounts that have been inactive for a certain number of weeks
+dsquery computer -inactive 4
+
+# Find all disabled computer accounts
+dsquery computer -disabled
+
+# Find computer accounts in a specific organizational unit (OU)
+dsquery computer "OU=Servers,DC=example,DC=com"
+
+# Find computer accounts by operating system
+dsquery computer -o "Windows Server 2016*"
+
+# Find computer accounts by their location attribute
+dsquery computer -loc "Building 1"
+
+# Combining multiple criteria: find computers by name and inactive status
+dsquery computer -name "Workstation*" -inactive 8
+```
+
+**Wildcard Search**
+```powershell
+# iew all objects in an OU
+dsquery * "CN=Users,DC=INLANEFREIGHT,DC=LOCAL"
+
+```
+
+**dsquery with LDAP search filters**
+```powershell
+# Users With Specific Attributes Set (PASSWD_NOTREQD)
+dsquery * -filter "(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32))" -attr distinguishedName userAccountControl
+
+# Searching for Domain Controllers
+dsquery * -filter "(userAccountControl:1.2.840.113556.1.4.803:=8192)" -limit 5 -attr sAMAccountName
+
+```
+
+#### LDAP Filtering Explained
+- [LDAP Matching Rules](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/4e638665-f466-4597-93c4-12f2ebfabab5)
+- [UserAccountControl flags](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/useraccountcontrol-manipulate-account-properties)
+
+
+in `userAccountControl:1.2.840.113556.1.4.803:=8192`  
+
+- in `userAccountControl` part we say we look in the userAccountControl object attributes the
+- in `1.2.840.113556.1.4.803` part it is a `LDAP_MATCHING_RULE_BIT_AND` you can check [LDAP Matching Rules](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/4e638665-f466-4597-93c4-12f2ebfabab5) used to match bit values with attributes
+- in `8192` it is the decimal value for UserAccountControl attribute check  [UserAccountControl flags](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/useraccountcontrol-manipulate-account-properties)
+
+
+**Logical Operators**
+- The operators `&` , `|` and `!` are used
+- ` (&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=64))` This would search for any user object that does NOT have the Password Can't Change attribute set.
