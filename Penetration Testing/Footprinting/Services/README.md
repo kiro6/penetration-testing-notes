@@ -94,8 +94,8 @@ Server Message Block (SMB) is a client-server protocol that regulates access to 
 - `CIFS` was used as the same as SMB but now it's old and work on the same ports as SMB
 
 ### port used  
--  `OLD` 137, 138, and 139 TCP
--  `NEW` 445 TCP
+-  `OLD` 137, 138, and 139 TCP/UDP  on top of  `NetBIOS `
+-  `NEW` 445 TCP on top of `microsoft-ds`
 
 ### Dangerous Settings
 | Setting             | Description                                                   |
