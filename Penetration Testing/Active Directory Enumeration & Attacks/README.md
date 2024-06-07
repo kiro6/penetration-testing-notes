@@ -565,3 +565,71 @@ The `Windows PowerShell` log located at `Applications and Services Logs > Window
 
 ![Screenshot 2024-06-07 at 14-12-12 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/602a5583-1924-4793-90f4-fa02aa3f4f58)
 
+### Checking Defenses
+
+#### checked if Defender was running
+
+**Powershell**
+```powershell
+netsh advfirewall show allprofiles
+```
+**CMD**
+```
+sc query windefend
+```
+
+#### check the status and configuration settings
+```powershell
+Get-MpComputerStatus 
+```
+
+### Network Information
+
+| Networking Commands              | Description                                                                                  |
+|----------------------------------|----------------------------------------------------------------------------------------------|
+| arp -a                           | Lists all known hosts stored in the arp table.                                                |
+| ipconfig /all                    | Prints out adapter settings for the host. We can figure out the network segment from here.    |
+| route print                      | Displays the routing table (IPv4 & IPv6) identifying known networks and layer three routes shared with the host. |
+| netsh advfirewall show state     | Displays the status of the host's firewall. We can determine if it is active and filtering traffic. |
+
+### Windows Management Instrumentation (wMIC)
+
+- [querying host and domain info using wmic cheat sheet](https://gist.github.com/xorrior/67ee741af08cb1fc86511047550cdaf4)
+
+| Command                                                                       | Description                                                                                             |
+|-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| wmic qfe get Caption,Description,HotFixID,InstalledOn                         | Prints the patch level and description of the Hotfixes applied.                                         |
+| wmic computersystem get Name,Domain,Manufacturer,Model,Username,Roles /format:List | Displays basic host information to include any attributes within the list.                               |
+| wmic process list /format:list                                                | A listing of all processes on host.                                                                     |
+| wmic ntdomain list /format:list                                               | Displays information about the Domain and Domain Controllers.                                           |
+| wmic useraccount list /format:list                                            | Displays information about all local accounts and any domain accounts that have logged into the device. |
+| wmic group list /format:list                                                  | Information about all local groups.                                                                     |
+| wmic sysaccount list /format:list                                             | Dumps information about any system accounts that are being used as service accounts.                    |
+
+### Net Commands
+
+| Command                                                       | Description                                                                                             |
+|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| net accounts                                                  | Information about password requirements                                                                 |
+| net accounts /domain                                          | Password and lockout policy                                                                             |
+| net group /domain                                             | Information about domain groups                                                                         |
+| net group "Domain Admins" /domain                             | List users with domain admin privileges                                                                 |
+| net group "domain computers" /domain                          | List of PCs connected to the domain                                                                     |
+| net group "Domain Controllers" /domain                        | List PC accounts of domains controllers                                                                 |
+| net group <domain_group_name> /domain                         | User that belongs to the group                                                                          |
+| net groups /domain                                            | List of domain groups                                                                                   |
+| net localgroup                                                | All available groups                                                                                    |
+| net localgroup administrators /domain                         | List users that belong to the administrators group inside the domain (the group Domain Admins is included here by default) |
+| net localgroup Administrators                                 | Information about a group (admins)                                                                      |
+| net localgroup administrators [username] /add                 | Add user to administrators                                                                              |
+| net share                                                     | Check current shares                                                                                    |
+| net user <ACCOUNT_NAME> /domain                               | Get information about a user within the domain                                                          |
+| net user /domain                                              | List all users of the domain                                                                            |
+| net user %username%                                           | Information about the current user                                                                      |
+| net use x: \\computer\share                                    | Mount the share locally                                                                                 |
+| net view                                                      | Get a list of computers                                                                                 |
+| net view /all /domain[:domainname]                            | Shares on the domains                                                                                   |
+| net view \\computer /ALL                                      | List shares of a computer                                                                               |
+| net view /domain                                              | List of PCs of the domain                                                                               |
+
+
