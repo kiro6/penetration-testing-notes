@@ -330,6 +330,19 @@ Windows security model following key components:
 - SIDs are unique within their scope (domain or local), and they're never reused.
 
 
+
+### SID identifier authority
+
+| Authority                   | ID | SID Prefix | Description                                                                                               |
+|-----------------------------|----|------------|-----------------------------------------------------------------------------------------------------------|
+| SECURITY_NULL_SID_AUTHORITY | 0  | S-1-0      | Represents an empty or null security identifier. It's typically used for placeholder or special purposes. |
+| SECURITY_WORLD_SID_AUTHORITY| 1  | S-1-1      | Represents the "Everyone" group, which includes all users, even those from outside the local domain.      |
+| SECURITY_LOCAL_SID_AUTHORITY| 2  | S-1-2      | Represents local security identifiers. These SIDs are used for built-in local groups and users on a system.|
+| SECURITY_CREATOR_SID_AUTHORITY | 3 | S-1-3   | Represents SIDs that are dynamically generated to represent the creator/owner of an object. These SIDs are used to grant permissions based on object ownership. |
+| SECURITY_NT_AUTHORITY       | 5  | S-1-5      | Represents the Windows NT authority. SIDs generated using this authority are the most common and are used for domain accounts, built-in groups, and security principals in Windows environments. |
+
+
+
 ### SID components
 
 
