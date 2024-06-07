@@ -535,3 +535,33 @@ This can also be a more stealthy approach and may not create as many log entries
 | echo %USERDOMAIN%                                 | Displays the domain name to which the host belongs (ran from CMD-prompt)                     |
 | echo %logonserver%                                | Prints out the name of the Domain controller the host checks in with (ran from CMD-prompt)  |
 
+
+
+| Command | Description |
+|---------|-------------|
+| `Get-Content C:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\Powershell\PSReadline\ConsoleHost_history.txt` | Retrieves the specified user's PowerShell history. This can be quite helpful as the command history may contain passwords or point towards configuration files or scripts that contain passwords. |
+| `Get-ChildItem Env: | ft Key,Value` | Returns environment values such as key paths, users, computer information, etc. |
+
+### Downgrade Powershell
+- Powershell event logging was introduced as a feature with Powershell 3.0 and forward. 
+- With that in mind, we can attempt to call Powershell version 2.0 or older. 
+- If successful, our actions from the shell will not be logged in Event Viewer.
+
+
+```powershell
+powershell.exe -version 2
+
+Get-host
+```
+
+#### Examining the Powershell Event Log
+you can check in `event viewer`
+
+`PowerShell Operational` Log found under `Applications and Services Logs > Microsoft > Windows > PowerShell > Operational`
+![Screenshot 2024-06-07 at 14-12-08 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/c601ca98-5f26-495b-858c-34f21ae2f905)
+
+
+The `Windows PowerShell` log located at `Applications and Services Logs > Windows PowerShell`
+
+![Screenshot 2024-06-07 at 14-12-12 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/602a5583-1924-4793-90f4-fa02aa3f4f58)
+
