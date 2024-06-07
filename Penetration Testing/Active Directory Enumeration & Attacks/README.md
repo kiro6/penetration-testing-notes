@@ -13,7 +13,7 @@
 - [Deeper Down Digging](#deeper-down-digging)
   - [Enumerating Security Controls](#enumerating-security-controls)
   - [Credentialed Enumeration - from Linux](#credentialed-enumeration---from-linux)
-  - [Credentialed Enumeration - from Windows]() 
+  - [Credentialed Enumeration - from Windows](#credentialed-enumeration---from-windows) 
 
 
 # Initial Enumeration
