@@ -502,6 +502,11 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 ```
 .\SharpView.exe Get-DomainUser -Identity forend
 
+```
 
+### Snaffler
+[Snaffler](https://github.com/SnaffCon/Snaffler) works by obtaining a list of hosts within the domain and then enumerating those hosts for shares and readable directories
 
+```powershell
+.\Snaffler.exe  -d INLANEFREIGHT.LOCAL -s -v data
 ```
