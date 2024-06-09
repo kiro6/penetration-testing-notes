@@ -267,6 +267,11 @@ Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory D
 ![Screenshot 2024-04-09 at 15-20-16 Introduction to Active Directory](https://github.com/kiro6/penetration-testing-notes/assets/57776872/bab56808-5196-4d76-97ca-44920c058794)
 
 
+ For domain-joined computers, users typically log in using their domain credentials. Upon successful login, the system automatically obtains a TGT from the KDC using the user's credentials.
+
+
+
+
 ### LM
 - LAN Manager (LM or LANMAN) hashes are the oldest password storage mechanism used by the Windows operating system
 - LM hashes are stored in the SAM or NTDS.DIT database on Windows hosts or Domain Controllers, respectively.
