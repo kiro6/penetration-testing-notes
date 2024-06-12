@@ -13,7 +13,9 @@
 - [Deeper Down Digging](#deeper-down-digging)
   - [Enumerating Security Controls](#enumerating-security-controls)
   - [Credentialed Enumeration - from Linux](#credentialed-enumeration---from-linux)
-  - [Credentialed Enumeration - from Windows](#credentialed-enumeration---from-windows) 
+  - [Credentialed Enumeration - from Windows](#credentialed-enumeration---from-windows)
+  - [Living Off the Land](#living-off-the-land)
+- [Active Directory Attacks]() 
 
 
 # Initial Enumeration
@@ -752,3 +754,7 @@ in `userAccountControl:1.2.840.113556.1.4.803:=8192`
 **Logical Operators**
 - The operators `&` , `|` and `!` are used
 - ` (&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=64))` This would search for any user object that does NOT have the Password Can't Change attribute set.
+
+
+# Active Directory Attacks
+## Kerberoasting 
