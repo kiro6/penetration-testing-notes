@@ -15,6 +15,12 @@
   - [Credentialed Enumeration - from Linux](#credentialed-enumeration---from-linux)
   - [Credentialed Enumeration - from Windows](#credentialed-enumeration---from-windows)
   - [Living Off the Land](#living-off-the-land)
+    - [Downgrade Powershell](#downgrade-powershell)
+    - [Checking Defenses](#checking-defenses)
+    - [Windows Management Instrumentation (wMIC)](#windows-management-instrumentation-wmic)
+    - [Net Commands](#net-commands)
+    - [Dsquery](#dsquery)
+    - [dsquery with LDAP search filters](#ldap-filtering-explained)
 - [Active Directory Attacks]() 
 
 
