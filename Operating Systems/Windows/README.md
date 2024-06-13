@@ -465,6 +465,32 @@ An Access Control List (ACL) is the ordered collection of Access Control Entries
 ### Access Control Entries (ACEs)
 Each Access Control Entry (ACE) in an ACL identifies a trustee (user account, group account, or logon session) and lists the access rights that are allowed, denied, or audited for the given trustee.
 
+
+#### ACEs types
+
+| ACE Type            | Description                                                                                             |
+|---------------------|---------------------------------------------------------------------------------------------------------|
+| Access denied ACE   | Used within a DACL to show that a user or group is explicitly denied access to an object                |
+| Access allowed ACE  | Used within a DACL to show that a user or group is explicitly granted access to an object               |
+| System audit ACE    | Used within a SACL to generate audit logs when a user or group attempts to access an object. It records whether access was granted or not and what type of access occurred |
+
+Each ACE is made up of the following four components:
+- The security identifier (SID) of the user/group that has access to the object (or principal name graphically)
+- A flag denoting the type of ACE (access denied, allowed, or system audit ACE)
+- A set of flags that specify whether or not child containers/objects can inherit the given ACE entry from the primary or parent object
+- An [access mask](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/7a53f60e-e730-4dfe-bbe9-b21b62eb790b?redirectedfrom=MSDN)  which is a 32-bit value that defines the rights granted to an object
+
+```yaml
+ACE {
+    Type: Access allowed
+    SID: S-1-5-21-3623811015-3361044348-30300820-1013
+    Flags: Object Inherit, Container Inherit
+    Access Mask: 0x001200A9 (Read, Write, Execute)
+}
+
+```
+
+
 ### Discretionary Access Control List (DACL)
 DACLs define which security principles are granted or denied access to an object; it contains a list of ACEs. When a process tries to access a securable object, the system checks the ACEs in the object's DACL to determine whether or not to grant access. If an object does NOT have a DACL, then the system will grant full access to everyone, but if the DACL has no ACE entries, the system will deny all access attempts. ACEs in the DACL are checked in sequence until a match is found that allows the requested rights or until access is denied.
 
