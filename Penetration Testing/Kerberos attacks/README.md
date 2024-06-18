@@ -342,7 +342,7 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 ```
 
 **Execution**
-```sehll
+```shell
 # Generating RC4,AES Hash 
 .\Rubeus.exe hash /password:123456 /user:fake01 /domain:offense.local
 
