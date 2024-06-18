@@ -30,7 +30,10 @@
     - [Net Commands](#net-commands)
     - [Dsquery](#dsquery)
     - [dsquery with LDAP search filters](#ldap-filtering-explained)
-- [Active Directory Attacks]() 
+- [Active Directory Attacks](#active-directory-attacks)
+  - [Kerberoasting](#kerberoasting)
+    - [Kerberoasting From Linux](#from-linux)
+    - [Kerberoasting From Windows](#from-windows)   
 
 
 # Initial Enumeration
@@ -915,3 +918,7 @@ This can be done by opening Group Policy, editing the Default Domain Policy, and
 then double-clicking on Network security: Configure encryption types allowed for Kerberos and selecting the desired encryption type allowed for Kerberos.
 Removing all other encryption types except for RC4_HMAC_MD5
 ```
+
+## Access Control List Abuse 
+
+
