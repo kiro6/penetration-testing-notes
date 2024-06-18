@@ -287,6 +287,7 @@ ls \\dc01.offense.local\c$
 - It's possible to gain code execution with elevated privileges on a remote computer if you have WRITE privilege on that computer's AD object.
 
 - must be Windows 2012 Domain Controller or later
+- write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute
 
 ### Example steps
 - We have code execution on the box `WS02` in the context of `offense\Service1` user;
