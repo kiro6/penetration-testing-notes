@@ -507,21 +507,33 @@ check [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/wi
 
 
 Allowed ace_types
+
+
 ![Screenshot 2024-06-18 at 11-37-36 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/cc775733-18f6-425c-bb7c-8f1e8a279387)
 
 Allowed ace_flags
+
+
 ![Screenshot 2024-06-18 at 11-37-40 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/551a1281-a1e5-465b-bbef-eef58debce3c)
 
 Generic Rights
+
+
 ![Screenshot 2024-06-18 at 11-37-58 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/da64e040-a1c3-4d53-a7c2-10081df6479b)
 
 Specific File Rights
+
+
 ![Screenshot 2024-06-18 at 11-38-03 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/419699f1-a7b1-4d4e-b508-fe64afa6d53b)
 
 Specific Registry Rights
+
+
 ![Screenshot 2024-06-18 at 11-38-05 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/907ab05c-2f2a-49a4-b9e1-af3420820291)
 
 Integrity Labels
+
+
 ![Screenshot 2024-06-18 at 11-38-10 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/def92da9-8ca0-4994-b9e5-738e4f058867)
 
 
