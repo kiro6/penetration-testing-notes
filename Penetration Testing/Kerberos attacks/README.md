@@ -1,4 +1,9 @@
 # Content
+- [Roasting attacks](#roasting-attacks)
+  - [AS-REQ Roasting](#as-req-roasting)
+  - [Kerberoasting](#kerberoasting)
+- [Delegation attacks](#delegation-attacks)
+  - [Unconstrained delegation](#unconstrained-delegation) 
 
 # Roasting attacks
 
