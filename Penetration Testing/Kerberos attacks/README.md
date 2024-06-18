@@ -173,7 +173,7 @@ hashcat -m 19700 aes_to_crack /usr/share/wordlists/rockyou.txt
 ```
 
 - `RC4` is the fastest to crack
-- downgrading do now work after windows server 2019 and above
+- downgrading do not work after windows server 2019 and above
 - Windows Server 2019 Domain Controller will always return a service ticket encrypted with the highest level of encryption supported by the target account. 
 - Server 2016 or earlier (which is quite common), enabling AES will not partially mitigate Kerberoasting by only returning AES encrypted tickets
 - edit encryption types used by Kerberos
