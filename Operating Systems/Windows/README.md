@@ -466,7 +466,7 @@ An Access Control List (ACL) is the ordered collection of Access Control Entries
 Each Access Control Entry (ACE) in an ACL identifies a trustee (user account, group account, or logon session) and lists the access rights that are allowed, denied, or audited for the given trustee.
 
 
-#### ACEs types
+#### ACEs
 
 | ACE Type            | Description                                                                                             |
 |---------------------|---------------------------------------------------------------------------------------------------------|
@@ -475,20 +475,54 @@ Each Access Control Entry (ACE) in an ACL identifies a trustee (user account, gr
 | System audit ACE    | Used within a SACL to generate audit logs when a user or group attempts to access an object. It records whether access was granted or not and what type of access occurred |
 
 Each ACE is made up of the following four components:
-- The security identifier (SID) of the user/group that has access to the object (or principal name graphically)
 - A flag denoting the type of ACE (access denied, allowed, or system audit ACE)
 - A set of flags that specify whether or not child containers/objects can inherit the given ACE entry from the primary or parent object
-- An [access mask](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/7a53f60e-e730-4dfe-bbe9-b21b62eb790b?redirectedfrom=MSDN)  which is a 32-bit value that defines the rights granted to an object
+- An [access mask - rights](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/7a53f60e-e730-4dfe-bbe9-b21b62eb790b?redirectedfrom=MSDN)  which is a 32-bit value that defines the rights granted to an object
+- The security identifier (SID) of the user/group that has access to the object (or principal name graphically)
 
+
+just represntation in json
 ```yaml
 ACE {
     Type: Access allowed
-    SID: S-1-5-21-3623811015-3361044348-30300820-1013
     Flags: Object Inherit, Container Inherit
     Access Mask: 0x001200A9 (Read, Write, Execute)
+    SID: S-1-5-21-3623811015-3361044348-30300820-1013
 }
 
 ```
+
+ACE has the following structure: (ace_type;ace_flags;rights;object_guid;inherit_object_guid;account_sid;(resource_attribute) ) 
+```
+get-Acl -Path c:\ | Format-List
+
+icacls c:\
+
+cacls c:\
+
+(Get-Acl c:\).Sddl
+```
+
+check [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) and [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings) for more tables 
+
+
+Allowed ace_types
+![Screenshot 2024-06-18 at 11-37-36 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/cc775733-18f6-425c-bb7c-8f1e8a279387)
+
+Allowed ace_flags
+![Screenshot 2024-06-18 at 11-37-40 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/551a1281-a1e5-465b-bbef-eef58debce3c)
+
+Generic Rights
+![Screenshot 2024-06-18 at 11-37-58 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/da64e040-a1c3-4d53-a7c2-10081df6479b)
+
+Specific File Rights
+![Screenshot 2024-06-18 at 11-38-03 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/419699f1-a7b1-4d4e-b508-fe64afa6d53b)
+
+Specific Registry Rights
+![Screenshot 2024-06-18 at 11-38-05 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/907ab05c-2f2a-49a4-b9e1-af3420820291)
+
+Integrity Labels
+![Screenshot 2024-06-18 at 11-38-10 Access Control Understanding Windows File And Registry Permissions](https://github.com/kiro6/penetration-testing-notes/assets/57776872/def92da9-8ca0-4994-b9e5-738e4f058867)
 
 
 ### Discretionary Access Control List (DACL)
