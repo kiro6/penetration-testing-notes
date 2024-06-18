@@ -232,6 +232,9 @@ kerberos::list /export #Another way
 ```shell
 # Windows 
 Get-NetUser -TrustedToAuth
+Get-NetComputer ws02 | select name, msds-allowedtodelegateto, useraccountcontrol | fl
+Get-NetComputer ws02 | Select-Object -ExpandProperty msds-allowedtodelegateto | fl
+
 ## Powerview
 Get-DomainUser -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto
 Get-DomainComputer -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto
