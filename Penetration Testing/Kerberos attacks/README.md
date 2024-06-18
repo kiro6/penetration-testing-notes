@@ -227,3 +227,17 @@ kerberos::list /export #Another way
 
 ![Screenshot 2024-06-18 at 20-47-21 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/ff8b6f98-4e34-4acb-bcd1-1de1cea0d073)
 
+### Enumration 
+
+```shell
+# Windows 
+Get-NetUser -TrustedToAuth
+## Powerview
+Get-DomainUser -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto
+Get-DomainComputer -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto
+
+## ADSearch
+ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))" --attributes cn,dnshostname,samaccountname,msds-allowedtodelegateto --json
+
+```
+![Screenshot 2024-06-18 at 20-42-44 Kerberos Constrained Delegation Red Team Notes](https://github.com/kiro6/penetration-testing-notes/assets/57776872/dfc45db7-65f4-412f-b58f-8b904ff5c606)
