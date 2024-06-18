@@ -6,6 +6,7 @@
 - AS-REQ Roasting is possible when Kerberos pre-authentication is not configured. This allows anyone to request authentication data for a user. In return, the KDC would provide an AS-REP message. 
 - Since part of that message is encrypted using the user’s password, it is possible to perform an offline brute-force attack to try and retrieve the user's password.
 - The only information an attacker requires is the username they want to attack, which can also be found using other enumeration techniques.
+-  if you have `GenericWrite/GenericAll` rights over a target user, you can maliciously modify their userAccountControl to not require preauth, use ASREPRoast, and then reset the value
 
 
 it's possible to obtain the TGT for any account that has the "Do not require Kerberos preauthentication" setting enabled.
