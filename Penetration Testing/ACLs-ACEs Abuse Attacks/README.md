@@ -1,6 +1,7 @@
 # Content
 ## ACL Enumeration
 - [control-access-rights list](https://learn.microsoft.com/en-us/windows/win32/adschema/control-access-rights)
+- [ace-strings right list](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings)
 ```powershell
 # get all intersting acl but can take alot of time
 Find-InterestingDomainAcl
