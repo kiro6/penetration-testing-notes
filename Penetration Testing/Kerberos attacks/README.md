@@ -194,6 +194,10 @@ Removing all other encryption types except for RC4_HMAC_MD5
 
 Unconstrained delegation `TrustedForDelegation` is  a feature that a Domain Administrator can set to any **Computer** inside the domain. Then, anytime a user logins onto the Computer, a copy of the TGT of that user is going to be sent inside the TGS provided by the DC and saved in memory in LSASS. So, if you have Administrator privileges on the machine, you will be able to dump the tickets and impersonate the users on any machine.
 
+
+- If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
+
+
 ![Screenshot 2024-06-18 at 20-25-07 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a00b55ca-4a12-4c9d-b0a6-4b6e8cd7e1a3)
 
 ![Screenshot 2024-06-18 at 20-47-52 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/8ea99855-6224-443c-913c-d0cae96922f2)
@@ -235,6 +239,7 @@ Rubeus.exe ptt /ticket:<base64 ticket>
 - If you have compromised a user account or a computer (machine account) that has kerberos constrained delegation enabled, it's possible to impersonate any domain user (including administrator) and authenticate to a service that the user account is trusted to delegate to.
 
 - If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
+- if the service is computer account you can get shell access but if user account you can not
 
 ![Screenshot 2024-06-18 at 20-34-36 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a73aff59-eb34-4f43-8c84-f3cf0eeadd38)
 
