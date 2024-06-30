@@ -3,7 +3,12 @@
   - [AS-REQ Roasting](#as-req-roasting)
   - [Kerberoasting](#kerberoasting)
 - [Delegation attacks](#delegation-attacks)
-  - [Unconstrained delegation](#unconstrained-delegation) 
+  - [Unconstrained delegation](#unconstrained-delegation)
+  - [Constrained Delegation](#constrained-delegation)
+  - [Resource-based constrained delegation](#resource-based-constrained-delegation)
+- [Ticket abuse](#ticket-abuse)
+  - [Golden ticket](#golden-ticket)
+  - [Silver ticket](#silver-ticket)  
 
 # Roasting attacks
 
