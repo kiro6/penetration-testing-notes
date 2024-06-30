@@ -1,4 +1,5 @@
 # Content
+- [ACL Enumeration with Powerview](#acl-enumeration-with-powerview)
 ## ACL Enumeration with Powerview
 - [control-access-rights list](https://learn.microsoft.com/en-us/windows/win32/adschema/control-access-rights)
 - [ace-strings right list](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings)
@@ -38,3 +39,11 @@ in here the `S-1-5-21-3842939050-3880317879-2865463114-1181` user have `User-For
 
 bloodhound 
 ```
+
+## ACL attacks
+
+![Screenshot 2024-06-30 at 22-18-35 Active Directory Enumeration   Attacks](https://github.com/kiro6/penetration-testing-notes/assets/57776872/243dfde0-9db7-4c9e-a76b-85ed31054167)
+
+
+
+
