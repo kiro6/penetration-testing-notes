@@ -16,6 +16,9 @@ Find-InterestingDomainAcl
 $sid = Convert-NameToSid wley
 Get-DomainObjectACL -ResolveGUIDs -Identity * | ? {$_.SecurityIdentifier -eq $sid}
 
+# specify one object to one target
+Get-DomainObjectACL -ResolveGUIDs -Identity  "GPO Management" | ? {$_.SecurityIdentifier -eq $sid}
+
 # Reverse Search & Mapping to a GUID Value
 $guid= "00299570-246d-11d0-a768-00aa006e0529"
 Get-ADObject -SearchBase "CN=Extended-Rights,$((Get-ADRootDSE).ConfigurationNamingContext)" -Filter {ObjectClass -like 'ControlAccessRight'} -Properties * |Select Name,DisplayName,DistinguishedName,rightsGuid| ?{$_.rightsGuid -eq $guid} | fl
@@ -33,6 +36,13 @@ Get-DomainGroup -Identity "Help Desk Level 1" | select memberof
 
 in here the `S-1-5-21-3842939050-3880317879-2865463114-1181` user have `User-Force-Change-Password` right on `S-1-5-21-3842939050-3880317879-2865463114-1176` user
 ![Screenshot_2](https://github.com/kiro6/penetration-testing-notes/assets/57776872/891252fe-052c-4e21-9034-2bbfeaa3eff6)
+
+
+
+in here `S-1-5-21-3842939050-3880317879-2865463114-5614` have `Self-Membership` and `ReadProperty, WriteProperty, GenericExecute` on `S-1-5-21-3842939050-3880317879-2865463114-4046`
+![Screenshot_2](https://github.com/kiro6/penetration-testing-notes/assets/57776872/0f2aaade-e4cc-4a62-b333-3828962e85b9)
+
+
 
 
 ## ACL Enumeration with BloodHound
