@@ -118,7 +118,7 @@ Add-DomainGroupMember -Identity 'Help Desk Level 1' -Members 'damundsen' -Creden
 
 1) **Access over User account allows for:**
    - Change the Target's Password
-   - Targeted Kerberoasting:** Assign an SPN to the user's account to make it kerberoastable
+   - Targeted Kerberoasting: Assign an SPN to the user's account to make it kerberoastable
    - Shadow Credentials: Use this technique to impersonate a user 
 2) **Access over Group allows for:**
    - Add current user to the target Group
