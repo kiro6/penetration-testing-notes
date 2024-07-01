@@ -65,7 +65,7 @@ bloodhound
 gives us the right to reset a user's password without first knowing their password (should be used cautiously and typically best to consult our client before resetting passwords).
 
 
-### **Scenario:** Use the `wley` user to change the password for the `damundsen` user
+### Scenario: Use the `wley` user to change the password for the `damundsen` user
 
 
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `wley` using his password
@@ -82,5 +82,17 @@ using PowerView change the password
 ```powershell
 Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -Credential $Cred -Verbose
 ```
+
+## GenericWrite
+
+**gives us the right to write to any non-protected attribute on an object.** 
+
+
+1) If we have this access over a `user`, we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+2) Over a `group` means we could `add ourselves` or another security principal to a given group.
+3) if we have this access over a `computer object`, we could perform a `resource-based constrained delegation` attack.
+
+
+###
 
 
