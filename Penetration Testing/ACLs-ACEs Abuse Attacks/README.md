@@ -88,9 +88,12 @@ Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -
 **gives us the right to write to any non-protected attribute on an object.** 
 
 
-1) If we have this access over a `user`, we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
-2) Over a `group` means we could `add ourselves` or another security principal to a given group.
-3) if we have this access over a `computer object`, we could perform a `resource-based constrained delegation` attack.
+1) **Access over User account allows for:**
+  - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+2) **Access over Group allows for:**
+  - we could `add ourselves` or another `security principal` to a given group.
+3) **Access over Computer user allows for:**
+  - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
 
 
 ### Scenario 1 : damundsen user have GenericWrite over Help Desk Level 1 group so we can out selves 
@@ -118,10 +121,10 @@ Add-DomainGroupMember -Identity 'Help Desk Level 1' -Members 'damundsen' -Creden
 
 1) **Access over User account allows for:**
    - Change the Target's Password
-   - Targeted Kerberoasting: Assign an SPN to the user's account to make it kerberoastable
+   - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
    - Shadow Credentials: Use this technique to impersonate a user 
 2) **Access over Group allows for:**
-   - Add current user to the target Group
+   - we could `add ourselves` or another `security principal` to a given group.
 3) **Access over Computer user allows for:**
-   - Kerberos Resource-based Constrained Delegation
+   - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
    - Shadow Credentials: Use this technique to impersonate a computer    
