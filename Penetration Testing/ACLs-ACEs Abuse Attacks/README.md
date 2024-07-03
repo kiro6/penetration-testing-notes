@@ -2,7 +2,17 @@
 - [ACL Enumeration](#acl-enumeration)
   - [ACL Enumeration with Powerview](#acl-enumeration-with-powerview)
   - [ACL Enumeration with BloodHound](#acl-enumeration-with-bloodhound)
+ 
+- [ACL Dangerous Rights](#acl-dangerous-rights)
+  - [ForceChangePassword](#forcechangepassword)
+  - [GenericWrite](#genericwrite)
+  - [GenericAll](#genericall)
+  - [Get Changes All](#get-changes-all)
 - [ACL attacks](#acl-attacks)
+  - [Change password](#change-password)
+  - [Targeted Kerberoasting](#targeted-kerberoasting)
+  - [Add to group](#add-to-group)
+  - [DCSync](#dcsync) 
 
 # ACL Enumeration
 ## ACL Enumeration with Powerview
@@ -95,10 +105,13 @@ bloodhound
    - Shadow Credentials: Use this technique to impersonate a computer
   
 ## Get Changes All
-- The user or service account with this permission can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
+- The user or service account with this permission ` DS-Replication-Get-Changes-All` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
 - By default only Domain Admins, Enterprise Admins, Administrators, and Domain Controllers groups have the required privileges.
 
 1) DCSync mimic a Domain Controller to retrieve user NTLM password hashes.
+
+
+
 
 
 # Acl Attacks 
@@ -186,7 +199,7 @@ remove the user from the group
 Remove-DomainGroupMember -Identity <Group Name>" -Members 'Target User' -Credential $Cred -Verbose
 ```
 
-# Defense
+### Defense
 
 Enabling the `Advanced Security Audit Policy` can help in detecting unwanted changes, especially `Event ID 5136: A directory service object was modified` which would indicate that the domain object was modified
 
