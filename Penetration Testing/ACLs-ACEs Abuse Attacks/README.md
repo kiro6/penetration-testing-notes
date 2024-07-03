@@ -61,7 +61,8 @@ bloodhound
 
 
 ## ForceChangePassword 
-gives us the right to reset a user's password without first knowing their password (should be used cautiously and typically best to consult our client before resetting passwords).
+- gives us the right to reset a user's password without first knowing their password (should be used cautiously and typically best to consult our client before resetting passwords) 
+- [how to do Change password](#change-password)
 
 
 ## GenericWrite
@@ -70,9 +71,9 @@ gives us the right to reset a user's password without first knowing their passwo
 
 
 1) **Access over User account allows for:**
-    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set). [how to do Targeted Kerberoasting](#targeted-kerberoasting)
 2) **Access over Group allows for:**
-    - we could `add ourselves` or another `security principal` to a given group.
+    - we could `add ourselves` or another `security principal` to a given group [how to Add to group](#add-to-group) .
 3) **Access over Computer user allows for:**
     - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
 
@@ -84,11 +85,11 @@ gives us the right to reset a user's password without first knowing their passwo
 **full rights to the object**
 
 1) **Access over User account allows for:**
-   - Change the Target's Password
-   - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+   - Change the Target's Password [how to do Change password](#change-password)
+   - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).  [how to do Targeted Kerberoasting](#targeted-kerberoasting)
    - Shadow Credentials: Use this technique to impersonate a user 
 2) **Access over Group allows for:**
-   - we could `add ourselves` or another `security principal` to a given group.
+   - we could `add ourselves` or another `security principal` to a given group. [how to Add to group](#add-to-group)
 3) **Access over Computer user allows for:**
    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
    - Shadow Credentials: Use this technique to impersonate a computer
@@ -144,7 +145,7 @@ use `Rubeus` to catch the ticket also check this [kerberoasting](https://github.
 .\Rubeus.exe kerberoast /user:adunn /nowrap
 ```
 
-## Add Ourself to group 
+## Add to group 
 needed controls `GenericAll` or `GenericWrite`  
 
 
