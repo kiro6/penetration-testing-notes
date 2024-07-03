@@ -61,6 +61,7 @@ hashcat -m 18200 --force -a 0 hashes.asreproast passwords_kerb.txt
 ## Kerberoasting 
 - Kerberoasting focuses on the acquisition of TGS tickets, specifically those related to services operating under user accounts in Active Directory (AD)
 - Kerberoasting is an attack against service accounts that allows an attacker to perform an offline password-cracking attack against the Active Directory account associated with the service.
+- Any domain user can request a Kerberos ticket for any service account in the same domain. This is also possible across forest trusts if authentication is permitted across the trust boundary. 
 
 
 ### From Linux 
