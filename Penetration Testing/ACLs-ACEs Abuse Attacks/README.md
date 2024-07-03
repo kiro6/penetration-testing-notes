@@ -55,7 +55,7 @@ in here `S-1-5-21-3842939050-3880317879-2865463114-5614` have `Self-Membership` 
 bloodhound 
 ```
 
-# ACL attacks
+# ACL Dangerous Rights
 
 ![Screenshot 2024-06-30 at 22-18-35 Active Directory Enumeration   Attacks](https://github.com/kiro6/penetration-testing-notes/assets/57776872/243dfde0-9db7-4c9e-a76b-85ed31054167)
 
@@ -94,12 +94,17 @@ bloodhound
    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
    - Shadow Credentials: Use this technique to impersonate a computer
   
+## Get Changes All
+- The user or service account with this permission can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
+- By default only Domain Admins, Enterprise Admins, Administrators, and Domain Controllers groups have the required privileges.
+
+1) DCSync mimic a Domain Controller to retrieve user NTLM password hashes.
 
 
-# Examples
+# Acl Attacks 
 
 ## Change password 
-needed controls `GenericAll` or `ForceChangePassword`  
+needed rights `GenericAll` or `ForceChangePassword`  
 
 ### Exploit
 Use the `wley` user to change the password for the `damundsen` user
@@ -123,7 +128,7 @@ Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -
 
 
 ## Targeted Kerberoasting
-needed controls `GenericAll` or `GenericWrite`  
+needed rights `GenericAll` or `GenericWrite`  
 
 ### Exploit 
 damundsen user have GenericWrite over adunn user so we can do Targeted Kerberoasting
@@ -153,7 +158,7 @@ Set-DomainObject -Credential $Cred -Identity <User to remove> -Clear erviceprinc
 
 
 ## Add to group 
-needed controls `GenericAll` or `GenericWrite`  
+needed rights `GenericAll` or `GenericWrite`  
 
 
 ### Exploit 
@@ -184,3 +189,10 @@ Remove-DomainGroupMember -Identity <Group Name>" -Members 'Target User' -Credent
 # Defense
 
 Enabling the `Advanced Security Audit Policy` can help in detecting unwanted changes, especially `Event ID 5136: A directory service object was modified` which would indicate that the domain object was modified
+
+
+## DCSync
+- needed rights `DS-Replication-Get-Changes-All`
+
+
+
