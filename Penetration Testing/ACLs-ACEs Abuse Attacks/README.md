@@ -7,7 +7,7 @@
   - [ForceChangePassword](#forcechangepassword)
   - [GenericWrite](#genericwrite)
   - [GenericAll](#genericall)
-  - [Get Changes All](#get-changes-all)
+  - [Get Changes All](#get-changes-and-get-changes-all)
 - [ACL attacks](#acl-attacks)
   - [Change password](#change-password)
   - [Targeted Kerberoasting](#targeted-kerberoasting)
@@ -104,8 +104,8 @@ bloodhound
    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
    - Shadow Credentials: Use this technique to impersonate a computer
   
-## Get Changes All
-- The user or service account with this permission ` DS-Replication-Get-Changes-All` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
+## Get Changes and Get Changes All 
+- The user or service account with this permission ` DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
 - By default only Domain Admins, Enterprise Admins, Administrators, and Domain Controllers groups have the required privileges.
 
 1) DCSync mimic a Domain Controller to retrieve user NTLM password hashes.
@@ -205,7 +205,7 @@ Enabling the `Advanced Security Audit Policy` can help in detecting unwanted cha
 
 
 ## DCSync
-- needed rights `DS-Replication-Get-Changes-All`
+- needed rights `DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes`
 
 
 
