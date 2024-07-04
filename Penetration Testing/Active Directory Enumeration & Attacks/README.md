@@ -791,3 +791,64 @@ check [Kerberos attacks](https://github.com/kiro6/penetration-testing-notes/blob
 
 [ACLs-ACEs Abuse Attacks](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/ACLs-ACEs%20Abuse%20Attacks)
 
+
+# Movement in AD
+**Movment in AD can lead to:**
+- Launch further attacks
+- We may be able to escalate privileges and obtain credentials for a higher privileged user
+- We may be able to pillage the host for sensitive data or credentials
+
+## Remote Desktop
+- if we have control of a local admin user on a given machine, we will be able to access it via RDP.
+- sometimes we will get a foothold for a user that does not have local admin priv on any machine but does have the rights to `RDP` [CanRDP](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#canrdp) into one or more machines.
+- `Remote Desktop Users` Group , which is a local group on every machine that contains the Users or Groups that can access this machine
+
+
+
+### Search for RDP access
+
+Enumerating the `Remote Desktop Users` Group 
+```powershell
+Get-NetLocalGroupMember -ComputerName ACADEMY-EA-MS01 -GroupName "Remote Desktop Users"
+
+
+ComputerName : ACADEMY-EA-MS01
+GroupName    : Remote Desktop Users
+MemberName   : INLANEFREIGHT\Domain Users
+SID          : S-1-5-21-3842939050-3880317879-2865463114-513
+IsGroup      : True
+IsDomain     : UNKNOWN
+```
+
+Checking the Domain Users Group's Local Admin & Execution Rights using BloodHound
+![Screenshot 2024-07-04 at 20-27-13 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/ddb4e7de-e7d9-415a-8e7c-9e065dfc3b4c)
+
+Checking the current user Remote Access Rights using BloodHound
+![Screenshot 2024-07-04 at 20-27-38 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/05be48b5-9837-4759-b571-cfaa2b87e510)
+
+
+also we can check the Analysis in BloodHound tab and run the pre-built queries `Find Workstations where Domain Users can RDP` or `Find Servers where Domain Users can RDP`.
+
+## PowerShell Remoting 
+- if we got a foothold on a user that have [CanPSRemote](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#canpsremote) on a machine we can access it
+- `Remote Management Users` Group , which is a local group on every machine that contains the Users or Groups that can access this machine
+- This group has existed since the days of Windows 8/Windows Server 2012 to enable WinRM access without granting local admin rights.  
+
+### Search for PowerShell Remoting access
+
+Enumerating the `Remote Management Users` Group , which is a local group on every machine that contains the Users or Groups that can access this machine  
+```powershell
+Get-NetLocalGroupMember -ComputerName ACADEMY-EA-MS01 -GroupName "Remote Management Users"
+````
+
+Using the Cypher Query in BloodHound
+```
+MATCH p1=shortestPath((u1:User)-[r1:MemberOf*1..]->(g1:Group)) MATCH p2=(u1)-[:CanPSRemote*1..]->(c:Computer) RETURN p2
+```
+![Screenshot 2024-07-04 at 20-47-50 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/f1ff6b01-8b04-43f5-9a5b-386b3b95c411)
+
+
+## MSSQL Server
+
+## SMB
+if we take over an account with local admin rights over a host, or set of hosts, we can perform a Pass-the-Hash attack to authenticate via the SMB protocol.
