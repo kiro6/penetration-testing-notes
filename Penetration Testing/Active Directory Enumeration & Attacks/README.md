@@ -31,7 +31,8 @@
     - [Dsquery](#dsquery)
     - [dsquery with LDAP search filters](#ldap-filtering-explained)
 - [Active Directory Attacks](#active-directory-attacks)
-  - [Kerberos attacks](#kerberoasting)
+  - [Kerberos attacks](#kerberos-attacks)
+  - [Access Control List Abuse](#access-control-list-abuse)
 
 
 # Initial Enumeration
@@ -788,4 +789,5 @@ check [Kerberos attacks](https://github.com/kiro6/penetration-testing-notes/blob
 
 ## Access Control List Abuse 
 
+[ACLs-ACEs Abuse Attacks](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/ACLs-ACEs%20Abuse%20Attacks)
 
