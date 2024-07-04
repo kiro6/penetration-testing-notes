@@ -907,6 +907,7 @@ Double Hop arise while using Kerberos to authenticate and you want to jumb from 
 - If unconstrained delegation is enabled on a server, it is likely we won't face the "Double Hop" problem.
 
 ## Workarounds
+[check this blog](https://posts.slayerlabs.com/double-hop/)
 
 ### PSCredential Object
 
