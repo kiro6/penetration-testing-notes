@@ -33,6 +33,14 @@
 - [Active Directory Attacks](#active-directory-attacks)
   - [Kerberos attacks](#kerberos-attacks)
   - [Access Control List Abuse](#access-control-list-abuse)
+- [Movement in AD](#movement-in-ad)
+  - [Privileged Access](#privileged-access)
+    - [Remote Desktop](#remote-desktop)
+    - [PowerShell Remoting](#powershell-remoting)
+    - [MSSQL Server](#mssql-server) 
+  - [Kerberos Double Hop Problem](#kerberos-double-hop-problem)
+    - [PSCredential Object](#pscredential-object)
+    - [Register PSSession Configuration](#register-pssession-configuration)
 
 
 # Initial Enumeration
@@ -933,6 +941,7 @@ get-domainuser -spn -credential $Cred | select samaccountname
 for this to work we need to be in windows env:
 - we're on a domain-joined host and can connect remotely to another using WinRM
 - we are working from a Windows attack host and connect to our target via WinRM using the Enter-PSSession cmdlet
+- we need a full powershell session with gui to make it work
 
 
 ```powershell
