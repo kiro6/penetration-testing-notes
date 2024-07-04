@@ -894,4 +894,42 @@ mssqlclient.py INLANEFREIGHT/DAMUNDSEN@172.16.5.150 -windows-auth
 ### SMB
 if we take over an account with local admin rights over a host, or set of hosts, we can perform a Pass-the-Hash attack to authenticate via the SMB protocol.
 
-## Kerberos Double Hop Problem
+# Kerberos Double Hop Problem
+
+Double Hop arise while using Kerberos to authenticate and you want to jumb from host to another, you only have a TGS in the memory to access a specfic service so there is no way to auth yourself to access other services 
+
+![Screenshot 2024-07-05 at 00-01-39 Active Directory Enumeration   Attacks](https://github.com/kiro6/penetration-testing-notes/assets/57776872/168b3239-575a-4ea0-b929-5075a0cbdb85)
+
+
+
+- authentication performed over `SMB` or `LDAP` means the user's NTLM Hash would be stored in memory. EX: PSExec
+- when using `WinRM` through Kerberos to authenticate , the user's password is never cached as part of their login instead there will be a TGS
+- If unconstrained delegation is enabled on a server, it is likely we won't face the "Double Hop" problem.
+
+## Workarounds
+
+### PSCredential Object
+
+```powershell
+$SecPassword = ConvertTo-SecureString '!qazXSW@' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\backupadm', $SecPassword)
+
+import-module .\PowerView.ps1
+get-domainuser -spn -credential $Cred | select samaccountname
+```
+
+### Register PSSession Configuration
+
+for this to work we need to be in windows env:
+- we're on a domain-joined host and can connect remotely to another using WinRM
+- we are working from a Windows attack host and connect to our target via WinRM using the Enter-PSSession cmdlet
+
+
+```powershell
+# this have a Double Hop Problem
+Enter-PSSession -ComputerName ACADEMY-AEN-DEV01.INLANEFREIGHT.LOCAL -Credential inlanefreight\backupadm
+
+# registering a new session configuration 
+Register-PSSessionConfiguration -Name backupadmsess -RunAsCredential inlanefreight\backupadm
+Enter-PSSession -ComputerName DEV01 -Credential INLANEFREIGHT\backupadm -ConfigurationName  backupadmsess
+```
