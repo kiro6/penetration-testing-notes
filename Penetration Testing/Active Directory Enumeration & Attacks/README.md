@@ -854,6 +854,11 @@ $cred = new-object System.Management.Automation.PSCredential ("INLANEFREIGHT\for
 Enter-PSSession -ComputerName ACADEMY-EA-MS01 -Credential $cred
 ```
 
+Establishing WinRM Session from Linux
+```shell
+evil-winrm -i 10.129.201.234 -u forend
+```
+
 ## MSSQL Server
 
 ## SMB
