@@ -847,6 +847,12 @@ MATCH p1=shortestPath((u1:User)-[r1:MemberOf*1..]->(g1:Group)) MATCH p2=(u1)-[:C
 ```
 ![Screenshot 2024-07-04 at 20-47-50 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/f1ff6b01-8b04-43f5-9a5b-386b3b95c411)
 
+Establishing WinRM Session from Windows
+```powershell
+$password = ConvertTo-SecureString "Klmcargo2" -AsPlainText -Force
+$cred = new-object System.Management.Automation.PSCredential ("INLANEFREIGHT\forend", $password)
+Enter-PSSession -ComputerName ACADEMY-EA-MS01 -Credential $cred
+```
 
 ## MSSQL Server
 
