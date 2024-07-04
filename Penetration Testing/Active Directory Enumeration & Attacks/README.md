@@ -792,6 +792,12 @@ check [Kerberos attacks](https://github.com/kiro6/penetration-testing-notes/blob
 [ACLs-ACEs Abuse Attacks](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/ACLs-ACEs%20Abuse%20Attacks)
 
 
+
+
+
+
+
+
 # Movement in AD
 
 **Movment in AD can lead to:**
@@ -894,7 +900,10 @@ mssqlclient.py INLANEFREIGHT/DAMUNDSEN@172.16.5.150 -windows-auth
 ### SMB
 if we take over an account with local admin rights over a host, or set of hosts, we can perform a Pass-the-Hash attack to authenticate via the SMB protocol.
 
-## Kerberos Double Hop Problem
+
+
+
+# Kerberos Double Hop Problem
 
 Double Hop arise while using Kerberos to authenticate and you want to jumb from host to another, you only have a TGS in the memory to access a specfic service so there is no way to auth yourself to access other services 
 
@@ -906,10 +915,10 @@ Double Hop arise while using Kerberos to authenticate and you want to jumb from 
 - when using `WinRM` through Kerberos to authenticate , the user's password is never cached as part of their login instead there will be a TGS
 - If unconstrained delegation is enabled on a server, it is likely we won't face the "Double Hop" problem.
 
-### Workarounds
+## Workarounds
 [check this blog](https://posts.slayerlabs.com/double-hop/)
 
-#### PSCredential Object
+### PSCredential Object
 
 ```powershell
 $SecPassword = ConvertTo-SecureString '!qazXSW@' -AsPlainText -Force
@@ -919,7 +928,7 @@ import-module .\PowerView.ps1
 get-domainuser -spn -credential $Cred | select samaccountname
 ```
 
-#### Register PSSession Configuration
+### Register PSSession Configuration
 
 for this to work we need to be in windows env:
 - we're on a domain-joined host and can connect remotely to another using WinRM
