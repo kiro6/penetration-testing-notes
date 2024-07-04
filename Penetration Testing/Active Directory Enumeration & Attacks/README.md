@@ -793,19 +793,22 @@ check [Kerberos attacks](https://github.com/kiro6/penetration-testing-notes/blob
 
 
 # Movement in AD
+
 **Movment in AD can lead to:**
 - Launch further attacks
 - We may be able to escalate privileges and obtain credentials for a higher privileged user
 - We may be able to pillage the host for sensitive data or credentials
 
-## Remote Desktop
+## Privileged Access
+
+### Remote Desktop
 - if we have control of a local admin user on a given machine, we will be able to access it via RDP.
 - sometimes we will get a foothold for a user that does not have local admin priv on any machine but does have the rights to `RDP` [CanRDP](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#canrdp) into one or more machines.
 - `Remote Desktop Users` Group , which is a local group on every machine that contains the Users or Groups that can access this machine
 
 
 
-### Search for RDP access
+#### Search for RDP access
 
 Enumerating the `Remote Desktop Users` Group 
 ```powershell
@@ -829,12 +832,12 @@ Checking the current user Remote Access Rights using BloodHound
 
 also we can check the Analysis in BloodHound tab and run the pre-built queries `Find Workstations where Domain Users can RDP` or `Find Servers where Domain Users can RDP`.
 
-## PowerShell Remoting 
+### PowerShell Remoting 
 - if we got a foothold on a user that have [CanPSRemote](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#canpsremote) on a machine we can access it
 - `Remote Management Users` Group , which is a local group on every machine that contains the Users or Groups that can access this machine
 - This group has existed since the days of Windows 8/Windows Server 2012 to enable WinRM access without granting local admin rights.  
 
-### Search for PowerShell Remoting access
+#### Search for PowerShell Remoting access
 
 Enumerating the `Remote Management Users` Group , which is a local group on every machine that contains the Users or Groups that can access this machine  
 ```powershell
@@ -859,7 +862,7 @@ Establishing WinRM Session from Linux
 evil-winrm -i 10.129.201.234 -u forend
 ```
 
-## MSSQL Server
+### MSSQL Server
 - It is common to find user and service accounts set up with sysadmin privileges on a given SQL server instance.
 - We may obtain credentials for an account with this access via Kerberoasting (common) or others such as LLMNR/NBT-NS Response Spoofing or password spraying.
 - Another way that you may find SQL server credentials is using the tool Snaffler to find web.config or other types of configuration files that contain SQL server connection strings.
@@ -888,5 +891,7 @@ mssqlclient.py INLANEFREIGHT/DAMUNDSEN@172.16.5.150 -windows-auth
 
 **check MSSQL attacks [here](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Footprinting/Services#mssql)**
 
-## SMB
+### SMB
 if we take over an account with local admin rights over a host, or set of hosts, we can perform a Pass-the-Hash attack to authenticate via the SMB protocol.
+
+## Kerberos Double Hop Problem
