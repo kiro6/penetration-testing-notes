@@ -860,6 +860,33 @@ evil-winrm -i 10.129.201.234 -u forend
 ```
 
 ## MSSQL Server
+- It is common to find user and service accounts set up with sysadmin privileges on a given SQL server instance.
+- We may obtain credentials for an account with this access via Kerberoasting (common) or others such as LLMNR/NBT-NS Response Spoofing or password spraying.
+- Another way that you may find SQL server credentials is using the tool Snaffler to find web.config or other types of configuration files that contain SQL server connection strings.
+
+
+
+Using a Custom Cypher Query to Check for SQL Admin Rights in BloodHound
+```
+MATCH p1=shortestPath((u1:User)-[r1:MemberOf*1..]->(g1:Group)) MATCH p2=(u1)-[:SQLAdmin*1..]->(c:Computer) RETURN p2
+```
+![Screenshot 2024-07-04 at 21-13-28 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/e95c334c-b9d6-48c1-8c32-edae87362f1a)
+
+
+Enumerating MSSQL Instances with PowerUpSQL , [cheat sheet](https://github.com/NetSPI/PowerUpSQL/wiki/PowerUpSQL-Cheat-Sheet)
+```powershell
+Import-Module .\PowerUpSQL.ps1
+Get-SQLInstanceDomain
+Get-SQLQuery -Verbose -Instance "172.16.5.150,1433" -username "inlanefreight\damundsen" -password "SQL1234!" -query 'Select @@version'
+```
+
+Enumerating MSSQL Instances with mssqlclient from Impacket toolkit.
+```shell
+mssqlclient.py INLANEFREIGHT/DAMUNDSEN@172.16.5.150 -windows-auth
+```
+
+
+**check MSSQL attacks [here](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Footprinting/Services#mssql)**
 
 ## SMB
 if we take over an account with local admin rights over a host, or set of hosts, we can perform a Pass-the-Hash attack to authenticate via the SMB protocol.
