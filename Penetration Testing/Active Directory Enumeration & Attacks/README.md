@@ -31,9 +31,7 @@
     - [Dsquery](#dsquery)
     - [dsquery with LDAP search filters](#ldap-filtering-explained)
 - [Active Directory Attacks](#active-directory-attacks)
-  - [Kerberoasting](#kerberoasting)
-    - [Kerberoasting From Linux](#from-linux)
-    - [Kerberoasting From Windows](#from-windows)   
+  - [Kerberos attacks](#kerberoasting)
 
 
 # Initial Enumeration
