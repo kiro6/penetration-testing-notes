@@ -29,3 +29,9 @@ ComputerName                        Status
 ------------                        ------
 ACADEMY-EA-DC01.INLANEFREIGHT.LOCAL   True 
 ```
+
+## MS14-068
+- This was a flaw in the Kerberos protocol, which could be leveraged along with standard domain user credentials to elevate privileges to Domain Admin.
+- A Kerberos ticket contains information about a user, including the account name, ID, and group membership in the Privilege Attribute Certificate (PAC). The PAC is signed by the KDC using secret keys to validate that the PAC has not been tampered with after creation.
+- The vulnerability allowed a forged PAC to be accepted by the KDC as legitimate. This can be leveraged to create a fake PAC, presenting a user as a member of the Domain Administrators or other privileged group.
+- use this [tool](https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068/pykek)
