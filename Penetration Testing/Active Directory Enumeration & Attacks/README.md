@@ -571,6 +571,39 @@ bloodhound
 - check this [blog](https://grimhacker.com/2018/03/09/just-a-printer/)
 
 
+### Password in Description Field
+
+```powershell
+Get-DomainUser * | Select-Object samaccountname,description |Where-Object {$_.Description -ne $null}
+
+
+samaccountname description
+-------------- -----------
+administrator  Built-in account for administering the computer/domain
+guest          Built-in account for guest access to the computer/domain
+krbtgt         Key Distribution Center Service Account
+ldap.agent     *** DO NOT CHANGE ***  3/12/2012: Sunsh1ne4All!
+
+
+```
+
+### PASSWD_NOTREQD Field
+
+- If this is set, the user is not subject to the current password policy length, meaning they could have a **shorter password or no password at all** (if empty passwords are allowed in the domain).
+
+```powershell
+Get-DomainUser -UACFilter PASSWD_NOTREQD | Select-Object samaccountname,useraccountcontrol
+
+samaccountname                                                         useraccountcontrol
+--------------                                                         ------------------
+guest                ACCOUNTDISABLE, PASSWD_NOTREQD, NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+mlowe                                PASSWD_NOTREQD, NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+ehamilton                            PASSWD_NOTREQD, NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+$725000-9jb50uejje9f                       ACCOUNTDISABLE, PASSWD_NOTREQD, NORMAL_ACCOUNT
+nagiosagent                                                PASSWD_NOTREQD, NORMAL_ACCOUNT
+```
+
+
 
 ## Living Off the Land
 This can also be a more stealthy approach and may not create as many log entries , also when there is noway to upload the tools
