@@ -551,6 +551,13 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 bloodhound 
 ```
 
+### Sniffing LDAP Credentials
+- Many applications and printers store LDAP credentials in their web admin console to connect to the domain. These consoles are often left with weak or default passwords.
+- Sometimes, these credentials can be viewed in cleartext. 
+- Other times, the application has a test connection function that we can use to gather credentials by changing the LDAP IP address to that of our attack host and setting up a `netcat` listener on LDAP port `389`.
+- When the device attempts to test the LDAP connection, it will send the credentials to our machine, often in cleartext.
+- Accounts used for LDAP connections are often privileged 
+
 ## Living Off the Land
 This can also be a more stealthy approach and may not create as many log entries , also when there is noway to upload the tools
 
