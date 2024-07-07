@@ -799,8 +799,9 @@ check [Kerberos attacks](https://github.com/kiro6/penetration-testing-notes/blob
 
 [ACLs-ACEs Abuse Attacks](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/ACLs-ACEs%20Abuse%20Attacks)
 
+## Group Policy Object (GPO) Abuse
 
-
+[Group Policy Object (GPO) Abuse](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Group%20Policy%20Object%20(GPO)%20Abuse)
 
 
 
