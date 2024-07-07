@@ -112,6 +112,15 @@ kerbrute userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o valid_ad_
 ## or check compiled binaries https://github.com/ropnop/kerbrute/releases/tag/v1.0.3
 ```
 
+## Enumerating DNS Records
+- We can use a tool such as [adidnsdump](https://github.com/dirkjanm/adidnsdump) to enumerate all DNS records in a domain using a valid domain user account.
+
+```shell
+adidnsdump -u inlanefreight\\forend ldap://172.16.5.5 -r
+
+head records.csv 
+```
+
 # Get a Foothold
 
 ## LLMNR/NBT-NS Poisoning
