@@ -3,6 +3,7 @@
   - [Basic Info](#basic-info)
   - [Enumeration of the Domain](#enumeration-of-the-domain)
   - [Internal AD Username Enumeration](#internal-ad-username-enumeration)
+  - [Enumerating DNS Records](#enumerating-dns-records)
 - [Get a Foothold](#get-a-foothold)
   - [LLMNR/NBT-NS Poisoning](#llmnrnbt-ns-poisoning)
   - [Password Spraying](#password-spraying)
