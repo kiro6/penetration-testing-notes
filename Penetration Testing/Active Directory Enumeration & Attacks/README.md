@@ -22,7 +22,8 @@
     - [PowerView](#powerview)
     - [SharpView](#sharpview)
     - [Snaffler](#snaffler)
-    - [BloodHound](#bloodhound) 
+    - [BloodHound](#bloodhound)
+    - [Sniffing LDAP Credentials](#sniffing-ldap-credentials)
   - [Living Off the Land](#living-off-the-land)
     - [Downgrade Powershell](#downgrade-powershell)
     - [Checking Defenses](#checking-defenses)
@@ -556,7 +557,10 @@ bloodhound
 - Sometimes, these credentials can be viewed in cleartext. 
 - Other times, the application has a test connection function that we can use to gather credentials by changing the LDAP IP address to that of our attack host and setting up a `netcat` listener on LDAP port `389`.
 - When the device attempts to test the LDAP connection, it will send the credentials to our machine, often in cleartext.
-- Accounts used for LDAP connections are often privileged 
+- Accounts used for LDAP connections are often privileged
+- check this [blog](https://grimhacker.com/2018/03/09/just-a-printer/)
+
+
 
 ## Living Off the Land
 This can also be a more stealthy approach and may not create as many log entries , also when there is noway to upload the tools
