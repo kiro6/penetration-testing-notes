@@ -33,6 +33,7 @@
 - [Active Directory Attacks](#active-directory-attacks)
   - [Kerberos attacks](#kerberos-attacks)
   - [Access Control List Abuse](#access-control-list-abuse)
+  - [Group Policy Object (GPO) Abuse](#group-policy-object-gpo-abuse)
 - [Movement in AD](#movement-in-ad)
   - [Privileged Access](#privileged-access)
     - [Remote Desktop](#remote-desktop)
