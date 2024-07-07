@@ -603,6 +603,16 @@ $725000-9jb50uejje9f                       ACCOUNTDISABLE, PASSWD_NOTREQD, NORMA
 nagiosagent                                                PASSWD_NOTREQD, NORMAL_ACCOUNT
 ```
 
+### Credentials in SMB Shares and SYSVOL Scripts
+
+- The SYSVOL share can be a treasure trove of data, especially in large organizations. We may find many different batch, VBScript, and PowerShell scripts within the scripts directory, which is readable by all authenticated users in the domain.
+
+```powershell
+
+ls \\academy-ea-dc01\SYSVOL\INLANEFREIGHT.LOCAL\scripts
+
+cat \\academy-ea-dc01\SYSVOL\INLANEFREIGHT.LOCAL\scripts\reset_local_admin_pass.vbs
+```
 
 
 ## Living Off the Land
