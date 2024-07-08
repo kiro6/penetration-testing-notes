@@ -40,7 +40,25 @@
 | Tree-root     | A two-way transitive trust between a forest root domain and a new tree root domain. Created when setting up a new tree root domain within a forest. |
 | Forest        | A transitive trust between two forest root domains.                                                                              |
 
+
+### Directions
+
+| **Type of Trust**  | **Description**                                                                                                                                                                      | **Example**                                                                                   |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **One-Way**        | Users in a trusted domain can access resources in a trusting domain, not vice-versa.                                                                                                 | Users in Domain A can access resources in Domain B, but users in Domain B cannot access resources in Domain A. |
+| **Bidirectional**  | Users from both trusting domains can access resources in the other domain.                                                                                                           | Users in INLANEFREIGHT.LOCAL can access resources in FREIGHTLOGISTICS.LOCAL, and vice-versa.  |
+
+
 ![Screenshot_9](https://github.com/kiro6/penetration-testing-notes/assets/57776872/d7bab82f-f01e-400c-af1b-481541f2f876)
+
+### Transitive
+
+| Trust Type        | Description                                                                                                         | Example                                                                                                             |
+|-------------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Transitive Trust  | Trust is extended to objects that the child domain trusts.                                                          | If Domain A trusts Domain B, and Domain B has a transitive trust with Domain C, then Domain A will trust Domain C.  |
+| Non-Transitive Trust | The child domain itself is the only one trusted.                                                                 | Domain A trusts Domain B only, regardless of any trusts Domain B might have with other domains.                    |
+
+![Screenshot 2024-07-08 at 03-10-20 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/3cfe2cf4-dc3f-476e-95e8-a0854e9831e4)
 
 
 
