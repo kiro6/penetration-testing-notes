@@ -45,7 +45,7 @@
 
 | **Type of Trust**  | **Description**                                                                                                                                                                      | **Example**                                                                                   |
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **One-Way**        | Users in a trusted domain can access resources in a trusting domain, not vice-versa.                                                                                                 | Users in Domain A can access resources in Domain B, but users in Domain B cannot access resources in Domain A. |
+| **One-Way**        | Users in a trusted domain can access resources in a trusting domain, not vice-versa.                                                                                                 | Users in Domain `freightlogics` can access resources in Domain `INLANEFREIGHT`, but users in Domain `INLANEFREIGHT` cannot access resources in Domain `freightlogics`. |
 | **Bidirectional**  | Users from both trusting domains can access resources in the other domain.                                                                                                           | Users in INLANEFREIGHT.LOCAL can access resources in FREIGHTLOGISTICS.LOCAL, and vice-versa.  |
 
 
