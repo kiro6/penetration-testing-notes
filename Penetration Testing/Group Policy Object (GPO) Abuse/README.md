@@ -26,6 +26,13 @@ Get-GPO -Guid 7CA9C789-14CE-46E3-A722-83F4097AF532
 
 
 ## using bloodhound
+```powershell
+.\SharpHound.exe -c All --zipfilename ILFREIGHT
+
+bloodhound 
+```
+
+
 
 here we see that `Domain Users` have control over over `Disconnect Idle RDP` GPO 
 ![Screenshot 2024-07-05 at 02-50-31 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/599c7d4b-9101-48fd-882a-2c16b0ed6958)
