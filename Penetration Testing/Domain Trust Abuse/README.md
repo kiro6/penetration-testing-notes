@@ -23,7 +23,7 @@ Get-DomainUser -Domain LOGISTICS.INLANEFREIGHT.LOCAL | select SamAccountName
 
 ```
 
-## powershell 
+## netdom 
 ```powershell
 # Using netdom to query domain trust
 netdom query /domain:inlanefreight.local trust
