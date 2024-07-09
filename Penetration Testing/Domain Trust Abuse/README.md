@@ -18,6 +18,9 @@ Import-Module ./powerview.ps1
 Get-DomainTrust
 Get-DomainTrustMapping
 
+# check parent domain
+Get-NetDomain -Domain INLANEFREIGHT.LOCAL
+
 # Checking Users in the Trusted domains using Get-DomainUser
 Get-DomainUser -Domain LOGISTICS.INLANEFREIGHT.LOCAL | select SamAccountName
 
