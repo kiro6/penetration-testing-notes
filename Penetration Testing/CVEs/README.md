@@ -21,6 +21,7 @@
 - The spooler service runs as SYSTEM and is installed by default in Windows servers running Desktop Experience. This attack can be leveraged to relay to LDAP and grant your attacker account DCSync privileges to retrieve all password hashes from AD.
 - The attack can also be used to relay LDAP authentication and grant Resource-Based Constrained Delegation (RBCD) privileges for the victim to a computer account under our control, thus giving the attacker privileges to authenticate as any user on the victim's computer. This attack can be leveraged to compromise a Domain Controller in a partner domain/forest, provided you have administrative access to a Domain Controller in the first forest/domain already, and the trust allows TGT delegation, which is not by default anymore.
 - using this [tool](http://web.archive.org/web/20200919080216/https://github.com/cube0x0/Security-Assessment) We can use `Get-SpoolStatus` module or this [tool](https://github.com/NotMedic/NetNTLMtoSilverTicket)
+- poc [PrintSpoofer](https://github.com/itm4n/PrintSpoofer)
 ```powershell
 Import-Module .\SecurityAssessment.ps1
 Get-SpoolStatus -ComputerName ACADEMY-EA-DC01.INLANEFREIGHT.LOCAL
