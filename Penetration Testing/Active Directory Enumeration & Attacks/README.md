@@ -158,7 +158,9 @@ Let's walk through a quick example of the attack flow at a very high level:
 
 ### LLMNR/NBT-NS Poisoning - from Linux
 
-```shell 
+```shell
+
+# where prev hashes stored /usr/share/responder/logs/
 sudo responder -I ens224
 
 
