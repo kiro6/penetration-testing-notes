@@ -119,6 +119,12 @@ C:\user>more file.txt
 This is a test file
 ```
 
+## CMD 
+
+```cmd 
+certutil -urlcache -get https://server/file.txt c:\file.txt
+```
+
 # Upload Operations
 
 ## 1) PowerShell Base64 Encode & Decode
