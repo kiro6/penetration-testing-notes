@@ -12,6 +12,7 @@
   - [Security identifiers](#security-identifiers)
   - [Access Tokens](#access-tokens)
   - [Access Control Lists (ACLs)](#access-control-lists-acls)
+  - [Privileges](#privileges)
 - [Pipes](#pipes)
 
 
