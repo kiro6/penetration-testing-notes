@@ -548,3 +548,16 @@ Allows for administrators to log access attempts that are made to secured object
 
 - is type of ACL
 
+
+## Pipes
+
+- Pipes are used for communication between two applications or processes using shared memory.
+- Pipes are essentially files stored in memory that get cleared out after being read.
+- There are two types of pipes
+  - named pipes - An example of a named pipe is `\\.\PipeName\\ExampleNamedPipeServer`
+  - anonymous pipes 
+- Windows systems use a client-server implementation for pipe communication. In this type of implementation, the process that creates a named pipe is the server, and the process communicating with the named pipe is the client.
+- Every active connection to a named pipe server results in the creation of a new named pipe. These all share the same pipe name but communicate using a different data buffer.
+- Named pipes can communicate
+  - using half-duplex, or a one-way channel with the client only being able to write data to the server
+  - duplex, which is a two-way communication channel that allows the client to write data over the pipe, and the server to respond back with data over that pipe
