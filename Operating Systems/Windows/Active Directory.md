@@ -23,6 +23,7 @@
   - [NTHash (NTLM)](#nthash-ntlm)
   - [NTLMv1 (Net-NTLMv1)](#ntlmv1-net-ntlmv1)
   - [NTLMv2 (Net-NTLMv2)](#ntlmv2-net-ntlmv2)
+- [Privileged Groups](#privileged-groups)
   
 
 
