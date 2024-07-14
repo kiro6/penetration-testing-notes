@@ -30,6 +30,9 @@ find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null
 ## Environment Enumeration
 
 ```shell
+# list all current dir
+ls -ahlR
+
 # operating system and version
 cat /etc/os-release
 
