@@ -136,3 +136,6 @@ c:\inetpub\wwwwroot\web.config
 %WINDIR%\system32\config\software.sav
 %WINDIR%\system32\config\system.sav
 ```
+
+# Windows Group Privileges
+
