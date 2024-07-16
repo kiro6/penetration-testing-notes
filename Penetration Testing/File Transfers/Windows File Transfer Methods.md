@@ -122,7 +122,7 @@ This is a test file
 ## CMD 
 
 ```cmd 
-certutil -urlcache -get https://server/file.txt c:\file.txt
+certutil -urlcache -split -f https://server/file.txt c:\file.txt
 ```
 
 # Upload Operations
