@@ -504,7 +504,8 @@ cacls c:\
 (Get-Acl c:\).Sddl
 ```
 
-- check [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) and [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings) for more tables 
+- [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) 
+- [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings)  
 - [ACL meanings in services](https://www.winhelponline.com/blog/view-edit-service-permissions-windows/)
 
 Allowed ace_types
