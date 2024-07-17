@@ -173,6 +173,8 @@ robocopy /B 'C:\Confidential\' .\ '2021 Contract.txt'
 ```
 
 ### Attacking a Domain Controller - Copying NTDS.dit
+- log in DC
+- DiskShadow binary needs to executed from the C:\Windows\System32
 ```powershell
 # beckup the NTDS.dit from DC
 diskshadow.exe
