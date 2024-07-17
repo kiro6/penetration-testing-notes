@@ -11,7 +11,7 @@
   - [Windows security model](#windows-security-model)
   - [Security identifiers](#security-identifiers)
   - [Access Tokens](#access-tokens)
-  - [Access Control Lists (ACLs)](#access-control-lists-acls)
+  - [Access Rights](#access-rights)
   - [Privileges](#privileges)
 - [Pipes](#pipes)
 
@@ -458,7 +458,7 @@ if we have a user named `John` in a domain with the `SID S-1-5-21-{domain}`, `Jo
 
 
 
-## Access Control Lists (ACLs)
+## Access Rights
 
 ### Access Control List (ACL)
 An Access Control List (ACL) is the ordered collection of Access Control Entries (ACEs) that apply to an object.
@@ -504,8 +504,8 @@ cacls c:\
 (Get-Acl c:\).Sddl
 ```
 
-check [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) and [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings) for more tables 
-
+- check [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) and [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings) for more tables 
+- [ACL meanings in services](https://www.winhelponline.com/blog/view-edit-service-permissions-windows/)
 
 Allowed ace_types
 
