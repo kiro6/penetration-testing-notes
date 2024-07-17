@@ -247,6 +247,10 @@ Get-WinEvent -LogName security | where { $_.ID -eq 4688 -and $_.Properties[8].Va
 - DnsAdmins group doesn't give the ability to restart the DNS service, but this is conceivably something that sysadmins might permit DNS admins to do.
 -  Membership in this group gives us the rights to disable global query block security which can be used in Creating a WPAD (Web Proxy Automatic Discovery Protocol) Record 
 
+### check
+```powershell
+Get-ADGroupMember -Identity DnsAdmins
+```
 
 ### RCE
 - DNS management is performed over RPC
