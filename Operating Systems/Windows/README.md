@@ -578,6 +578,19 @@ Allows for administrators to log access attempts that are made to secured object
 - [How User Account Control works](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works)
 - [User Account Control settings and configuration](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=intune)
 
+### UAC Internals
+1) The user requests to run an application as administrator.
+2) A ShellExecute API call is made using the runas verb.
+3) The request gets forwarded to Appinfo to handle elevation.
+4) The application manifest is checked to see if AutoElevation is allowed .
+5) Appinfo executes consent.exe, which shows the UAC prompt on a secure desktop. A secure desktop is simply a separate desktop that isolates processes from whatever is running in the actual user's desktop to avoid other processes from tampering with the UAC prompt in any way.
+6) If the user gives consent to run the application as administrator, the Appinfo service will execute the request using a user's Elevated Token. Appinfo will then set the parent process ID of the new process to point to the shell from which elevation was requested.
+
+![Screenshot 2024-07-23 at 10-30-20 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/f1bc9939-cb49-45fd-9cb2-608047ea9f00)
+
+
+
+
 
 ## Mandatory Integrity Control
 - [Mandatory Integrity Control doc](https://learn.microsoft.com/en-us/windows/win32/secauthz/mandatory-integrity-control)
