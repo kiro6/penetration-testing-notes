@@ -573,6 +573,10 @@ Allows for administrators to log access attempts that are made to secured object
 | SeRestorePrivilege            | Restore files and directories                      | Administrators                               | This security setting determines which users can bypass file, directory, registry, and other persistent object permissions when they restore backed up files and directories. It determines which users can set valid security principals as the owner of an object.                  |
 
 
+## User Account Control (UAC)
+- [How User Account Control works](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works)
+- [User Account Control settings and configuration](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=intune)
+
 # Pipes
 
 - Pipes are used for communication between two applications or processes using shared memory.
