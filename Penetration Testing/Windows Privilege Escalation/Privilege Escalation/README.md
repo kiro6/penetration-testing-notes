@@ -446,6 +446,7 @@ secretsdump.py server_adm@10.129.43.9 -just-dc-user administrator
 - [How User Account Control works](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works)
 - [User Account Control settings and configuration](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=intune)
 - [The UACME project maintains a list of UAC bypasses](https://github.com/hfiref0x/UACME)
+- From an attacker's perspective, the three lower UAC security levels are equivalent, and only the Always notify setting presents a difference.
 
 ## Check
 
