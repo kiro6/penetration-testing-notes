@@ -310,6 +310,7 @@ wmic /?
 
 
 # Security
+## Windows security model
 Windows security model following key components:
 - Security identifiers (SIDs)
 - Access tokens
@@ -319,7 +320,6 @@ Windows security model following key components:
 
 
 
-## Windows security model
 
 ## Security identifiers   
 [documntation](https://learn.microsoft.com/en-us/windows-hardware/drivers/driversecurity/windows-security-model)
