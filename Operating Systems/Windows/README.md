@@ -455,6 +455,11 @@ if we have a user named `John` in a domain with the `SID S-1-5-21-{domain}`, `Jo
    - Current impersonation levels
    - Other statistics
 
+- When an **administrator** logs on, two separate access tokens are created for the user: a **standard user access token** and an **administrator access token**.
+  - A user that is a member of the Administrators group can sign in, browse the Web, and read e-mail while using a standard user access token.
+  - When the administrator needs to perform a task that requires the administrator access token, Windows automatically prompts the user for approval.
+  - This prompt is called an elevation prompt, and its behavior can be configured via policy or registry. 
+
 
 
 
