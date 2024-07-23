@@ -13,6 +13,7 @@
   - [Access Tokens](#access-tokens)
   - [Access Rights](#access-rights)
   - [Privileges](#privileges)
+  - [User Account Control (UAC)](#user-account-control-uac)
 - [Pipes](#pipes)
 
 
