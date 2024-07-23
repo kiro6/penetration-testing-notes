@@ -1,3 +1,27 @@
+# Content
+- [Windows User Privileges](#windows-user-privileges)
+  - [SeImpersonate and SeAssignPrimaryToken](#seimpersonate-and-seassignprimarytoken)
+  - [SeDebugPrivilege](#sedebugprivilege)
+    - [Dump Memory](#dump-memory)
+    - [RCE](#rce)
+  - [SeTakeOwnershipPrivilege](#setakeownershipprivilege)
+    - [Take onwership](#take-onwership)
+- [Windows Group Privileges](#windows-group-privileges)
+  - [Backup Operators](#backup-operators)
+    - [Copying a Protected File](#copying-a-protected-file)
+    - [Attacking a Domain Controller - Copying NTDS.dit](#attacking-a-domain-controller---copying-ntdsdit)
+  - [Event Log Readers](#event-log-readers)
+    - [read logs](#read-logs)
+  - [DnsAdmins](#dnsadmins)
+    - [RCE](#rce-1)
+    - [Disabling the Global Query Block List](#disabling-the-global-query-block-list)
+  - [Print Operators](#print-operators)
+    - [RCE: Manual way GUI](#rce-manual-way-gui)
+    - [RCE: Manual way no GUI](#rce-manual-way-no-gui)
+    - [RCE: Automated](#rce-automated)
+  - [Server Operators](#server-operators)
+    - [RCE](#rce-2)      
+
 
 # Windows User Privileges
 - [list of User Rights and Privileges](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-b--privileged-accounts-and-groups-in-active-directory#table-b-1-user-rights-and-privileges)
