@@ -578,6 +578,22 @@ Allows for administrators to log access attempts that are made to secured object
 - [How User Account Control works](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works)
 - [User Account Control settings and configuration](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=intune)
 
+
+## Mandatory Integrity Control
+- [Mandatory Integrity Control doc](https://learn.microsoft.com/en-us/windows/win32/secauthz/mandatory-integrity-control)
+- `Mandatory Integrity Control (MIC)`, which is a mechanism that allows differentiating users, processes and resources by assigning an `Integrity Level (IL)` to each of them.
+- MIC takes precedence over regular Windows DACLs, so you may be authorized to access a resource according to the DACL, but it won't matter if your IL isn't high enough.
+
+
+| Integrity Level | Use                                                                                     |
+|-----------------|-----------------------------------------------------------------------------------------|
+| Low             | Generally used for interaction with the Internet (i.e., Internet Explorer). Has very limited permissions. |
+| Medium          | Assigned to standard users and Administrators' filtered tokens.                        |
+| High            | Used by Administrators' elevated tokens if UAC is enabled. If UAC is disabled, all administrators will always use a high IL token. |
+| System          | Reserved for system use.                                                                 |
+
+
+
 # Pipes
 
 - Pipes are used for communication between two applications or processes using shared memory.
