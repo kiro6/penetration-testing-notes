@@ -470,7 +470,15 @@ REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\
 [environment]::OSVersion.Version
 
 ```
+
+
+## General Methdology
+- most of the bypass techniques rely on us being able to leverage a High IL process to execute something on our behalf, Since any process created by a High IL parent process will inherit the same integrity level, this will be enough to get an elevated token without requiring us to go through the UAC prompt.
+
+
+
 then we could check [UACME list](https://github.com/hfiref0x/UACME?tab=readme-ov-file#usage)
+
 
 ## technique number 54 example 
 ```
