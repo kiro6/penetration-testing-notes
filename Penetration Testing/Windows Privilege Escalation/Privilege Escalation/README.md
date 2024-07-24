@@ -469,6 +469,11 @@ REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\
 # Checking Windows Version
 [environment]::OSVersion.Version
 
+
+# check the manifest for executables to find the autoElevate property
+sigcheck64.exe -m c:/windows/system32/msconfig.exe | findstr "autoElevate"
+
+
 ```
 
 
@@ -546,6 +551,8 @@ Author: James Forshaw
 ## No GUI UAC Bypass
 
 ## technique number 54 example: SystemProperties*.exe Dll Hijack
+**work on "Always Notify" level**
+
 ```
 Author: egre55
 Type: Dll Hijack
@@ -590,6 +597,8 @@ C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
 ```
 
 ## technique number 33: Fodhelper.exe
+
+**do not work on "Always Notify" level**
 
 ```
     Type: Shell API
