@@ -14,6 +14,7 @@
   - [Access Rights](#access-rights)
   - [Privileges](#privileges)
   - [User Account Control (UAC)](#user-account-control-uac)
+  - [Mandatory Integrity Control](#mandatory-integrity-control)
 - [Pipes](#pipes)
 
 
