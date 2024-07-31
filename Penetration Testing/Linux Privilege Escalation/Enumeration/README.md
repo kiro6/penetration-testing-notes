@@ -207,3 +207,12 @@ grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"   ## private
 grep -rnw "ssh-rsa" /home/* 2>/dev/null | grep ":1        ## public
 
 ```
+
+## network
+```sh
+# shell
+for i in {1..254} ;do (ping -c 1 172.16.5.$i | grep "bytes from" &) ;done
+
+# arb
+arb
+```
