@@ -21,6 +21,9 @@ ip route add 172.16.1.0/24 dev ligolo
 # create ip to be routed
 sudo ip route add 172.16.2.101 dev ligolo2
 
+# show routes
+ip route
+
 ```
 
 ## ligolo proxy
