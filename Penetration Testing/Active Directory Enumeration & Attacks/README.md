@@ -447,6 +447,9 @@ python3 windapsearch.py --dc-ip 172.16.5.5 -u forend@inlanefreight.local -p Klmc
 
 ```
 sudo bloodhound-python -u 'forend' -p 'Klmcargo2' -ns 172.16.5.5 -d inlanefreight.local -c all
+
+bloodhound-python -u 'riley' -p 'P@ssw0rd'  -ns 192.168.110.55  -d painters.htb -c all --dns-tcp 
+
 ls
 sudo neo4j start 
 zip -r ilfreight_bh.zip *.json
