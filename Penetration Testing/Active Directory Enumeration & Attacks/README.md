@@ -563,6 +563,8 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 
 ```powershell
 .\SharpHound.exe -c All --zipfilename ILFREIGHT
+.\SharpHound.exe -c All --zipfilename painters --ldapusername  riley  --ldappassword  P@ssw0rd
+.\SharpHound.exe -c All --zipfilename painters2 --doLocalAdminSessionEnum  --localadminusername riley --localadminpassword P@ssw0rd
 
 bloodhound 
 ```
