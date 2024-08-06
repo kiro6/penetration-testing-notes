@@ -181,7 +181,7 @@ find / ! -path "*/proc/*" -iname "*config*" -type f 2>/dev/null
 
 ## Credentials in Configuration Files
 for i in $(find / -name *.cnf 2>/dev/null | grep -v "doc\|lib");do echo -e "\nFile: " $i; grep "user\|password\|pass" $i 2>/dev/null | grep -v "\#";done
-
+for i in $(find / -name *.conf 2>/dev/null | grep -v "doc\|lib");do echo -e "\nFile: " $i; grep "user\|password\|pass" $i 2>/dev/null | grep -v "\#";done
 # Finding History Files
 find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
 
