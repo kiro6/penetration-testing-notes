@@ -12,7 +12,8 @@
   - [Change password](#change-password)
   - [Targeted Kerberoasting](#targeted-kerberoasting)
   - [Add to group](#add-to-group)
-  - [DCSync](#dcsync) 
+  - [DCSync](#dcsync)
+  - [Shadow Credentials](#shadow-credentials)
 
 # ACL Enumeration
 ## ACL Enumeration with Powerview
