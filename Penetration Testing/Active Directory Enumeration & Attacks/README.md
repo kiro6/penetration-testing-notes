@@ -564,6 +564,7 @@ Get-DomainUser -SPN -Properties samaccountname,ServicePrincipalName
 ```
 
 ### BloodHound
+- [BloodHound Collectors Builds](https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors/DebugBuilds)
 - [SharpHound .NET](https://github.com/BloodHoundAD/SharpHound)
 - [SharpHound powershell](https://github.com/BloodHoundAD/BloodHound/blob/master/Collectors/SharpHound.ps1)
 
