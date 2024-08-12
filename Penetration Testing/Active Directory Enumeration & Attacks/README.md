@@ -39,6 +39,7 @@
   - [Kerberos attacks](#kerberos-attacks)
   - [Access Control List Abuse](#access-control-list-abuse)
   - [Group Policy Object (GPO) Abuse](#group-policy-object-gpo-abuse)
+  - [Domain Trust Abuse]()
 - [Movement in AD](#movement-in-ad)
   - [Privileged Access](#privileged-access)
     - [Remote Desktop](#remote-desktop)
@@ -882,7 +883,8 @@ check [Kerberos attacks](https://github.com/kiro6/penetration-testing-notes/blob
 
 [Group Policy Object (GPO) Abuse](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Group%20Policy%20Object%20(GPO)%20Abuse)
 
-
+## Domain Trust Abuse
+check [Domain Trust Abuse](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Domain%20Trust%20Abuse)
 
 
 
