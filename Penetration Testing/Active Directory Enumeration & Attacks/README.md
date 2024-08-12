@@ -11,7 +11,7 @@
     - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
     - [Internal Password Spraying](#internal-password-spraying)
     - [Pass the Hash , Pass the Ticket and Relay Attacks](#pass-the-hash--pass-the-ticket-and-relay-attacks)
-- [Deeper Down Digging](#deeper-down-digging)
+- [Situational Awareness](#deeper-down-digging)
   - [Enumerating Security Controls](#enumerating-security-controls)
   - [Credentialed Enumeration - from Linux](#credentialed-enumeration---from-linux)
     - [CrackMapExec / Netexec](#crackmapexec--netexec)
@@ -341,7 +341,7 @@ kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  W
 
 check [this section in my repo](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Password%20Attacks/Windows%20Lateral%20Movement)
 
-# Deeper Down Digging 
+# Situational Awareness
 ## Enumerating Security Controls
 
 ### Windows Defender
@@ -394,7 +394,7 @@ Get-LAPSComputers
 ```
 
 
-## Credentialed Enumeration - from Linux
+## Enumeration - from Linux
 - We are interested in information about domain user and computer attributes, group membership, Group Policy Objects, permissions, ACLs, trusts, and more. 
 - we will have to have acquired a user's cleartext password, NTLM password hash, or SYSTEM access on a domain-joined host.
 ### CrackMapExec / Netexec 
@@ -460,7 +460,7 @@ zip -r ilfreight_bh.zip *.json
 bloodhound
 ```
 
-## Credentialed Enumeration - from Windows
+## Enumeration - from Windows
 ### ActiveDirectory PowerShell Module
 
 ```powershell
