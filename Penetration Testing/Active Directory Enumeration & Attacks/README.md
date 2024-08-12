@@ -6,11 +6,12 @@
   - [Enumerating DNS Records](#enumerating-dns-records)
 - [Get a Foothold](#get-a-foothold)
   - [LLMNR/NBT-NS Poisoning](#llmnrnbt-ns-poisoning)
+  - [AS-REQ Roasting](#as-req-roasting)
   - [Password Spraying](#password-spraying)
     - [Enumerating & Retrieving Password Policies](#enumerating--retrieving-password-policies)
     - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
     - [Internal Password Spraying](#internal-password-spraying)
-    - [Pass the Hash , Pass the Ticket and Relay Attacks](#pass-the-hash--pass-the-ticket-and-relay-attacks)
+  - [Pass the Hash , Pass the Ticket and Relay Attacks](#pass-the-hash--pass-the-ticket-and-relay-attacks)
 - [Situational Awareness](#situational-awareness)
   - [Enumerating Security Controls](#enumerating-security-controls)
   - [Enumeration - from Linux](#enumeration---from-linux)
@@ -193,6 +194,9 @@ HELP
 GET NTLMV2USERNAMES
 GET NTLMV2UNIQUE
 ```
+
+## AS-REQ Roasting
+check [AS-REQ Roasting](https://github.com/kiro6/penetration-testing-notes/tree/main/Penetration%20Testing/Kerberos%20attacks#as-req-roasting)
 
 ## Password Spraying
 ### Enumerating & Retrieving Password Policies
