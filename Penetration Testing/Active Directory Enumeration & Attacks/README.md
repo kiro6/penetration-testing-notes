@@ -974,6 +974,7 @@ Enumerating MSSQL Instances with PowerUpSQL , [cheat sheet](https://github.com/N
 ```powershell
 Import-Module .\PowerUpSQL.ps1
 Get-SQLInstanceDomain
+Invoke-SQLAudit -Verbose -Instance ZPH-SVRSQL01.ZSM.LOCAL -username "inlanefreight\damundsen"  -password "SQL1234!"
 Get-SQLQuery -Verbose -Instance "172.16.5.150,1433" -username "inlanefreight\damundsen" -password "SQL1234!" -query 'Select @@version'
 ```
 
