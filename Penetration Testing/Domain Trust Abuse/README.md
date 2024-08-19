@@ -2,6 +2,7 @@
 - [Enumerating Trust Relationships](#enumerating-trust-relationships)
 - [From child to parent Trusts Abuse](#from-child-to-parent-trusts-abuse)
   - [ExtraSids Attack](#extrasids-attack)
+  - [Abusing Trust Account$](#abusing-trust-account)
   - [child to parent Kerberoasting](#child-to-parent-kerberoasting)
 - [Cross-Forest Trust Abuse](#cross-forest-trust-abuse)
   - [Cross-Forest Kerberoasting](#cross-forest-kerberoasting)
