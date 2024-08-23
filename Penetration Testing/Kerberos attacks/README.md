@@ -208,10 +208,10 @@ Removing all other encryption types except for RC4_HMAC_MD5
 
 # Delegation attacks
 ## Unconstrained delegation
-
-Unconstrained delegation `TrustedForDelegation` is  a feature that a Domain Administrator can set to any **Computer** inside the domain. Then, anytime a user logins onto the Computer, a copy of the TGT of that user is going to be sent inside the TGS provided by the DC and saved in memory in LSASS. So, if you have Administrator privileges on the machine, you will be able to dump the tickets and impersonate the users on any machine.
-
-
+- Unrestricted kerberos delegation is a privilege that can be assigned to a domain computer or a user
+- When a user authenticates to a computer that has unresitricted kerberos delegation privilege turned on, authenticated user's TGT ticket gets saved to that computer's memory.
+- The reason TGTs get cached in memory is so the computer (with delegation rights) can impersonate the authenticated user as and when required for accessing any other services on that user's behalf.
+- if we have `local admin privileges` inside that machine, we will be able to dump the ticket and impersonate user who logged in the machine
 - If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
 
 
