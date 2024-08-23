@@ -14,6 +14,7 @@
   - [Add to group](#add-to-group)
   - [DCSync](#dcsync)
   - [Shadow Credentials](#shadow-credentials)
+  - [Resource-based constrained delegation](#resource-based-constrained-delegation)
 
 # ACL Enumeration
 ## ACL Enumeration with Powerview
@@ -272,3 +273,7 @@ we have write right over `ZPH-SVRMGMT1$` computer
 Rubeus.exe asktgt /user:ZPH-SVRMGMT1$ /certificate:<cert> /password:"2hI2TIOeZevndEXG" /domain:zsm.local /dc:ZPH-SVRDC01.zsm.local /getcredentials /show
 
 ```
+
+## Resource-based constrained delegation
+
+check [Resource-based constrained delegation section in my repo](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Kerberos%20attacks/README.md#resource-based-constrained-delegation)
