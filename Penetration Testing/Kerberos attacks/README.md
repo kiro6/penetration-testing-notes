@@ -209,13 +209,18 @@ Removing all other encryption types except for RC4_HMAC_MD5
 # Delegation attacks
 ## Unconstrained delegation
 - Unrestricted kerberos delegation is a privilege that can be assigned to a domain computer or a user
+- If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
+
+### computer case
 - When a user authenticates to a computer that has unresitricted kerberos delegation privilege turned on, authenticated user's TGT ticket gets saved to that computer's memory.
 - The reason TGTs get cached in memory is so the computer (with delegation rights) can impersonate the authenticated user as and when required for accessing any other services on that user's behalf.
-- If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
+### user case (service account)
+- When a user (let's call them User A) authenticates to a service or application that is running under another user account (let's call it User B which have delegation rights), using Kerberos authentication, the Domain Controller (DC) provides User B with User A's Ticket Granting Ticket (TGT).
+- When unconstrained delegation is enabled, the KDC includes User A's TGT inside the service ticket that is issued to User B. 
 
 ### Exploit scenarios  
 1) if we have `local admin privileges` inside that machine, we will be able to dump the ticket and impersonate user who logged in the machine
-2) if we have creds for user with Unconstrained delegation priv (The user must authenticate to a machine or service that has delegation privileges). we can use him to impersonate the other users. 
+2) if we have creds for user with Unconstrained delegation priv we can use him to impersonate the other users. 
 
 
 ![Screenshot 2024-06-18 at 20-25-07 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a00b55ca-4a12-4c9d-b0a6-4b6e8cd7e1a3)
