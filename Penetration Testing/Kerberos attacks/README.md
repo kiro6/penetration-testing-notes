@@ -316,8 +316,8 @@ ls \\dc01.offense.local\c$
 
 
 ## Resource-based constrained delegation
+- **Resource Trust:** The resource server maintains a list of trusted services or computers that are allowed to delegate on behalf of users.
 - It's possible to gain code execution with elevated privileges on a remote computer if you have WRITE privilege on that computer's AD object.
-
 - must be Windows 2012 Domain Controller or later
 - write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute
 
