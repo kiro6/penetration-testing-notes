@@ -95,6 +95,7 @@ bloodhound
 3) **Access over Computer user allows for:**
     - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
     - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
+    - Resource-based constrained delegation: write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute
 
 
 
