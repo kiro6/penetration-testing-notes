@@ -718,6 +718,9 @@ sc start SecurityService
 
 ## Weak Service Permissions
 ```powershell
+# enum
+SharpUp.exe audit ModifiableServices
+# check
 accesschk.exe /accepteula -quvcw WindscribeService
 
 # Changing the Service Binary Path
@@ -767,6 +770,7 @@ SERVICE_NAME: SystemExplorerHelpService
 ## Weak Registry Permissions
 
 ```powershell
+# enum
 accesschk.exe /accepteula "username" -kvuqsw hklm\System\CurrentControlSet\services
 
 >    RW HKLM\System\CurrentControlSet\services\ModelManagerService
@@ -779,8 +783,6 @@ sc start ModelManagerService
 
 ## Modifiable Registry Autorun Binary
 Get-CimInstance Win32_StartupCommand | select Name, command, Location, User |fl
-
-
 
 ```
 
