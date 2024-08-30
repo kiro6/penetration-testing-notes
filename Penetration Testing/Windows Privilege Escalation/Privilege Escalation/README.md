@@ -21,10 +21,10 @@
     - [RCE: Automated](#rce-automated)
   - [Server Operators](#server-operators)
     - [RCE](#rce-2)
-  - [User Account Control](#user-account-control)
+- [User Account Control](#user-account-control)
     - [GUI UAC Bypass](#gui-uac-bypass)
     - [No GUI UAC Bypass](#no-gui-uac-bypass)
-  - [Weak Permissions](#weak-permissions)      
+- [Weak Permissions](#weak-permissions)      
 
 
 # Windows User Privileges
