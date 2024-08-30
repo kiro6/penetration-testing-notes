@@ -511,10 +511,10 @@ cacls c:\
 (Get-Acl c:\).Sddl
 ```
 
-- [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) 
 - [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings)  
-- [ACL meanings in services](https://www.winhelponline.com/blog/view-edit-service-permissions-windows/)
-- [ACL meanings in services](https://learn.microsoft.com/en-us/windows/win32/services/service-security-and-access-rights)
+- [microsoft learn ace strings (Files/Binares, Registry and Dir)](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) 
+- [ACL meanings in services microsoft docs](https://learn.microsoft.com/en-us/windows/win32/services/service-security-and-access-rights)
+- [ACL meanings in services in a blog](https://www.winhelponline.com/blog/view-edit-service-permissions-windows/)
 
 Allowed ace_types
 
