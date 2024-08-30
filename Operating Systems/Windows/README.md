@@ -514,6 +514,7 @@ cacls c:\
 - [microsoft learn ace strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/ace-strings) 
 - [microsoft learn sid strings](https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings)  
 - [ACL meanings in services](https://www.winhelponline.com/blog/view-edit-service-permissions-windows/)
+- [ACL meanings in services](https://learn.microsoft.com/en-us/windows/win32/services/service-security-and-access-rights)
 
 Allowed ace_types
 
