@@ -23,4 +23,15 @@
 | `/storage`       | Mount point for all external storage volumes, organizing various external storage locations.       |
 
 # Important Files
-- The `/system/etc/permissions/platform.xml` file defines system-wide permissions, policies, and mappings for granting access to components and features in Android. EX: [android src code](https://android.googlesource.com/platform/frameworks/base/+/master/data/etc/platform.xml)
+
+## platform.xml
+
+- The `/etc/permissions/platform.xml`  file in Android is to **manage** and **define** system-level permissions for different components and apps on the device. so define the permssions , and map it to uid to access in andorid system level. 
+- outlines permissions required by the Android platform to control access to sensitive system features like cameras, sensors, network interfaces, and system settings.
+- It acts as a centralized configuration file that specifies which system services, apps, or user groups can access particular system resources or perform certain privileged operations. 
+- EX: [android src code](https://android.googlesource.com/platform/frameworks/base/+/master/data/etc/platform.xml)
+
+## android_filesystem_config.h
+- 
+
+
