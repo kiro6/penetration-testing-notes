@@ -21,3 +21,6 @@
 | `/odm_dlkm`      | Stores Device Kernel Loadable Modules (DKLMs) specific to hardware, allowing kernel modularization.|
 | `/vendor_dlkm`   | Similar to `/odm_dlkm`, stores kernel modules specific to vendor hardware.                        |
 | `/storage`       | Mount point for all external storage volumes, organizing various external storage locations.       |
+
+# Important Files
+- The `/system/etc/permissions/platform.xml` file defines system-wide permissions, policies, and mappings for granting access to components and features in Android. EX: [android src code](https://android.googlesource.com/platform/frameworks/base/+/master/data/etc/platform.xml)
