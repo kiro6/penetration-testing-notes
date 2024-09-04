@@ -24,14 +24,19 @@
 
 # Important Files
 
+## android_filesystem_config.h
+- this file defines users and groups in the android system
+- EX: [android_filesystem_config in googlesource](https://android.googlesource.com/platform/system/core/+/master/libcutils/include/private/android_filesystem_config.h) 
+
+
+
 ## platform.xml
 
-- The `/etc/permissions/platform.xml`  file in Android is to **manage** and **define** system-level permissions for different components and apps on the device. so define the permssions , and map it to uid to access in andorid system level. 
+- The `/etc/permissions/platform.xml`  file in Android is to **manage** and **define** system-level permissions for different components and apps on the device. so it defines the permssions , and maps it to user's uid to access it at the andorid system level. 
 - outlines permissions required by the Android platform to control access to sensitive system features like cameras, sensors, network interfaces, and system settings.
 - It acts as a centralized configuration file that specifies which system services, apps, or user groups can access particular system resources or perform certain privileged operations. 
 - EX: [android src code](https://android.googlesource.com/platform/frameworks/base/+/master/data/etc/platform.xml)
 
-## android_filesystem_config.h
-- 
+
 
 
