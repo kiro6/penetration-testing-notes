@@ -31,6 +31,11 @@
   - [Weak Registry Permissions](#weak-registry-permissions)          
 
 
+# tools
+- [winPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)
+- [PowerUp](https://github.com/BC-SECURITY/Empire/blob/main/empire/server/data/module_source/privesc/PowerUp.ps1)
+- [Windows Exploit Suggester - Next Generation](https://github.com/bitsadmin/wesng)
+
 # Windows User Privileges
 - [list of User Rights and Privileges](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-b--privileged-accounts-and-groups-in-active-directory#table-b-1-user-rights-and-privileges)
 ## SeImpersonate and SeAssignPrimaryToken
@@ -797,5 +802,11 @@ Get-CimInstance Win32_StartupCommand | select Name, command, Location, User |fl
 systeminfo
 wmic qfe list brief
 Get-Hotfix
+```
+
+# Vulnerable Services
+### enum 
+```powershell
+wmic product get name
 ```
 
