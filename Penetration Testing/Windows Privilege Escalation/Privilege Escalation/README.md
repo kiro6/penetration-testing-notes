@@ -807,6 +807,18 @@ Get-Hotfix
 # Vulnerable Services
 ### enum 
 ```powershell
+# Enumerating Installed Programs
 wmic product get name
+
+# Enumerating Local Ports
+netstat -ano | findstr 6064
+
+# Enumerating Process ID
+get-process -Id 3324
+
+# Enumerating Running Service
+get-service | ? {$_.DisplayName -like 'Druva*'}
+
+
 ```
 
