@@ -790,4 +790,12 @@ Get-CimInstance Win32_StartupCommand | select Name, command, Location, User |fl
 
 ```
 
+# Kernal Exploits 
+
+### enum 
+```powershell
+systeminfo
+wmic qfe list brief
+Get-Hotfix
+```
 
