@@ -22,9 +22,13 @@
   - [Server Operators](#server-operators)
     - [RCE](#rce-2)
 - [User Account Control](#user-account-control)
-    - [GUI UAC Bypass](#gui-uac-bypass)
-    - [No GUI UAC Bypass](#no-gui-uac-bypass)
-- [Weak Permissions](#weak-permissions)      
+  - [GUI UAC Bypass](#gui-uac-bypass)
+  - [No GUI UAC Bypass](#no-gui-uac-bypass)
+- [Weak Permissions](#weak-permissions)
+  - [Weak File System Permissions](#weak-file-system-permissions)
+  - [Weak Service Permissions](#weak-service-permissions)
+  - [Unquoted Service Path](#unquoted-service-path)
+  - [Weak Registry Permissions](#weak-registry-permissions)          
 
 
 # Windows User Privileges
