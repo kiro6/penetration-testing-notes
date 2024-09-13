@@ -66,7 +66,7 @@ Get-AppLockerPolicy -Local | Test-AppLockerPolicy -path C:\Windows\System32\cmd.
 ```
 
 ### User & Group Information
-```
+```powershell
 # Logged-In Users
 query user
 
@@ -90,5 +90,31 @@ net localgroup administrators
 
 # Get Password Policy & Other Account Information
 net accounts
+
+```
+
+### creds
+
+```powershell
+# Searching for Files
+findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
+
+# Chrome Dictionary Files
+gc 'C:\Users\htb-student\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
+
+
+# PowerShell History File
+(Get-PSReadLineOption).HistorySavePath
+gc (Get-PSReadLineOption).HistorySavePath
+## for all users
+foreach($user in ((ls C:\users).fullname)){cat "$user\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt" -ErrorAction SilentlyContinue}
+
+
+# PowerShell Credentials
+## PowerShell credentials in scripts stored using DPAPI are encrypted and can only be decrypted by the same user on the same computer where they were created.
+## Decrypting PowerShell Credentials
+$credential = Import-Clixml -Path 'C:\scripts\pass.xml'
+$credential.GetNetworkCredential().username
+$credential.GetNetworkCredential().password
 
 ```
