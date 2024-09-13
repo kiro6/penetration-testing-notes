@@ -232,6 +232,7 @@ net accounts /domain
 - [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump)
 - [windapsearch](https://github.com/ropnop/windapsearch)
 - [ldapsearch](https://docs.ldap.com/ldap-sdk/docs/tool-usages/ldapsearch.html)
+- [go-windapsearch](https://github.com/ropnop/go-windapsearch)
 
 ```shell
 ./windapsearch.py --dc-ip 172.16.5.5 -u ""  --gpos 
