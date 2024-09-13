@@ -100,6 +100,8 @@ net accounts
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
 findstr /SIM /C:"password" C:\Users\*.txt C:\Users\*.ini C:\Users\*.cfg C:\Users\*.config C:\Users\*.xml
 
+Get-ChildItem -Path C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse | Get-Content | Select-String "password"
+
 
 # Chrome Dictionary Files
 gc 'C:\Users\htb-student\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
