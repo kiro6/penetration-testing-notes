@@ -103,6 +103,30 @@ findstr /SIM /C:"password" C:\Users\*.txt C:\Users\*.ini C:\Users\*.cfg C:\Users
 Get-ChildItem -Path C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse | Get-Content | Select-String "password"
 
 
+
+Get-ChildItem C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse -ErrorAction SilentlyContinue | 
+ForEach-Object { 
+    Select-String "password" $_.FullName -ErrorAction SilentlyContinue | 
+    ForEach-Object { Write-Host "Match found in: $($_.Path)"; $_ }
+}
+
+
+
+Get-ChildItem -Path C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse -ErrorAction SilentlyContinue | 
+ForEach-Object {
+    try {
+        $content = Get-Content -Path $_.FullName -ErrorAction SilentlyContinue
+        if ($content | Select-String "password") {
+            Write-Host "Match found in file: $($_.FullName)"
+            $content | Select-String "password"
+        }
+    } catch { }
+}
+
+
+
+
+
 # Chrome Dictionary Files
 gc 'C:\Users\htb-student\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
 
