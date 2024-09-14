@@ -117,11 +117,11 @@ bloodhound
    - add `WriteDacl` to our user on this object
 2) **Access over Group allows for:**
    - we could `add ourselves` or another `security principal` to a given group. [how to Add to group](#add-to-group)
-   - - add `WriteDacl` to our user on this object
+   - add `WriteDacl` to our user on this object
 3) **Access over Computer user allows for:**
    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
-   - - add `WriteDacl` to our user on this object
+   - add `WriteDacl` to our user on this object
   
 ## Get Changes and Get Changes All 
 - The user or service account with this permission ` DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
