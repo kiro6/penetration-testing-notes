@@ -348,6 +348,8 @@ response = LMv2 | CC | NTv2 | CC*
 
 # Privileged Groups 
 
+- [active-directory-security-groups](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#default-active-directory-security-groups)
+
 | Group                          | Description                                                                                                                                                                                                                                                                                                                |
 |--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Default Administrators         | Domain Admins and Enterprise Admins are "super" groups.                                                                                                                                                                                                                                                                     |
