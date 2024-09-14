@@ -78,6 +78,11 @@ bloodhound
 ![Screenshot 2024-06-30 at 22-18-35 Active Directory Enumeration   Attacks](https://github.com/kiro6/penetration-testing-notes/assets/57776872/243dfde0-9db7-4c9e-a76b-85ed31054167)
 
 
+![DACL abuse mindmap CnS4bNaY](https://github.com/user-attachments/assets/470006a4-3a95-44f2-b608-49e1a7ad7fb9)
+
+
+
+
 ## ForceChangePassword 
 - gives us the right to reset a user's password without first knowing their password (should be used cautiously and typically best to consult our client before resetting passwords) 
 - [how to do Change password](#change-password)
@@ -109,12 +114,14 @@ bloodhound
    - Change the Target's Password [how to do Change password](#change-password)
    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).  [how to do Targeted Kerberoasting](#targeted-kerberoasting)
    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
-   - Shadow Credentials: Use this technique to impersonate a user 
+   - add `WriteDacl` to our user on this object
 2) **Access over Group allows for:**
    - we could `add ourselves` or another `security principal` to a given group. [how to Add to group](#add-to-group)
+   - - add `WriteDacl` to our user on this object
 3) **Access over Computer user allows for:**
    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
+   - - add `WriteDacl` to our user on this object
   
 ## Get Changes and Get Changes All 
 - The user or service account with this permission ` DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
@@ -124,6 +131,13 @@ bloodhound
 
 
 
+## WriteDacl
+- can give ourselvies any rights 
+
+```powershell
+Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -Rights <String>
+Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -RightsGUID <Guid>
+```
 
 
 # Acl Attacks 
