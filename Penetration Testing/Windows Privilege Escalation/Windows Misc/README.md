@@ -18,3 +18,22 @@ Set-MpPreference -DisableRealtimeMonitoring $true
 Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
 New-NetFirewallRule -DisplayName 'Remote Desktop' -Direction Inbound -Action Allow -Protocol TCP -LocalPort 3389        
 ```
+
+## Net Command
+
+```powershell
+# add user to domain
+net user <username> <pass> /add /domain
+
+# add user to gorup
+net group <Groupname> <username> /add /domain
+
+# Get All Users
+net user
+
+# Get All Groups
+net localgroup
+
+# Details About a Group
+net localgroup administrators
+```
