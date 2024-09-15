@@ -248,7 +248,7 @@ func main() {
 
 - custom data types using `type`
 
-```
+```go
 type MyFloat float64
 
 func (f MyFloat) Abs() float64 {
