@@ -210,6 +210,245 @@ encoded_string = quote_plus(unencoded_string)
 print(encoded_string)
 ```
 
+# Httpx 
+
+```python
+import httpx
+from io import BytesIO
+
+def main():
+    # Create a synchronous HTTP client
+    client = httpx.Client()
+
+    # Case 1: Simple GET request
+    try:
+        response = client.get("https://jsonplaceholder.typicode.com/posts/1")
+        print("GET Response:", response.text)
+    except Exception as e:
+        print("Error in GET request:", e)
+
+
+
+    # Case 2: Simple POST request with form data
+    form_data = {"title": "foo", "body": "bar", "userId": "1"}
+    try:
+        response = client.post("https://jsonplaceholder.typicode.com/posts", data=form_data)
+        print("POST Form Data Response:", response.text)
+    except Exception as e:
+        print("Error in POST request with form data:", e)
+
+
+    # Case 3: POST request with multipart form data and a file from disk
+    try:
+        with open("/path/to/file.txt", "rb") as file:
+            files = {"fileField": ("file.txt", file)}
+            response = client.post("https://jsonplaceholder.typicode.com/posts", data=form_data, files=files)
+            print("POST Multipart with File Response:", response.text)
+    except Exception as e:
+        print("Error in POST request with file from disk:", e)
+
+
+    # Case 4: POST request with multipart form data and a file from memory buffer
+    file_content = b"This is the content of the in-memory file"
+    file_reader = BytesIO(file_content)
+    try:
+        files = {"fileField": ("in-memory-file.txt", file_reader)}
+        response = client.post("https://jsonplaceholder.typicode.com/posts", data=form_data, files=files)
+        print("POST Multipart with In-Memory File Response:", response.text)
+    except Exception as e:
+        print("Error in POST request with in-memory file:", e)
+
+
+    # Case 5: Setting a single custom header
+    try:
+        response = client.get("https://jsonplaceholder.typicode.com/posts/1", headers={"Authorization": "Bearer your_token_here"})
+        print("GET with Custom Header Response:", response.text)
+    except Exception as e:
+        print("Error in GET request with custom header:", e)
+
+
+
+    # Case 6: Setting multiple custom headers
+    custom_headers = {
+        "Authorization": "Bearer your_token_here",
+        "Content-Type": "application/json",
+        "X-Custom-Header": "custom_value"
+    }
+    try:
+        response = client.get("https://jsonplaceholder.typicode.com/posts/1", headers=custom_headers)
+        print("GET with Multiple Custom Headers Response:", response.text)
+    except Exception as e:
+        print("Error in GET request with multiple custom headers:", e)
+
+
+
+    # Case 7: Setting redirect behavior
+    try:
+        response = client.get("http://httpbin.org/redirect/3", follow_redirects=False)
+        print("GET without Redirect Response:", response.text)
+    except Exception as e:
+        print("Error in GET request with no redirect:", e)
+
+    try:
+        response = client.get("http://httpbin.org/redirect/3")
+        print("GET with Redirect Response:", response.text)
+    except Exception as e:
+        print("Error in GET request with redirect:", e)
+
+
+
+    # Case: Allow redirects
+    try:
+        response = client.get("http://httpbin.org/redirect/3", follow_redirects=True)
+        print("GET Response with 1 Redirect Allowed:", response.text)
+    except Exception as e:
+        print("Error in GET request with 1 redirect allowed:", e)
+
+
+
+
+
+    # Case 8: Handling the response and checking for words or status codes
+    try:
+        response = client.get("https://jsonplaceholder.typicode.com/posts/1")
+        if "userId" in response.text:
+            print("The word 'userId' was found in the response!")
+        else:
+            print("The word 'userId' was NOT found in the response.")
+        
+        if response.status_code == 200:
+            print("Success! Status code is 200.")
+        else:
+            print("Request failed with status code:", response.status_code)
+    except Exception as e:
+        print("Error handling response:", e)
+
+
+    # Close the client
+    client.close()
+
+if __name__ == "__main__":
+    main()
+```
+
+- with asyncio
+```python
+import httpx
+import asyncio
+from io import BytesIO
+
+async def main():
+    async with httpx.AsyncClient() as client:
+        # Case 1: Simple GET request
+        try:
+            response = await client.get("https://jsonplaceholder.typicode.com/posts/1")
+            print("GET Response:", response.text)
+        except Exception as e:
+            print("Error in GET request:", e)
+
+
+
+        # Case 2: Simple POST request with form data
+        form_data = {"title": "foo", "body": "bar", "userId": "1"}
+        try:
+            response = await client.post("https://jsonplaceholder.typicode.com/posts", data=form_data)
+            print("POST Form Data Response:", response.text)
+        except Exception as e:
+            print("Error in POST request with form data:", e)
+
+
+
+        # Case 3: POST request with multipart form data and a file from disk
+        try:
+            with open("/path/to/file.txt", "rb") as file:
+                files = {"fileField": ("file.txt", file)}
+                response = await client.post("https://jsonplaceholder.typicode.com/posts", data=form_data, files=files)
+                print("POST Multipart with File Response:", response.text)
+        except Exception as e:
+            print("Error in POST request with file from disk:", e)
+
+
+
+        # Case 4: POST request with multipart form data and a file from memory buffer
+        file_content = b"This is the content of the in-memory file"
+        file_reader = BytesIO(file_content)
+        try:
+            files = {"fileField": ("in-memory-file.txt", file_reader)}
+            response = await client.post("https://jsonplaceholder.typicode.com/posts", data=form_data, files=files)
+            print("POST Multipart with In-Memory File Response:", response.text)
+        except Exception as e:
+            print("Error in POST request with in-memory file:", e)
+
+
+
+        # Case 5: Setting a single custom header
+        try:
+            response = await client.get("https://jsonplaceholder.typicode.com/posts/1", headers={"Authorization": "Bearer your_token_here"})
+            print("GET with Custom Header Response:", response.text)
+        except Exception as e:
+            print("Error in GET request with custom header:", e)
+
+
+
+        # Case 6: Setting multiple custom headers
+        custom_headers = {
+            "Authorization": "Bearer your_token_here",
+            "Content-Type": "application/json",
+            "X-Custom-Header": "custom_value"
+        }
+        try:
+            response = await client.get("https://jsonplaceholder.typicode.com/posts/1", headers=custom_headers)
+            print("GET with Multiple Custom Headers Response:", response.text)
+        except Exception as e:
+            print("Error in GET request with multiple custom headers:", e)
+
+
+
+        # Case 7: Setting redirect behavior
+        try:
+            response = await client.get("http://httpbin.org/redirect/3", follow_redirects=False)
+            print("GET without Redirect Response:", response.text)
+        except Exception as e:
+            print("Error in GET request with no redirect:", e)
+
+        try:
+            response = await client.get("http://httpbin.org/redirect/3")
+            print("GET with Redirect Response:", response.text)
+        except Exception as e:
+            print("Error in GET request with redirect:", e)
+
+
+
+        # Case: Allow redirects 
+        try:
+            response = await client.get("http://httpbin.org/redirect/3", follow_redirects=True)
+            print("GET Response with 1 Redirect Allowed:", response.text)
+        except Exception as e:
+            print("Error in GET request with 1 redirect allowed:", e)
+
+
+
+        # Case 8: Handling the response and checking for words or status codes
+        try:
+            response = await client.get("https://jsonplaceholder.typicode.com/posts/1")
+            if "userId" in response.text:
+                print("The word 'userId' was found in the response!")
+            else:
+                print("The word 'userId' was NOT found in the response.")
+            
+            if response.status_code == 200:
+                print("Success! Status code is 200.")
+            else:
+                print("Request failed with status code:", response.status_code)
+        except Exception as e:
+            print("Error handling response:", e)
+
+# Run the main function
+asyncio.run(main())
+
+```
+
+
 # Threading
 
 ## using threading
