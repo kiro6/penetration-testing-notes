@@ -2,7 +2,6 @@
 - [Initial Enumeration](#initial-enumeration)
   - [Basic Info](#basic-info)
   - [Enumeration of the Domain](#enumeration-of-the-domain)
-  - [Internal AD Username Enumeration](#internal-ad-username-enumeration)
   - [Enumerating DNS Records](#enumerating-dns-records)
 - [Get a Foothold](#get-a-foothold)
   - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
@@ -106,17 +105,6 @@ for /L %i in (1 1 254) do ping 172.16.5.%i -n 1 -w 100 | find "Reply"
 ```
 - nmap
 
-## Internal AD Username Enumeration
-#### Kerbrute 
-
-- [kerbrute](ttps://github.com/ropnop/kerbrute/)
-- [statistically-likely-usernames](https://github.com/insidetrust/statistically-likely-usernames)
-```
-sudo git clone https://github.com/ropnop/kerbrute.git
-sudo make all
-kerbrute userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o valid_ad_users
-## or check compiled binaries https://github.com/ropnop/kerbrute/releases/tag/v1.0.3
-```
 
 ## Enumerating DNS Records
 - We can use a tool such as [adidnsdump](https://github.com/dirkjanm/adidnsdump) to enumerate all DNS records in a domain using a valid domain user account.
