@@ -1,7 +1,8 @@
-# Here i mention the most important python libraries for hackers
-## - [requests](#requests)
-## - [BeautifulSoup](#BeautifulSoup)
-## - [urllibparse](#urllibparse)
+# Content
+- [requests](#requests)
+- [BeautifulSoup](#BeautifulSoup)
+- [urllibparse](#urllibparse)
+- 
 
 
 ## requests
@@ -209,3 +210,69 @@ encoded_string = quote_plus(unencoded_string)
 print(encoded_string)
 ```
 
+# using threads
+
+```python
+import threading
+import time
+
+def print_numbers():
+    for i in range(5):
+        print(f"Number: {i}")
+        time.sleep(1)  # Simulate a time-consuming task
+
+def print_letters():
+    for letter in 'abcde':
+        print(f"Letter: {letter}")
+        time.sleep(1)  # Simulate a time-consuming task
+
+# Create threads
+thread1 = threading.Thread(target=print_numbers)
+thread2 = threading.Thread(target=print_letters)
+
+# Start threads
+thread1.start()
+thread2.start()
+
+# Wait for both threads to complete
+thread1.join()
+thread2.join()
+
+print("Both threads have finished execution.")
+```
+
+- using httpx
+
+```python
+import threading
+import httpx
+
+# Function to perform an HTTP GET request
+def fetch_url(url):
+    try:
+        response = httpx.get(url)
+        print(f"URL: {url}, Status Code: {response.status_code}")
+    except httpx.RequestError as exc:
+        print(f"An error occurred while requesting {url}: {exc}")
+
+# List of URLs to fetch
+urls = [
+    "https://jsonplaceholder.typicode.com/posts/1",
+    "https://jsonplaceholder.typicode.com/posts/2",
+    "https://jsonplaceholder.typicode.com/posts/3"
+]
+
+# Create and start threads
+threads = []
+for url in urls:
+    thread = threading.Thread(target=fetch_url, args=(url,))
+    thread.start()
+    threads.append(thread)
+
+# Wait for all threads to complete
+for thread in threads:
+    thread.join()
+
+print("All requests have been completed.")
+
+```
