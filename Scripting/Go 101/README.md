@@ -9,6 +9,16 @@
 - [Pointer receivers vs Value](#pointer-receivers-vs-value)
 
 
+## 
+```shell
+go mod init Project   
+
+go run main.go
+
+go build main.go
+
+```
+
 ## Variables
 - declare variables types
 ```go
