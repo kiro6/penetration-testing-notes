@@ -266,17 +266,22 @@ package main
 import "fmt"
 
 func main() {
+	// Declaring a pointer variable
 	var pnt *int
 
+	// Declaring a variable
 	i := 15
 
+	// Storing the address of i in pnt
 	pnt = &i
 
-	// Address of pnt
+	// Address of pnt (pointer variable)
 	fmt.Println("the Address of pnt", &pnt)
-	// Address of i which is stored in pnt
+
+	// Address of i variable which is stored in pnt (pointer variable)
 	fmt.Println("Address of i : ", pnt)
-	// The value of i which is stored in address that the pnt store it
+
+	// The value of i (15) which is stored in address that the pnt holds it
 	fmt.Println("Value of i: ", *pnt)
 }
 
