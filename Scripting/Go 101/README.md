@@ -7,6 +7,9 @@
 - [custom data types](#custom-data-types)
 - [Pointers](#pointers)
 - [Pointer receivers vs Value](#pointer-receivers-vs-value)
+- [Special Keywords](#special-keywords)
+- [HTTP requests](#http-requests)
+- [Go Routine](#go-routine)
 
 
 ## 
