@@ -210,7 +210,9 @@ encoded_string = quote_plus(unencoded_string)
 print(encoded_string)
 ```
 
-# using threads
+# Threading
+
+## using threading
 
 ```python
 import threading
@@ -276,3 +278,58 @@ for thread in threads:
 print("All requests have been completed.")
 
 ```
+
+
+
+
+
+## using asyncio 
+- `async def`: Defines a coroutine.
+- `await`: Pauses the coroutine until the awaited task finishes.
+- `asyncio.run()`: function automatically creates and runs an event loop
+
+```python
+import asyncio
+
+async def say_hello():
+    print("Hello")
+    await asyncio.sleep(1)  # Simulate an asynchronous delay
+    print("World")
+
+# To run the coroutine
+asyncio.run(say_hello())
+```
+
+- `asyncio.create_task()`: to schedule a coroutine without waiting for its completion.
+
+```python
+async def print_message():
+    await asyncio.sleep(2)
+    print("Message after 2 seconds")
+
+async def main():
+    task = asyncio.create_task(print_message())  # Create a task
+    print("Task started")
+    await task  # Wait for the task to complete
+
+asyncio.run(main())
+```
+
+- `asyncio.gather()`: is used to run multiple coroutines concurrently. It returns the results of all coroutines when they have all completed.
+```python
+async def fetch_data_1():
+    await asyncio.sleep(2)
+    return "Data 1"
+
+async def fetch_data_2():
+    await asyncio.sleep(1)
+    return "Data 2"
+
+async def main():
+    results = await asyncio.gather(fetch_data_1(), fetch_data_2())
+    print(results)  # Outputs: ['Data 1', 'Data 2']
+
+asyncio.run(main())
+```
+
+
