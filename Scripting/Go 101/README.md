@@ -299,6 +299,62 @@ Alice 30
 Bob 30
 ```
 
+# Special Keywords
+
+### defer
+- Usage: It's commonly used for resource cleanup, like closing files, releasing locks, or network connections.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	defer fmt.Println("This will run at the end!") // Executed last
+	fmt.Println("This will run first!")
+}
+```
+
+### panic
+Usage: It's generally discouraged for routine error handling but can be useful in situations where recovery is impossible.
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	defer fmt.Println("This will not run.")
+	panic("Something went wrong!")
+}
+
+```
+
+### recover
+- Usage: Used in combination with panic to regain control of a panicking program. It allows a program to recover from a panic and continue execution. It must be called inside a defer function.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered from panic:", r)
+		}
+	}()
+
+	fmt.Println("Starting...")
+	panic("Oh no!")
+}
+```
+
 # HTTP requests 
 
 ```go
