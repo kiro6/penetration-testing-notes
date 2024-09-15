@@ -822,3 +822,8 @@ get-service | ? {$_.DisplayName -like 'Druva*'}
 
 ```
 
+# Saved Creds
+```powershell
+cmdkey /list
+runas /user:<user> /savecred "command"
+```
