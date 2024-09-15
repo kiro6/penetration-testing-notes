@@ -204,6 +204,9 @@ smbclient -N -L //10.129.14.128
 | `mkdir`        | Creates a new directory on the remote server.                |
 | `pwd`          | Prints the current working directory on the server.          |
 | `quit` (`q`)   | Exits the `smbclient` session.                               |
+| RECURSE ON     | make any command recursive                                   |
+| PROMPT OFF     | Turns off prompting, allowing commands like mget to process all files without asking for confirmation for each one. |
+| mget *         |     download multiple files from an SMB share            |
 
 
 
