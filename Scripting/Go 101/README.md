@@ -288,3 +288,148 @@ Alice 30
 Alice 30
 Bob 30
 ```
+
+# HTTP requests 
+
+```go
+package main
+
+import (
+    "bytes"
+    "fmt"
+    "strings"
+    "github.com/go-resty/resty/v2"
+)
+
+func main() {
+    client := resty.New()
+
+    // Case 1: Simple GET request
+    resp, err := client.R().
+        Get("https://jsonplaceholder.typicode.com/posts/1")
+    if err != nil {
+        fmt.Println("Error in GET request:", err)
+        return
+    }
+    fmt.Println("GET Response:", resp.String()) // Print the response body
+
+    // Case 2: Simple POST request with form data (application/x-www-form-urlencoded)
+    formData := map[string]string{
+        "title":  "foo",
+        "body":   "bar",
+        "userId": "1",
+    }
+    resp, err = client.R().
+        SetFormData(formData).
+        Post("https://jsonplaceholder.typicode.com/posts")
+    if err != nil {
+        fmt.Println("Error in POST request with form data:", err)
+        return
+    }
+    fmt.Println("POST Form Data Response:", resp.String()) // Print the response body
+
+    // Case 3: POST request with multipart form data and a file from disk
+    resp, err = client.R().
+        SetMultipartFormData(formData).            // Set normal form fields
+        SetFile("fileField", "/path/to/file.txt").  // Attach file from disk
+        Post("https://jsonplaceholder.typicode.com/posts")
+    if err != nil {
+        fmt.Println("Error in POST request with file from disk:", err)
+        return
+    }
+    fmt.Println("POST Multipart with File Response:", resp.String()) // Print the response body
+
+    // Case 4: POST request with multipart form data and a file from memory buffer
+    fileContent := []byte("This is the content of the in-memory file")
+    fileReader := bytes.NewReader(fileContent)
+    resp, err = client.R().
+        SetMultipartFormData(formData).                          // Set normal form fields
+        SetFileReader("fileField", "in-memory-file.txt", fileReader). // Attach file from buffer
+        Post("https://jsonplaceholder.typicode.com/posts")
+    if err != nil {
+        fmt.Println("Error in POST request with in-memory file:", err)
+        return
+    }
+    fmt.Println("POST Multipart with In-Memory File Response:", resp.String()) // Print the response body
+
+    // Case 5: Setting a single custom header (e.g., Authorization header)
+    resp, err = client.R().
+        SetHeader("Authorization", "Bearer your_token_here").   // Set Authorization header
+        Get("https://jsonplaceholder.typicode.com/posts/1")
+    if err != nil {
+        fmt.Println("Error in GET request with custom header:", err)
+        return
+    }
+    fmt.Println("GET with Custom Header Response:", resp.String()) // Print the response body
+
+    // Case 6: Setting multiple custom headers at once
+    customHeaders := map[string]string{
+        "Authorization":   "Bearer your_token_here",
+        "Content-Type":    "application/json",
+        "X-Custom-Header": "custom_value",
+    }
+    resp, err = client.R().
+        SetHeaders(customHeaders).  // Set multiple headers at once
+        Get("https://jsonplaceholder.typicode.com/posts/1")
+    if err != nil {
+        fmt.Println("Error in GET request with multiple custom headers:", err)
+        return
+    }
+    fmt.Println("GET with Multiple Custom Headers Response:", resp.String()) // Print the response body
+
+    // Case 7: Setting redirect behavior (true or false)
+    // Prevent redirects by setting RedirectPolicy to resty.NoRedirectPolicy
+    resp, err = client.R().
+        SetRedirectPolicy(resty.NoRedirectPolicy()). // Disable redirects
+        Get("http://httpbin.org/redirect/3")
+    if err != nil {
+        fmt.Println("Error in GET request with no redirect:", err)
+    } else {
+        fmt.Println("GET without Redirect Response:", resp.String()) // Print the response body
+    }
+
+    // Allowing redirects by default (Resty allows redirects automatically)
+    resp, err = client.R().Get("http://httpbin.org/redirect/3")
+    if err != nil {
+        fmt.Println("Error in GET request with redirect:", err)
+    } else {
+        fmt.Println("GET with Redirect Response:", resp.String()) // Print the response body
+    }
+
+
+    // Case: Allow redirects only 1 time
+    resp, err := client.R().
+        SetRedirectPolicy(resty.FlexibleRedirectPolicy(1)).  // Allow only 1 redirect
+        Get("http://httpbin.org/redirect/3")                 // This URL redirects 3 times
+    if err != nil {
+        fmt.Println("Error in GET request with 1 redirect allowed:", err)
+    } else {
+        fmt.Println("GET Response with 1 Redirect Allowed:", resp.String())
+    }
+
+    // Case: Allow redirects only 2 times
+    resp, err = client.R().
+        SetRedirectPolicy(resty.FlexibleRedirectPolicy(2)).  // Allow only 2 redirects
+        Get("http://httpbin.org/redirect/3")                 // This URL redirects 3 times
+    if err != nil {
+        fmt.Println("Error in GET request with 2 redirects allowed:", err)
+    } else {
+        fmt.Println("GET Response with 2 Redirects Allowed:", resp.String())
+    }
+
+    // Case 8: Handling the response and checking for words or status codes
+    if strings.Contains(resp.String(), "userId") {
+        fmt.Println("The word 'userId' was found in the response!")
+    } else {
+        fmt.Println("The word 'userId' was NOT found in the response.")
+    }
+
+    // Checking the status code of the response
+    if resp.StatusCode() == 200 {
+        fmt.Println("Success! Status code is 200.")
+    } else {
+        fmt.Println("Request failed with status code:", resp.StatusCode())
+    }
+}
+
+```
