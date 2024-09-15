@@ -482,45 +482,6 @@ thread2.join()
 print("Both threads have finished execution.")
 ```
 
-- using httpx
-
-```python
-import threading
-import httpx
-
-# Function to perform an HTTP GET request
-def fetch_url(url):
-    try:
-        response = httpx.get(url)
-        print(f"URL: {url}, Status Code: {response.status_code}")
-    except httpx.RequestError as exc:
-        print(f"An error occurred while requesting {url}: {exc}")
-
-# List of URLs to fetch
-urls = [
-    "https://jsonplaceholder.typicode.com/posts/1",
-    "https://jsonplaceholder.typicode.com/posts/2",
-    "https://jsonplaceholder.typicode.com/posts/3"
-]
-
-# Create and start threads
-threads = []
-for url in urls:
-    thread = threading.Thread(target=fetch_url, args=(url,))
-    thread.start()
-    threads.append(thread)
-
-# Wait for all threads to complete
-for thread in threads:
-    thread.join()
-
-print("All requests have been completed.")
-
-```
-
-
-
-
 
 ## using asyncio 
 - `async def`: Defines a coroutine.
