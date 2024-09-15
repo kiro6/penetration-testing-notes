@@ -523,3 +523,190 @@ func main() {
 }
 
 ```
+
+# Go Routine
+
+### Creating a Go Routine
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func printNumbers() {
+    for i := 1; i <= 5; i++ {
+        fmt.Println(i)
+        time.Sleep(1 * time.Second)
+    }
+}
+
+func main() {
+    go printNumbers() // Start printNumbers as a Go routine
+    
+    // Main function continues executing concurrently
+    fmt.Println("Main function running concurrently")
+    
+    // Wait for the Go routine to complete
+    time.Sleep(6 * time.Second)
+}
+
+```
+
+### Communication Between Go Routines
+
+- Bidirectional Channel : `chan int`
+- Send-Only Channel: `chan<- int`
+- Receive-Only Channel: `<-chan int`
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+// Function to generate numbers and send them to the channel
+func generateNumbers(ch chan<- int) { // Send-only channel
+	for i := 1; i <= 5; i++ {
+		ch <- i
+		time.Sleep(1 * time.Second)
+	}
+	close(ch) // Close the channel when done
+}
+
+// Function to receive numbers from the channel
+func receiveNumbers(ch <-chan int) { // Receive-only channel
+	for num := range ch {
+		fmt.Println("Received:", num)
+	}
+}
+
+func main() {
+	ch := make(chan int) // Create a bidirectional channel
+	//  ch := make(chan string, 5) // Create a buffered channel with capacity of the channel before it locks further sends.
+	go generateNumbers(ch) // Start a goroutine to generate numbers
+	receiveNumbers(ch)    // Receive numbers in the main goroutine
+}
+
+```
+
+### Synchronizing Go Routines
+Sometimes you need to wait for one or more Go routines to complete before continuing. This can be achieved using the `sync.WaitGroup` from the `sync` package.
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+    "time"
+)
+
+func doWork(id int, wg *sync.WaitGroup) {
+    defer wg.Done() // Notify that this Go routine is done
+    fmt.Printf("Go routine %d is working\n", id)
+    time.Sleep(2 * time.Second)
+}
+
+func main() {
+    var wg sync.WaitGroup
+
+    for i := 1; i <= 3; i++ {
+        wg.Add(1) // Increment the counter
+        go doWork(i, &wg) // Start Go routine
+    }
+
+    wg.Wait() // Wait for all Go routines to finish
+    fmt.Println("All Go routines complete")
+}
+```
+
+### Handling Panics in Go Routines
+```go
+package main
+
+import (
+    "fmt"
+    "runtime"
+)
+
+func safeGoRoutine() {
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Println("Recovered from panic:", r)
+        }
+    }()
+    // Code that may panic
+    panic("Something went wrong")
+}
+
+func main() {
+    go safeGoRoutine()
+    
+    // Wait to ensure the Go routine finishes
+    time.Sleep(1 * time.Second)
+}
+
+```
+
+### lock objects 
+A sync.Mutex is used to lock and unlock access to shared resources. This ensures that only one goroutine can access the shared resource at a time, preventing race conditions.
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// Define a struct with a Mutex and a shared counter
+type Counter struct {
+	mu    sync.Mutex
+	count int
+}
+
+// Increment the counter with locking
+func (c *Counter) Increment() {
+	c.mu.Lock()         // Lock the mutex
+	defer c.mu.Unlock() // Ensure the mutex is unlocked after the function completes
+	c.count++
+}
+
+// Get the current count with locking
+func (c *Counter) Get() int {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	return c.count
+}
+
+func main() {
+	counter := &Counter{}
+
+	// Create a wait group to wait for all goroutines to finish
+	var wg sync.WaitGroup
+
+	// Launch 10 goroutines that increment the counter
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 1000; j++ {
+				counter.Increment()
+				time.Sleep(1 * time.Millisecond) // Simulate work
+			}
+		}()
+	}
+
+	// Wait for all goroutines to finish
+	wg.Wait()
+
+	// Print the final count
+	fmt.Println("Final count:", counter.Get())
+}
+
+```
+
