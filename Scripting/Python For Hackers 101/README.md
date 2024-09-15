@@ -2,7 +2,10 @@
 - [requests](#requests)
 - [BeautifulSoup](#BeautifulSoup)
 - [urllibparse](#urllibparse)
-- 
+- [Httpx](#httpx)
+- [Threading](#threading)
+    - [using threading](#using-threading)
+    - [using asyncio](#using-asyncio) 
 
 
 ## requests
