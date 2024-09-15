@@ -139,6 +139,30 @@ func main() {
 
 }
 ```
+- Conditional Initialization
+```go
+package main
+
+import (
+    "fmt"
+    "strconv"
+)
+
+func parseData(data string) (int, error) {
+    return strconv.Atoi(data)
+}
+
+func main() {
+    if result, err := parseData("456"); err == nil {
+        fmt.Println("Parsed result:", result)
+    } else {
+        fmt.Println("Failed to parse data:", err)
+    }
+}
+
+```
+
+
 ## packages 
 ```go
 import (
