@@ -5,11 +5,11 @@
   - [Internal AD Username Enumeration](#internal-ad-username-enumeration)
   - [Enumerating DNS Records](#enumerating-dns-records)
 - [Get a Foothold](#get-a-foothold)
+  - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
   - [LLMNR/NBT-NS Poisoning](#llmnrnbt-ns-poisoning)
   - [AS-REQ Roasting](#as-req-roasting)
   - [Password Spraying](#password-spraying)
     - [Enumerating & Retrieving Password Policies](#enumerating--retrieving-password-policies)
-    - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
     - [Internal Password Spraying](#internal-password-spraying)
   - [Pass the Hash , Pass the Ticket and Relay Attacks](#pass-the-hash--pass-the-ticket-and-relay-attacks)
 - [Situational Awareness](#situational-awareness)
@@ -129,6 +129,53 @@ head records.csv
 
 # Get a Foothold
 
+
+## Enumerating & Retrieving Valid users
+#### 1) SMB NULL Session
+**from linux**
+
+- crackmapexec 
+```
+crackmapexec smb 172.16.5.5 --users
+```
+
+- rpcclient 
+```
+rpcclient -U "" -N 172.16.5.5
+> enumdomusers 
+```
+
+- enum4linux or enum4linux-ng 
+```
+enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
+```
+
+#### 2) LDAP Anonymous Bind
+
+```shell
+./windapsearch.py --dc-ip 172.16.5.5 --dc-ip -u "" -U
+
+ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
+```
+
+#### 3) Enumerating Users
+- This tool uses Kerberos Pre-Authentication for password spraying, which is faster and stealthier than traditional methods.
+- It avoids generating Windows event ID `4625` for `logon failures`.
+- The tool sends TGT requests without Kerberos Pre-Authentication to identify valid usernames: a PRINCIPAL UNKNOWN error means the username is invalid, while a prompt for `Pre-Authentication` means the username exists.
+- This method doesn't cause logon failures or account lockouts during enumeration.
+-  Using Kerbrute for username enumeration will generate event ID `4768`: A Kerberos authentication ticket (TGT) was requested. This will only be triggered if `Kerberos event logging` is enabled via Group Policy.
+- [kerbrute](https://github.com/ropnop/kerbrute)
+- [statistically-likely-usernames](https://github.com/insidetrust/statistically-likely-usernames)
+- [linkedin2username](https://github.com/initstring/linkedin2username)
+- [username-anarchy](https://github.com/urbanadventurer/username-anarchy)
+
+```shell
+
+kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
+```
+
+
+
 ## LLMNR/NBT-NS Poisoning
 [Link-Local Multicast Name Resolution](https://datatracker.ietf.org/doc/html/rfc4795) (LLMNR) and [NetBIOS Name Service](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)?redirectedfrom=MSDN) (NBT-NS) are Microsoft Windows components that serve as alternate methods of host identification that can be used when DNS fails. 
 
@@ -200,7 +247,6 @@ check [AS-REQ Roasting](https://github.com/kiro6/penetration-testing-notes/tree/
 
 ## Password Spraying
 ### Enumerating & Retrieving Password Policies
-
 #### 1) SMB NULL Sessions 
 **from linux**
 
@@ -253,49 +299,6 @@ import-module .\PowerView.ps1
 Get-DomainPolicy
 ```
 
-### Enumerating & Retrieving Valid users
-#### 1) SMB NULL Session
-**from linux**
-
-- crackmapexec 
-```
-crackmapexec smb 172.16.5.5 --users
-```
-
-- rpcclient 
-```
-rpcclient -U "" -N 172.16.5.5
-> enumdomusers 
-```
-
-- enum4linux or enum4linux-ng 
-```
-enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
-```
-
-#### 2) LDAP Anonymous Bind
-
-```shell
-./windapsearch.py --dc-ip 172.16.5.5 --dc-ip -u "" -U
-
-ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
-```
-
-#### 3) Enumerating Users
-- This tool uses Kerberos Pre-Authentication for password spraying, which is faster and stealthier than traditional methods.
-- It avoids generating Windows event ID `4625` for `logon failures`.
-- The tool sends TGT requests without Kerberos Pre-Authentication to identify valid usernames: a PRINCIPAL UNKNOWN error means the username is invalid, while a prompt for `Pre-Authentication` means the username exists.
-- This method doesn't cause logon failures or account lockouts during enumeration.
--  Using Kerbrute for username enumeration will generate event ID `4768`: A Kerberos authentication ticket (TGT) was requested. This will only be triggered if `Kerberos event logging` is enabled via Group Policy.
-- [kerbrute](https://github.com/ropnop/kerbrute)
-- [statistically-likely-usernames](https://github.com/insidetrust/statistically-likely-usernames)
-- [linkedin2username](https://github.com/initstring/linkedin2username)
-- [username-anarchy](https://github.com/urbanadventurer/username-anarchy)
-
-```shell
-
-kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
-```
 
 ### Internal Password Spraying
 **From Linux**
