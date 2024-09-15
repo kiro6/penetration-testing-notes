@@ -281,15 +281,19 @@ enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
 ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
 ```
 
-#### 3) Enumerating Users with Kerbrute
+#### 3) Enumerating Users
 - This tool uses Kerberos Pre-Authentication for password spraying, which is faster and stealthier than traditional methods.
 - It avoids generating Windows event ID `4625` for `logon failures`.
 - The tool sends TGT requests without Kerberos Pre-Authentication to identify valid usernames: a PRINCIPAL UNKNOWN error means the username is invalid, while a prompt for `Pre-Authentication` means the username exists.
 - This method doesn't cause logon failures or account lockouts during enumeration.
 -  Using Kerbrute for username enumeration will generate event ID `4768`: A Kerberos authentication ticket (TGT) was requested. This will only be triggered if `Kerberos event logging` is enabled via Group Policy.
 - [kerbrute](https://github.com/ropnop/kerbrute)
+- [statistically-likely-usernames](https://github.com/insidetrust/statistically-likely-usernames)
+- [linkedin2username](https://github.com/initstring/linkedin2username)
+- [username-anarchy](https://github.com/urbanadventurer/username-anarchy)
 
 ```shell
+
 kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
 ```
 
