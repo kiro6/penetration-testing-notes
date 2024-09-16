@@ -8,6 +8,7 @@
   - [GenericWrite](#genericwrite)
   - [GenericAll](#genericall)
   - [Get Changes All](#get-changes-and-get-changes-all)
+  - [WriteDacl](#writedacl)
 - [ACL attacks](#acl-attacks)
   - [Change password](#change-password)
   - [Targeted Kerberoasting](#targeted-kerberoasting)
