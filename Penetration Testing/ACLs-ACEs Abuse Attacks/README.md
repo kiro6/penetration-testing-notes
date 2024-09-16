@@ -95,13 +95,12 @@ bloodhound
 
 1) **Access over User account allows for:**
     - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set). [how to do Targeted Kerberoasting](#targeted-kerberoasting)
-    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
+    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials. [Shadow Credentials](#shadow-credentials)
 2) **Access over Group allows for:**
     - we could `add ourselves` or another `security principal` to a given group [how to Add to group](#add-to-group) .
 3) **Access over Computer user allows for:**
-    - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
-    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
-    - Resource-based constrained delegation: write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute
+    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials. [Shadow Credentials](#shadow-credentials)
+    - we could perform a Kerberos Resource-based constrained delegation: write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute. [Resource-based constrained delegation](#resource-based-constrained-delegation)
 
 
 
@@ -113,28 +112,33 @@ bloodhound
 1) **Access over User account allows for:**
    - Change the Target's Password [how to do Change password](#change-password)
    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).  [how to do Targeted Kerberoasting](#targeted-kerberoasting)
-   - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
-   - add `WriteDacl` to our user on this object
+   - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.  [Shadow Credentials](#shadow-credentials)
+   - add `WriteDacl` to our user on this object [WriteDacl](#writedacl)
 2) **Access over Group allows for:**
    - we could `add ourselves` or another `security principal` to a given group. [how to Add to group](#add-to-group)
-   - add `WriteDacl` to our user on this object
+   - add `WriteDacl` to our user on this object [WriteDacl](#writedacl) 
 3) **Access over Computer user allows for:**
-   - we could perform a `Kerberos Resource-based Constrained Delegation` attack.
-   - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.
-   - add `WriteDacl` to our user on this object
+   - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials. [Shadow Credentials](#shadow-credentials)
+   - we could perform a Kerberos Resource-based constrained delegation: write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute. [Resource-based constrained delegation](#resource-based-constrained-delegation)
+   - add `WriteDacl` to our user on this object [WriteDacl](#writedacl)
   
 ## Get Changes and Get Changes All 
 - The user or service account with this permission ` DS-Replication-Get-Changes-All` and `DS-Replication-Get-Changes` can ask Domain Controllers to replicate all changes in the directory through `Directory Replication Service Remote Protocol (MS-DRSR)` , including those changes that are normally restricted, such as confidential attributes. it cannot be turned off or disabled.
 - By default only Domain Admins, Enterprise Admins, Administrators, and Domain Controllers groups have the required privileges.
 
-1) DCSync mimic a Domain Controller to retrieve user NTLM password hashes.
+1) DCSync mimic a Domain Controller to retrieve user NTLM password hashes. [DCSync](#dcsync)
 
 
 
 ## WriteDacl
+- needed rights `GenericAll`
 - can give ourselvies any rights 
 
 ```powershell
+# if we have GenericAll we can add WriteDacl to ourself
+Add-ObjectAcl -TargetIdentity <Object_DN> -PrincipalIdentity <User_DN> -Rights WriteDacl
+
+# use this to give ourself any permssion 
 Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -Rights <String>
 Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -RightsGUID <Guid>
 
@@ -294,3 +298,6 @@ Rubeus.exe asktgt /user:ZPH-SVRMGMT1$ /certificate:<cert> /password:"2hI2TIOeZev
 ## Resource-based constrained delegation
 
 check [Resource-based constrained delegation section in my repo](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Kerberos%20attacks/README.md#resource-based-constrained-delegation)
+
+
+
