@@ -96,23 +96,17 @@ net accounts
 ### creds
 
 ```powershell
-# Searching for Files
+# Searching for patterns in Files
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
 findstr /SIM /C:"password" C:\Users\*.txt C:\Users\*.ini C:\Users\*.cfg C:\Users\*.config C:\Users\*.xml
-
 Get-ChildItem -Path C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse | Get-Content | Select-String "password"
-
 select-string -Path C:\Users\htb-student\Documents\*.txt -Pattern password
-
-
 
 Get-ChildItem C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse -ErrorAction SilentlyContinue | 
 ForEach-Object { 
     Select-String "password" $_.FullName -ErrorAction SilentlyContinue | 
     ForEach-Object { Write-Host "Match found in: $($_.Path)"; $_ }
 }
-
-
 
 Get-ChildItem -Path C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse -ErrorAction SilentlyContinue | 
 ForEach-Object {
@@ -125,8 +119,10 @@ ForEach-Object {
     } catch { }
 }
 
-
-
+# srarch for file extenstions
+dir /S /B *pass*.txt == *pass*.xml == *pass*.ini == *cred* == *vnc* == *.config*
+where /R C:\ *.config
+Get-ChildItem C:\ -Recurse -Include *.rdp, *.config, *.vnc, *.cred -ErrorAction Ignore
 
 
 # Chrome Dictionary Files
@@ -147,4 +143,31 @@ $credential = Import-Clixml -Path 'C:\scripts\pass.xml'
 $credential.GetNetworkCredential().username
 $credential.GetNetworkCredential().password
 
+
+# Sticky Notes Passwords
+## C:\Users\<user>\AppData\Local\Packages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\LocalState\plum.sqlite
+Import-Module .\PSSQLite.psd1  ; $db = 'C:\Users\htb-student\AppData\Local\Packages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\LocalState\plum.sqlite' ; Invoke-SqliteQuery -Database $db -Query "SELECT Text FROM Note" | ft -wrap
+strings plum.sqlite-wal
+```
+
+- other intersting files
+```powershell
+%SYSTEMDRIVE%\pagefile.sys
+%WINDIR%\debug\NetSetup.log
+%WINDIR%\repair\sam
+%WINDIR%\repair\system
+%WINDIR%\repair\software, %WINDIR%\repair\security
+%WINDIR%\iis6.log
+%WINDIR%\system32\config\AppEvent.Evt
+%WINDIR%\system32\config\SecEvent.Evt
+%WINDIR%\system32\config\default.sav
+%WINDIR%\system32\config\security.sav
+%WINDIR%\system32\config\software.sav
+%WINDIR%\system32\config\system.sav
+%WINDIR%\system32\CCM\logs\*.log
+%USERPROFILE%\ntuser.dat
+%USERPROFILE%\LocalS~1\Tempor~1\Content.IE5\index.dat
+%WINDIR%\System32\drivers\etc\hosts
+C:\ProgramData\Configs\*
+C:\Program Files\Windows PowerShell\*
 ```
