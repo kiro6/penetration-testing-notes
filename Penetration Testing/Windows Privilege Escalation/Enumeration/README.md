@@ -102,6 +102,8 @@ findstr /SIM /C:"password" C:\Users\*.txt C:\Users\*.ini C:\Users\*.cfg C:\Users
 
 Get-ChildItem -Path C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse | Get-Content | Select-String "password"
 
+select-string -Path C:\Users\htb-student\Documents\*.txt -Pattern password
+
 
 
 Get-ChildItem C:\Users -Include *.txt, *.ini, *.cfg, *.config, *.xml -Recurse -ErrorAction SilentlyContinue | 
