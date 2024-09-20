@@ -868,6 +868,35 @@ Invoke-SelfSearch -Mailbox current-user@domain.com
 - [LaZagne](https://github.com/AlessandroZ/LaZagne)
 - [Search for local creds](https://github.com/kiro6/penetration-testing-notes/blob/main/Penetration%20Testing/Windows%20Privilege%20Escalation/Enumeration/README.md#creds)
 
+### Windows AutoLogon
+- The registry keys associated with Autologon can be found under `HKEY_LOCAL_MACHINE` in the following hive, and can be accessed by standard users
+```powershell
+# HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+# AdminAutoLogon - Determines whether Autologon is enabled or disabled. A value of "1" means it is enabled.
+# DefaultUserName - Holds the value of the username of the account that will automatically log on.
+# DefaultPassword - Holds the value of the password for the user account specified previously.
+
+query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+
+```
+> **Note:** If you absolutely must configure Autologon for your windows system, it is recommended to use Autologon.exe from the Sysinternals suite, which will encrypt the password as an LSA secret.
+
+
+### Putty
+- For Putty sessions utilizing a proxy connection, when the session is saved, the credentials are stored in the registry in clear text.
+```powershell
+# Computer\HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions\<SESSION NAME>
+
+# get sessions
+reg query HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions
+
+# query session
+reg query HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions\kali%20ssh
 ```
 
+### Wifi Passwords
+
+```powershell
+netsh wlan show profile
+netsh wlan show profile <profilename> key=clear
 ```
