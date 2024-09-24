@@ -4,6 +4,8 @@
 - [Enumerating Protections](#enumerating-protections)
 - [User & Group Information](#user--group-information)
 - [Creds](#creds)
+- [Permssions](#permssions)
+- [User/Computer Description Field](#user-vomputer-description-field)
 
 
 
@@ -177,7 +179,7 @@ C:\ProgramData\Configs\*
 C:\Program Files\Windows PowerShell\*
 ```
 
-# permssions 
+# Permssions 
 ```powershell
 # files 
 icacls <file.txt>
@@ -199,4 +201,10 @@ accesschk.exe /accepteula "bob" -kvuqsw hklm\System\CurrentControlSet\services
 accesschk.exe /accepteula -k "regKey"
 accesschk.exe /accepteula -k "hklm\System\CurrentControlSet\services"
 
+```
+
+# User/Computer Description Field
+```powershell
+Get-LocalUser
+Get-WmiObject -Class Win32_OperatingSystem | select Description
 ```
