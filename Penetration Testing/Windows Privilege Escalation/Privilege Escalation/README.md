@@ -32,7 +32,8 @@
 - [Kernal Exploits](#kernal-exploits)
 - [Vulnerable Services](#vulnerable-services)
 - [Credential Theft](#credential-theft)
-- [Interacting with Users]()
+- [Interacting with Users](#interacting-with-users)
+- [Network Share](#network-share)
 
 # tools
 - [winPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)
@@ -991,3 +992,10 @@ $lnk.Description = "Browsing to the directory where this file is saved will trig
 $lnk.HotKey = "Ctrl+Alt+O"
 $lnk.Save()
 ```
+
+# Network Share
+- [Snaffler](https://github.com/SnaffCon/Snaffler)
+```powershell
+snaffler.exe -s -o snaffler.log
+```
+
