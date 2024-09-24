@@ -31,6 +31,7 @@
   - [Weak Registry Permissions](#weak-registry-permissions)          
 - [Kernal Exploits](#kernal-exploits)
 - [Vulnerable Services](#vulnerable-services)
+- [Scheduled Tasks](#scheduled-tasks)
 - [Credential Theft](#credential-theft)
 - [Interacting with Users](#interacting-with-users)
 - [Network Share](#network-share)
@@ -830,6 +831,13 @@ get-process -Id 3324
 get-service | ? {$_.DisplayName -like 'Druva*'}
 
 
+```
+
+# Scheduled Tasks
+ We (though rarely) may encounter a scheduled task that runs as an administrator configured with weak file/folder permissions for any number of reasons.
+```powershell
+schtasks /query /fo LIST /v
+Get-ScheduledTask | select TaskName,State
 ```
 
 # Credential Theft
