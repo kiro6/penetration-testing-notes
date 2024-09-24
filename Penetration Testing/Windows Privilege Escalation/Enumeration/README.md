@@ -5,7 +5,7 @@
 - [User & Group Information](#user--group-information)
 - [Creds](#creds)
 - [Permssions](#permssions)
-- [User/Computer Description Field](#user-vomputer-description-field)
+- [User/Computer Description Field](#usercomputer-description-field)
 
 
 
