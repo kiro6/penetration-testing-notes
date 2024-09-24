@@ -831,6 +831,9 @@ get-process -Id 3324
 get-service | ? {$_.DisplayName -like 'Druva*'}
 
 
+# then search for cve or poc
+
+
 ```
 
 # Scheduled Tasks
@@ -838,6 +841,8 @@ get-service | ? {$_.DisplayName -like 'Druva*'}
 ```powershell
 schtasks /query /fo LIST /v
 Get-ScheduledTask | select TaskName,State
+
+# then edit the script or exe files
 ```
 
 # Credential Theft
