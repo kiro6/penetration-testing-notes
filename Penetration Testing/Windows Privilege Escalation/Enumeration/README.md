@@ -196,5 +196,7 @@ sc.exe sdshow <service>
 accesschk.exe /accepteula <"username"> -kvuqsw <regKey>
 accesschk.exe /accepteula "bob" -kvuqsw hklm\System\CurrentControlSet\services
 
+accesschk.exe /accepteula -k "regKey"
+accesschk.exe /accepteula -k "hklm\System\CurrentControlSet\services"
 
 ```
