@@ -176,3 +176,25 @@ strings plum.sqlite-wal
 C:\ProgramData\Configs\*
 C:\Program Files\Windows PowerShell\*
 ```
+
+# permssions 
+```powershell
+# files 
+icacls <file.txt>
+accesschk.exe /accepteula -s <file.txt>
+
+# dir
+icacls <dir>
+accesschk.exe /accepteula -s -d <file.txt>
+
+# service
+PsService.exe security <service>
+accesschk.exe /accepteula -quvcw <service>
+sc.exe sdshow <service>
+
+# Registry
+accesschk.exe /accepteula <"username"> -kvuqsw <regKey>
+accesschk.exe /accepteula "bob" -kvuqsw hklm\System\CurrentControlSet\services
+
+
+```
