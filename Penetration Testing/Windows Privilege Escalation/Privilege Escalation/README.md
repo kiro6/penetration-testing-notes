@@ -28,7 +28,7 @@
   - [Weak File System Permissions](#weak-file-system-permissions)
   - [Weak Service Permissions](#weak-service-permissions)
   - [Unquoted Service Path](#unquoted-service-path)
-  - [Weak Registry Permissions](#weak-registry-permissions)          
+[Registry Attacks](#registry-attacks)          
 - [Kernal Exploits](#kernal-exploits)
 - [Vulnerable Services](#vulnerable-services)
 - [Scheduled Tasks](#scheduled-tasks)
@@ -781,7 +781,7 @@ SERVICE_NAME: SystemExplorerHelpService
         BINARY_PATH_NAME   : C:\Program Files (x86)\System Explorer\service\SystemExplorerService64.exe
 ```
 
-## Registry Attacks
+# Registry Attacks
 
 ```powershell
 
