@@ -28,7 +28,7 @@
   - [Weak File System Permissions](#weak-file-system-permissions)
   - [Weak Service Permissions](#weak-service-permissions)
   - [Unquoted Service Path](#unquoted-service-path)
-[Registry Attacks](#registry-attacks)          
+- [Registry Attacks](#registry-attacks)          
 - [Kernal Exploits](#kernal-exploits)
 - [Vulnerable Services](#vulnerable-services)
 - [Scheduled Tasks](#scheduled-tasks)
