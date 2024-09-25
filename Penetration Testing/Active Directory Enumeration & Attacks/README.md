@@ -872,7 +872,7 @@ in `userAccountControl:1.2.840.113556.1.4.803:=8192`
 
 **Logical Operators**
 - The operators `&` , `|` and `!` are used
-- ` (&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=64))` This would search for any user object that does NOT have the Password Can't Change attribute set.
+- `(&(objectClass=user)(!(userAccountControl:1.2.840.113556.1.4.803:=64)))` This would search for any user object that does NOT have the Password Can't Change attribute set.
 
 
 # Active Directory Attacks
