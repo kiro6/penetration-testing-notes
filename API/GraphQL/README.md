@@ -113,6 +113,20 @@ query GetPostById($postId: ID!) {  # Query name: GetPostById, with an argument p
 }
 
 
+# get input type
+{   
+  __type(name: "RegisterUserInput") {
+    name
+    inputFields {
+      name
+      description
+      defaultValue
+    }
+  }
+}
+
+
+
 ```
 ## GraphQL mutations
 - Mutations change data in some way, either adding, deleting, or editing it
