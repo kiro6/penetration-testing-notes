@@ -13,4 +13,6 @@ this my is repo with notes i take in penetration testing & related technologies/
 - [learnprompting](https://learnprompting.org/docs/prompt_hacking)
 - blogs
   - [github-dork](https://infosecwriteups.com/github-dork-553b7b84bcf4)
-  - [windows SID](https://morgantechspace.com/2013/10/difference-between-rid-and-sid-in.html)  
+  - [windows SID](https://morgantechspace.com/2013/10/difference-between-rid-and-sid-in.html)
+  - [A Red Teamer’s Guide to GPOs and OUs](https://wald0.com/?p=179)
+  - [GOAD - part 10 - Delegations](https://mayfly277.github.io/posts/GOADv2-pwning-part10/#unconstrained-delegation)  
