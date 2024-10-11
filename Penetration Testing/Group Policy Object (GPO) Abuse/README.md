@@ -41,6 +41,10 @@ here we can see the affected `OU` and members
 ![Screenshot 2024-07-05 at 02-50-34 Hack The Box - Academy](https://github.com/kiro6/penetration-testing-notes/assets/57776872/4a5f7368-cda9-42dc-a10c-8f32a273acde)
 
 
+
+## using Group3r
+[Group3r](https://github.com/Group3r/Group3r)
+
 # GPO Enforcement Logic
 
 GPO enforcement logic, very briefly, works like this ([source](https://wald0.com/?p=179)) :
