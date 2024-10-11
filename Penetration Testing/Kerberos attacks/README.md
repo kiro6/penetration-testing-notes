@@ -211,17 +211,15 @@ Removing all other encryption types except for RC4_HMAC_MD5
 
 ## Concepts
 S4U2Self (Service for User to Self):
-
-    This part of the delegation allows a service (like a web server or computer account) to request a Kerberos service ticket on behalf of a user.
-    In this step, the service says: "I am acting as user X (e.g., a domain admin or any other user)."
-    Importantly, the service doesn't need the user's password. Instead, it uses its own credentials (like the machine account's credentials) to ask the Key Distribution Center (KDC) for a ticket that represents the user.
-    Once the service receives this ticket, it can use it to interact with other resources as if it were the user.
+- This part of the delegation allows a service (like a web server or computer account) to request a Kerberos service ticket on behalf of a user.
+- In this step, the service says: "I am acting as user X (e.g., a domain admin or any other user)."
+- Importantly, the service doesn't need the user's password. Instead, it uses its own credentials (like the machine account's credentials) to ask the Key Distribution Center (KDC) for a ticket that represents the user.
+- Once the service receives this ticket, it can use it to interact with other resources as if it were the user.
 
 S4U2Proxy (Service for User to Proxy):
-
-    This is the next step after S4U2Self. Once a service has a ticket for a user (from S4U2Self), it can use S4U2Proxy to request additional tickets on behalf of that user to access other services.
-    For example, if a web server acting as a user needs to access a file server, it uses the S4U2Proxy request to ask the KDC for a ticket to access the file server, acting on behalf of the user.
-    This allows the service to act as the user when interacting with other systems, enabling privilege escalation or lateral movement within the network, depending on the user's access rights.
+- This is the next step after S4U2Self. Once a service has a ticket for a user (from S4U2Self), it can use S4U2Proxy to request additional tickets on behalf of that user to access other services.
+- For example, if a web server acting as a user needs to access a file server, it uses the S4U2Proxy request to ask the KDC for a ticket to access the file server, acting on behalf of the user.
+- This allows the service to act as the user when interacting with other systems, enabling privilege escalation or lateral movement within the network, depending on the user's access rights.
 
 
 ## Unconstrained delegation
