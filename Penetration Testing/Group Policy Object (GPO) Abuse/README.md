@@ -81,5 +81,5 @@ Custom Password Policy is linked to the domain object, which again contains the 
 
 
 # Attacks
-
-using [SharpGPOAbuse](https://github.com/FSecureLABS/SharpGPOAbuse) we can do alot of attacks 
+- [SharpGPOAbuse](https://github.com/FSecureLABS/SharpGPOAbuse) 
+- [PowerGPOAbuse](https://github.com/rootSySdk/PowerGPOAbuse)
