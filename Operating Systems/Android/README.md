@@ -38,5 +38,128 @@
 - EX: [android src code](https://android.googlesource.com/platform/frameworks/base/+/master/data/etc/platform.xml)
 
 
+# Android App Components
+
+
+## BroadcastReceiver
+
+A **BroadcastReceiver** listens for broadcast messages (or intents) from the system or other apps.
+
+#### Example of BroadcastReceiver:
+
+**Manifest Declaration:**
+```xml
+<receiver android:name=".BatteryReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.BATTERY_CHANGED" />
+    </intent-filter>
+</receiver>
+```
+
+**BroadcastReceiver Implementation:**
+```java
+public class BatteryReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+        float batteryPct = level / (float) scale * 100;
+
+        Toast.makeText(context, "Battery Level: " + batteryPct + "%", Toast.LENGTH_SHORT).show();
+    }
+}
+```
+
+---
+
+## ContentProvider
+
+A **ContentProvider** manages access to a structured set of data and allows other applications to query or modify that data.
+
+#### Example of ContentProvider:
+
+**ContentProvider Implementation:**
+```java
+public class MyContentProvider extends ContentProvider {
+    @Override
+    public boolean onCreate() {
+        // Initialize database or data structures
+        return true;
+    }
+
+    @Override
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        // Implement query to retrieve data from database
+        return null;
+    }
+
+    @Override
+    public Uri insert(Uri uri, ContentValues values) {
+        // Insert new data into database
+        return null;
+    }
+
+    @Override
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        // Update data in the database
+        return 0;
+    }
+
+    @Override
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        // Delete data from the database
+        return 0;
+    }
+
+    @Override
+    public String getType(Uri uri) {
+        // Return the MIME type of data for the URI
+        return null;
+    }
+}
+```
+
+---
+
+## FileProvider
+
+A **FileProvider** facilitates secure sharing of files between apps by generating a content URI for the files.
+
+#### Example of FileProvider:
+
+**Manifest Declaration:**
+```xml
+<provider
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="${applicationId}.provider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+</provider>
+```
+
+**File Provider Paths XML (`res/xml/file_paths.xml`):**
+```xml
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-files-path name="images" path="Pictures/" />
+</paths>
+```
+
+**Usage in Code (Sharing a File):**
+```java
+File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "my_image.jpg");
+Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
+
+Intent shareIntent = new Intent(Intent.ACTION_SEND);
+shareIntent.setType("image/jpeg");
+shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+context.startActivity(Intent.createChooser(shareIntent, "Share Image"));
+```
+
 
 
