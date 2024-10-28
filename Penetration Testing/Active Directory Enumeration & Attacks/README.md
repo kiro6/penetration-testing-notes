@@ -123,9 +123,11 @@ head records.csv
 #### 1) SMB NULL Session
 **from linux**
 
-- crackmapexec 
+- crackmapexec/netexec
 ```
 crackmapexec smb 172.16.5.5 --users
+
+netexec smb cicada.htb -u "" -p "" --rid-brute  
 ```
 
 - rpcclient 
