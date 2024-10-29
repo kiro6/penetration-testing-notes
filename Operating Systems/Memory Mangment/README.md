@@ -1,3 +1,5 @@
+check [Mermaid Live Editor](https://mermaid.live/edit#) for easy navigation
+
 ## Paging
 
 ```mermaid
