@@ -127,7 +127,8 @@ head records.csv
 ```
 crackmapexec smb 172.16.5.5 --users
 
-netexec smb cicada.htb -u "" -p "" --rid-brute  
+// Guest Access settings
+netexec smb 172.16.5.5 -u "guest" -p "" --rid-brute  
 ```
 
 - rpcclient 
