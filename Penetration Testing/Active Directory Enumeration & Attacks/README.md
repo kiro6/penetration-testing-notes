@@ -5,7 +5,6 @@
   - [Enumerating DNS Records](#enumerating-dns-records)
 - [Get a Foothold](#get-a-foothold)
   - [Enumerating & Retrieving Valid users](#enumerating--retrieving-valid-users)
-  - [Ldap Query](#ldap-query)
   - [LLMNR/NBT-NS Poisoning](#llmnrnbt-ns-poisoning)
   - [AS-REQ Roasting](#as-req-roasting)
   - [Password Spraying](#password-spraying)
@@ -166,17 +165,7 @@ ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclas
 kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt 
 ```
 
-## Ldap Query 
-### ldap query can be used to search for 
-- [Computer](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adcomputer?view=windowsserver2022-ps)
-- [User](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser?view=windowsserver2022-ps)
-- [Group](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup?view=windowsserver2022-ps)
-- [OU](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adorganizationalunit?view=windowsserver2022-ps)
-- site
-- Server
 
-```
-```
 
 
 ## LLMNR/NBT-NS Poisoning
@@ -860,6 +849,15 @@ dsquery * -filter  (&(objectClass=user)(memberOf=CN=Administrators,CN=Builtin,DC
 dsquery * -filter "(&(objectCategory=user)(userAccountControl:1.2.840.113556.1.4.803:=2)(adminCount=1)(description=*))" -limit 5 -attr SAMAccountName description
 
 ```
+
+
+#### ldap query can be used to search for 
+- [Computer](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adcomputer?view=windowsserver2022-ps)
+- [User](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser?view=windowsserver2022-ps)
+- [Group](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup?view=windowsserver2022-ps)
+- [OU](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adorganizationalunit?view=windowsserver2022-ps)
+- site
+- Server
 
 #### LDAP Filtering Explained
 - [LDAP Matching Rules](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/4e638665-f466-4597-93c4-12f2ebfabab5)
