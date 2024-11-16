@@ -290,6 +290,9 @@ Rubeus.exe ptt /ticket:<base64 ticket>
 - if the service is computer account you can get shell access but if user account you can not
 
 
+check this graph from [thehacker.recipes](https://www.thehacker.recipes/ad/movement/kerberos/delegations/constrained)
+
+![KCD mindmap BqD0fGv7](https://github.com/user-attachments/assets/2639958c-b2f4-4ebd-a90f-2aa755bae4ce)
 
 
 ### Enumration 
