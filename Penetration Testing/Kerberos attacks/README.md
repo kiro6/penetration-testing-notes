@@ -384,9 +384,7 @@ wmiexec.py -k -no-pass north.sevenkingdoms.local/administrator@winterfell
 
 ## Resource-based constrained delegation
 - **Resource Trust:** The resource server maintains a list of trusted services or computers that are allowed to delegate on behalf of users.
-- It's possible to gain code execution with elevated privileges on a remote computer if you have WRITE privilege on that computer's AD object.
-- must be Windows 2012 Domain Controller or later
-- write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute
+
 
 ### Example steps
 - We have code execution on the box `WS02` in the context of `offense\Service1` user;
@@ -398,6 +396,14 @@ wmiexec.py -k -no-pass north.sevenkingdoms.local/administrator@winterfell
 - Profit - we can now access the c$ share of ws01 from the computer `ws02`.
 
 ### Requirements
+- you must control a machine account or user account with spn
+- write `msDS-AllowedToActOnBehalfOfOtherIdentitity` attribute
+- must be Windows 2012 Domain Controller or later
+- It's possible to gain code execution with elevated privileges on a remote computer if you have WRITE privilege on that computer's AD object.
+
+check this graph from  [thehacker.recipes](https://www.thehacker.recipes/ad/movement/kerberos/delegations/rbcd)
+
+![RBCD mindmap rbocZNrR](https://github.com/user-attachments/assets/d90fb055-0081-4a1e-a3f5-14506e886405)
 
 
 ### Enumration 
