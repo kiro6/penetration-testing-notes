@@ -276,17 +276,18 @@ Rubeus.exe ptt /ticket:<base64 ticket>
 
 ## Constrained Delegation
 - Constrained delegation `TRUSTED_TO_AUTH_FOR_DELEGATION` is a “more restrictive” version of unconstrained delegation. In this case, a service has the right to impersonate a user to a well-defined list of services.
-- If you have compromised a user account or a computer (machine account) that has kerberos constrained delegation enabled, it's possible to impersonate any domain user (including administrator) and authenticate to a service that the user account is trusted to delegate to.
 
-- If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
-- if the service is computer account you can get shell access but if user account you can not
 
 ![Screenshot 2024-06-18 at 20-34-36 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a73aff59-eb34-4f43-8c84-f3cf0eeadd38)
 
 ![Screenshot 2024-06-18 at 20-47-21 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/ff8b6f98-4e34-4acb-bcd1-1de1cea0d073)
 
 
+### Requirements
 - Attribute `msds-allowedtodelegateto` identifies the SPNs of services the user
+- If you have compromised a user account or a computer (machine account) that has kerberos constrained delegation enabled, it's possible to impersonate any domain user (including administrator) and authenticate to a service that the user account is trusted to delegate to.
+- If a user is marked as `Account is sensitive and cannot be delegated` in AD, you will not be able to impersonate them.
+- if the service is computer account you can get shell access but if user account you can not
 
 
 
