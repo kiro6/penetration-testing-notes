@@ -234,8 +234,8 @@ S4U2Proxy (Service for User to Proxy):
 - When unconstrained delegation is enabled, the KDC includes User A's TGT inside the service ticket that is issued to User B. 
 
 ### Exploit scenarios  
-1) if we have `local admin privileges` inside that machine, we will be able to dump the ticket and impersonate user who logged in the machine
-2) if we have creds for user with Unconstrained delegation priv we can use him to impersonate the other users. 
+1) if we have `admin privileges` inside that machine, we will be able to dump the ticket and impersonate user who logged in the machine
+2) if we have creds for user with Unconstrained delegation priv we can use him to impersonate the other users (in case they already used the delegated account we already auth in the DC) . 
 
 
 ![Screenshot 2024-06-18 at 20-25-07 8 Powerful Kerberos attacks (that analysts hate)](https://github.com/kiro6/penetration-testing-notes/assets/57776872/a00b55ca-4a12-4c9d-b0a6-4b6e8cd7e1a3)
