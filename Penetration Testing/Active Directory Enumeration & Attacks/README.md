@@ -146,7 +146,8 @@ enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
 ```shell
 ./windapsearch.py --dc-ip 172.16.5.5 --dc-ip -u "" -U
 
-ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
+ldapsearch -H ldap://support.htb -D ldap@support.htb -w 'pasdword' -b "dc=support,dc=htb" "*" > ldap.txt
+
 ```
 
 #### 3) Enumerating Users
