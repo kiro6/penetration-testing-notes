@@ -274,7 +274,8 @@ Think of it of a way to seperate servcices instead of runing this on a single ma
 
 
 ### Kerberos
-Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory Domain Services (AD DS) include a Kerberos Key Distribution Center (KDC).
+- check this [video](https://youtu.be/5N242XcKAsM?si=Ngi57zC--Tp855z1)
+- Kerberos Key Distribution Center (KDC): Domain Controllers in Active Directory Domain Services (AD DS) include a Kerberos Key Distribution Center (KDC).
 
 #### **Kerberos Authentication Process**
 1. The user logs on, and their password is converted to an NTLM hash, which is used to encrypt the TGT ticket. This decouples the user's credentials from requests to resources.
