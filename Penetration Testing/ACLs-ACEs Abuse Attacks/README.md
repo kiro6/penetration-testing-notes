@@ -96,6 +96,7 @@ bloodhound
 
 1) **Access over User account allows for:**
     - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set). [how to do Targeted Kerberoasting](#targeted-kerberoasting)
+    - Targeted AS-REQ Roasting: we can modify target userAccountControl to not require preauth, to use ASREPRoast and get the hash [Targeted AS-REQ Roasting](#targeted-as-req-roasting)
     - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials. [Shadow Credentials](#shadow-credentials)
 2) **Access over Group allows for:**
     - we could `add ourselves` or another `security principal` to a given group [how to Add to group](#add-to-group) .
@@ -113,6 +114,7 @@ bloodhound
 1) **Access over User account allows for:**
    - Change the Target's Password [how to do Change password](#change-password)
    - Targeted Kerberoasting: we could `assign them an SPN` and perform a `Kerberoasting attack` (which relies on the target account having a weak password set).  [how to do Targeted Kerberoasting](#targeted-kerberoasting)
+   - Targeted AS-REQ Roasting: we can modify target userAccountControl to not require preauth, to use ASREPRoast and get the hash [Targeted AS-REQ Roasting](#targeted-as-req-roasting)
    - Shadow Credentials: Use this technique to impersonate a computer or user account by exploiting the privileges to create shadow credentials.  [Shadow Credentials](#shadow-credentials)
    - add `WriteDacl` to our user on this object [WriteDacl](#writedacl)
 2) **Access over Group allows for:**
