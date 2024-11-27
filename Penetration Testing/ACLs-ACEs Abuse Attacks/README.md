@@ -12,6 +12,7 @@
 - [ACL attacks](#acl-attacks)
   - [Change password](#change-password)
   - [Targeted Kerberoasting](#targeted-kerberoasting)
+  - [Targeted AS-REQ Roasting](#targeted-as-req-roasting)
   - [Add to group](#add-to-group)
   - [DCSync](#dcsync)
   - [Shadow Credentials](#shadow-credentials)
