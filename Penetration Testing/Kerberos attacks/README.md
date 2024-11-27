@@ -317,6 +317,9 @@ ADSearch.exe --search "(&(objectCategory=computer)(msds-allowedtodelegateto=*))"
 ![Screenshot_5](https://github.com/user-attachments/assets/8b3283ba-a2a6-4903-bdd5-e2d19f382d02)
 
 
+To abuse the constrained delegation with protocol transition, the concept is to first ask a TGT for the user and execute S4U2Self followed by a S4U2Proxy to impersonate an admin user to the SPN on the target.
+
+
 **Windows**
 ```powershell
 # if you are using the Delegation service (in a shell of context of the service user) 
@@ -359,6 +362,13 @@ wmiexec.py -k --no-pass domain/user@service
 ### Without protocol transition
 
 ![Screenshot_4](https://github.com/user-attachments/assets/97af6de9-32ef-47f4-b5ab-bf7b7dffa23f)
+
+
+- To exploit the constrained delegation here we only need a forwardable TGS as administrator to any service on castelblack
+- But if we do a s4u (s4u2self + s4u2proxy) like we did with protocol transition, the s4uself will send us a not forwardable TGS and the attack will fail.
+- So to exploit and get the forwardable TGS we need, we first need to add a computer and use RBCD between the created computer (house$) and the computer who have delegation set (here castelblack$).
+- By doing that, you can do a s4u2self followed by a s4u2proxy on the added computer and the result is a forwardable tgs on hots/castelblack$ as administrator.
+- Once that done, you have the forwardable ticket to pass to s4u2proxy, and we even can change the request service with -altservice
 
 **Linux**
 ```shell
