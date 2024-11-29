@@ -187,7 +187,7 @@ find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/nu
 
 
 ## Databases
-for l in $(echo ".sql .db .*db .db*");do echo -e "\nDB File extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share\|man";done
+for l in $(echo ".sql .db .*db .db* .json .mdb .sdf");do echo -e "\nDB File extension: " $l; find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share\|man";done
 
 ## Notes
 find /home/* -type f -name "*.txt" -o ! -name "*.*"
