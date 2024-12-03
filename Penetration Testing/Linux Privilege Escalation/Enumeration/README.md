@@ -217,8 +217,7 @@ for i in {1..254} ;do (ping -c 1 172.16.5.$i | grep "bytes from" &) ;done
  arp -a
 
 # list connections
-nestat
-netstat -tuln
+netstat -tulnp
 # -t: Show TCP connections. -u: Show UDP connections. -l: Show listening sockets. -n: Display numerical addresses and port numbers instead of resolving names.
 
 ```
