@@ -5,15 +5,16 @@
   - [Integer Operators](#integer-operators)
   - [File Operators](#file-operators)
   - [Logical Operators](#logical-operators)
-- Braces 
+- [Braces](#braces) 
 - [Manipulation](#manipulation)
   - [Substitution](#substitution)  
   - [Slicing](#slicing)
 - [Debugging](#debugging)
   - [Return Values](#return-values)
   - [xtrace](#xtrace--x)
-- Condtions
-- loops
+- [Condtions](#condtions)
+- [loops](#loops)
+- [read files](#read-files)
 
 # Special Variables
 
@@ -236,10 +237,21 @@ done
 
 
 ```
-# read files
-```
-filepath="/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt"
+# Read files
+```bash
 
+## this trim the white spaces
+filepath="/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt"
+subs=()
+
+if [[ -e $filepath ]]; then
+    while read -r line ; do
+        subs+=("$line")
+    done < "$filepath"
+fi;
+
+## if we want to not trim the lines 
+filepath="/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt"
 subs=()
 
 if [[ -e $filepath ]]; then
@@ -247,4 +259,6 @@ if [[ -e $filepath ]]; then
         subs+=("$line")
     done < "$filepath"
 fi; 
+
+
 ```
