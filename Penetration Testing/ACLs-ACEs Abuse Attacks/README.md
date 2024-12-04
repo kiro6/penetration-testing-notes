@@ -136,7 +136,8 @@ bloodhound
 
 
 ## WriteDacl
-- can give ourselvies any rights 
+- can give ourselvies any rights
+- check [bloodhound WriteDacl](https://support.bloodhoundenterprise.io/hc/en-us/articles/17312765477787-WriteDacl)
 
 ```powershell
 # if we have GenericAll we can add WriteDacl to ourself
