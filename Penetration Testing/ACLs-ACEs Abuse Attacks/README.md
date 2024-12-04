@@ -136,7 +136,6 @@ bloodhound
 
 
 ## WriteDacl
-- needed rights `GenericAll`
 - can give ourselvies any rights 
 
 ```powershell
