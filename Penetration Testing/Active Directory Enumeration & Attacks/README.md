@@ -146,6 +146,9 @@ enum4linux -U 172.16.5.5  | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
 ```shell
 ./windapsearch.py --dc-ip 172.16.5.5 --dc-ip -u "" -U
 
+ldapsearch -H ldap://manager.htb0 -b "dc=manager,dc=htb0" "*" > ldap.txt
+
+# with creds
 ldapsearch -H ldap://support.htb -D ldap@support.htb -w 'pasdword' -b "dc=support,dc=htb" "*" > ldap.txt
 ldapsearch -H ldap://support.htb -D ldap@support.htb -w 'password' -b "dc=support,dc=htb" "(objectClass=user)" "*" > ldap2.txt
 
