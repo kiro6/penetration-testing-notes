@@ -9,10 +9,15 @@
 - [online revshells tool](https://www.revshells.com/)
 
 ### Linux stable reverse shell 
-```
+- stty
+```bash
 stty raw -echo; nc -nlvp 9901
 # after entering the shell
 export Term=xterm
+```
+- rlwrap
+```bash
+rlwrap -cAr nc -lnvp 443
 ```
 
 # Payload Types
