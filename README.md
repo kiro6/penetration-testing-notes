@@ -5,6 +5,7 @@ this my is repo with notes i take in penetration testing & related technologies/
 - [hackthebox academy](https://academy.hackthebox.com/)
 - [portswigger academy](https://portswigger.net/web-security/)
 - [hacktricks](https://github.com/carlospolop/hacktricks/tree/master)
+- [The Hacker Recipes](https://www.thehacker.recipes/)
 - [tryhackme](https://tryhackme.com/)
 - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 - [owasp](https://owasp.org/)
