@@ -71,7 +71,6 @@ public class BatteryReceiver extends BroadcastReceiver {
 }
 ```
 
----
 
 ## ContentProvider
 
@@ -161,5 +160,15 @@ shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 context.startActivity(Intent.createChooser(shareIntent, "Share Image"));
 ```
 
+# Android Security 
+## Binder
+The Android Binder is a Linux kernel driver that is used to transmit the intent from one app to another.
 
+
+
+- **Permission Handling:** The Android system uses the Binder IPC to enforce security checks. For instance, if an app tries to communicate with a system service, Android checks whether the app has the necessary permissions for that action (e.g., location access).
+
+- **Sandboxing:** Each app runs in its own process with its own memory space. Binder helps enforce this isolation by ensuring that an app can only interact with another app or system service via well-defined and secure interfaces.
+
+- **Services and AIDL (Android Interface Definition Language):** Many of Android's core services are built to communicate over the Binder interface. When an app wants to interact with system services (like Location, Camera, etc.), it does so through AIDL (Android Interface Definition Language). AIDL allows you to define interfaces that both the client and server use to communicate over Binder.
 
