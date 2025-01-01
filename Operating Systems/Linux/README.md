@@ -357,8 +357,7 @@ $ ls -lah  sh.sh
 ```
 
 ### Sticky Bit
-When the sticky bit is set on a directory, it ensures that only the owner of a file can delete or rename their own files within that directory
-
+When the sticky bit is set on a directory, only the owner of a file, the owner of the directory, or the root user can delete or rename files within that directory.
 
 ```bash
 sudo chmod +t,o-x scripts 
@@ -369,11 +368,27 @@ drwxr-xr-t 1 user group 0 Oct 14 13:08 reports
 drwxr-xr-T 1 user group 0 Oct 14 13:07 scripts
 ```
 
-**Uppercase 'T' (T):** - When the sticky bit is represented as 'T', it means that the execute (x) permission for "others" is not set. 
-                       - This implies that other users do not have permission to access or execute files within that directory, even if they have read or write permissions on those files.
+**Uppercase 'T' (T):** 
 
-**Lowercase 't' (t):**  - When the sticky bit is represented as 't', it means that the execute (x) permission for "others" is set. 
-                        - This allows other users to access and execute files within that directory if they have appropriate permissions on the individual files, in addition to read permission on the directory.
+- When the sticky bit is represented as 'T', it means that the execute (x) permission for "others" is not set. 
+- This implies that `other` users do not have permission to access or execute files within that directory, even if they have read or write permissions on those files.
+
+**Lowercase 't' (t):**  
+
+- When the sticky bit is represented as 't', it means that the execute (x) permission for "others" is set. 
+- This allows `other` users to access and execute files within that directory if they have appropriate permissions on the individual files, in addition to read permission on the directory.
+
+#### Permissions for Directories:
+Read (r):
+- Allows the user to list the contents of the directory (e.g., see the files and subdirectories).
+
+
+Write (w):
+- Allows the user to create, delete, or rename files and subdirectories within the directory.
+
+
+Execute (x):
+- Allows the user to access (traverse) the directory and interact with its contents.
 
 
                         
