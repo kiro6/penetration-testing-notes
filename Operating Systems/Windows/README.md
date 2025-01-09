@@ -579,6 +579,7 @@ Allows for administrators to log access attempts that are made to secured object
 ## User Account Control (UAC)
 - [How User Account Control works](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works)
 - [User Account Control settings and configuration](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=intune)
+- [UAC's ConsentPromptBehaviorAdmin reg values](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/341747f5-6b5d-4d30-85fc-fa1cc04038d4)
 
 ### UAC Internals
 1) The user requests to run an application as administrator.
