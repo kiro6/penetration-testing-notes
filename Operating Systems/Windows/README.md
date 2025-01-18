@@ -608,7 +608,50 @@ Allows for administrators to log access attempts that are made to secured object
 | High            | Used by Administrators' elevated tokens if UAC is enabled. If UAC is disabled, all administrators will always use a high IL token. |
 | System          | Reserved for system use.                                                                 |
 
+### How Integrity Level is Set for a Process
+The Integrity Level of a process is typically determined when the process is created. It is inherited from the parent process or explicitly set based on the following factors:
+#### 1) Parent Process Integrity Level
+A child process usually inherits the Integrity Level of its parent process unless explicitly overridden.
+#### 2) Executable File's Mandatory Label
+- If the executable file has a Mandatory Label in its security descriptor, it can specify the Integrity Level for processes created from it.
+- The `SetTokenInformation` API can be used to modify the Integrity Level of a process's access token.
 
+```c++
+BOOL SetProcessIntegrityLevel(DWORD integrityLevel) {
+    HANDLE hToken;
+    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_DEFAULT, &hToken))
+        return FALSE;
+
+    TOKEN_MANDATORY_LABEL tml = {0};
+    tml.Label.Attributes = SE_GROUP_INTEGRITY;
+    tml.Label.Sid = GetIntegrityLevelSid(integrityLevel);
+
+    BOOL result = SetTokenInformation(hToken, TokenIntegrityLevel, &tml, sizeof(tml));
+    CloseHandle(hToken);
+    return result;
+}
+```
+
+- For example, Internet Explorer runs in Low Integrity mode because its executable file is tagged with a Low Integrity Mandatory Label.
+#### 3) User Account Control (UAC)
+- When UAC is enabled, processes started by standard users run at Medium Integrity by default.
+- If the process is elevated (e.g., by clicking "Run as Administrator"), it runs at High Integrity.
+#### 4)  System Processes
+Processes that are part of the operating system (e.g., lsass.exe, services.exe) run at System Integrity, the highest level.
+
+### How Integrity Level is Enforced
+#### No Write-Up:
+- A process cannot write to an object with a higher Integrity Level.
+- Example: A Low Integrity process cannot modify a Medium Integrity process's memory.
+#### No Read-Up (Optional):
+- By default, a process can read objects with a higher Integrity Level, but this can be restricted using the Mandatory Label ACE.
+#### Equal or Higher Access:
+- A process can access objects with the same or lower Integrity Level, provided the security descriptor allows it.
+
+### Checking Integrity Level
+```powershell
+Get-Process -Id <PID> | Select-Object -ExpandProperty IntegrityLevel
+```
 
 # Pipes
 
