@@ -295,6 +295,13 @@ Pointer Variable               Memory Address (points to)              Stored Va
 
 ```
 
+ Symbol                | Meaning                                | Example                                |
+|-----------------------|----------------------------------------|----------------------------------------|
+| `&`                  | Gets the address of a variable         | `ptr := &x` (stores the memory address of `x` in `ptr`) |
+| `*` (before a type)   | Declares a pointer                    | `var ptr *int` (a pointer to an `int`) |
+| `*` (before a pointer variable) | Dereferences a pointer (gets the actual value) | `val := *ptr` (retrieves the value at `ptr`) |
+
+
 
 ## Pointer receivers vs Value
 
