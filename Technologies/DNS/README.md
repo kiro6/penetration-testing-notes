@@ -205,22 +205,36 @@ An SOA (Start of Authority) record is an essential part of a DNS zone file and p
 ```d
 ; Zone file for example.com (Primary Name Server)
 $TTL 3600
-example.com.  IN  SOA  ns1.example.com. admin.example.com. (
-                2024013101 ; Serial number
-                3600       ; Refresh
-                1800       ; Retry
-                604800     ; Expire
-                3600 )     ; Minimum TTL
 
-; Name Server (NS) records for subdomains
-@  IN  NS  ns1.example.com.
-   IN  NS  ns2.example.com.
+@  IN  SOA  ns1.example.com. admin.example.com. (
+          2024013101 ; Serial number
+          3600       ; Refresh
+          1800       ; Retry
+          604800     ; Expire
+          3600 )     ; Minimum TTL
+
+; Name Server (NS) records for the domain
+@    IN  NS  ns1.example.com.
+@    IN  NS  ns2.example.com.
+
+; A records for the name servers
+ns1  IN  A   192.168.1.10
+ns2  IN  A   192.168.1.11
 
 ; A records for subdomains
 subdomain1  IN  A   192.168.1.30
 subdomain2  IN  A   192.168.1.31
 
-; Additional records for other services...
+; Optional: MX (Mail Exchange) record
+@    IN  MX 10 mail.example.com.
+mail IN  A   192.168.1.50
+
+; Optional: CNAME record
+www  IN  CNAME  subdomain1.example.com.
+
+; Optional: TXT record (SPF, verification, etc.)
+@    IN  TXT   "v=spf1 include:_spf.example.com ~all"
+
 
 ```
 
